@@ -1,0 +1,2142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ABSENT">
+          <Key>
+            <PropertyRef Name="AbsentID" />
+          </Key>
+          <Property Name="AbsentID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="AbsentName" Type="varchar" MaxLength="40" />
+          <Property Name="AbsentType" Type="int" />
+          <Property Name="MaxDay" Type="int" />
+        </EntityType>
+        <EntityType Name="ADVANCED">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="DateAdvanced" />
+          </Key>
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="DateAdvanced" Type="datetime" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="ADVANCEDREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALLOWANCE">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+          </Key>
+          <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="AllowanceName" Type="varchar" MaxLength="20" />
+          <Property Name="Insurance" Type="bit" />
+          <Property Name="Tax" Type="bit" />
+          <Property Name="FreeTax" Type="int" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEDETAIL">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="AllowanceID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="BONUS">
+          <Key>
+            <PropertyRef Name="BonusID" />
+          </Key>
+          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="BonusName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BONUSDETAIL">
+          <Key>
+            <PropertyRef Name="BonusID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="BONUSREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="BonusID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="CERTIFICATE">
+          <Key>
+            <PropertyRef Name="TypeCertificateID" />
+          </Key>
+          <Property Name="TypeCertificateID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="TypeCertificate" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="CERTIFICATEDETAIL">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="CertificateName" />
+          </Key>
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="CertificateName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TypeCertificateID" Type="char" MaxLength="3" />
+          <Property Name="CertificateDate" Type="datetime" />
+          <Property Name="CertificatePlace" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CONTRACT">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ContractType" Type="nvarchar" MaxLength="20" />
+          <Property Name="DateStartWork" Type="datetime" />
+          <Property Name="ContractExpirationDate" Type="datetime" />
+          <Property Name="BasicSalary" Type="int" />
+          <Property Name="PersonalIncomeTax" Type="char" MaxLength="10" />
+          <Property Name="TrialTime" Type="int" />
+        </EntityType>
+        <EntityType Name="DATEINFORMATION">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="EDUCATION">
+          <Key>
+            <PropertyRef Name="EducationID" />
+          </Key>
+          <Property Name="EducationID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="EducationName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="EDUCATIONDETAIL">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="EducationID" />
+            <PropertyRef Name="MajorID" />
+          </Key>
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="EducationID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="MajorID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Place" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Sex" Type="bit" />
+          <Property Name="DoB" Type="datetime" />
+          <Property Name="Birthplace" Type="nvarchar" MaxLength="20" />
+          <Property Name="HomeTown" Type="nvarchar" MaxLength="20" />
+          <Property Name="Nation" Type="nvarchar" MaxLength="20" />
+          <Property Name="Id" Type="varchar" MaxLength="13" />
+          <Property Name="Phone" Type="varchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="70" />
+          <Property Name="Ward" Type="nvarchar" MaxLength="70" />
+          <Property Name="Dictrict" Type="nvarchar" MaxLength="70" />
+          <Property Name="RoomID" Type="char" MaxLength="3" />
+          <Property Name="PositionID" Type="char" MaxLength="3" />
+          <Property Name="ContractID" Type="char" MaxLength="10" />
+          <Property Name="HealthInsurance" Type="bit" />
+          <Property Name="HealthInsuranceID" Type="varchar" MaxLength="16" />
+          <Property Name="SocialInsuranceID" Type="varchar" MaxLength="16" />
+          <Property Name="DeductionPersonal" Type="bit" />
+          <Property Name="DeductionDependent" Type="int" />
+        </EntityType>
+        <EntityType Name="GR">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="GroupPermission" Type="int" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GROUPACCESS">
+          <Key>
+            <PropertyRef Name="GroupPermission" />
+            <PropertyRef Name="Permission" />
+          </Key>
+          <Property Name="GroupPermission" Type="int" Nullable="false" />
+          <Property Name="Permission" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GROUPMEMBER">
+          <Key>
+            <PropertyRef Name="GroupID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="GroupID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GROUPPERMISSION">
+          <Key>
+            <PropertyRef Name="GroupPermission" />
+          </Key>
+          <Property Name="GroupPermission" Type="int" Nullable="false" />
+          <Property Name="GroupPermissionName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="INSURANCEREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="SalaryInsurance" Type="int" />
+          <Property Name="UnionFee" Type="int" />
+          <Property Name="SocialInsurance1" Type="int" />
+          <Property Name="HealthInsurance1" Type="int" />
+          <Property Name="UnemployeeInsurance1" Type="int" />
+          <Property Name="InsuranceAndUnionFee" Type="int" />
+          <Property Name="SocialInsurance2" Type="int" />
+          <Property Name="HealthInsurance2" Type="int" />
+          <Property Name="UnemployeeInsurance2" Type="int" />
+          <Property Name="SubSalary" Type="int" />
+        </EntityType>
+        <EntityType Name="MAJOR">
+          <Key>
+            <PropertyRef Name="MajorID" />
+          </Key>
+          <Property Name="MajorID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="MajorName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="Permission" />
+          </Key>
+          <Property Name="Permission" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="POSITION">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="20" />
+          <Property Name="RoomID" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="RoomName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SALARYREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Allowance" Type="int" />
+          <Property Name="SalaryStandard" Type="int" />
+          <Property Name="WorkDay" Type="int" />
+          <Property Name="SalaryWorkDay" Type="int" />
+          <Property Name="Bonus" Type="int" />
+          <Property Name="Insurance" Type="int" />
+          <Property Name="Overtime" Type="int" />
+          <Property Name="IncomeTax" Type="int" />
+          <Property Name="Advance" Type="int" />
+          <Property Name="RealSalary" Type="int" />
+        </EntityType>
+        <EntityType Name="SHIFT">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+          </Key>
+          <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" />
+          <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShiftType" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SHIFTDETAIL">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+            <PropertyRef Name="WeekDay" />
+          </Key>
+          <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="WeekDay" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAXREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="TotalIncome" Type="int" />
+          <Property Name="FreeTax" Type="int" />
+          <Property Name="Deduction" Type="int" />
+          <Property Name="OverTimeHour" Type="int" />
+          <Property Name="OverTimeFreeTax" Type="int" />
+          <Property Name="TaxableIncome" Type="int" />
+          <Property Name="IncomeTax" Type="int" />
+        </EntityType>
+        <EntityType Name="TIMEKEEPING">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="State" Type="int" />
+          <Property Name="AbsentID" Type="char" MaxLength="3" />
+          <Property Name="HoursWorkDay" Type="int" />
+          <Property Name="HoursWorkNight" Type="int" />
+        </EntityType>
+        <EntityType Name="TIMEKEEPINGREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="SumWorkDay" Type="int" />
+          <Property Name="SumLateDay" Type="int" />
+          <Property Name="SunAbsentNoSalary" Type="int" />
+          <Property Name="SumVacation" Type="int" />
+          <Property Name="SumAbsent" Type="int" />
+          <Property Name="SumHourNormal" Type="int" />
+          <Property Name="SumHourDayOff" Type="int" />
+          <Property Name="SumHourVacation" Type="int" />
+          <Property Name="SumHourNight" Type="int" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="Advanced_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ADVANCED" Type="Self.ADVANCED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCED">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdvancedReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ADVANCEDREPORT" Type="Self.ADVANCEDREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCEDREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceDetail_FK_Allowance">
+          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALLOWANCE">
+              <PropertyRef Name="AllowanceID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="AllowanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEREPORT" Type="Self.ALLOWANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusDetail_FK_Bonus">
+          <End Role="BONUS" Type="Self.BONUS" Multiplicity="1" />
+          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BONUS">
+              <PropertyRef Name="BonusID" />
+            </Principal>
+            <Dependent Role="BONUSDETAIL">
+              <PropertyRef Name="BonusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BONUSDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="BONUSREPORT" Type="Self.BONUSREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BONUSREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CertificateDetail_FK_Certificate">
+          <End Role="CERTIFICATE" Type="Self.CERTIFICATE" Multiplicity="0..1" />
+          <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CERTIFICATE">
+              <PropertyRef Name="TypeCertificateID" />
+            </Principal>
+            <Dependent Role="CERTIFICATEDETAIL">
+              <PropertyRef Name="TypeCertificateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CertificateDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CERTIFICATEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Education">
+          <End Role="EDUCATION" Type="Self.EDUCATION" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDUCATION">
+              <PropertyRef Name="EducationID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="EducationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Major">
+          <End Role="MAJOR" Type="Self.MAJOR" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAJOR">
+              <PropertyRef Name="MajorID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_CONTRACT">
+          <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACT">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_POSITION">
+          <End Role="POSITION" Type="Self.POSITION" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POSITION">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Gr_FK">
+          <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="0..1" />
+          <End Role="GR" Type="Self.GR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUPPERMISSION">
+              <PropertyRef Name="GroupPermission" />
+            </Principal>
+            <Dependent Role="GR">
+              <PropertyRef Name="GroupPermission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupAccess_FK_GroupPermission">
+          <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="1" />
+          <End Role="GROUPACCESS" Type="Self.GROUPACCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUPPERMISSION">
+              <PropertyRef Name="GroupPermission" />
+            </Principal>
+            <Dependent Role="GROUPACCESS">
+              <PropertyRef Name="GroupPermission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupAccess_FK_Permission">
+          <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="1" />
+          <End Role="GROUPACCESS" Type="Self.GROUPACCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSION">
+              <PropertyRef Name="Permission" />
+            </Principal>
+            <Dependent Role="GROUPACCESS">
+              <PropertyRef Name="Permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupMember_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="GROUPMEMBER" Type="Self.GROUPMEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="GROUPMEMBER">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupMember_FK_Gr">
+          <End Role="GR" Type="Self.GR" Multiplicity="1" />
+          <End Role="GROUPMEMBER" Type="Self.GROUPMEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GR">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GROUPMEMBER">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InsuranceReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="INSURANCEREPORT" Type="Self.INSURANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="INSURANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Position_FK_Room">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="POSITION" Type="Self.POSITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="POSITION">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalaryReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SALARYREPORT" Type="Self.SALARYREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SALARYREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Shift_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SHIFT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ShiftDetail_FK_Shift">
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHIFT">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaxReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TAXREPORT" Type="Self.TAXREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TAXREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_Absent">
+          <End Role="ABSENT" Type="Self.ABSENT" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABSENT">
+              <PropertyRef Name="AbsentID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="AbsentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_DateInformation">
+          <End Role="DATEINFORMATION" Type="Self.DATEINFORMATION" Multiplicity="1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATEINFORMATION">
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="Date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimekeepingReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TIMEKEEPINGREPORT" Type="Self.TIMEKEEPINGREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPINGREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FK">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hrmserver_HRMModelStoreContainer">
+          <EntitySet Name="ABSENT" EntityType="Self.ABSENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALLOWANCEDETAIL" EntityType="Self.ALLOWANCEDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALLOWANCEREPORT" EntityType="Self.ALLOWANCEREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BONUS" EntityType="Self.BONUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BONUSDETAIL" EntityType="Self.BONUSDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BONUSREPORT" EntityType="Self.BONUSREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CERTIFICATE" EntityType="Self.CERTIFICATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CERTIFICATEDETAIL" EntityType="Self.CERTIFICATEDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DATEINFORMATION" EntityType="Self.DATEINFORMATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EDUCATION" EntityType="Self.EDUCATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EDUCATIONDETAIL" EntityType="Self.EDUCATIONDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GR" EntityType="Self.GR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GROUPACCESS" EntityType="Self.GROUPACCESS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GROUPMEMBER" EntityType="Self.GROUPMEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GROUPPERMISSION" EntityType="Self.GROUPPERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSURANCEREPORT" EntityType="Self.INSURANCEREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAJOR" EntityType="Self.MAJOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALARYREPORT" EntityType="Self.SALARYREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHIFT" EntityType="Self.SHIFT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHIFTDETAIL" EntityType="Self.SHIFTDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAXREPORT" EntityType="Self.TAXREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIMEKEEPINGREPORT" EntityType="Self.TIMEKEEPINGREPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Advanced_FK_Employee" Association="Self.Advanced_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ADVANCED" EntitySet="ADVANCED" />
+          </AssociationSet>
+          <AssociationSet Name="AdvancedReport_FK_Employee" Association="Self.AdvancedReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceDetail_FK_Allowance" Association="Self.AllowanceDetail_FK_Allowance">
+            <End Role="ALLOWANCE" EntitySet="ALLOWANCE" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceDetail_FK_Employee" Association="Self.AllowanceDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceReport_FK_Employee" Association="Self.AllowanceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="BonusDetail_FK_Bonus" Association="Self.BonusDetail_FK_Bonus">
+            <End Role="BONUS" EntitySet="BONUS" />
+            <End Role="BONUSDETAIL" EntitySet="BONUSDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="BonusDetail_FK_Employee" Association="Self.BonusDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="BONUSDETAIL" EntitySet="BONUSDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="BonusReport_FK_Employee" Association="Self.BonusReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="BONUSREPORT" EntitySet="BONUSREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="CertificateDetail_FK_Certificate" Association="Self.CertificateDetail_FK_Certificate">
+            <End Role="CERTIFICATE" EntitySet="CERTIFICATE" />
+            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="CertificateDetail_FK_Employee" Association="Self.CertificateDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Education" Association="Self.EducationDetail_FK_Education">
+            <End Role="EDUCATION" EntitySet="EDUCATION" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Employee" Association="Self.EducationDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Major" Association="Self.EducationDetail_FK_Major">
+            <End Role="MAJOR" EntitySet="MAJOR" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_CONTRACT" Association="Self.EMPLOYEE_FK_CONTRACT">
+            <End Role="CONTRACT" EntitySet="CONTRACT" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_POSITION" Association="Self.EMPLOYEE_FK_POSITION">
+            <End Role="POSITION" EntitySet="POSITION" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_ROOM" Association="Self.EMPLOYEE_FK_ROOM">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="Gr_FK" Association="Self.Gr_FK">
+            <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSION" />
+            <End Role="GR" EntitySet="GR" />
+          </AssociationSet>
+          <AssociationSet Name="GroupAccess_FK_GroupPermission" Association="Self.GroupAccess_FK_GroupPermission">
+            <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSION" />
+            <End Role="GROUPACCESS" EntitySet="GROUPACCESS" />
+          </AssociationSet>
+          <AssociationSet Name="GroupAccess_FK_Permission" Association="Self.GroupAccess_FK_Permission">
+            <End Role="PERMISSION" EntitySet="PERMISSION" />
+            <End Role="GROUPACCESS" EntitySet="GROUPACCESS" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMember_FK_Employee" Association="Self.GroupMember_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="GROUPMEMBER" EntitySet="GROUPMEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMember_FK_Gr" Association="Self.GroupMember_FK_Gr">
+            <End Role="GR" EntitySet="GR" />
+            <End Role="GROUPMEMBER" EntitySet="GROUPMEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="InsuranceReport_FK_Employee" Association="Self.InsuranceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="Position_FK_Room" Association="Self.Position_FK_Room">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="POSITION" EntitySet="POSITION" />
+          </AssociationSet>
+          <AssociationSet Name="SalaryReport_FK_Employee" Association="Self.SalaryReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="SALARYREPORT" EntitySet="SALARYREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="Shift_FK_Employee" Association="Self.Shift_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="SHIFT" EntitySet="SHIFT" />
+          </AssociationSet>
+          <AssociationSet Name="ShiftDetail_FK_Shift" Association="Self.ShiftDetail_FK_Shift">
+            <End Role="SHIFT" EntitySet="SHIFT" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TAXREPORT" EntitySet="TAXREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
+            <End Role="ABSENT" EntitySet="ABSENT" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_DateInformation" Association="Self.TimeKeeping_FK_DateInformation">
+            <End Role="DATEINFORMATION" EntitySet="DATEINFORMATION" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_Employee" Association="Self.TimeKeeping_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
+          </AssociationSet>
+          <AssociationSet Name="TimekeepingReport_FK_Employee" Association="Self.TimekeepingReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORT" />
+          </AssociationSet>
+          <AssociationSet Name="User_FK" Association="Self.User_FK">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ABSENT">
+          <Key>
+            <PropertyRef Name="AbsentID" />
+          </Key>
+          <Property Name="AbsentID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AbsentName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AbsentType" Type="Int32" />
+          <Property Name="MaxDay" Type="Int32" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Absent" FromRole="ABSENT" ToRole="TIMEKEEPING" />
+        </EntityType>
+        <EntityType Name="ADVANCED">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="DateAdvanced" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DateAdvanced" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.Advanced_FK_Employee" FromRole="ADVANCED" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="ADVANCEDREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AdvancedReport_FK_Employee" FromRole="ADVANCEDREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="ALLOWANCE">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+          </Key>
+          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AllowanceName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Insurance" Type="Boolean" />
+          <Property Name="Tax" Type="Boolean" />
+          <Property Name="FreeTax" Type="Int32" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Allowance" FromRole="ALLOWANCE" ToRole="ALLOWANCEDETAIL" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEDETAIL">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="ALLOWANCE" Relationship="Self.AllowanceDetail_FK_Allowance" FromRole="ALLOWANCEDETAIL" ToRole="ALLOWANCE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="ALLOWANCEDETAIL" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="AllowanceID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="BONU">
+          <Key>
+            <PropertyRef Name="BonusID" />
+          </Key>
+          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BonusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUS" ToRole="BONUSDETAIL" />
+        </EntityType>
+        <EntityType Name="BONUSDETAIL">
+          <Key>
+            <PropertyRef Name="BonusID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="BONU" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUSDETAIL" ToRole="BONUS" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.BonusDetail_FK_Employee" FromRole="BONUSDETAIL" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="BONUSREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="BonusID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.BonusReport_FK_Employee" FromRole="BONUSREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="CERTIFICATE">
+          <Key>
+            <PropertyRef Name="TypeCertificateID" />
+          </Key>
+          <Property Name="TypeCertificateID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TypeCertificate" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CERTIFICATEDETAILs" Relationship="Self.CertificateDetail_FK_Certificate" FromRole="CERTIFICATE" ToRole="CERTIFICATEDETAIL" />
+        </EntityType>
+        <EntityType Name="CERTIFICATEDETAIL">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="CertificateName" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CertificateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeCertificateID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="CertificateDate" Type="DateTime" Precision="3" />
+          <Property Name="CertificatePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CERTIFICATE" Relationship="Self.CertificateDetail_FK_Certificate" FromRole="CERTIFICATEDETAIL" ToRole="CERTIFICATE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.CertificateDetail_FK_Employee" FromRole="CERTIFICATEDETAIL" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="CONTRACT">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ContractType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DateStartWork" Type="DateTime" Precision="3" />
+          <Property Name="ContractExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="BasicSalary" Type="Int32" />
+          <Property Name="PersonalIncomeTax" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TrialTime" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="CONTRACT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="DATEINFORMATION">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="Int32" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_DateInformation" FromRole="DATEINFORMATION" ToRole="TIMEKEEPING" />
+        </EntityType>
+        <EntityType Name="EDUCATION">
+          <Key>
+            <PropertyRef Name="EducationID" />
+          </Key>
+          <Property Name="EducationID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EducationName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
+        </EntityType>
+        <EntityType Name="EDUCATIONDETAIL">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="EducationID" />
+            <PropertyRef Name="MajorID" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EducationID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MajorID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EDUCATION" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATIONDETAIL" ToRole="EDUCATION" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.EducationDetail_FK_Employee" FromRole="EDUCATIONDETAIL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="MAJOR" Relationship="Self.EducationDetail_FK_Major" FromRole="EDUCATIONDETAIL" ToRole="MAJOR" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sex" Type="Boolean" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HomeTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Nation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Ward" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Dictrict" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="HealthInsurance" Type="Boolean" />
+          <Property Name="HealthInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="SocialInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DeductionPersonal" Type="Boolean" />
+          <Property Name="DeductionDependent" Type="Int32" />
+          <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
+          <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
+          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
+          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
+          <NavigationProperty Name="BONUSREPORTs" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
+          <NavigationProperty Name="CERTIFICATEDETAILs" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
+          <NavigationProperty Name="CONTRACT" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
+          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="POSITION" Relationship="Self.EMPLOYEE_FK_POSITION" FromRole="EMPLOYEE" ToRole="POSITION" />
+          <NavigationProperty Name="ROOM" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="EMPLOYEE" ToRole="ROOM" />
+          <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
+          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="SHIFTs" Relationship="Self.Shift_FK_Employee" FromRole="EMPLOYEE" ToRole="SHIFT" />
+          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
+          <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
+          <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
+        </EntityType>
+        <EntityType Name="GR">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="GroupPermission" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GROUPPERMISSION1" Relationship="Self.Gr_FK" FromRole="GR" ToRole="GROUPPERMISSION" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.GROUPMEMBER" FromRole="GR" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="GROUPPERMISSION">
+          <Key>
+            <PropertyRef Name="GroupPermission1" />
+          </Key>
+          <Property Name="GroupPermission1" Type="Int32" Nullable="false" />
+          <Property Name="GroupPermissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GRs" Relationship="Self.Gr_FK" FromRole="GROUPPERMISSION" ToRole="GR" />
+          <NavigationProperty Name="PERMISSIONs" Relationship="Self.GROUPACCESS" FromRole="GROUPPERMISSION" ToRole="PERMISSION" />
+        </EntityType>
+        <EntityType Name="INSURANCEREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SalaryInsurance" Type="Int32" />
+          <Property Name="UnionFee" Type="Int32" />
+          <Property Name="SocialInsurance1" Type="Int32" />
+          <Property Name="HealthInsurance1" Type="Int32" />
+          <Property Name="UnemployeeInsurance1" Type="Int32" />
+          <Property Name="InsuranceAndUnionFee" Type="Int32" />
+          <Property Name="SocialInsurance2" Type="Int32" />
+          <Property Name="HealthInsurance2" Type="Int32" />
+          <Property Name="UnemployeeInsurance2" Type="Int32" />
+          <Property Name="SubSalary" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.InsuranceReport_FK_Employee" FromRole="INSURANCEREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="MAJOR">
+          <Key>
+            <PropertyRef Name="MajorID" />
+          </Key>
+          <Property Name="MajorID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MajorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="Permission1" />
+          </Key>
+          <Property Name="Permission1" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GROUPPERMISSIONs" Relationship="Self.GROUPACCESS" FromRole="PERMISSION" ToRole="GROUPPERMISSION" />
+        </EntityType>
+        <EntityType Name="POSITION">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PositionName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_POSITION" FromRole="POSITION" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="ROOM" Relationship="Self.Position_FK_Room" FromRole="POSITION" ToRole="ROOM" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="RoomName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="ROOM" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="POSITIONs" Relationship="Self.Position_FK_Room" FromRole="ROOM" ToRole="POSITION" />
+        </EntityType>
+        <EntityType Name="SALARYREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Allowance" Type="Int32" />
+          <Property Name="SalaryStandard" Type="Int32" />
+          <Property Name="WorkDay" Type="Int32" />
+          <Property Name="SalaryWorkDay" Type="Int32" />
+          <Property Name="Bonus" Type="Int32" />
+          <Property Name="Insurance" Type="Int32" />
+          <Property Name="Overtime" Type="Int32" />
+          <Property Name="IncomeTax" Type="Int32" />
+          <Property Name="Advance" Type="Int32" />
+          <Property Name="RealSalary" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.SalaryReport_FK_Employee" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="SHIFT">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+          </Key>
+          <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShiftType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.Shift_FK_Employee" FromRole="SHIFT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.ShiftDetail_FK_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
+        </EntityType>
+        <EntityType Name="SHIFTDETAIL">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+            <PropertyRef Name="WeekDay" />
+          </Key>
+          <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="WeekDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SHIFT" Relationship="Self.ShiftDetail_FK_Shift" FromRole="SHIFTDETAIL" ToRole="SHIFT" />
+        </EntityType>
+        <EntityType Name="TAXREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TotalIncome" Type="Int32" />
+          <Property Name="FreeTax" Type="Int32" />
+          <Property Name="Deduction" Type="Int32" />
+          <Property Name="OverTimeHour" Type="Int32" />
+          <Property Name="OverTimeFreeTax" Type="Int32" />
+          <Property Name="TaxableIncome" Type="Int32" />
+          <Property Name="IncomeTax" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="TIMEKEEPING">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="AbsentID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="HoursWorkDay" Type="Int32" />
+          <Property Name="HoursWorkNight" Type="Int32" />
+          <NavigationProperty Name="ABSENT" Relationship="Self.TimeKeeping_FK_Absent" FromRole="TIMEKEEPING" ToRole="ABSENT" />
+          <NavigationProperty Name="DATEINFORMATION" Relationship="Self.TimeKeeping_FK_DateInformation" FromRole="TIMEKEEPING" ToRole="DATEINFORMATION" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TimeKeeping_FK_Employee" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="TIMEKEEPINGREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SumWorkDay" Type="Int32" />
+          <Property Name="SumLateDay" Type="Int32" />
+          <Property Name="SunAbsentNoSalary" Type="Int32" />
+          <Property Name="SumVacation" Type="Int32" />
+          <Property Name="SumAbsent" Type="Int32" />
+          <Property Name="SumHourNormal" Type="Int32" />
+          <Property Name="SumHourDayOff" Type="Int32" />
+          <Property Name="SumHourVacation" Type="Int32" />
+          <Property Name="SumHourNight" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="TIMEKEEPINGREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.User_FK" FromRole="USERS" ToRole="EMPLOYEE" />
+        </EntityType>
+        <Association Name="TimeKeeping_FK_Absent">
+          <End Role="ABSENT" Type="Self.ABSENT" Multiplicity="0..1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABSENT">
+              <PropertyRef Name="AbsentID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="AbsentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Advanced_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ADVANCED" Type="Self.ADVANCED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCED">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdvancedReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ADVANCEDREPORT" Type="Self.ADVANCEDREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCEDREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceDetail_FK_Allowance">
+          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALLOWANCE">
+              <PropertyRef Name="AllowanceID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="AllowanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEREPORT" Type="Self.ALLOWANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusDetail_FK_Bonus">
+          <End Role="BONUS" Type="Self.BONU" Multiplicity="1" />
+          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BONUS">
+              <PropertyRef Name="BonusID" />
+            </Principal>
+            <Dependent Role="BONUSDETAIL">
+              <PropertyRef Name="BonusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BONUSDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BonusReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="BONUSREPORT" Type="Self.BONUSREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BONUSREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CertificateDetail_FK_Certificate">
+          <End Role="CERTIFICATE" Type="Self.CERTIFICATE" Multiplicity="0..1" />
+          <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CERTIFICATE">
+              <PropertyRef Name="TypeCertificateID" />
+            </Principal>
+            <Dependent Role="CERTIFICATEDETAIL">
+              <PropertyRef Name="TypeCertificateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CertificateDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CERTIFICATEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_CONTRACT">
+          <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACT">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_DateInformation">
+          <End Role="DATEINFORMATION" Type="Self.DATEINFORMATION" Multiplicity="1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATEINFORMATION">
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="Date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Education">
+          <End Role="EDUCATION" Type="Self.EDUCATION" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EDUCATION">
+              <PropertyRef Name="EducationID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="EducationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Major">
+          <End Role="MAJOR" Type="Self.MAJOR" Multiplicity="1" />
+          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAJOR">
+              <PropertyRef Name="MajorID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_POSITION">
+          <End Role="POSITION" Type="Self.POSITION" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POSITION">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_ROOM">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InsuranceReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="INSURANCEREPORT" Type="Self.INSURANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="INSURANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalaryReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SALARYREPORT" Type="Self.SALARYREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SALARYREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Shift_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SHIFT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaxReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TAXREPORT" Type="Self.TAXREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TAXREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimekeepingReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TIMEKEEPINGREPORT" Type="Self.TIMEKEEPINGREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPINGREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FK">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Gr_FK">
+          <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="0..1" />
+          <End Role="GR" Type="Self.GR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUPPERMISSION">
+              <PropertyRef Name="GroupPermission1" />
+            </Principal>
+            <Dependent Role="GR">
+              <PropertyRef Name="GroupPermission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Position_FK_Room">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="0..1" />
+          <End Role="POSITION" Type="Self.POSITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="POSITION">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ShiftDetail_FK_Shift">
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHIFT">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GROUPACCESS">
+          <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="*" />
+          <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="*" />
+        </Association>
+        <Association Name="GROUPMEMBER">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <End Role="GR" Type="Self.GR" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="hrmserver_HRMEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
+          <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
+          <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
+          <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
+          <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
+          <EntitySet Name="ALLOWANCEREPORTs" EntityType="Self.ALLOWANCEREPORT" />
+          <EntitySet Name="BONUS" EntityType="Self.BONU" />
+          <EntitySet Name="BONUSDETAILs" EntityType="Self.BONUSDETAIL" />
+          <EntitySet Name="BONUSREPORTs" EntityType="Self.BONUSREPORT" />
+          <EntitySet Name="CERTIFICATEs" EntityType="Self.CERTIFICATE" />
+          <EntitySet Name="CERTIFICATEDETAILs" EntityType="Self.CERTIFICATEDETAIL" />
+          <EntitySet Name="CONTRACTs" EntityType="Self.CONTRACT" />
+          <EntitySet Name="DATEINFORMATIONs" EntityType="Self.DATEINFORMATION" />
+          <EntitySet Name="EDUCATIONs" EntityType="Self.EDUCATION" />
+          <EntitySet Name="EDUCATIONDETAILs" EntityType="Self.EDUCATIONDETAIL" />
+          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="GRs" EntityType="Self.GR" />
+          <EntitySet Name="GROUPPERMISSIONs" EntityType="Self.GROUPPERMISSION" />
+          <EntitySet Name="INSURANCEREPORTs" EntityType="Self.INSURANCEREPORT" />
+          <EntitySet Name="MAJORs" EntityType="Self.MAJOR" />
+          <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
+          <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
+          <EntitySet Name="ROOMs" EntityType="Self.ROOM" />
+          <EntitySet Name="SALARYREPORTs" EntityType="Self.SALARYREPORT" />
+          <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
+          <EntitySet Name="SHIFTDETAILs" EntityType="Self.SHIFTDETAIL" />
+          <EntitySet Name="TAXREPORTs" EntityType="Self.TAXREPORT" />
+          <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
+          <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
+            <End Role="ABSENT" EntitySet="ABSENTs" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+          </AssociationSet>
+          <AssociationSet Name="Advanced_FK_Employee" Association="Self.Advanced_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ADVANCED" EntitySet="ADVANCEDs" />
+          </AssociationSet>
+          <AssociationSet Name="AdvancedReport_FK_Employee" Association="Self.AdvancedReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceDetail_FK_Allowance" Association="Self.AllowanceDetail_FK_Allowance">
+            <End Role="ALLOWANCE" EntitySet="ALLOWANCEs" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceDetail_FK_Employee" Association="Self.AllowanceDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceReport_FK_Employee" Association="Self.AllowanceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="BonusDetail_FK_Bonus" Association="Self.BonusDetail_FK_Bonus">
+            <End Role="BONUS" EntitySet="BONUS" />
+            <End Role="BONUSDETAIL" EntitySet="BONUSDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="BonusDetail_FK_Employee" Association="Self.BonusDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="BONUSDETAIL" EntitySet="BONUSDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="BonusReport_FK_Employee" Association="Self.BonusReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="BONUSREPORT" EntitySet="BONUSREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="CertificateDetail_FK_Certificate" Association="Self.CertificateDetail_FK_Certificate">
+            <End Role="CERTIFICATE" EntitySet="CERTIFICATEs" />
+            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="CertificateDetail_FK_Employee" Association="Self.CertificateDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_CONTRACT" Association="Self.EMPLOYEE_FK_CONTRACT">
+            <End Role="CONTRACT" EntitySet="CONTRACTs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_DateInformation" Association="Self.TimeKeeping_FK_DateInformation">
+            <End Role="DATEINFORMATION" EntitySet="DATEINFORMATIONs" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Education" Association="Self.EducationDetail_FK_Education">
+            <End Role="EDUCATION" EntitySet="EDUCATIONs" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Employee" Association="Self.EducationDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Major" Association="Self.EducationDetail_FK_Major">
+            <End Role="MAJOR" EntitySet="MAJORs" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_POSITION" Association="Self.EMPLOYEE_FK_POSITION">
+            <End Role="POSITION" EntitySet="POSITIONs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_ROOM" Association="Self.EMPLOYEE_FK_ROOM">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="InsuranceReport_FK_Employee" Association="Self.InsuranceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="SalaryReport_FK_Employee" Association="Self.SalaryReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="Shift_FK_Employee" Association="Self.Shift_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="SHIFT" EntitySet="SHIFTs" />
+          </AssociationSet>
+          <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_Employee" Association="Self.TimeKeeping_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+          </AssociationSet>
+          <AssociationSet Name="TimekeepingReport_FK_Employee" Association="Self.TimekeepingReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="User_FK" Association="Self.User_FK">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="Gr_FK" Association="Self.Gr_FK">
+            <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSIONs" />
+            <End Role="GR" EntitySet="GRs" />
+          </AssociationSet>
+          <AssociationSet Name="Position_FK_Room" Association="Self.Position_FK_Room">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="POSITION" EntitySet="POSITIONs" />
+          </AssociationSet>
+          <AssociationSet Name="ShiftDetail_FK_Shift" Association="Self.ShiftDetail_FK_Shift">
+            <End Role="SHIFT" EntitySet="SHIFTs" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="GROUPACCESS" Association="Self.GROUPACCESS">
+            <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSIONs" />
+            <End Role="PERMISSION" EntitySet="PERMISSIONs" />
+          </AssociationSet>
+          <AssociationSet Name="GROUPMEMBER" Association="Self.GROUPMEMBER">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="GR" EntitySet="GRs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities1">
+          <EntitySetMapping Name="ABSENTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ABSENT">
+              <MappingFragment StoreEntitySet="ABSENT">
+                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
+                <ScalarProperty Name="AbsentName" ColumnName="AbsentName" />
+                <ScalarProperty Name="AbsentType" ColumnName="AbsentType" />
+                <ScalarProperty Name="MaxDay" ColumnName="MaxDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADVANCEDs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ADVANCED">
+              <MappingFragment StoreEntitySet="ADVANCED">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="DateAdvanced" ColumnName="DateAdvanced" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADVANCEDREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ADVANCEDREPORT">
+              <MappingFragment StoreEntitySet="ADVANCEDREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALLOWANCEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCE">
+              <MappingFragment StoreEntitySet="ALLOWANCE">
+                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
+                <ScalarProperty Name="AllowanceName" ColumnName="AllowanceName" />
+                <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALLOWANCEDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCEDETAIL">
+              <MappingFragment StoreEntitySet="ALLOWANCEDETAIL">
+                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALLOWANCEREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCEREPORT">
+              <MappingFragment StoreEntitySet="ALLOWANCEREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BONUS">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONU">
+              <MappingFragment StoreEntitySet="BONUS">
+                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+                <ScalarProperty Name="BonusName" ColumnName="BonusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BONUSDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONUSDETAIL">
+              <MappingFragment StoreEntitySet="BONUSDETAIL">
+                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BONUSREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONUSREPORT">
+              <MappingFragment StoreEntitySet="BONUSREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CERTIFICATEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.CERTIFICATE">
+              <MappingFragment StoreEntitySet="CERTIFICATE">
+                <ScalarProperty Name="TypeCertificateID" ColumnName="TypeCertificateID" />
+                <ScalarProperty Name="TypeCertificate" ColumnName="TypeCertificate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CERTIFICATEDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.CERTIFICATEDETAIL">
+              <MappingFragment StoreEntitySet="CERTIFICATEDETAIL">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CertificateName" ColumnName="CertificateName" />
+                <ScalarProperty Name="TypeCertificateID" ColumnName="TypeCertificateID" />
+                <ScalarProperty Name="CertificateDate" ColumnName="CertificateDate" />
+                <ScalarProperty Name="CertificatePlace" ColumnName="CertificatePlace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRACTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.CONTRACT">
+              <MappingFragment StoreEntitySet="CONTRACT">
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="ContractType" ColumnName="ContractType" />
+                <ScalarProperty Name="DateStartWork" ColumnName="DateStartWork" />
+                <ScalarProperty Name="ContractExpirationDate" ColumnName="ContractExpirationDate" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="PersonalIncomeTax" ColumnName="PersonalIncomeTax" />
+                <ScalarProperty Name="TrialTime" ColumnName="TrialTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATEINFORMATIONs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.DATEINFORMATION">
+              <MappingFragment StoreEntitySet="DATEINFORMATION">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDUCATIONs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.EDUCATION">
+              <MappingFragment StoreEntitySet="EDUCATION">
+                <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+                <ScalarProperty Name="EducationName" ColumnName="EducationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDUCATIONDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.EDUCATIONDETAIL">
+              <MappingFragment StoreEntitySet="EDUCATIONDETAIL">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+                <ScalarProperty Name="MajorID" ColumnName="MajorID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+                <ScalarProperty Name="HomeTown" ColumnName="HomeTown" />
+                <ScalarProperty Name="Nation" ColumnName="Nation" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Ward" ColumnName="Ward" />
+                <ScalarProperty Name="Dictrict" ColumnName="Dictrict" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="HealthInsuranceID" ColumnName="HealthInsuranceID" />
+                <ScalarProperty Name="SocialInsuranceID" ColumnName="SocialInsuranceID" />
+                <ScalarProperty Name="DeductionPersonal" ColumnName="DeductionPersonal" />
+                <ScalarProperty Name="DeductionDependent" ColumnName="DeductionDependent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.GR">
+              <MappingFragment StoreEntitySet="GR">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupPermission" ColumnName="GroupPermission" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GROUPPERMISSIONs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.GROUPPERMISSION">
+              <MappingFragment StoreEntitySet="GROUPPERMISSION">
+                <ScalarProperty Name="GroupPermission1" ColumnName="GroupPermission" />
+                <ScalarProperty Name="GroupPermissionName" ColumnName="GroupPermissionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSURANCEREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.INSURANCEREPORT">
+              <MappingFragment StoreEntitySet="INSURANCEREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SalaryInsurance" ColumnName="SalaryInsurance" />
+                <ScalarProperty Name="UnionFee" ColumnName="UnionFee" />
+                <ScalarProperty Name="SocialInsurance1" ColumnName="SocialInsurance1" />
+                <ScalarProperty Name="HealthInsurance1" ColumnName="HealthInsurance1" />
+                <ScalarProperty Name="UnemployeeInsurance1" ColumnName="UnemployeeInsurance1" />
+                <ScalarProperty Name="InsuranceAndUnionFee" ColumnName="InsuranceAndUnionFee" />
+                <ScalarProperty Name="SocialInsurance2" ColumnName="SocialInsurance2" />
+                <ScalarProperty Name="HealthInsurance2" ColumnName="HealthInsurance2" />
+                <ScalarProperty Name="UnemployeeInsurance2" ColumnName="UnemployeeInsurance2" />
+                <ScalarProperty Name="SubSalary" ColumnName="SubSalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAJORs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.MAJOR">
+              <MappingFragment StoreEntitySet="MAJOR">
+                <ScalarProperty Name="MajorID" ColumnName="MajorID" />
+                <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSION">
+                <ScalarProperty Name="Permission1" ColumnName="Permission" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POSITIONs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.POSITION">
+              <MappingFragment StoreEntitySet="POSITION">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ROOM">
+              <MappingFragment StoreEntitySet="ROOM">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALARYREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.SALARYREPORT">
+              <MappingFragment StoreEntitySet="SALARYREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Allowance" ColumnName="Allowance" />
+                <ScalarProperty Name="SalaryStandard" ColumnName="SalaryStandard" />
+                <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
+                <ScalarProperty Name="SalaryWorkDay" ColumnName="SalaryWorkDay" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+                <ScalarProperty Name="Overtime" ColumnName="Overtime" />
+                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+                <ScalarProperty Name="Advance" ColumnName="Advance" />
+                <ScalarProperty Name="RealSalary" ColumnName="RealSalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHIFTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFT">
+              <MappingFragment StoreEntitySet="SHIFT">
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="ShiftType" ColumnName="ShiftType" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHIFTDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFTDETAIL">
+              <MappingFragment StoreEntitySet="SHIFTDETAIL">
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAXREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
+              <MappingFragment StoreEntitySet="TAXREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+                <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
+                <ScalarProperty Name="Deduction" ColumnName="Deduction" />
+                <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
+                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
+                <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
+                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIMEKEEPINGs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPING">
+              <MappingFragment StoreEntitySet="TIMEKEEPING">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
+                <ScalarProperty Name="HoursWorkDay" ColumnName="HoursWorkDay" />
+                <ScalarProperty Name="HoursWorkNight" ColumnName="HoursWorkNight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIMEKEEPINGREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPINGREPORT">
+              <MappingFragment StoreEntitySet="TIMEKEEPINGREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SumWorkDay" ColumnName="SumWorkDay" />
+                <ScalarProperty Name="SumLateDay" ColumnName="SumLateDay" />
+                <ScalarProperty Name="SunAbsentNoSalary" ColumnName="SunAbsentNoSalary" />
+                <ScalarProperty Name="SumVacation" ColumnName="SumVacation" />
+                <ScalarProperty Name="SumAbsent" ColumnName="SumAbsent" />
+                <ScalarProperty Name="SumHourNormal" ColumnName="SumHourNormal" />
+                <ScalarProperty Name="SumHourDayOff" ColumnName="SumHourDayOff" />
+                <ScalarProperty Name="SumHourVacation" ColumnName="SumHourVacation" />
+                <ScalarProperty Name="SumHourNight" ColumnName="SumHourNight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GROUPACCESS" TypeName="hrmserver_HRMModel.GROUPACCESS" StoreEntitySet="GROUPACCESS">
+            <EndProperty Name="GROUPPERMISSION">
+              <ScalarProperty Name="GroupPermission1" ColumnName="GroupPermission" />
+            </EndProperty>
+            <EndProperty Name="PERMISSION">
+              <ScalarProperty Name="Permission1" ColumnName="Permission" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="GROUPMEMBER" TypeName="hrmserver_HRMModel.GROUPMEMBER" StoreEntitySet="GROUPMEMBER">
+            <EndProperty Name="EMPLOYEE">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+            <EndProperty Name="GR">
+              <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
