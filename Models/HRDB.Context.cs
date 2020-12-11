@@ -31,7 +31,7 @@ namespace HRM.Models
         public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
         public virtual DbSet<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
         public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        public virtual DbSet<BONU> BONUS { get; set; }
+        public virtual DbSet<BONUS> BONUS { get; set; }
         public virtual DbSet<BONUSDETAIL> BONUSDETAILs { get; set; }
         public virtual DbSet<BONUSREPORT> BONUSREPORTs { get; set; }
         public virtual DbSet<CERTIFICATE> CERTIFICATEs { get; set; }
