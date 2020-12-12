@@ -312,6 +312,7 @@
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />
     <Content Include="Views\SHIFTs\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
