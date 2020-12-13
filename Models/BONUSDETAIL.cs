@@ -18,7 +18,7 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         public Nullable<int> Value { get; set; }
     
-        public virtual BONUS BONUS { get; set; }
+        public virtual BONU BONU { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }
