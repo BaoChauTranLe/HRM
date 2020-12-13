@@ -5,226 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link href="Assets/css/main.css" rel="stylesheet" />
-    <title>Document</title>
-</head>
+<h2>Create</h2>
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.ShiftID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ShiftID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ShiftID, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>SHIFT</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShiftID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShiftID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShiftID, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="v419_7">
-        <div class="name"></div>
-        <div class="name"></div>
-        <div class="v419_10">
-            <div class="v419_11">
-                <div class="v419_12">
-                    <div class="v419_13"></div>
-                    <div class="name"></div>
-                    <div class="v419_15">
-                        <div class="v419_16">
-                            <div class="v419_17"></div>
-                        </div>
-                        <div class="v419_18">
-                            <div class="v419_19"></div>
-                        </div>
-                    </div>
-                    <div class="v419_40">
-                        <div class="v419_41">
-                            <div class="v419_42"></div>
-                        </div>
-                        <div class="v419_43">
-                            <div class="v419_44"></div>
-                        </div>
-                    </div>
-                    <div class="v419_65">
-                        <div class="v419_66">
-                            <div class="v419_67"></div>
-                        </div>
-                        <div class="v419_68">
-                            <div class="v419_69"></div>
-                        </div>
-                    </div>
-                    <div class="v419_90">
-                        <div class="v419_91">
-                            <div class="v419_92"></div>
-                        </div>
-                        <div class="v419_93">
-                            <div class="v419_94"></div>
-                        </div>
-                    </div>
-                    <div class="v436_3293">
-                        <div class="v436_3294">
-                            <div class="v436_3295"></div>
-                        </div>
-                        <div class="v436_3296">
-                            <div class="v436_3297"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="v436_3298">
-                    <div class="v436_3299">
-                        <div class="v436_3300"></div>
-                    </div><div class="v436_3301">
-                        <div class="v436_3302"></div>
-                    </div>
-                </div>
-                <div class="v436_3303">
-                    <div class="v436_3304">
-                        <div class="v436_3305"></div>
-                    </div>
-                    <div class="v436_3306">
-                        <div class="v436_3307"></div>
-                    </div>
-                </div>
-                <div class="v436_3308">
-                    <div class="v436_3309">
-                        <div class="v436_3310"></div>
-                    </div><div class="v436_3311">
-                        <div class="v436_3312"></div>
-                    </div>
-                </div>
-                <div class="v419_124">
-                    <div class="v419_125">
-                        <div class="v419_126">
-                        </div>
-                    </div>
-                    <div class="v419_127">
-                        <div class="v419_128"></div>
-                    </div>
-                    <span class="v419_149">Triệu Thị Tuyết Trinh</span>
-                    <span class="v419_150">Nhân sự</span>
-                    <div class="v436_3260">
-                        <div class="v436_3261">
-                            <div class="v436_3262"></div>
-                        </div>
-                        <div class="v436_3263"></div>
-                    </div>
-                </div>
-                <div class="v419_152">
-                    <div class="v419_153">
-                        <div class="v419_154"></div>
-                    </div>
-                    <div class="v419_155">
-                        <div class="v419_156"></div>
-                    </div>
-                </div>
-                <div class="v419_177">
-                    <div class="v419_178">
-                        <div class="v419_179"></div>
-                    </div>
-                    <div class="v419_180">
-                        <div class="v419_181"></div>
-                    </div>
-                </div>
-                <div class="v419_202">
-                    <div class="v419_203">
-                        <div class="v419_204"></div>
-                    </div>
-                    <div class="v419_205">
-                        <div class="v419_206"></div>
-                    </div>
-                </div>
-                <div class="v419_227">
-                    <span class="v419_229">Chức vụ</span>
-                    <span class="v419_232">Phòng</span>
-                    <span class="v419_233">Tên nhân viên</span>
-                    <div class="v419_235">
-                        <div class="v419_236"></div>
-                    </div>
-                    <div class="v436_3267"></div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
             </div>
-            <div class="v436_3266">
-                <div class="v436_3265"></div>
-                <div class="v436_3264"></div>
-            </div>
-            <div class="v436_3269">
-                <div class="v436_3270">
-                    <div class="v436_3271"></div>
-                    <div class="v436_3272"></div>
-                </div>
-                <span class="v436_3273">Tất cả phòng</span>
-            </div>
-            <div class="v436_3274">
-                <div class="v436_3275">
-                    <div class="v436_3276"></div>
-                    <div class="v436_3277"></div>
-                </div>
-                <span class="v436_3278">Tất cả chức vụ</span>
-            </div>
-            <div class="v436_3279">
-                <div class="v436_3280">
-                    <span class="v436_3281">Error message</span>
-                    <div class="v436_3282">
-                        <div class="v436_3283"></div>
-                    </div>
-                </div>
-                <div class="v436_3284">
-                    <div class="v436_3285">
-                        <span class="v436_3286">Tìm nhân viên</span>
-                        <div class="v436_3287">
-                            <div class="v436_3288"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="v436_3289">
-                    <span class="v436_3290">Optional</span>
-                </div>
-                <div class="v436_3291">
-                    <div class="v436_3292"></div>
-                </div>
-            </div>
-            <div class="name"></div>
-            <div class="name"></div>
-            <div class="name"></div>
-            <div class="v558_3572">
-                <span class="v558_3573">Text</span>
-                <div class="v558_3574">
-                    <div class="v558_3575"></div>
-                    <div class="v558_3576"></div>
-                </div>
-                <span class="v558_3577">Đến ngày</span>
-            </div>
-            <div class="v558_3561">
-                <span class="v558_3562">Text</span>
-                <div class="v558_3563">
-                    <div class="v558_3564"></div>
-                    <div class="v558_3565"></div>
-                </div>
-                <span class="v558_3560">Từ ngày</span>
-            </div>
-            <div class="v704_35429">
-                <div class="v704_35430"></div>
-                <span class="v704_35431">Danh sách ca</span>
-                <span class="v704_35432">Sắp xếp ca</span>
-                <span class="v704_35433">Ca hành chính</span>
-                <div class="v704_35434"></div>
-            </div>
-            <div class="v704_35436"></div>
-            <span class="v704_35435">Ca làm thêm</span>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShiftName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShiftType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShiftType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>
