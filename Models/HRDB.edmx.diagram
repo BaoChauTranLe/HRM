@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="32468f5477b04f3e9046a6be00978856" Name="Diagram1">
+      <Diagram DiagramId="ba2aeb843ba6489989e832576026aee5" Name="Diagram1">
         <EntityTypeShape EntityType="hrmserver_HRMModel.ABSENT" Width="1.5" PointX="11.25" PointY="38.875" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCED" Width="1.5" PointX="7.5" PointY="30.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCEDREPORT" Width="1.5" PointX="7.5" PointY="32.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCE" Width="1.5" PointX="5.25" PointY="52" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCEDETAIL" Width="1.5" PointX="7.5" PointY="47" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCEREPORT" Width="1.5" PointX="7.5" PointY="38" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.BONU" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.BONUS" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.BONUSDETAIL" Width="1.5" PointX="10.5" PointY="45" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.BONUSREPORT" Width="1.5" PointX="7.5" PointY="43.5" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.CERTIFICATE" Width="1.5" PointX="8.25" PointY="27.25" IsExpanded="true" />
@@ -31,6 +31,7 @@
         <EntityTypeShape EntityType="hrmserver_HRMModel.SALARYREPORT" Width="1.5" PointX="7.5" PointY="59.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFT" Width="1.5" PointX="7.5" PointY="63.875" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFTDETAIL" Width="1.5" PointX="9.75" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TAXREPORT" Width="1.5" PointX="7.5" PointY="67.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPING" Width="1.5" PointX="13.5" PointY="44.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPINGREPORT" Width="1.5" PointX="7.5" PointY="74.375" IsExpanded="true" />
