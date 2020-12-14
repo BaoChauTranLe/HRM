@@ -274,7 +274,6 @@
             <PropertyRef Name="ShiftID" />
           </Key>
           <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="EmployeeID" Type="char" MaxLength="8" />
           <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
           <Property Name="ShiftType" Type="nvarchar" MaxLength="50" />
           <Property Name="StartTime" Type="datetime" />
@@ -283,9 +282,11 @@
         <EntityType Name="SHIFTDETAIL">
           <Key>
             <PropertyRef Name="ShiftID" />
+            <PropertyRef Name="EmployeeID" />
             <PropertyRef Name="WeekDay" />
           </Key>
           <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="WeekDay" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -637,14 +638,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Shift_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
-          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="*" />
+        <Association Name="ShiftDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EMPLOYEE">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="SHIFT">
+            <Dependent Role="SHIFTDETAIL">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -733,37 +734,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hrmserver_HRMModelStoreContainer">
           <EntitySet Name="ABSENT" EntityType="Self.ABSENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
@@ -894,9 +864,9 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORT" />
           </AssociationSet>
-          <AssociationSet Name="Shift_FK_Employee" Association="Self.Shift_FK_Employee">
+          <AssociationSet Name="ShiftDetail_FK_Employee" Association="Self.ShiftDetail_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="SHIFT" EntitySet="SHIFT" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
           </AssociationSet>
           <AssociationSet Name="ShiftDetail_FK_Shift" Association="Self.ShiftDetail_FK_Shift">
             <End Role="SHIFT" EntitySet="SHIFT" />
@@ -997,7 +967,7 @@
           <Property Name="Value" Type="Int32" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
         </EntityType>
-        <EntityType Name="BONUS">
+        <EntityType Name="BONU">
           <Key>
             <PropertyRef Name="BonusID" />
           </Key>
@@ -1013,7 +983,7 @@
           <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="BONUS" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUSDETAIL" ToRole="BONUS" />
+          <NavigationProperty Name="BONU" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUSDETAIL" ToRole="BONUS" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.BonusDetail_FK_Employee" FromRole="BONUSDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="BONUSREPORT">
@@ -1132,7 +1102,7 @@
           <NavigationProperty Name="ROOM" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="EMPLOYEE" ToRole="ROOM" />
           <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
           <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
-          <NavigationProperty Name="SHIFTs" Relationship="Self.Shift_FK_Employee" FromRole="EMPLOYEE" ToRole="SHIFT" />
+          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.ShiftDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
           <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
           <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
           <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
@@ -1236,21 +1206,22 @@
             <PropertyRef Name="ShiftID" />
           </Key>
           <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
           <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShiftType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StartTime" Type="DateTime" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.Shift_FK_Employee" FromRole="SHIFT" ToRole="EMPLOYEE" />
           <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.ShiftDetail_FK_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
         </EntityType>
         <EntityType Name="SHIFTDETAIL">
           <Key>
             <PropertyRef Name="ShiftID" />
+            <PropertyRef Name="EmployeeID" />
             <PropertyRef Name="WeekDay" />
           </Key>
           <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="WeekDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.ShiftDetail_FK_Employee" FromRole="SHIFTDETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="SHIFT" Relationship="Self.ShiftDetail_FK_Shift" FromRole="SHIFTDETAIL" ToRole="SHIFT" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -1393,7 +1364,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="BonusDetail_FK_Bonus">
-          <End Role="BONUS" Type="Self.BONUS" Multiplicity="1" />
+          <End Role="BONUS" Type="Self.BONU" Multiplicity="1" />
           <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BONUS">
@@ -1560,14 +1531,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Shift_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="0..1" />
-          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="*" />
+        <Association Name="ShiftDetail_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EMPLOYEE">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="SHIFT">
+            <Dependent Role="SHIFTDETAIL">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1664,14 +1635,14 @@
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="hrmserver_HRMEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
           <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
           <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
           <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
           <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
           <EntitySet Name="ALLOWANCEREPORTs" EntityType="Self.ALLOWANCEREPORT" />
-          <EntitySet Name="BONUS" EntityType="Self.BONUS" />
+          <EntitySet Name="BONUS" EntityType="Self.BONU" />
           <EntitySet Name="BONUSDETAILs" EntityType="Self.BONUSDETAIL" />
           <EntitySet Name="BONUSREPORTs" EntityType="Self.BONUSREPORT" />
           <EntitySet Name="CERTIFICATEs" EntityType="Self.CERTIFICATE" />
@@ -1776,9 +1747,9 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
           </AssociationSet>
-          <AssociationSet Name="Shift_FK_Employee" Association="Self.Shift_FK_Employee">
+          <AssociationSet Name="ShiftDetail_FK_Employee" Association="Self.ShiftDetail_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="SHIFT" EntitySet="SHIFTs" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
           </AssociationSet>
           <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
@@ -1816,54 +1787,13 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="GR" EntitySet="GRs" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities2">
+        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities">
           <EntitySetMapping Name="ABSENTs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.ABSENT">
               <MappingFragment StoreEntitySet="ABSENT">
@@ -1923,7 +1853,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BONUS">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONUS">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONU">
               <MappingFragment StoreEntitySet="BONUS">
                 <ScalarProperty Name="BonusID" ColumnName="BonusID" />
                 <ScalarProperty Name="BonusName" ColumnName="BonusName" />
@@ -2126,7 +2056,6 @@
             <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFT">
               <MappingFragment StoreEntitySet="SHIFT">
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="ShiftType" ColumnName="ShiftType" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
@@ -2138,6 +2067,7 @@
             <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFTDETAIL">
               <MappingFragment StoreEntitySet="SHIFTDETAIL">
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2221,30 +2151,6 @@
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_HRMModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_HRMModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_HRMModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

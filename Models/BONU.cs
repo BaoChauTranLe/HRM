@@ -12,10 +12,10 @@ namespace HRM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BONUS
+    public partial class BONU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BONUS()
+        public BONU()
         {
             this.BONUSDETAILs = new HashSet<BONUSDETAIL>();
         }

@@ -13,7 +13,7 @@ namespace HRM.Controllers
 {
     public class EMPLOYEEsController : Controller
     {
-        private hrmserver_HRMEntities1 db = new hrmserver_HRMEntities1();
+        private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
         // GET: EMPLOYEEs
         public async Task<ActionResult> Index()

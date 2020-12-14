@@ -223,12 +223,6 @@
     <Compile Include="Models\SHIFTDETAIL.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -316,12 +310,12 @@
     <Content Include="Views\EMPLOYEEs\Details.cshtml" />
     <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\SHIFTs\Create.cshtml" />
     <Content Include="Views\SHIFTs\Delete.cshtml" />
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />
     <Content Include="Views\SHIFTs\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

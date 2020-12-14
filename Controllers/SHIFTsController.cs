@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -13,23 +12,22 @@ namespace HRM.Controllers
 {
     public class SHIFTsController : Controller
     {
-        private hrmserver_HRMEntities1 db = new hrmserver_HRMEntities1();
+        private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
         // GET: SHIFTs
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var sHIFTs = db.SHIFTs.Include(s => s.EMPLOYEE);
-            return View(await sHIFTs.ToListAsync());
+            return View(db.SHIFTs.ToList());
         }
 
         // GET: SHIFTs/Details/5
-        public async Task<ActionResult> Details(string id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = await db.SHIFTs.FindAsync(id);
+            SHIFT sHIFT = db.SHIFTs.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
@@ -40,7 +38,6 @@ namespace HRM.Controllers
         // GET: SHIFTs/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
 
@@ -49,32 +46,30 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ShiftID,EmployeeID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
+        public ActionResult Create([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
         {
             if (ModelState.IsValid)
             {
                 db.SHIFTs.Add(sHIFT);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", sHIFT.EmployeeID);
             return View(sHIFT);
         }
 
         // GET: SHIFTs/Edit/5
-        public async Task<ActionResult> Edit(string id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = await db.SHIFTs.FindAsync(id);
+            SHIFT sHIFT = db.SHIFTs.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", sHIFT.EmployeeID);
             return View(sHIFT);
         }
 
@@ -83,26 +78,25 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ShiftID,EmployeeID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
+        public ActionResult Edit([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sHIFT).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", sHIFT.EmployeeID);
             return View(sHIFT);
         }
 
         // GET: SHIFTs/Delete/5
-        public async Task<ActionResult> Delete(string id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = await db.SHIFTs.FindAsync(id);
+            SHIFT sHIFT = db.SHIFTs.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
@@ -113,11 +107,11 @@ namespace HRM.Controllers
         // POST: SHIFTs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            SHIFT sHIFT = await db.SHIFTs.FindAsync(id);
+            SHIFT sHIFT = db.SHIFTs.Find(id);
             db.SHIFTs.Remove(sHIFT);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
