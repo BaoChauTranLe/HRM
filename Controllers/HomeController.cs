@@ -1,6 +1,8 @@
-﻿using System;
+﻿using HRM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,12 +10,39 @@ namespace HRM.Controllers
 {
     public class HomeController : Controller
     {
+        private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
         public ActionResult Index()
         {
-            return View();
+            if (Session["EmployeeID"] != null)
+                return View();
+            else
+                return RedirectToAction("Login");
         }
         public ActionResult Login()
         {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(USER _user)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var data = db.USERS.Where(s => s.EmployeeID.Equals(_user.EmployeeID) && s.Password.Equals(_user.Password));
+                var valid_data = data.FirstOrDefault();
+                if (valid_data != null)
+                {
+                    //add session
+                    Session["EmployeeID"] = valid_data.EmployeeID;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Password", "Tên đăng nhập hoặc mật khẩu không hợp lệ");
+                    return View();
+                }    
+            }
             return View();
         }
         public ActionResult About()
