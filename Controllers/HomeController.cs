@@ -35,6 +35,11 @@ namespace HRM.Controllers
                 {
                     //add session
                     Session["EmployeeID"] = valid_data.EmployeeID;
+                    EMPLOYEE e = db.EMPLOYEEs.Find(valid_data.EmployeeID);
+                    Session["EmployeeName"] = e.EmployeeName;
+                    Session["Position"] = e.POSITION.PositionName;
+                    Session["Room"] = e.ROOM.RoomName;
+                    Session["Image"] = e.Image;
                     return RedirectToAction("Index");
                 }
                 else
