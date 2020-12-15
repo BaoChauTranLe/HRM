@@ -45,6 +45,13 @@ namespace HRM.Controllers
             }
             return View();
         }
+        //Logout
+        public ActionResult Logout()
+        {
+            Session.Clear();//remove session
+            return RedirectToAction("Login");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
