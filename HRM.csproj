@@ -291,6 +291,7 @@
     <Content Include="Views\ManageAccountList.html" />
     <Content Include="Views\ManagePermissionGroupsList.html" />
     <Content Include="Views\SetShift.html" />
+    <Content Include="Views\Shared\ModalLayout.css" />
     <Content Include="Views\TimekeepingDetail.html" />
     <Content Include="Views\TimekeepingTable.html" />
     <Content Include="Web.config" />

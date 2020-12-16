@@ -1,52 +1,400 @@
-﻿@model IEnumerable<HRM.Models.SHIFT>
+﻿@model HRM.Models.SHIFT
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 12; /* Sit on top */
+            float: left;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: left;
+            width: 490px;
+            height: 558px;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+            vertical-align: middle;
+            margin-left: 122px;
+        }
 
-<h2>Index</h2>
+        /* Modal Content */
+        .modal-content {
+            position: fixed;
+            
+            background-color: #fefefe;
+            width: 100%;
+            height: 100%;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ShiftName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShiftType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>
-        <th></th>
-    </tr>
+        /* The Close Button */
+        .close {
+            color: #4282BB;
+            float: right;
+            font-weight: bold;
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShiftName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShiftType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShiftID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShiftID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShiftID })
-        </td>
-    </tr>
-}
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
 
-</table>
+        .modal-header {
+            top: 0px;
+            height: 32px;
+            padding: 2px 16px;
+            padding-top: 10px;
+            background-color: #E0EFFF;
+            color: #4282BB;
+            font-size: 20px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding-top: 33px;
+            padding-left: 37px;
+            padding-right: 37px;
+        }
+
+        #bg {
+            background-color: black;
+            width: 0;
+            height: 0;
+            display: none;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+
+        .add__button {
+            display: block;
+            height: 36px;
+            width: 94px;
+            right: 36px;
+            top: 80px;
+            position: absolute;
+            background: #E3F2FD;
+            border: 1px solid #3D76B5;
+            border-radius: 4px;
+        }
+
+        .modal__text {
+            font-size: 15px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+            margin-bottom: 7px;
+        }
+
+        .form-control {
+            height: 47px;
+            width: 100%;
+            margin-bottom: 13px;
+            font-size: 15px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+            padding-left: 10px;
+            background: #F8FAFA;
+            border: 1px solid #DBDBDB;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        ul.checkbox {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            padding: 0;
+            list-style: none;
+        }
+
+            ul.checkbox li input {
+                width: 20px;
+                height: 20px;
+                box-sizing: border-box;
+                border-radius: 2px;
+                margin-left: 0px;
+                margin-right: 0px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+
+            ul.checkbox li {
+                display: inline-block;
+                width: 6.5em;
+            }
+        ul.button {
+            list-style: none;
+            text-align: center;
+            padding: 0px;
+        }
+
+        ul.button li {
+            display: inline-block;
+        }
+
+            ul.button li input {
+                width: 126px;
+                height: 40px;
+                box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+                border-radius: 4px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 25px;
+                color: white;
+            }
+    </style>
+</head>
+
+<body>
+    <button id="btn" class="add__button">Thêm</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                Thêm ca làm việc
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <div id="SubmitForm">
+                        @Html.HiddenFor(newShift => newShift.ShiftID, new { @id = "shiftID" })
+                        <div class="col-md-10">
+                            <div class="modal__text">
+                                Tên ca
+                            </div>
+                            @Html.TextBoxFor(newShift => newShift.ShiftName, new { @id = "shiftName", @class = "form-control", @placeholder = "--Họ tên--" })
+                            @Html.ValidationMessageFor(newShift => newShift.ShiftName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="modal__text">
+                                Loại ca
+                            </div>
+                            @Html.TextBoxFor(newShift => newShift.ShiftType, new { @id = "shiftType", @class = "form-control", @placeholder = "--Loại ca--" })
+                            @Html.ValidationMessageFor(newShift => newShift.ShiftType, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-offset-1 col-md-12">
+                            <div class="modal__text">
+                                Thời gian làm việc
+                            </div>
+                            <div class="form-group form-inline">
+                                <input class="text-box single-line" id="StartTime" name="StartTime" type="time" value="" style="        height: 47px;
+        width: 45.5%;
+        margin-bottom: 13px;
+        font-size: 15px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        padding-left: 10px;
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+    ">
+                                @Html.ValidationMessageFor(newShift => newShift.StartTime, "", new { @class = "text-danger" })
+                                <span> đến </span>
+                                <input class="text-box single-line" id="EndTime" name="EndTime" type="time" value="" style="        height: 47px;
+        width: 45.5%;
+        margin-bottom: 13px;
+        font-size: 15px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        padding-left: 10px;
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+    ">
+                                @Html.ValidationMessageFor(newShift => newShift.EndTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="modal__text">
+                            Các ngày làm việc trong tuần
+                        </div>
+
+                        <ul class="checkbox">
+                            <li>
+                                <input type="checkbox" id="cb1" value="false" />
+                                <label for="cb1">Thứ hai   </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb2" value="false" />
+                                <label for="cb2">Thứ ba    </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb3" value="false" />
+                                <label for="cb3">Thứ tư    </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb4" value="false" />
+                                <label for="cb4">Thứ năm   </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb5" value="false" />
+                                <label for="cb5">Thứ sáu   </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb6" value="false" />
+                                <label for="cb6">Thứ bảy   </label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="cb7" value="false" />
+                                <label for="cb7">Chủ nhật  </label>
+                            </li>
+                        </ul>
+
+                        <ul class="button">
+                            <li>
+                                <input type="button" id="save" value="Lưu" style="background: #3D76B5">
+                            </li>
+                            <li>
+                                <input type="button" id="delete" value="Hủy" style="background: #C33333">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="bg"></div>
+
+
+    <br />
+    <br />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên ca</th>
+                <th>Loại ca</th>
+                <th>Thời gian</th>
+                <th>Thời lượng</th>
+                <th>Các ngày làm việc trong tuần</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="SetShiftList">
+            <tr id="LoadingStatus" style="color:red"></tr>
+        </tbody>
+    </table>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("btn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+            var dheight = document.body.clientHeight;
+            var dwidth = document.body.clientWidth;
+
+            $("#bg").width("100%").height("100%");
+
+            $("#bg").fadeTo("slow", 0.8);
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            $("#bg").fadeOut();
+        }
+
+        $.get("/SHIFTsController/GetShiftList", null, DataBind);
+        function DataBind(ShiftList) {
+            var SetData = $("#SetShiftList");
+            for (var i = 0; i < ShiftList.length; i++) {
+                var Data = "<tr class='row_" + ShiftList[i].ShiftID + "'>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + ShiftList[i].ShiftName + "</td>" +
+                    "<td>" + ShiftList[i].ShiftType + "</td>" +
+                    "<td>" + ShiftList[i].StartTime + " - " + ShiftList[i].EndTime + "</td>" +
+                    "<td>" + "</td>" +
+                    "<td>";
+                var flag = 0;
+                if (ShiftList[i].Monday == true) {
+                    Data = Data + "T2";
+                    flag = 1;
+                }
+                if (ShiftList[i].Tueday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T3";
+                    flag = 1;
+                }
+                if (ShiftList[i].Wednesday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T4";
+                    flag = 1;
+                }
+                if (ShiftList[i].Thursday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T5";
+                    flag = 1;
+                }
+                if (ShiftList[i].Friday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T6";
+                    flag = 1;
+                }
+                if (ShiftList[i].Saturday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T7";
+                    flag = 1;
+                }
+                if (ShiftList[i].Sunday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "CN";
+                    flag = 1;
+                }
+                Data = Data + "</td>" + "</tr>";
+                SetData.append(Data);
+            }
+        }
+
+
+    </script>
+</body>

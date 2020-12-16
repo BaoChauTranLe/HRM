@@ -17,7 +17,29 @@ namespace HRM.Controllers
         // GET: SHIFTs
         public ActionResult Index()
         {
-            return View(db.SHIFTs.ToList());
+            //db.SHIFTs.ToList();
+            return View();
+        }
+
+        public JsonResult GetShiftList()
+        {
+            List<SHIFT> ShiftList = db.SHIFTs.Select(x => new SHIFT
+            {
+                ShiftID = x.ShiftID,
+                ShiftName = x.ShiftName,
+                ShiftType = x.ShiftType,
+                StartTime = x.StartTime,
+                EndTime = x.EndTime,
+                Monday = x.Monday,
+                Tuesday = x.Tuesday,
+                Wednesday = x.Wednesday,
+                Thursday = x.Thursday,
+                Friday = x.Friday,
+                Saturday = x.Saturday,
+                Sunday = x.Sunday
+            }).ToList();
+
+            return Json(ShiftList, JsonRequestBehavior.AllowGet);
         }
 
         // GET: SHIFTs/Details/5
@@ -46,7 +68,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
+        public ActionResult Create([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +100,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime")] SHIFT sHIFT)
+        public ActionResult Edit([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
             if (ModelState.IsValid)
             {

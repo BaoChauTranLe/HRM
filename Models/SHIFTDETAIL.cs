@@ -16,7 +16,6 @@ namespace HRM.Models
     {
         public string ShiftID { get; set; }
         public string EmployeeID { get; set; }
-        public int WeekDay { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual SHIFT SHIFT { get; set; }
