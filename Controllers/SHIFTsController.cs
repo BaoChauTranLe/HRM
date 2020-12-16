@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRM.Models;
+using HRM.Util;
 
 namespace HRM.Controllers
 {
@@ -18,27 +19,13 @@ namespace HRM.Controllers
         public ActionResult Index()
         {
             //db.SHIFTs.ToList();
+            ViewBag.ListOfShiftType = SelectListItemHelper.GetShiftTypeList();
             return View();
         }
 
         public JsonResult GetShiftList()
         {
-            List<SHIFT> ShiftList = db.SHIFTs.Select(x => new SHIFT
-            {
-                ShiftID = x.ShiftID,
-                ShiftName = x.ShiftName,
-                ShiftType = x.ShiftType,
-                StartTime = x.StartTime,
-                EndTime = x.EndTime,
-                Monday = x.Monday,
-                Tuesday = x.Tuesday,
-                Wednesday = x.Wednesday,
-                Thursday = x.Thursday,
-                Friday = x.Friday,
-                Saturday = x.Saturday,
-                Sunday = x.Sunday
-            }).ToList();
-
+            List<SHIFT> ShiftList = db.SHIFTs.ToList();
             return Json(ShiftList, JsonRequestBehavior.AllowGet);
         }
 
@@ -78,6 +65,54 @@ namespace HRM.Controllers
             }
 
             return View(sHIFT);
+        }
+
+        public JsonResult SaveDataInDatabase(SHIFT model)
+        {
+            var result = false;
+            try
+            {
+                if (model.ShiftID != null)
+                {
+                    SHIFT Sh = db.SHIFTs.SingleOrDefault(x => x.ShiftID == model.ShiftID);
+                    Sh.ShiftName = model.ShiftName;
+                    Sh.ShiftType = model.ShiftType;
+                    Sh.StartTime = model.StartTime;
+                    Sh.EndTime = model.EndTime;
+                    Sh.Monday = model.Monday;
+                    Sh.Tuesday = model.Tuesday;
+                    Sh.Wednesday = model.Wednesday;
+                    Sh.Thursday = model.Thursday;
+                    Sh.Friday = model.Friday;
+                    Sh.Saturday = model.Saturday;
+                    Sh.Sunday = model.Sunday;
+                    db.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    SHIFT Sh = new SHIFT();
+                    Sh.ShiftName = model.ShiftName;
+                    Sh.ShiftType = model.ShiftType;
+                    Sh.StartTime = model.StartTime;
+                    Sh.EndTime = model.EndTime;
+                    Sh.Monday = model.Monday;
+                    Sh.Tuesday = model.Tuesday;
+                    Sh.Wednesday = model.Wednesday;
+                    Sh.Thursday = model.Thursday;
+                    Sh.Friday = model.Friday;
+                    Sh.Saturday = model.Saturday;
+                    Sh.Sunday = model.Sunday;
+                    db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: SHIFTs/Edit/5
