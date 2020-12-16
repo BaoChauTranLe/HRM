@@ -25,7 +25,7 @@
             margin-top: 90px;
             margin-bottom: 90px;
             width: 500px;
-            height: 600px;
+            height: 500px;
             background: #FFFFFF;
             border: 2px solid #3D76B5;
             box-sizing: border-box;
@@ -35,14 +35,14 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 80px;
+            margin-top: 40px;
             width: 220px;
             height: 50px;
             background-color: cornflowerblue;
             font-family: Montserrat;
             font-style: normal;
             font-weight: 500;
-            font-size: 32px;
+            font-size: 24px;
             line-height: 27px;
             text-align:center;
             color: #E4E4E4;
@@ -51,7 +51,7 @@
             font-family: Montserrat;
             font-style: normal;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 27px;
             color: #4A4A4A;
         }
@@ -77,12 +77,6 @@
             color: #E4E4E4;
             border:none;
         }
-        .login-func-txt {
-            font-family: Montserrat;
-            font-style: normal;
-            font-size: 20px;
-            color: #4A4A4A;
-        }
     </style>
 </head>
 <body>
@@ -92,26 +86,26 @@
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            <div class="login-label" style="margin-top:75px; margin-left:44px;">
+            <div class="login-label" style="margin-top:50px; margin-left:44px;">
                 @Html.Label("Tên đăng nhập")
             </div>
-            @Html.TextBoxFor(m => m.EmployeeID, "", new { @class = "login-textbox"})
+            @Html.TextBoxFor(m => m.EmployeeID, "", new { @class = "login-textbox" })
+            <div style="margin-left:44px; font-family:Montserrat; color:red;">
+                @Html.ValidationMessageFor(m => m.EmployeeID)
+            </div>
 
-            <div class="login-label" style="margin-top:30px; margin-left:44px;">
+            <div class="login-label" style="margin-top:20px; margin-left:44px;">
                 @Html.Label("Mật khẩu")
             </div>
-            @Html.PasswordFor(m => m.Password, new { @class = "login-textbox"})
-            
-            <div style="margin-top:20px; margin-left:44px">
-                <input type="checkbox" name="check" />
-                @Html.Label("Nhớ tài khoản", new { @class = "login-func-txt" })
-                <label class="login-func-txt" style="margin-left:128px;">Quên mật khẩu?</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "login-textbox" })
+            <div style="margin-left:44px; font-family:Montserrat; color:red;">
+                @Html.ValidationMessageFor(m => m.Password);
             </div>
 
             <div style="margin-top:20px">
                 <input type="submit" name="login" class="login-btn" value="Đăng nhập" />
             </div>
-            
+
         }
     </div>
 </body>
