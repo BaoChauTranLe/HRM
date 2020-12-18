@@ -26,17 +26,17 @@ namespace HRM.Models
         public string ShiftType { get; set; }
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> StartTime { get; set; }
+        public System.DateTime StartTime { get; set; }
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> EndTime { get; set; }
-        public Nullable<bool> Monday { get; set; }
-        public Nullable<bool> Tuesday { get; set; }
-        public Nullable<bool> Wednesday { get; set; }
-        public Nullable<bool> Thursday { get; set; }
-        public Nullable<bool> Friday { get; set; }
-        public Nullable<bool> Saturday { get; set; }
-        public Nullable<bool> Sunday { get; set; }
+        public System.DateTime EndTime { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public bool Sunday { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
