@@ -68,7 +68,7 @@
             <PropertyRef Name="BonusID" />
           </Key>
           <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="BonusName" Type="varchar" MaxLength="20" />
+          <Property Name="BonusName" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="BONUSDETAIL">
           <Key>
@@ -276,15 +276,15 @@
           <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
           <Property Name="ShiftType" Type="nvarchar" MaxLength="50" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
-          <Property Name="Monday" Type="bit" />
-          <Property Name="Tuesday" Type="bit" />
-          <Property Name="Wednesday" Type="bit" />
-          <Property Name="Thursday" Type="bit" />
-          <Property Name="Friday" Type="bit" />
-          <Property Name="Saturday" Type="bit" />
-          <Property Name="Sunday" Type="bit" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Monday" Type="bit" Nullable="false" />
+          <Property Name="Tuesday" Type="bit" Nullable="false" />
+          <Property Name="Wednesday" Type="bit" Nullable="false" />
+          <Property Name="Thursday" Type="bit" Nullable="false" />
+          <Property Name="Friday" Type="bit" Nullable="false" />
+          <Property Name="Saturday" Type="bit" Nullable="false" />
+          <Property Name="Sunday" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFTDETAIL">
           <Key>
@@ -976,7 +976,7 @@
             <PropertyRef Name="BonusID" />
           </Key>
           <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="BonusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BonusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUS" ToRole="BONUSDETAIL" />
         </EntityType>
         <EntityType Name="BONUSDETAIL">
@@ -1212,16 +1212,16 @@
           <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShiftType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="DateTime" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.ShiftDetail_FK_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
-          <Property Name="Monday" Type="Boolean" />
-          <Property Name="Tuesday" Type="Boolean" />
-          <Property Name="Wednesday" Type="Boolean" />
-          <Property Name="Thursday" Type="Boolean" />
-          <Property Name="Friday" Type="Boolean" />
-          <Property Name="Saturday" Type="Boolean" />
-          <Property Name="Sunday" Type="Boolean" />
+          <Property Name="Monday" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="Thursday" Type="Boolean" Nullable="false" />
+          <Property Name="Friday" Type="Boolean" Nullable="false" />
+          <Property Name="Saturday" Type="Boolean" Nullable="false" />
+          <Property Name="Sunday" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFTDETAIL">
           <Key>

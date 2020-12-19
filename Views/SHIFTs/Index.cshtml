@@ -19,7 +19,7 @@
             transform: translate(-50%, -50%);
             text-align: left;
             width: 490px;
-            height: 558px;
+            height: 554px;
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -29,6 +29,7 @@
             animation-duration: 0.4s;
             vertical-align: middle;
             margin-left: 122px;
+            margin-top: 30px;
         }
 
         /* Modal Content */
@@ -71,7 +72,7 @@
         }
 
         .modal-body {
-            padding-top: 33px;
+            padding-top: 10px;
             padding-left: 37px;
             padding-right: 37px;
         }
@@ -102,13 +103,13 @@
             font-size: 15px;
             font-family: 'IBM Plex Sans', sans-serif;
             font-style: normal;
+            margin-top: 13px;
             margin-bottom: 7px;
         }
 
-        .form-control {
+        .form-control, select {
             height: 47px;
             width: 100%;
-            margin-bottom: 13px;
             font-size: 15px;
             font-family: 'IBM Plex Sans', sans-serif;
             font-style: normal;
@@ -119,49 +120,54 @@
             border-radius: 4px;
         }
 
-        ul.checkbox {
+        .check-box {
             margin-top: 2px;
             margin-bottom: 2px;
             padding: 0;
             list-style: none;
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            border-radius: 2px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 8px;
+            margin-bottom: 8px;
         }
 
-            ul.checkbox li input {
-                width: 20px;
-                height: 20px;
-                box-sizing: border-box;
-                border-radius: 2px;
-                margin-left: 0px;
-                margin-right: 0px;
-                margin-top: 8px;
-                margin-bottom: 8px;
-            }
-
-            ul.checkbox li {
-                display: inline-block;
-                width: 6.5em;
-            }
-
-        ul.button {
-            list-style: none;
+        .btn.btn-default {
+            position: fixed;
+            display: block;
             text-align: center;
             padding: 0px;
+            bottom: 37px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            width: 126px;
+            height: 40px;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+            border-radius: 4px;
+            color: white;
         }
 
-            ul.button li {
-                display: inline-block;
-            }
+        input#StartTime, input#EndTime {
+            height: 47px;
+            width: 45.5%;
+            font-size: 15px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+            padding-left: 10px;
+            background: #F8FAFA;
+            border: 1px solid #DBDBDB;
+            box-sizing: border-box;
+            border-radius: 4px;
+            display: inline;
+        }
 
-                ul.button li input {
-                    width: 126px;
-                    height: 40px;
-                    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-                    border-radius: 4px;
-                    margin-left: 10px;
-                    margin-right: 10px;
-                    margin-top: 25px;
-                    color: white;
-                }
+        .form-group-time {
+            display: inline;
+            width: 45.5%;
+        }
     </style>
 </head>
 
@@ -177,118 +183,142 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-                <form id="form">
-                    <div id="SubmitForm">
-                        @Html.HiddenFor(newShift => newShift.ShiftID, new { @id = "shiftID" })
-                        <div class="col-md-10">
-                            <div class="modal__text">
-                                Tên ca
-                            </div>
-                            @Html.TextBoxFor(newShift => newShift.ShiftName, new { @id = "shiftName", @class = "form-control", @placeholder = "--Tên ca--" })
-                            @Html.ValidationMessageFor(newShift => newShift.ShiftName, "", new { @class = "text-danger" })
-                        </div>
+                @using (Html.BeginForm("Index", "SHIFTs", FormMethod.Post, new { name = "frm", id = "frm" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                        <div class="col-md-10">
-                            <div class="modal__text">
-                                Loại ca
-                            </div>
-                            @Html.DropDownListFor(newShift => newShift.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { @id = "shiftType", @class = "form-control", @placeholder = "--Loại ca--" })
-                            @Html.ValidationMessageFor(newShift => newShift.ShiftType, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-md-offset-1 col-md-12">
-                            <div class="modal__text">
-                                Thời gian làm việc
-                            </div>
-                            <div class="form-group form-inline">
-                                <input class="text-box single-line" id="StartTime" name="StartTime" type="time" value="" style="        height: 47px;
-        width: 45.5%;
-        margin-bottom: 13px;
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-    ">
-                                @Html.ValidationMessageFor(newShift => newShift.StartTime, "", new { @class = "text-danger" })
-                                <span> đến </span>
-                                <input class="text-box single-line" id="EndTime" name="EndTime" type="time" value="" style="        height: 47px;
-        width: 45.5%;
-        margin-bottom: 13px;
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-    ">
-                                @Html.ValidationMessageFor(newShift => newShift.EndTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
+                <div class="form-horizontal" id="newForm">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
                         <div class="modal__text">
-                            Các ngày làm việc trong tuần
+                            Tên ca
                         </div>
-
-                        <ul class="checkbox">
-                            <li>
-                                <input type="checkbox" id="cb1" value="false" />
-                                <label for="cb1">Thứ hai   </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb2" value="false" />
-                                <label for="cb2">Thứ ba    </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb3" value="false" />
-                                <label for="cb3">Thứ tư    </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb4" value="false" />
-                                <label for="cb4">Thứ năm   </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb5" value="false" />
-                                <label for="cb5">Thứ sáu   </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb6" value="false" />
-                                <label for="cb6">Thứ bảy   </label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="cb7" value="false" />
-                                <label for="cb7">Chủ nhật  </label>
-                            </li>
-                        </ul>
-
-                        <ul class="button">
-                            <li>
-                                <input type="button" id="savebtn" value="Lưu" style="background: #3D76B5" onclick="createShift()">
-                            </li>
-                            <li>
-                                <input type="button" id="deletebtn" value="Hủy" style="background: #C33333" onclick="closeModal()">
-                            </li>
-                        </ul>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </form>
+
+                    <div class="form-group">
+                        <div class="modal__text">
+                            Loại ca
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="modal__text">
+                        Thời gian làm việc
+                    </div>
+
+                    <div class="form-group-time">
+                        <div class="col-md-10" style="display: inline; width: 45.5%;">
+                            @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <span>đến</span>
+
+                    <div class="form-group-time">
+                        <div class="col-md-10" style="display: inline; width: 45.5%;">
+                            @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                    
+                    <div class="modal__text">
+                        Các ngày làm việc trong tuần
+                    </div>
+
+                    <div class="form-group" style="display: inline-block; width: 100px;">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Monday) Thứ hai
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Tuesday) Thứ ba
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Wednesday) Thứ tư
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Thursday) Thứ năm
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Friday) Thứ sáu
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Saturday) Thứ bảy
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                        <div class="col-md-10" style="display: inline;">
+                            <div class="checkbox" style="display: inline;">
+                                @Html.EditorFor(model => model.Sunday) Chủ nhật
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Tạo" class="btn btn-default" style="        background: #3D76B5; left: 110px;
+" />
+                            <input type="button" value="Hủy" class="btn btn-default" style="        background: #C33333; right: 110px;
+" />
+                        </div>
+                    </div>
+                </div>
+                }
             </div>
         </div>
     </div>
 
-    <div id="bg"></div>
+    <div id="bg" onclick="closeModal()"></div>
 
 
+    <br />
     <br />
     <br />
     <table class="table table-striped">
@@ -326,7 +356,7 @@
         // When the user clicks the button, open the modal
         btn.onclick = function () {
             modal.style.display = "block";
-            $("#form")[0].reset();
+            document.getElementById("frm").reset();
             var dheight = document.body.clientHeight;
             var dwidth = document.body.clientWidth;
 
@@ -422,4 +452,8 @@
             }
         }
     </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
 </body>
