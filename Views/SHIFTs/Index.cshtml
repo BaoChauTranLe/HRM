@@ -385,14 +385,14 @@
         function DataBind(ShiftList) {
             var SetData = $("#SetShiftList");
             for (var i = 0; i < ShiftList.length; i++) {
-                var start = moment.utc(ShiftList[i].StartTime);
-                var end = moment.utc(ShiftList[i].EndTime);
+                var start = moment(ShiftList[i].StartTime);
+                var end = moment(ShiftList[i].EndTime);
                 var Data = "<tr class='row_" + ShiftList[i].ShiftID + "'>" +
                     "<td>" + (i + 1) + "</td>" +
                     "<td>" + ShiftList[i].ShiftName + "</td>" +
                     "<td>" + ShiftList[i].ShiftType + "</td>" +
                     "<td>" + start.format("HH:mm") + " - " + end.format("HH:mm") + "</td>" +
-                    "<td>" + "</td>" +
+                    "<td>" + end.diff(start, 'hours', true) + "h" + "</td>" +
                     "<td>";
 
                 var flag = 0;

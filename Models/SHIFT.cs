@@ -24,9 +24,11 @@ namespace HRM.Models
         public string ShiftID { get; set; }
         public string ShiftName { get; set; }
         public string ShiftType { get; set; }
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime StartTime { get; set; }
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime EndTime { get; set; }
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }

@@ -58,6 +58,7 @@ namespace HRM.Controllers
         public ActionResult Index([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
             //sHIFT.ShiftID = auto create shiftID
+            sHIFT.ShiftID = "4321";
             if (ModelState.IsValid)
             {
                 db.SHIFTs.Add(sHIFT);

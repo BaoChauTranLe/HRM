@@ -12,8 +12,8 @@ namespace HRM.Util
         {
             IList<SelectListItem> items = new List<SelectListItem>
             {
-                new SelectListItem{Text = "Ca hành chính", Value = "hc"},
-                new SelectListItem{Text = "Ca làm thêm", Value = "lt"},
+                new SelectListItem{Text = "Ca hành chính", Value = "Ca hành chính"},
+                new SelectListItem{Text = "Ca làm thêm", Value = "Ca làm thêm"},
             };
             return items;
         }
