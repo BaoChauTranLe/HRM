@@ -11,7 +11,8 @@ namespace HRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SHIFT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +24,9 @@ namespace HRM.Models
         public string ShiftID { get; set; }
         public string ShiftName { get; set; }
         public string ShiftType { get; set; }
+        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public System.DateTime StartTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public System.DateTime EndTime { get; set; }
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }
