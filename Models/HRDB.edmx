@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -229,12 +229,9 @@
           <Property Name="MajorID" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="MajorName" Type="nvarchar" MaxLength="30" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'hrmserver_HRM.dbo.PARAMETER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PARAMETER">
           <Key>
             <PropertyRef Name="ParameterName" />
-            <PropertyRef Name="Value" />
           </Key>
           <Property Name="ParameterName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Value" Type="int" Nullable="false" />
@@ -812,6 +809,7 @@ warning 6002: The table/view 'hrmserver_HRM.dbo.PARAMETER' does not have a prima
           <EntitySet Name="GROUPPERMISSION" EntityType="Self.GROUPPERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INSURANCEREPORT" EntityType="Self.INSURANCEREPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MAJOR" EntityType="Self.MAJOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARAMETER" EntityType="Self.PARAMETER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
@@ -824,12 +822,6 @@ warning 6002: The table/view 'hrmserver_HRM.dbo.PARAMETER' does not have a prima
           <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMEKEEPINGREPORT" EntityType="Self.TIMEKEEPINGREPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PARAMETER" EntityType="Self.PARAMETER" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PARAMETER].[ParameterName] AS [ParameterName], 
-    [PARAMETER].[Value] AS [Value]
-    FROM [dbo].[PARAMETER] AS [PARAMETER]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="Advanced_FK_Employee" Association="Self.Advanced_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ADVANCED" EntitySet="ADVANCED" />
@@ -959,8 +951,7 @@ warning 6002: The table/view 'hrmserver_HRM.dbo.PARAMETER' does not have a prima
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
