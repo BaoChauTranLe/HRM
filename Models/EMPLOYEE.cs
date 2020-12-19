@@ -27,11 +27,11 @@ namespace HRM.Models
             this.EDUCATIONDETAILs = new HashSet<EDUCATIONDETAIL>();
             this.INSURANCEREPORTs = new HashSet<INSURANCEREPORT>();
             this.SALARYREPORTs = new HashSet<SALARYREPORT>();
-            this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
             this.TAXREPORTs = new HashSet<TAXREPORT>();
             this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
             this.TIMEKEEPINGREPORTs = new HashSet<TIMEKEEPINGREPORT>();
             this.GRs = new HashSet<GR>();
+            this.SHIFTs = new HashSet<SHIFT>();
         }
     
         public string EmployeeID { get; set; }
@@ -81,8 +81,6 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SALARYREPORT> SALARYREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAXREPORT> TAXREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
@@ -91,5 +89,7 @@ namespace HRM.Models
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GR> GRs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SHIFT> SHIFTs { get; set; }
     }
 }

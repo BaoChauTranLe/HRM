@@ -205,6 +205,9 @@
     <Compile Include="Models\MAJOR.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PARAMETER.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PERMISSION.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -220,10 +223,16 @@
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SHIFTDETAIL.cs">
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TAXRATE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAXREPORT.cs">

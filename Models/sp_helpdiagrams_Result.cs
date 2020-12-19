@@ -10,14 +10,13 @@
 namespace HRM.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SHIFTDETAIL
+    public partial class sp_helpdiagrams_Result
     {
-        public string ShiftID { get; set; }
-        public string EmployeeID { get; set; }
-    
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual SHIFT SHIFT { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

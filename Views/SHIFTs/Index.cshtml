@@ -168,6 +168,13 @@
             display: inline;
             width: 45.5%;
         }
+
+        .text-danger.field-validation-error {
+            color: red;
+            font-size: 13px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+        }
     </style>
 </head>
 
@@ -305,7 +312,7 @@
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Tạo" class="btn btn-default" style="        background: #3D76B5; left: 110px;
 " />
-                            <input type="button" value="Hủy" class="btn btn-default" style="        background: #C33333; right: 110px;
+                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
 " />
                         </div>
                     </div>
@@ -355,10 +362,9 @@
 
         // When the user clicks the button, open the modal
         btn.onclick = function () {
+            
             modal.style.display = "block";
             document.getElementById("frm").reset();
-            var dheight = document.body.clientHeight;
-            var dwidth = document.body.clientWidth;
 
             $("#bg").width("100%").height("100%");
 
@@ -367,31 +373,24 @@
 
         var btnCreate = document.getElementById("savebtn");
 
-        function CheckData() {
-            if (document.getElementsById('shiftName')[0].value == null);
-
-        }
-
-        function createShift() {
-            CheckData();
-
-            var data = $("#SubmitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/SHIFTs/SaveDataInDatabase",
-                data: data,
-                success: function (result) {
-                    alert("Success!..");
-                    window.location.href = "/SHIFTs/index";
-                    closeModal();
-                }
-            })
-        }
-
         //close create modal
         function closeModal() {
+            window.location.reload();
             modal.style.display = "none";
             $("#bg").fadeOut();
+        }
+
+        function ChangeDateTime(date) {
+            var b = date.match(/\d+/g);
+
+            // Get the sign of the offset
+            var sign = /-/.test(date) ? -1 : +1;
+
+            // Adjust the time value by the offset converted to milliseconds
+            // and use to create a Date
+            var ms = +b[0] + sign * (b[1].toISOString().slice(0, 2) * 3.6e6 + b[1].toISOString().slice(-2) * 6e4);
+
+            return new Date(ms).toISOString();
         }
 
         $.get("/SHIFTs/GetShiftList", null, DataBind);
@@ -402,9 +401,10 @@
                     "<td>" + (i + 1) + "</td>" +
                     "<td>" + ShiftList[i].ShiftName + "</td>" +
                     "<td>" + ShiftList[i].ShiftType + "</td>" +
-                    "<td>" + ShiftList[i].StartTime + " - " + ShiftList[i].EndTime + "</td>" +
+                    "<td>" + ChangeDateTime(ShiftList[i].StartTime) + " - " + ChangeDateTime(ShiftList[i].EndTime) + "</td>" +
                     "<td>" + "</td>" +
                     "<td>";
+
                 var flag = 0;
                 if (ShiftList[i].Monday == true) {
                     Data = Data + "T2";
