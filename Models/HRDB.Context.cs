@@ -47,6 +47,7 @@ namespace HRM.Models
         public virtual DbSet<GROUPPERMISSION> GROUPPERMISSIONs { get; set; }
         public virtual DbSet<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
         public virtual DbSet<MAJOR> MAJORs { get; set; }
+        public virtual DbSet<PARAMETER> PARAMETERs { get; set; }
         public virtual DbSet<PERMISSION> PERMISSIONs { get; set; }
         public virtual DbSet<POSITION> POSITIONs { get; set; }
         public virtual DbSet<ROOM> ROOMs { get; set; }
@@ -58,7 +59,6 @@ namespace HRM.Models
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
-        public virtual DbSet<PARAMETER> PARAMETERs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

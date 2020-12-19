@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -951,7 +951,8 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1208,6 +1209,13 @@
           <Property Name="MajorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
         </EntityType>
+        <EntityType Name="PARAMETER">
+          <Key>
+            <PropertyRef Name="ParameterName" />
+          </Key>
+          <Property Name="ParameterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
             <PropertyRef Name="Permission1" />
@@ -1347,14 +1355,6 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.User_FK" FromRole="USERS" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="PARAMETER">
-          <Key>
-            <PropertyRef Name="ParameterName" />
-            <PropertyRef Name="Value" />
-          </Key>
-          <Property Name="ParameterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="TimeKeeping_FK_Absent">
           <End Role="ABSENT" Type="Self.ABSENT" Multiplicity="0..1" />
@@ -1701,6 +1701,7 @@
           <EntitySet Name="GROUPPERMISSIONs" EntityType="Self.GROUPPERMISSION" />
           <EntitySet Name="INSURANCEREPORTs" EntityType="Self.INSURANCEREPORT" />
           <EntitySet Name="MAJORs" EntityType="Self.MAJOR" />
+          <EntitySet Name="PARAMETERs" EntityType="Self.PARAMETER" />
           <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
           <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
           <EntitySet Name="ROOMs" EntityType="Self.ROOM" />
@@ -1712,7 +1713,6 @@
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
-          <EntitySet Name="PARAMETERs" EntityType="Self.PARAMETER" />
           <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
             <End Role="ABSENT" EntitySet="ABSENTs" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
@@ -2092,6 +2092,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PARAMETERs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.PARAMETER">
+              <MappingFragment StoreEntitySet="PARAMETER">
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PERMISSIONs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.PERMISSION">
               <MappingFragment StoreEntitySet="PERMISSION">
@@ -2223,14 +2231,6 @@
               <MappingFragment StoreEntitySet="USERS">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PARAMETERs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.PARAMETER">
-              <MappingFragment StoreEntitySet="PARAMETER">
-                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
