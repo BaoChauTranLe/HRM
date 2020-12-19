@@ -99,10 +99,10 @@
             </div>
             @Html.PasswordFor(m => m.Password, new { @class = "login-textbox" })
             <div style="margin-left:44px; font-family:Montserrat; color:red;">
-                @Html.ValidationMessageFor(m => m.Password);
+                @Html.ValidationMessageFor(m => m.Password)
             </div>
 
-            <div style="margin-top:20px">
+            <div style="margin-top:30px">
                 <input type="submit" name="login" class="login-btn" value="Đăng nhập" />
             </div>
 
