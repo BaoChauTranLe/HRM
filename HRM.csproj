@@ -127,6 +127,7 @@
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,6 +282,7 @@
       <DependentUpon>HRDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\fresh-bootstrap-table.css" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -327,6 +329,7 @@
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />
     <Content Include="Views\SHIFTs\Index.cshtml" />
+    <Content Include="Views\Time\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,370 +1,375 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale = 1.0">
-    <!-- Load an icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type='text/css'>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/css.gg/icons/all.css'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.15.1/js/conflict-detection.js">
-    </script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <style>
-        /*SCROLLBAR STYLE*/
-        /* width */
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale = 1.0">
+	<!-- Load an icon library and font -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type='text/css'>
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/css.gg/icons/all.css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            border-radius: 10px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            margin-right: 2px;
-        }
+	<script type="text/javascript" src="https://use.fontawesome.com/releases/v5.15.1/js/conflict-detection.js">
+	</script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #C4C4C4;
-            border-radius: 10px;
-        }
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="~/Scripts/bootstrap.min.js"></script>
 
+	<style>
+		/*SCROLLBAR STYLE*/
+		/* width */
+		::-webkit-scrollbar {
+			width: 7px;
+		}
 
-        /* SIDENAV STYLE */
-        .sidenav {
-            height: 100%;
-            width: 245px;
-            position: fixed;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            background: #3D76B5;
-            overflow-x: hidden;
-            padding-top: 20px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 15px;
-            line-height: 36px;
-            color: #A0FFFF;
-        }
+		/* Track */
+		::-webkit-scrollbar-track {
+			border-radius: 10px;
+			margin-top: 10px;
+			margin-bottom: 30px;
+			margin-right: 2px;
+		}
 
-        .company-logo {
-            display: block;
-            height: 30px;
-            color: white;
-        }
-
-        .sidenav__title {
-            margin-left: 14px;
-        }
-
-        .personal a {
-            text-decoration: none;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 15px;
-            line-height: 30px;
-            color: #FFFFFF;
-            display: block;
-            border: 1px solid #3D76B5;
-            background: linear-gradient(0deg, #3D76B5, #3D76B5);
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            left: 0;
-            padding-bottom: 10px;
-            padding-left: 14px;
-        }
-
-        .management a, .report a, .regulations a {
-            text-decoration: none;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 13px;
-            line-height: 30px;
-            color: #FFFFFF;
-            display: block;
-            border: 1px solid #3D76B5;
-            background: linear-gradient(0deg, #6A9CD3, #6A9CD3);
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            padding-left: 8px;
-            left: 0;
-        }
-
-        hr.rounded {
-            height: 1px;
-            color: #5CA2D7;
-            margin-left: 10px;
-            margin-right: 10px;
-            background-color: #5CA2D7;
-            border: 0px;
-        }
-        /* Style the sidenav links and the dropdown button */
-        .dropdown-btn {
-            padding: 0px 0px 5px 10px;
-            text-decoration: none;
-            font-family: Montserrat;
-            font-size: 15px;
-            color: #FFFFFF;
-            display: block;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            padding-top: 13px;
-            padding-bottom: 13px;
-        }
-
-            .dropdown-btn:focus {
-                border: none;
-                outline: none;
-            }
-
-        /* Optional: Style the caret down icon */
-        .gg-chevron-down {
-            float: right;
-            padding-right: 30px;
-        }
-
-        /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-        .dropdown-container {
-            display: none;
-            background: linear-gradient(0deg, #6A9CD3, #6A9CD3);
-            padding-left: 0px;
-            margin-left: 0;
-        }
-
-        .block {
-            height: 60px;
-        }
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+			background: #C4C4C4;
+			border-radius: 10px;
+		}
 
 
-        /* TOPBAR STYLE */
-        .topbar {
-            z-index: 9;
-            margin-left: 245px; /* Same as the width of the sidenav */
-            height: 62px;
-            width: 100%;
-            top: 0;
-            left: 0;
-            position: fixed;
-            border-top: 5px;
-            border-right: 5px;
-            border-color: black;
-            background-color: white;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-        }
+		/* SIDENAV STYLE */
+		.sidenav {
+			height: 100%;
+			width: 245px;
+			position: fixed;
+			z-index: 10;
+			top: 0;
+			left: 0;
+			background: #3D76B5;
+			overflow-x: hidden;
+			padding-top: 20px;
+			font-family: Montserrat;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 15px;
+			line-height: 36px;
+			color: #A0FFFF;
+		}
 
-            .topbar topbar__list {
-                list-style-type: none;
-                margin-top: 0px;
-                margin-bottom: 0px;
-                display: flex;
-                text-align: right;
-            }
+		.company-logo {
+			display: block;
+			height: 30px;
+			color: white;
+		}
 
-                .topbar topbar__list li {
-                    margin: 0 1rem;
-                    float: right;
-                }
+		.sidenav__title {
+			margin-left: 14px;
+		}
 
-        .title, .user__ava, .notify__icon, .logout__icon {
-            position: fixed;
-            top: 20px;
-        }
+		.personal a {
+			text-decoration: none;
+			font-family: Montserrat;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 30px;
+			color: #FFFFFF;
+			display: block;
+			border: 1px solid #3D76B5;
+			background: linear-gradient(0deg, #3D76B5, #3D76B5);
+			width: 100%;
+			text-align: left;
+			cursor: pointer;
+			left: 0;
+			padding-bottom: 10px;
+			padding-left: 14px;
+		}
 
-        .title {
-            display: flex;
-            left: 272px;
-            text-align: left;
-        }
+		.management a, .report a, .regulations a {
+			text-decoration: none;
+			font-family: Montserrat;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 13px;
+			line-height: 30px;
+			color: #FFFFFF;
+			display: block;
+			border: 1px solid #3D76B5;
+			background: linear-gradient(0deg, #6A9CD3, #6A9CD3);
+			width: 100%;
+			text-align: left;
+			cursor: pointer;
+			padding-left: 8px;
+			left: 0;
+		}
 
-            .title span {
-                -ms-flex: 1;
-                flex: 1;
-                height: 100%;
-            }
+		hr.rounded {
+			height: 1px;
+			color: #5CA2D7;
+			margin-left: 10px;
+			margin-right: 10px;
+			background-color: #5CA2D7;
+			border: 0px;
+		}
+		/* Style the sidenav links and the dropdown button */
+		.dropdown-btn {
+			padding: 0px 0px 5px 10px;
+			text-decoration: none;
+			font-family: Montserrat;
+			font-size: 15px;
+			color: #FFFFFF;
+			display: block;
+			border: none;
+			background: none;
+			width: 100%;
+			text-align: left;
+			cursor: pointer;
+			padding-top: 13px;
+			padding-bottom: 13px;
+		}
 
-            .title title__main {
-                font-family: Montserrat;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 17px;
-                color: #589CE5;
-            }
+			.dropdown-btn:focus {
+				border: none;
+				outline: none;
+			}
 
-            .title title__sub {
-                font-family: Montserrat;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 17px;
-                color: #2C2C2C;
-            }
+		/* Optional: Style the caret down icon */
+		.gg-chevron-down {
+			float: right;
+			padding-right: 30px;
+		}
 
-        .user__ava {
-            right: 60px;
-            width: 40px;
-            height: 40px;
-        }
+		/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+		.dropdown-container {
+			display: none;
+			background: linear-gradient(0deg, #6A9CD3, #6A9CD3);
+			padding-left: 0px;
+			margin-left: 0;
+		}
 
-        .user__name {
-            display: inline-block;
-            position: fixed;
-            top: 17px;
-            right: 110px;
-            text-align: right;
-            font-size: 14px;
-            font-family: Montserrat;
-            line-height: 17px
-        }
+		.block {
+			height: 60px;
+		}
 
-        .user__infor {
-            position: fixed;
-            top: 32px;
-            right: 110px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 11px;
-            line-height: 13px;
-            color: #2C2C2C;
-        }
 
-        .notify__icon {
-            right: 40px;
-        }
+		/* TOPBAR STYLE */
+		.topbar {
+			z-index: 9;
+			margin-left: 245px; /* Same as the width of the sidenav */
+			height: 62px;
+			width: 100%;
+			top: 0;
+			left: 0;
+			position: fixed;
+			border-top: 5px;
+			border-right: 5px;
+			border-color: black;
+			background-color: white;
+			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+		}
 
-        .logout__icon {
-            right: 20px;
-            color: black;
-        }
+			.topbar topbar__list {
+				list-style-type: none;
+				margin-top: 0px;
+				margin-bottom: 0px;
+				display: flex;
+				text-align: right;
+			}
 
-        /* MODAL STYLE */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 12; /* Sit on top */
-            float: left;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            text-align: left;
-            width: 490px;
-            height: 558px;
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            -webkit-animation-name: fadeIn; /* Fade in the background */
-            -webkit-animation-duration: 0.4s;
-            animation-name: fadeIn;
-            animation-duration: 0.4s;
-            vertical-align: middle;
-            margin-left: 122px;
-        }
+				.topbar topbar__list li {
+					margin: 0 1rem;
+					float: right;
+				}
 
-        .modal-content {
-            position: fixed;
-            background-color: #fefefe;
-            width: 100%;
-            height: 100%;
-            -webkit-animation-name: slideIn;
-            -webkit-animation-duration: 0.4s;
-            animation-name: slideIn;
-            animation-duration: 0.4s
-        }
+		.title, .user__ava, .notify__icon, .logout__icon {
+			position: fixed;
+			top: 20px;
+		}
 
-        .modal-header {
-            top: 0px;
-            height: 32px;
-            padding: 2px 16px;
-            padding-top: 10px;
-            background-color: #E0EFFF;
-            color: #4282BB;
-            font-size: 20px;
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-style: normal;
-            font-weight: bold;
-        }
+		.title {
+			display: flex;
+			left: 272px;
+			text-align: left;
+		}
 
-        .modal-body {
-            padding-top: 33px;
-            padding-left: 37px;
-            padding-right: 37px;
-        }
+			.title span {
+				-ms-flex: 1;
+				flex: 1;
+				height: 100%;
+			}
 
-        .modal__text {
-            font-size: 15px;
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-style: normal;
-            margin-bottom: 7px;
-        }
+			.title title__main {
+				font-family: Montserrat;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 17px;
+				color: #589CE5;
+			}
 
-        #bg {
-            background-color: black;
-            width: 0;
-            height: 0;
-            display: none;
-            position: fixed;
-            top: 0px;
-            left: 0px;
-        }
+			.title title__sub {
+				font-family: Montserrat;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 17px;
+				color: #2C2C2C;
+			}
 
-        /* The Close Button */
-        .close {
-            color: #4282BB;
-            float: right;
-            font-weight: bold;
-        }
+		.user__ava {
+			right: 60px;
+			width: 40px;
+			height: 40px;
+		}
 
-            .close:hover,
-            .close:focus {
-                color: #000;
-                text-decoration: none;
-                cursor: pointer;
-            }
+		.user__name {
+			display: inline-block;
+			position: fixed;
+			top: 17px;
+			right: 110px;
+			text-align: right;
+			font-size: 14px;
+			font-family: Montserrat;
+			line-height: 17px
+		}
 
-        ul.button {
-            list-style: none;
-            text-align: center;
-            padding: 0px;
-        }
+		.user__infor {
+			position: fixed;
+			top: 32px;
+			right: 110px;
+			font-family: Montserrat;
+			font-style: normal;
+			font-weight: 300;
+			font-size: 11px;
+			line-height: 13px;
+			color: #2C2C2C;
+		}
 
-            ul.button li {
-                display: inline-block;
-            }
+		.notify__icon {
+			right: 40px;
+		}
 
-                ul.button li input {
-                    width: 126px;
-                    height: 40px;
-                    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-                    border-radius: 4px;
-                    margin-left: 10px;
-                    margin-right: 10px;
-                    margin-top: 25px;
-                    color: white;
-                }
+		.logout__icon {
+			right: 20px;
+			color: black;
+		}
 
-        /* MAIN STYLE */
-        .main {
-            font-family: Montserrat;
-            margin-left: 245px; /* Same as the width of the sidenav */
-            margin-top: 62px; /* Same as the width of the sidenav */
-            font-size: 15px; /* Increased text to enable scrolling */
-            padding: 0px 10px;
-        }
-    </style>
+		/* MODAL STYLE */
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 12; /* Sit on top */
+			float: left;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			text-align: left;
+			width: 490px;
+			height: 558px;
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			-webkit-animation-name: fadeIn; /* Fade in the background */
+			-webkit-animation-duration: 0.4s;
+			animation-name: fadeIn;
+			animation-duration: 0.4s;
+			vertical-align: middle;
+			margin-left: 122px;
+		}
+
+		.modal-content {
+			position: fixed;
+			background-color: #fefefe;
+			width: 100%;
+			height: 100%;
+			-webkit-animation-name: slideIn;
+			-webkit-animation-duration: 0.4s;
+			animation-name: slideIn;
+			animation-duration: 0.4s
+		}
+
+		.modal-header {
+			top: 0px;
+			height: 32px;
+			padding: 2px 16px;
+			padding-top: 10px;
+			background-color: #E0EFFF;
+			color: #4282BB;
+			font-size: 20px;
+			font-family: 'IBM Plex Sans', sans-serif;
+			font-style: normal;
+			font-weight: bold;
+		}
+
+		.modal-body {
+			padding-top: 33px;
+			padding-left: 37px;
+			padding-right: 37px;
+		}
+
+		.modal__text {
+			font-size: 15px;
+			font-family: 'IBM Plex Sans', sans-serif;
+			font-style: normal;
+			margin-bottom: 7px;
+		}
+
+		#bg {
+			background-color: black;
+			width: 0;
+			height: 0;
+			display: none;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+		}
+
+		/* The Close Button */
+		.close {
+			color: #4282BB;
+			float: right;
+			font-weight: bold;
+		}
+
+			.close:hover,
+			.close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+		ul.button {
+			list-style: none;
+			text-align: center;
+			padding: 0px;
+		}
+
+			ul.button li {
+				display: inline-block;
+			}
+
+				ul.button li input {
+					width: 126px;
+					height: 40px;
+					box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+					border-radius: 4px;
+					margin-left: 10px;
+					margin-right: 10px;
+					margin-top: 25px;
+					color: white;
+				}
+
+		/* MAIN STYLE */
+		.main {
+			font-family: Montserrat;
+			margin-left: 245px; /* Same as the width of the sidenav */
+			margin-top: 62px; /* Same as the width of the sidenav */
+			font-size: 15px; /* Increased text to enable scrolling */
+			padding: 0px 10px;
+		}
+	</style>
 </head>
 <body>
     <!-- The sidenav -->
