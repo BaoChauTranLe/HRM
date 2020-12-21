@@ -1,0 +1,97 @@
+﻿@model HRM.Models.TAXRATE
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .main-lbl {
+            font-family: IBM Plex Sans;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 150%;
+            /* identical to box height, or 22px */
+            letter-spacing: 0.01em;
+            color: #000000;
+        }
+        .main-txtbox {
+            /* Text Block */
+            /* Auto Layout */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 50px;
+            /* Surface/Light */
+            background: #F8FAFA;
+            border: 1px solid #DBDBDB;
+            box-sizing: border-box;
+            border-radius: 4px;
+            /* Inside Auto Layout */
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        .content-margin {
+            margin-left: 24px;
+        }
+        .main-btn {
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+            border-radius: 4px;
+            width: 126px;
+            height: 40px;
+            /* Inside Text */
+            font-family: IBM Plex Sans;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group content-margin" style="margin-top:96px; height:110px;">
+        @Html.Label("Bậc thuế", htmlAttributes: new { @class = "main-lbl" })
+        <br />
+        @Html.TextBoxFor(model => model.Rank, "", new { @class = "main-txtbox" , @style = "width:500px"})
+        @Html.ValidationMessageFor(model => model.Rank, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group content-margin" style="height:110px;">
+        @Html.Label("Phần thu nhập tính thuế / tháng (triệu đồng)", htmlAttributes: new { @class = "main-lbl" })
+        <br />
+        @Html.TextBoxFor(model => model.Min, "", new { @class = "main-txtbox", @style = "width:243px; display: inline-block" })
+        <label class="main-lbl"> - </label>
+        @Html.TextBoxFor(model => model.Max, "", new { @class = "main-txtbox", @style = "width:243px; display: inline-block" })
+        @Html.ValidationMessageFor(model => model.Min, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.Max, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group content-margin" style="height:110px;">
+        @Html.Label("Thuế suất (%)", htmlAttributes: new { @class = "main-lbl" })
+        <br />
+        @Html.TextBoxFor(model => model.Rate, "", new { @class = "main-txtbox", @style = "width:500px" })
+        @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group" style="margin-left:395px;">
+        <input type="submit" value="Thêm" class="btn main-btn" style="background: #3D76B5;" />
+        <input type="submit" value="Hủy" class="btn main-btn" style="background: #C33333;" />
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
