@@ -1,33 +1,21 @@
 ﻿@model HRM.Models.SHIFT
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
-
-	<!-- Style -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="~/Scripts/fresh-bootstrap-table.css" rel="stylesheet" />
-
 	<link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
 	<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table-locale-all.min.js"></script>
 	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 	<style>
-		table, th, td, tr {
-			border-color: #DFE0EB !important;
-			border-radius: 5px !important;
-		}
-
 		.modal {
 			display: none; /* Hidden by default */
 			position: fixed; /* Stay in place */
@@ -198,7 +186,8 @@
 </head>
 
 <body>
-	
+	<button id="btn" class="add__button">Thêm</button>
+
 	<!-- The Modal -->
 	<div id="createModal" class="modal">
 		<!-- Modal content -->
@@ -346,55 +335,29 @@
 	<br />
 	<br />
 	<br />
-	<div class="fresh-table">
-		<button id="btn" class="add__button">Thêm</button>
-		<table class="fresh-table" id="fresh-table" width="100%">
-			<thead>
-				<tr>
-					<th data-field="stt">STT</th>
-					<th data-field="shiftname">Tên ca</th>
-					<th data-field="shifttype">Loại ca</th>
-					<th data-field="time">Thời gian</th>
-					<th data-field="duration">Thời lượng</th>
-					<th data-field="worktime">Các ngày làm việc trong tuần</th>
-					<th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Tương tác</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody id="SetShiftList">
-				<tr id="LoadingStatus" style="color:black"></tr>
-			</tbody>
-		</table>
-	</div>
+	<table class="table table-responsive table-hover">
+		<thead>
+			<tr>
+				<th>STT</th>
+				<th>Tên ca</th>
+				<th>Loại ca</th>
+				<th>Thời gian</th>
+				<th>Thời lượng</th>
+				<th>Các ngày làm việc trong tuần</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="SetShiftList">
+			<tr id="LoadingStatus" style="color:red"></tr>
+		</tbody>
+	</table>
 
 	<p>
 		@Html.ActionLink("Create New", "Create")
 	</p>
-	
+
 	<script>
 		$("#LoadingStatus").html("Loading....");
-		var $table = $('#fresh-table')
-
-		$(function () {
-			$table.bootstrapTable({
-				classes: 'table table-hover table-responsive',
-				toolbar: '.toolbar',
-				pagination: true,
-				striped: true,
-				sortable: true,
-				pageSize: 8,
-				pageList: [8, 10, 25, 50, 100],
-
-				formatShowingRows: function (pageFrom, pageTo, totalRows) {
-					return ''
-				},
-				formatRecordsPerPage: function (pageNumber) {
-					return pageNumber + ' rows visible'
-				}
-			})
-		})
-
-		
 		// Get the modal
 		var create_modal = document.getElementById("createModal");
 
@@ -423,6 +386,7 @@
 			create_modal.style.display = "none";
 			$("#bg").fadeOut();
 		}
+
 		$.get("/SHIFTs/GetShiftList", null, DataBind);
 		function DataBind(ShiftList) {
 			var SetData = $("#SetShiftList");
@@ -478,36 +442,14 @@
 					Data = Data + "CN";
 					flag = 1;
 				}
-				Data = Data + "<td>" +
-					"<a rel='tooltip' title='Edit' class='table-action edit' href='javascript:void(0)' title='Edit'><i class='fa fa-edit'></i></a>" +
-					"<a rel='tooltip' title='Remove' class='table-action remove' href='javascript:void(0)' title='Remove'><i class='fa fa-remove'></i></a>" +
-					"</td > " + "</td > " + "</tr > ";
+				Data = Data + "</td>" + "</tr>";
 				SetData.append(Data);
 				$("#LoadingStatus").html(" ");
 			}
 		}
-
-		window.operateEvents = {
-			'click .like': function (e, value, row, index) {
-				alert('You click like icon, row: ' + JSON.stringify(row))
-				console.log(value, row, index)
-			},
-			'click .edit': function (e, value, row, index) {
-				alert('You click edit icon, row: ' + JSON.stringify(row))
-				console.log(value, row, index)
-			},
-			'click .remove': function (e, value, row, index) {
-				$table.bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				})
-			}
-		}		
 	</script>
-
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/jqueryval")
-
 	<script src="/Scripts/jquery.validate.js"></script>
 	<script src="/Scripts/jquery.validate.unobtrusive.js"></script>
 </body>
