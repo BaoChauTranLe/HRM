@@ -337,15 +337,16 @@
 	<br />
 	<table class="table table-responsive table-hover">
 		<thead>
-			<tr>
-				<th>STT</th>
-				<th>Tên ca</th>
-				<th>Loại ca</th>
-				<th>Thời gian</th>
-				<th>Thời lượng</th>
-				<th>Các ngày làm việc trong tuần</th>
-				<th></th>
-			</tr>
+            <tr>
+                <th>STT</th>
+                <th>Tên ca</th>
+                <th>Loại ca</th>
+                <th>Thời gian</th>
+                <th>Thời lượng</th>
+                <th>Các ngày làm việc trong tuần</th>
+                <th></th>
+                <th></th>
+            </tr>
 		</thead>
 		<tbody id="SetShiftList">
 			<tr id="LoadingStatus" style="color:red"></tr>
@@ -442,11 +443,36 @@
 					Data = Data + "CN";
 					flag = 1;
 				}
-				Data = Data + "</td>" + "</tr>";
+                Data = Data + "</td>" + "<td class='text-center' onclick='EditModule(" + ShiftList[i].ShiftID + ")'>"
+                    + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+                    "</td>" +
+                    " <td class='text-center' onclick='DeleteModule(" + ShiftList[i].ShiftID + ")' >"
+                    + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+                    "</td>" +
+                    "</tr>";
 				SetData.append(Data);
 				$("#LoadingStatus").html(" ");
 			}
 		}
+
+        function EditModule(id) {
+            var url = "/SHIFTs/Edit/id=" + String(id).padStart(4, "0");
+            $("#ModalTitle").html("Update Module Details");
+            $("#MyModal").modal();
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#ModuleID").val(obj.id);
+                    $("#Module").val(obj.Module);
+                    $("#ProjectID option:selected").text(obj.ProjectID);
+                    $("#ProjectID option:selected").val(obj.ProjectID.Project.SourceCode);
+                }
+            })
+
+        }
 	</script>
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/jqueryval")

@@ -57,8 +57,17 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
-            //sHIFT.ShiftID = auto create shiftID
-            sHIFT.ShiftID = "4321";
+            //auto create shiftID
+            int n = 0;
+            var shiftList = db.SHIFTs.ToList();
+            if (shiftList.Count > 0)
+            {
+                SHIFT s = shiftList.Last();
+                n = Int32.Parse(s.ShiftID) + 1;
+            }
+
+            string id = String.Format("{0:0000}", n);
+            sHIFT.ShiftID = id;
             if (ModelState.IsValid)
             {
                 db.SHIFTs.Add(sHIFT);
