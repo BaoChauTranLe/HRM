@@ -12,11 +12,14 @@ namespace HRM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TAXRATE
+    public partial class SHIFTDETAIL
     {
-        public int Rank { get; set; }
-        public int Min { get; set; }
-        public int Max { get; set; }
-        public int Rate { get; set; }
+        public string ShiftID { get; set; }
+        public string EmployeeID { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+    
+        public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual SHIFT SHIFT { get; set; }
     }
 }

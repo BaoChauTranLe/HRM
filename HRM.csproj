@@ -127,6 +127,7 @@
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
+    <Compile Include="Controllers\TAXRATEsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,6 +167,7 @@
     <Compile Include="Models\CONTRACT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateGreaterThanAttribute.cs" />
     <Compile Include="Models\DATEINFORMATION.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -224,7 +226,10 @@
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\SHIFTDETAIL.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAXRATE.cs">
@@ -300,7 +305,6 @@
     <Content Include="Views\ListEmployee.html" />
     <Content Include="Views\ManageAccountList.html" />
     <Content Include="Views\ManagePermissionGroupsList.html" />
-    <Content Include="Views\SetShift.html" />
     <Content Include="Views\Shared\ModalLayout.css" />
     <Content Include="Views\TimekeepingDetail.html" />
     <Content Include="Views\TimekeepingTable.html" />
@@ -322,11 +326,15 @@
     <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\SHIFTs\Create.cshtml" />
     <Content Include="Views\SHIFTs\Delete.cshtml" />
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />
     <Content Include="Views\SHIFTs\Index.cshtml" />
+    <Content Include="Views\TAXRATEs\Create.cshtml" />
+    <Content Include="Views\TAXRATEs\Delete.cshtml" />
+    <Content Include="Views\TAXRATEs\Details.cshtml" />
+    <Content Include="Views\TAXRATEs\Edit.cshtml" />
+    <Content Include="Views\TAXRATEs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

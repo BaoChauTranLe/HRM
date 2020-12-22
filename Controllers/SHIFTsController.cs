@@ -25,8 +25,21 @@ namespace HRM.Controllers
 
         public JsonResult GetShiftList()
         {
-            List<SHIFT> ShiftList = db.SHIFT.ToList();
-            return Json(ShiftList, JsonRequestBehavior.AllowGet);
+            try
+            {
+                List<SHIFT> ShiftList = db.SHIFTs.ToList();
+                return Json(ShiftList, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public JsonResult GetShiftById(string id)
+        {
+            SHIFT shift = db.SHIFTs.Find(id);
+            return Json(shift, JsonRequestBehavior.AllowGet);
         }
 
         // GET: SHIFTs/Details/5
@@ -44,21 +57,24 @@ namespace HRM.Controllers
             return View(sHIFT);
         }
 
-        // GET: SHIFTs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SHIFTs/Create
+        // POST: SHIFTs/Index
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
-            //sHIFT.ShiftID = auto create shiftID
-            sHIFT.ShiftID = "4321";
+            //auto create shiftID
+            int n = 0;
+            var shiftList = db.SHIFTs.ToList();
+            if (shiftList.Count > 0)
+            {
+                SHIFT s = shiftList.Last();
+                n = Int32.Parse(s.ShiftID) + 1;
+            }
+
+            string id = String.Format("{0:0000}", n);
+            sHIFT.ShiftID = id;
             if (ModelState.IsValid)
             {
                 db.SHIFT.Add(sHIFT);
@@ -120,8 +136,8 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SHIFT sHIFT = db.SHIFT.Find(id);
-            db.SHIFT.Remove(sHIFT);
+            SHIFT sHIFT = db.SHIFTs.Find(id);
+            db.SHIFTs.Remove(sHIFT);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

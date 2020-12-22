@@ -298,9 +298,12 @@
           <Key>
             <PropertyRef Name="ShiftID" />
             <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StartDate" />
           </Key>
           <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -317,8 +320,8 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="int" Nullable="false" />
-          <Property Name="Min" Type="int" />
-          <Property Name="Max" Type="int" />
+          <Property Name="Min" Type="int" Nullable="false" />
+          <Property Name="Max" Type="int" Nullable="false" />
           <Property Name="Rate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
@@ -564,6 +567,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShiftDetail_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShiftDetail_Shift">
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHIFT">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Gr_FK">
           <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="0..1" />
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
@@ -657,30 +684,6 @@
             </Principal>
             <Dependent Role="SALARYREPORT">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ShiftDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="SHIFTDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ShiftDetail_FK_Shift">
-          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="1" />
-          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SHIFT">
-              <PropertyRef Name="ShiftID" />
-            </Principal>
-            <Dependent Role="SHIFTDETAIL">
-              <PropertyRef Name="ShiftID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -856,6 +859,14 @@
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetail_Employee" Association="Self.FK_ShiftDetail_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetail_Shift" Association="Self.FK_ShiftDetail_Shift">
+            <End Role="SHIFT" EntitySet="SHIFT" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
+          </AssociationSet>
           <AssociationSet Name="Gr_FK" Association="Self.Gr_FK">
             <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSION" />
             <End Role="GR" EntitySet="GR" />
@@ -887,14 +898,6 @@
           <AssociationSet Name="SalaryReport_FK_Employee" Association="Self.SalaryReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORT" />
-          </AssociationSet>
-          <AssociationSet Name="ShiftDetail_FK_Employee" Association="Self.ShiftDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="ShiftDetail_FK_Shift" Association="Self.ShiftDetail_FK_Shift">
-            <End Role="SHIFT" EntitySet="SHIFT" />
-            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
           </AssociationSet>
           <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
@@ -1069,7 +1072,7 @@
           </Key>
           <Property Name="EducationID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EducationName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="EDUCATIONDETAIL">
           <Key>
@@ -1113,25 +1116,25 @@
           <Property Name="DeductionPersonal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeductionDependent" Type="Int32" />
           <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ADVANCED" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
-          <NavigationProperty Name="ADVANCEDREPORT" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
-          <NavigationProperty Name="ALLOWANCEDETAIL" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
-          <NavigationProperty Name="ALLOWANCEREPORT" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
-          <NavigationProperty Name="BONUSDETAIL" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
-          <NavigationProperty Name="BONUSREPORT" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
-          <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
+          <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
+          <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
+          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
+          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
+          <NavigationProperty Name="BONUSREPORTs" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
+          <NavigationProperty Name="CERTIFICATEDETAILs" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
           <NavigationProperty Name="CONTRACT" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
           <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
           <NavigationProperty Name="POSITION" Relationship="Self.EMPLOYEE_FK_POSITION" FromRole="EMPLOYEE" ToRole="POSITION" />
           <NavigationProperty Name="ROOM" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="EMPLOYEE" ToRole="ROOM" />
-          <NavigationProperty Name="INSURANCEREPORT" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
-          <NavigationProperty Name="SALARYREPORT" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
-          <NavigationProperty Name="TAXREPORT" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
-          <NavigationProperty Name="TIMEKEEPING" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
-          <NavigationProperty Name="TIMEKEEPINGREPORT" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
-          <NavigationProperty Name="USERS" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
-          <NavigationProperty Name="GR" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
-          <NavigationProperty Name="SHIFT" Relationship="Self.SHIFTDETAIL" FromRole="EMPLOYEE" ToRole="SHIFT" />
+          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.FK_ShiftDetail_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
+          <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
+          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
+          <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
+          <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1177,7 +1180,7 @@
           </Key>
           <Property Name="MajorID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="MajorName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="PARAMETER">
           <Key>
@@ -1248,7 +1251,20 @@
           <Property Name="Friday" Type="Boolean" Nullable="false" />
           <Property Name="Saturday" Type="Boolean" Nullable="false" />
           <Property Name="Sunday" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.SHIFTDETAIL" FromRole="SHIFT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.FK_ShiftDetail_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
+        </EntityType>
+        <EntityType Name="SHIFTDETAIL">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_ShiftDetail_Employee" FromRole="SHIFTDETAIL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="SHIFT" Relationship="Self.FK_ShiftDetail_Shift" FromRole="SHIFTDETAIL" ToRole="SHIFT" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1265,8 +1281,8 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Int32" />
-          <Property Name="Max" Type="Int32" />
+          <Property Name="Min" Type="Int32" Nullable="false" />
+          <Property Name="Max" Type="Int32" Nullable="false" />
           <Property Name="Rate" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
@@ -1542,6 +1558,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShiftDetail_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="InsuranceReport_FK_Employee">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="INSURANCEREPORT" Type="Self.INSURANCEREPORT" Multiplicity="*" />
@@ -1638,6 +1666,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShiftDetail_Shift">
+          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="1" />
+          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHIFT">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="GROUPACCESS">
           <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="*" />
           <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="*" />
@@ -1646,43 +1686,40 @@
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
         </Association>
-        <Association Name="SHIFTDETAIL">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <End Role="SHIFT" Type="Self.SHIFT" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ABSENT" EntityType="Self.ABSENT" />
-          <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" />
-          <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" />
-          <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" />
-          <EntitySet Name="ALLOWANCEDETAIL" EntityType="Self.ALLOWANCEDETAIL" />
-          <EntitySet Name="ALLOWANCEREPORT" EntityType="Self.ALLOWANCEREPORT" />
-          <EntitySet Name="BONUS" EntityType="Self.BONUS" />
-          <EntitySet Name="BONUSDETAIL" EntityType="Self.BONUSDETAIL" />
-          <EntitySet Name="BONUSREPORT" EntityType="Self.BONUSREPORT" />
-          <EntitySet Name="CERTIFICATE" EntityType="Self.CERTIFICATE" />
-          <EntitySet Name="CERTIFICATEDETAIL" EntityType="Self.CERTIFICATEDETAIL" />
-          <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" />
-          <EntitySet Name="DATEINFORMATION" EntityType="Self.DATEINFORMATION" />
-          <EntitySet Name="EDUCATION" EntityType="Self.EDUCATION" />
-          <EntitySet Name="EDUCATIONDETAIL" EntityType="Self.EDUCATIONDETAIL" />
-          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" />
-          <EntitySet Name="GR" EntityType="Self.GR" />
-          <EntitySet Name="GROUPPERMISSION" EntityType="Self.GROUPPERMISSION" />
-          <EntitySet Name="INSURANCEREPORT" EntityType="Self.INSURANCEREPORT" />
-          <EntitySet Name="MAJOR" EntityType="Self.MAJOR" />
-          <EntitySet Name="PARAMETER" EntityType="Self.PARAMETER" />
-          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" />
-          <EntitySet Name="POSITION" EntityType="Self.POSITION" />
-          <EntitySet Name="ROOM" EntityType="Self.ROOM" />
-          <EntitySet Name="SALARYREPORT" EntityType="Self.SALARYREPORT" />
-          <EntitySet Name="SHIFT" EntityType="Self.SHIFT" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TAXRATE" EntityType="Self.TAXRATE" />
-          <EntitySet Name="TAXREPORT" EntityType="Self.TAXREPORT" />
-          <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" />
-          <EntitySet Name="TIMEKEEPINGREPORT" EntityType="Self.TIMEKEEPINGREPORT" />
-          <EntitySet Name="USERS" EntityType="Self.USERS" />
+          <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
+          <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
+          <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
+          <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
+          <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
+          <EntitySet Name="ALLOWANCEREPORTs" EntityType="Self.ALLOWANCEREPORT" />
+          <EntitySet Name="BONUS" EntityType="Self.BONU" />
+          <EntitySet Name="BONUSDETAILs" EntityType="Self.BONUSDETAIL" />
+          <EntitySet Name="BONUSREPORTs" EntityType="Self.BONUSREPORT" />
+          <EntitySet Name="CERTIFICATEs" EntityType="Self.CERTIFICATE" />
+          <EntitySet Name="CERTIFICATEDETAILs" EntityType="Self.CERTIFICATEDETAIL" />
+          <EntitySet Name="CONTRACTs" EntityType="Self.CONTRACT" />
+          <EntitySet Name="DATEINFORMATIONs" EntityType="Self.DATEINFORMATION" />
+          <EntitySet Name="EDUCATIONs" EntityType="Self.EDUCATION" />
+          <EntitySet Name="EDUCATIONDETAILs" EntityType="Self.EDUCATIONDETAIL" />
+          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="GRs" EntityType="Self.GR" />
+          <EntitySet Name="GROUPPERMISSIONs" EntityType="Self.GROUPPERMISSION" />
+          <EntitySet Name="INSURANCEREPORTs" EntityType="Self.INSURANCEREPORT" />
+          <EntitySet Name="MAJORs" EntityType="Self.MAJOR" />
+          <EntitySet Name="PARAMETERs" EntityType="Self.PARAMETER" />
+          <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
+          <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
+          <EntitySet Name="ROOMs" EntityType="Self.ROOM" />
+          <EntitySet Name="SALARYREPORTs" EntityType="Self.SALARYREPORT" />
+          <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
+          <EntitySet Name="SHIFTDETAILs" EntityType="Self.SHIFTDETAIL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TAXRATEs" EntityType="Self.TAXRATE" />
+          <EntitySet Name="TAXREPORTs" EntityType="Self.TAXREPORT" />
+          <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
+          <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
           <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
             <End Role="ABSENT" EntitySet="ABSENT" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
@@ -1752,8 +1789,12 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
           <AssociationSet Name="EMPLOYEE_FK_ROOM" Association="Self.EMPLOYEE_FK_ROOM">
-            <End Role="ROOM" EntitySet="ROOM" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetail_Employee" Association="Self.FK_ShiftDetail_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
           </AssociationSet>
           <AssociationSet Name="InsuranceReport_FK_Employee" Association="Self.InsuranceReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
@@ -1787,6 +1828,10 @@
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="POSITION" EntitySet="POSITION" />
           </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetail_Shift" Association="Self.FK_ShiftDetail_Shift">
+            <End Role="SHIFT" EntitySet="SHIFTs" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
+          </AssociationSet>
           <AssociationSet Name="GROUPACCESS" Association="Self.GROUPACCESS">
             <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSION" />
             <End Role="PERMISSION" EntitySet="PERMISSION" />
@@ -1795,10 +1840,36 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="GR" EntitySet="GR" />
           </AssociationSet>
-          <AssociationSet Name="SHIFTDETAIL" Association="Self.SHIFTDETAIL">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="SHIFT" EntitySet="SHIFT" />
-          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -2091,6 +2162,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SHIFTDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFTDETAIL">
+              <MappingFragment StoreEntitySet="SHIFTDETAIL">
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -2180,14 +2261,30 @@
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="SHIFTDETAIL" TypeName="hrmserver_HRMModel.SHIFTDETAIL" StoreEntitySet="SHIFTDETAIL">
-            <EndProperty Name="EMPLOYEE">
-              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-            </EndProperty>
-            <EndProperty Name="SHIFT">
-              <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_HRMModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_HRMModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_HRMModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

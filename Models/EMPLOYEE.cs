@@ -78,7 +78,9 @@ namespace HRM.Models
         public virtual POSITION POSITION { get; set; }
         public virtual ROOM ROOM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INSURANCEREPORT> INSURANCEREPORT { get; set; }
+        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SALARYREPORT> SALARYREPORT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -89,8 +91,6 @@ namespace HRM.Models
         public virtual ICollection<TIMEKEEPINGREPORT> TIMEKEEPINGREPORT { get; set; }
         public virtual USER USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GR> GR { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFT> SHIFT { get; set; }
+        public virtual ICollection<GR> GRs { get; set; }
     }
 }
