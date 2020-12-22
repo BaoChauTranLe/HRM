@@ -320,9 +320,9 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="int" Nullable="false" />
-          <Property Name="Min" Type="int" Nullable="false" />
-          <Property Name="Max" Type="int" Nullable="false" />
-          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Min" Type="float" Nullable="false" />
+          <Property Name="Max" Type="float" />
+          <Property Name="Rate" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
@@ -1313,9 +1313,9 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Int32" Nullable="false" />
-          <Property Name="Max" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Min" Type="Double" Nullable="false" />
+          <Property Name="Max" Type="Double" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
