@@ -5,42 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <style>
+        .add__button {
+            display: block;
+            height: 36px;
+            width: 94px;
+            right: 36px;
+            top: 80px;
+            position: absolute;
+            background: #E3F2FD;
+            border: 1px solid #3D76B5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Min)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Max)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rate)
-        </th>
-        <th></th>
-    </tr>
+<body>
+    <button id="btn" class="add__button">Thêm</button>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Min)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Min)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Max)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Rank }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Rank }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Rank })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Min)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Rank })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+</body>

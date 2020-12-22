@@ -74,7 +74,7 @@
 </head>
 
 <body>
-    @using (Html.BeginForm("Create", "TAXRATEs", FormMethod.Post))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
@@ -89,7 +89,7 @@
             <br />
             <input id="min" type="text" class="taxrate-create-txtbox" style="width:243px; background:#E8E8E8; display:inline-block" disabled />
             <label class="taxrate-create-lbl"> - </label>
-            <input type="text" class="taxrate-create-txtbox" style="width:243px; display:inline-block" placeholder="Đến ..." />
+            @Html.TextBoxFor(model => model.Max, "", new { @id = "max", @class = "taxrate-create-txtbox", @style = "width:243px; display:inline-block" , @placeholder = "Đến ..." })
             @Html.ValidationMessageFor(model => model.Max, "", new { @class = "taxrate-error-msg" })
         </div>
 

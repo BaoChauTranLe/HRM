@@ -12,27 +12,21 @@ namespace HRM.Controllers
 {
     public class TAXRATEsController : Controller
     {
+        int? selectedRank;
+        public int? getselectedRank()
+        {
+            return selectedRank;
+        }
+        public void setselectedRank(int? rank)
+        {
+            selectedRank = rank;
+        }
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
         // GET: TAXRATEs
         public ActionResult Index()
         {
             return View(db.TAXRATEs.ToList());
-        }
-
-        // GET: TAXRATEs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
-            if (tAXRATE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tAXRATE);
         }
 
         // GET: TAXRATEs/Create
@@ -68,13 +62,14 @@ namespace HRM.Controllers
             int taxRank = 1;
             var taxRateList = db.TAXRATEs.ToList();
             if (taxRateList.Count > 0)
+            {
                 taxRank = taxRateList.Last().Rank + 1;
+                //if (taxRateList.Last().Max != null)
+                    //taxRank = taxRateList.Last().Rank + 1;
+                //else
+                    //taxRank = taxRateList.Last().Rank;
+            }
             return taxRank;
-        }
-
-        public ActionResult BackToIndex()
-        {
-            return RedirectToAction("Index");
         }
 
         public double? MinGenerator()
@@ -82,39 +77,19 @@ namespace HRM.Controllers
             double? min = 0;
             var taxRateList = db.TAXRATEs.ToList();
             if (taxRateList.Count > 0)
+            {
                 min = taxRateList.Last().Max;
+                //double? max = taxRateList.Last().Max;
+                //if (max == null)
+                //min = taxRateList.Last().Min;
+                //else
+                //min = max;
+            }    
             return min;
         }
-
-        // GET: TAXRATEs/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult BackToIndex()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
-            if (tAXRATE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tAXRATE);
-        }
-
-        // POST: TAXRATEs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Rank,Min,Max,Rate")] TAXRATE tAXRATE)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tAXRATE).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(tAXRATE);
+            return RedirectToAction("Index");
         }
 
         // GET: TAXRATEs/Delete/5
