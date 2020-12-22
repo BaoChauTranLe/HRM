@@ -166,6 +166,7 @@
     <Compile Include="Models\CONTRACT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateGreaterThanAttribute.cs" />
     <Compile Include="Models\DATEINFORMATION.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -301,7 +302,6 @@
     <Content Include="Views\ListEmployee.html" />
     <Content Include="Views\ManageAccountList.html" />
     <Content Include="Views\ManagePermissionGroupsList.html" />
-    <Content Include="Views\SetShift.html" />
     <Content Include="Views\Shared\ModalLayout.css" />
     <Content Include="Views\TimekeepingDetail.html" />
     <Content Include="Views\TimekeepingTable.html" />

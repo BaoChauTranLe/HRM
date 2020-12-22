@@ -25,8 +25,15 @@ namespace HRM.Controllers
 
         public JsonResult GetShiftList()
         {
-            List<SHIFT> ShiftList = db.SHIFTs.ToList();
-            return Json(ShiftList, JsonRequestBehavior.AllowGet);
+            try
+            {
+                List<SHIFT> ShiftList = db.SHIFTs.ToList();
+                return Json(ShiftList, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // GET: SHIFTs/Details/5
