@@ -11,16 +11,14 @@ namespace HRM.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TAXRATE
     {
         public int Rank { get; set; }
-        public Nullable<double> Min { get; set; }
         [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Giá trị được nhập phải là một số")]
-        public Nullable<double> Max { get; set; }
+        public int Min { get; set; }
         [Required(ErrorMessage = "Thuế suất (%) không được để trống")]
         [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Giá trị được nhập phải là một số")]
-        public double Rate { get; set; }
+        public int Rate { get; set; }
     }
 }
