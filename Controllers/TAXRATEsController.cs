@@ -77,9 +77,9 @@ namespace HRM.Controllers
             return RedirectToAction("Index");
         }
 
-        public int MinGenerator()
+        public double? MinGenerator()
         {
-            int min = 0;
+            double? min = 0;
             var taxRateList = db.TAXRATEs.ToList();
             if (taxRateList.Count > 0)
                 min = taxRateList.Last().Max;

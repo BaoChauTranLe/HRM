@@ -16,7 +16,7 @@ namespace HRM.Models
     public partial class TAXRATE
     {
         public int Rank { get; set; }
-        public double Min { get; set; }
+        public Nullable<double> Min { get; set; }
         public Nullable<double> Max { get; set; }
         [Required(ErrorMessage = "Thuế suất (%) không được để trống")]
         public double Rate { get; set; }
