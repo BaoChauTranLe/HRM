@@ -17,13 +17,13 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CERTIFICATE()
         {
-            this.CERTIFICATEDETAILs = new HashSet<CERTIFICATEDETAIL>();
+            this.CERTIFICATEDETAIL = new HashSet<CERTIFICATEDETAIL>();
         }
     
         public string TypeCertificateID { get; set; }
         public string TypeCertificate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
+        public virtual ICollection<CERTIFICATEDETAIL> CERTIFICATEDETAIL { get; set; }
     }
 }

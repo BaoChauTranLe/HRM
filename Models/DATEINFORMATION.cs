@@ -17,13 +17,13 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DATEINFORMATION()
         {
-            this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
+            this.TIMEKEEPING = new HashSet<TIMEKEEPING>();
         }
     
         public System.DateTime Date { get; set; }
         public Nullable<int> Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
+        public virtual ICollection<TIMEKEEPING> TIMEKEEPING { get; set; }
     }
 }

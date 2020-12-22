@@ -149,7 +149,7 @@
     <Compile Include="Models\ALLOWANCEREPORT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BONU.cs">
+    <Compile Include="Models\BONUS.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BONUSDETAIL.cs">
@@ -226,13 +226,10 @@
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SHIFTDETAIL.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAXRATE.cs">
@@ -247,7 +244,7 @@
     <Compile Include="Models\TIMEKEEPINGREPORT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\USER.cs">
+    <Compile Include="Models\USERS.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -263,9 +260,7 @@
     <Content Include="File_Text\ContractType.txt" />
     <Content Include="File_Text\Dictrict.txt" />
     <Content Include="File_Text\Nation.txt" />
-    <Content Include="File_Text\PersonalIncomeTax.txt" />
     <Content Include="File_Text\Place.txt" />
-    <Content Include="File_Text\Ward.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -330,7 +325,6 @@
     <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\SHIFTs\Create.cshtml" />
     <Content Include="Views\SHIFTs\Delete.cshtml" />
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />

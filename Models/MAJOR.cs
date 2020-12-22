@@ -17,13 +17,13 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MAJOR()
         {
-            this.EDUCATIONDETAILs = new HashSet<EDUCATIONDETAIL>();
+            this.EDUCATIONDETAIL = new HashSet<EDUCATIONDETAIL>();
         }
     
         public string MajorID { get; set; }
         public string MajorName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EDUCATIONDETAIL> EDUCATIONDETAILs { get; set; }
+        public virtual ICollection<EDUCATIONDETAIL> EDUCATIONDETAIL { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SHIFT()
         {
-            this.EMPLOYEEs = new HashSet<EMPLOYEE>();
+            this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
         }
-    
+
         public string ShiftID { get; set; }
         public string ShiftName { get; set; }
         public string ShiftType { get; set; }
@@ -34,6 +34,6 @@ namespace HRM.Models
         public bool Sunday { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
+        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
     }
 }

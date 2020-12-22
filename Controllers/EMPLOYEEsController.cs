@@ -51,7 +51,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
+            EMPLOYEE eMPLOYEE = await db.EMPLOYEE.FindAsync(id);
             if (eMPLOYEE == null)
             {
                 return HttpNotFound();
@@ -353,7 +353,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
+            EMPLOYEE eMPLOYEE = await db.EMPLOYEE.FindAsync(id);
             if (eMPLOYEE == null)
             {
                 return HttpNotFound();
@@ -390,7 +390,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
+            EMPLOYEE eMPLOYEE = await db.EMPLOYEE.FindAsync(id);
             if (eMPLOYEE == null)
             {
                 return HttpNotFound();
