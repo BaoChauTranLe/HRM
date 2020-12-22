@@ -37,7 +37,7 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public byte[] Image { get; set; }
-        public Nullable<bool> Sex { get; set; }
+        public string Sex { get; set; }
         public Nullable<System.DateTime> DoB { get; set; }
         public string Birthplace { get; set; }
         public string HomeTown { get; set; }
@@ -51,11 +51,12 @@ namespace HRM.Models
         public string RoomID { get; set; }
         public string PositionID { get; set; }
         public string ContractID { get; set; }
-        public Nullable<bool> HealthInsurance { get; set; }
+        public string HealthInsurance { get; set; }
         public string HealthInsuranceID { get; set; }
         public string SocialInsuranceID { get; set; }
-        public Nullable<bool> DeductionPersonal { get; set; }
+        public string DeductionPersonal { get; set; }
         public Nullable<int> DeductionDependent { get; set; }
+        public string Street { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ADVANCED> ADVANCEDs { get; set; }

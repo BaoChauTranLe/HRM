@@ -36,6 +36,12 @@ namespace HRM.Controllers
             }
         }
 
+        public JsonResult GetShiftById(string id)
+        {
+            SHIFT shift = db.SHIFTs.Find(id);
+            return Json(shift, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: SHIFTs/Details/5
         public ActionResult Details(string id)
         {
@@ -51,13 +57,7 @@ namespace HRM.Controllers
             return View(sHIFT);
         }
 
-        // GET: SHIFTs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SHIFTs/Create
+        // POST: SHIFTs/Index
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

@@ -324,7 +324,6 @@
     <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\SHIFTs\Create.cshtml" />
     <Content Include="Views\SHIFTs\Delete.cshtml" />
     <Content Include="Views\SHIFTs\Details.cshtml" />
     <Content Include="Views\SHIFTs\Edit.cshtml" />

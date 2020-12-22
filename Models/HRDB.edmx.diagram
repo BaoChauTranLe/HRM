@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5fccc621cfde4d36ace3917330c7c714" Name="Diagram1">
+      <Diagram DiagramId="158ccc99e0764a3ebd672b32f2ac3eb9" Name="Diagram1">
         <EntityTypeShape EntityType="hrmserver_HRMModel.ABSENT" Width="1.5" PointX="11.25" PointY="39.875" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCED" Width="1.5" PointX="7.5" PointY="30.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCEDREPORT" Width="1.5" PointX="7.5" PointY="33.25" IsExpanded="true" />
@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="hrmserver_HRMModel.DATEINFORMATION" Width="1.5" PointX="11.25" PointY="52.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.EDUCATION" Width="1.5" PointX="8.25" PointY="36.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.EDUCATIONDETAIL" Width="1.5" PointX="10.5" PointY="48.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.EMPLOYEE" Width="1.5" PointX="5.25" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.EMPLOYEE" Width="1.5" PointX="5.25" PointY="42.5" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.GR" Width="1.5" PointX="7.5" PointY="50.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.GROUPPERMISSION" Width="1.5" PointX="5.25" PointY="56.125" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.INSURANCEREPORT" Width="1.5" PointX="7.5" PointY="55.875" IsExpanded="true" />
