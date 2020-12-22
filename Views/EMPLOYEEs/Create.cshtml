@@ -1,214 +1,536 @@
-﻿@model HRM.Models.EMPLOYEE
+﻿@model HRM.Models.EmployeeViewModel
 
 @{
-    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    /* Style the button that is used to open and close the collapsible content */
+    .collapsible {
+        background: #E0EFFF;
+        border-radius: 4px;
+        width: 100%;
+        height: 35px;
+        border-bottom: 1px solid #4282BB;
+        position: relative;
+        cursor: pointer;
+        /*Text*/
+        color: #4282BB;
+        padding-left: 10px;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: 0.01em;
+        overflow: auto;
+    }
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .collapsible:hover {
+            color: white;
+        }
+    /* Style the collapsible content. Note: show by default */
+    .collapsible-content {
+        margin-top: 18px;
+        font-size: 15px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 30px;
+        /* identical to box height, or 22px */
+        letter-spacing: 0.01em;
+        width: 1000px;
+        position: relative;
+        margin-bottom: 18px;
+        display: none;
+    }
 
-<h2>Create</h2>
+    .collapsible:after {
+        content: '+';
+        float: left;
+        font-size: 30px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 30px;
+        color: #4282BB;
+    }
 
+    .active:after {
+        content: "-";
+        float: left;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 30px;
+        color: #4282BB;
+    }
 
-@using (Html.BeginForm()) 
+    .label {
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 30px;
+        /* identical to box height, or 22px */
+        letter-spacing: 0.01em;
+        background: none;
+        position: absolute;
+        color: black;
+    }
+
+    .text-box {
+        align-items: flex-start;
+        padding: 12px;
+        height: 47px;
+        /* Surface/Light */
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /* Inside Auto Layout */
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+        margin: 0px 2px;
+        /*Text*/
+        color: #060606;
+        padding-left: 10px;
+        position: absolute;
+        font-size: 15px;
+    }
+
+    .drop-down-list {
+        height: 47px;
+        /* Surface/Light */
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /* Inside Auto Layout */
+        order: 1;
+        flex-grow: 0;
+        margin: 0px 2px;
+        padding-left: 10px;
+        position: absolute;
+        font-size: 15px;
+    }
+
+    .btn-insert {
+        height: 50px;
+        left: 70px;
+        top: 330px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 16px;
+        /* or 89% */
+        align-items: center;
+        text-align: center;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        /* White / High Emphasis */
+        color: #FFFFFF;
+        background: #3D76B5;
+        /* 1 dp */
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+        padding: 10px 10px 10px 10px;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    .img {
+        width: 220.69px;
+        height: 290px;
+        left: 30px;
+        top: 30px;
+        position: absolute;
+    }
+
+    .date {
+        height: 47px;
+        /* Surface/Light */
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /*Text*/
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        padding-left: 10px;
+        position: absolute;
+    }
+
+    .radio {
+        box-sizing: border-box;
+        border-radius: 80px;
+        position: absolute;
+    }
+
+    .btn-add {
+        height: 40px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 150%;
+        text-align: center;
+        /* or 27px */
+        letter-spacing: 0.01em;
+        background: #3D76B5;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        line-height: 40px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .btn-save {
+        background: #3D76B5;
+        /* 1 dp */
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+        color: white;
+    }
+
+    .btn-cancel {
+        background: #E65252;
+        /* 1 dp */
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+        width: 80px;
+        height: 40px;
+        color: white;
+    }
+    /*phan tu goc*/
+    .first-element {
+        position: relative;
+        height: 200px;
+        left: 255px;
+        width: 800px;
+        padding: 0 0 0 0;
+    }
+
+    .text-danger {
+        position: absolute;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        /* Text / Status - Failed */
+        color: #FF0C3E;
+    }
+</style>
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>EMPLOYEE</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Sex)
-                    @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+    <!-- The topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="title">
+                <div class="title__main">
+                    Quản lý nhân sự
+                </div>
+                <span class="gg-chevron-double-right"></span>
+                <div class="title__sub">
+                    Thêm nhân viên
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DoB, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DoB, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DoB, "", new { @class = "text-danger" })
+            <div class="user__name">
+                Tên
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Birthplace, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Birthplace, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Birthplace, "", new { @class = "text-danger" })
+            <div class="user__ava">
+                Anh
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HomeTown, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeTown, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HomeTown, "", new { @class = "text-danger" })
+            <div class="user__infor">
+                Chức vụ <span>/</span> Phòng
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nation, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nation, "", new { @class = "text-danger" })
+            <div class="notify__icon">
+                <i class="fa fa-fw fa-user"></i>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ward, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ward, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ward, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dictrict, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Dictrict, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Dictrict, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoomID, "RoomID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("RoomID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RoomID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PositionID, "PositionID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PositionID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PositionID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContractID, "ContractID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ContractID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HealthInsurance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HealthInsurance)
-                    @Html.ValidationMessageFor(model => model.HealthInsurance, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HealthInsuranceID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HealthInsuranceID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HealthInsuranceID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SocialInsuranceID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SocialInsuranceID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SocialInsuranceID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DeductionPersonal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.DeductionPersonal)
-                    @Html.ValidationMessageFor(model => model.DeductionPersonal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DeductionDependent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DeductionDependent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DeductionDependent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="logout__icon">
+                <a href="#"><i class="gg-log-in"></i></a>
             </div>
         </div>
     </div>
-}
+    <div class="collapsible">
+        Thông tin cơ bản
+    </div>
+    <div class="collapsible-content" style="height: 800px;">
+        <div class="label" style="left: 300px;">
+            Mã nhân viên
+        </div>
+        @Html.TextBoxFor(model => model.EmployeeID, new { @placeholder = ViewBag.EmployeeID, style = "left: 300px; top: 30px; width: 160px; background: #E8E8E8;", @readonly = true, @class = "text-box", })
+        <div class="label" style="left: 500px;">
+            Tên nhân viên
+        </div>
+        @Html.TextBoxFor(model => model.EmployeeName, new { style = "left: 500px; top: 30px; width: 420px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.EmployeeName, "", new { style = "left: 500px; top: 80px;", @class = "text-danger" })
+        <div>
+            <img id="output" class="img" />
+            <input type="file" id="myFile" name="Image" accept="image/*" onchange="loadFile(event)" style="left: 70px; top: 330px; position: absolute;">
+        </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+        <div class="label" style="left: 300px; top: 100px;">
+            Giới tính
+        </div>
+        <input name="Sex" type="radio" checked="checked" value="Nam" class="radio" style="left: 320px; top:133px" />
+        <div class="label" style="left: 345px; top: 130px;">
+            Nam
+        </div>
+        <input name="Sex" type="radio" value="false" class="Nữ" style="left: 380px; top:133px" />
+        <div class="label" style="left: 400px; top: 130px;">
+            Nữ
+        </div>
+        <div class="label" style="left: 500px; top: 100px;">
+            Ngày sinh
+        </div>
+        <input type="date" name="DoB" class="date" style="left: 500px; top: 130px;" />
+        @Html.ValidationMessageFor(model => model.DoB, "", new { style = "left: 500px; top: 180px;", @class = "text-danger" })
+        <div class="label" style="left: 700px; top: 100px;">
+            Nơi sinh
+        </div>
+        @Html.DropDownList("Birthplace", (IEnumerable<SelectListItem>)ViewBag.Birthplace, new { style = "left: 700px; top: 130px; width: 160px;", @class = "drop-down-list" })
+        <div class="label" style="left: 300px; top: 200px;">
+            Quê quán
+        </div>
+        @Html.DropDownList("HomeTown", (IEnumerable<SelectListItem>)ViewBag.HomeTown, new { style = "left: 300px; top: 230px; width: 160px;", @class = "drop-down-list" })
+        <div class="label" style="left: 500px; top: 200px;">
+            Dân tộc
+        </div>
+        @Html.DropDownList("Nation", (IEnumerable<SelectListItem>)ViewBag.nationList, new { style = "left: 500px; top: 230px; width: 160px;", @class = "drop-down-list" })
+        <div class="label" style="left: 700px; top: 200px;">
+            Số CMND/CCCD
+        </div>
+        @Html.TextBoxFor(model => model.Id, new { style = "left: 700px; top: 230px; width: 160px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.Id, "", new { style = "left: 500px; top: 280px;", @class = "text-danger" })
+        <div class="label" style="left: 300px; top: 300px;">
+            Số điện thoại
+        </div>
+        @Html.TextBoxFor(model => model.Phone, new { style = "left: 300px; top: 330px; width: 160px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 500px; top: 300px;">
+            Email
+        </div>
+        @Html.TextBoxFor(model => model.Email, new { style = "left: 500px; top: 330px; width: 420px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 30px; top: 400px;">
+            Địa chỉ
+        </div>
+        @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.placeList, new { style = "left: 30px; top: 430px; width: 160px;", @class = "drop-down-list" })
+        @Html.DropDownList("Ward", (IEnumerable<SelectListItem>)ViewBag.placeList, new { style = "left: 230px; top: 430px; width: 160px;", @class = "drop-down-list" })
+        @Html.DropDownList("Dictrict", (IEnumerable<SelectListItem>)ViewBag.placeList, new { style = "left: 430px; top: 430px; width: 160px;", @class = "drop-down-list" })
+        @Html.TextBoxFor(model => model.Email, new { style = "left: 630px; top: 430px; width: 250px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 30px; top: 500px;">
+            Phòng
+        </div>
+        @Html.DropDownList("RoomID", (IEnumerable<SelectListItem>)ViewBag.RoomID, new { style = "left: 30px; top: 530px; width: 250px;", @class = "drop-down-list" })
+        <div class="label" style="left: 320px; top: 500px;">
+            Chức vụ
+        </div>
+        @Html.DropDownList("PositionID", (IEnumerable<SelectListItem>)ViewBag.PositionID, new { style = "left: 320px; top: 530px; width: 250px;", @class = "drop-down-list" })
+        <div class="label" style="left: 30px; top: 600px;">
+            Miễn BHYT
+        </div>
+        <input name="HealthInsurance" type="radio" checked="checked" value="Có" class="radio" style="left: 50px; top:633px" />
+        <div class="label" style="left: 75px; top: 630px;">
+            Có
+        </div>
+        <input name="HealthInsurance" type="radio" value="false" class="Không" style="left: 100px; top:633px" />
+        <div class="label" style="left: 125px; top: 630px;">
+            Không
+        </div>
+        <div class="label" style="left: 320px; top: 600px;">
+            Mã số thẻ BHYT
+        </div>
+        @Html.TextBoxFor(model => model.HealthInsuranceID, new { style = "left: 320px; top: 630px; width: 220.69px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 30px; top: 700px;">
+            Đăng ký giảm trừ bản thân
+        </div>
+        <input name="DeductionPersonal" type="radio" checked="checked" value="Có" class="radio" style="left: 50px; top:733px" />
+        <div class="label" style="left: 75px; top: 730px;">
+            Có
+        </div>
+        <input name="DeductionPersonal" type="radio" value="Không" class="radio" style="left: 100px; top:733px" />
+        <div class="label" style="left: 125px; top: 730px;">
+            Không
+        </div>
+        <div class="label" style="left: 320px; top: 700px;">
+            Đăng ký số người phụ thuộc
+        </div>
+        @Html.TextBoxFor(model => model.DeductionDependent, new { style = "left: 320px; top: 730px; width: 220.69px; background: #F8FAFA;", @class = "text-box", })
+    </div>
+    <div class="collapsible">
+        Trình độ chuyên môn
+    </div>
+    <!--hop bao quanh trinh do, chua cac form trong phan trinh do-->
+    <div class="collapsible-content">
+        <!--phan tu ban dau trong hop-->
+        <div class="first-element" id="e1" style="left: 0px; top: 0px;">
+            <div class="label" style="left: 10px;">
+                Trình độ
+            </div>
+            @Html.DropDownListFor(m => m.EducationID, (IEnumerable<SelectListItem>)ViewBag.EducationID, new { style = "margin-left: 10px; margin-top: 28px; width: 180px;", @class = "drop-down-list" })
+            <div class="label" style="left: 300px;">
+                Chuyên ngành
+            </div>
+            @Html.DropDownListFor(m => m.MajorID, (IEnumerable<SelectListItem>)ViewBag.MajorID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
+            <div class="label" style="left: 10px; top: 100px;">
+                Ngày cấp
+            </div>
+            <input type="date" name="Date" class="date" style="left: 10px; top: 130px; width: 180px;" />
+            <div class="label" style="left: 300px;top: 100px;">
+                Nơi đào tạo
+            </div>
+            @Html.TextBoxFor(model => model.Place, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+        </div>
+        <div class="btn-add" id="btn-add-1" style="left: 10px; right: 10px; top: 1030px;" onclick=AddButton1("e1","btn-add-1")>
+            + Thêm
+        </div>
+    </div>
+    <div class="collapsible">
+        Chứng chỉ chuyên ngành
+    </div>
+    <div class="collapsible-content">
+        <!--phan tu ban dau trong hop-->
+        <div class="first-element" id="e2" style="left: 0px; top: 0px;">
+            <div class="label" style="left: 10px;">
+                Tên chứng chỉ
+            </div>
+            @Html.TextBoxFor(model => model.CertificateName, new { style = "margin-left: 10px; margin-top: 28px; width: 200px", @class = "text-box", })
+            <div class="label" style="left: 300px;">
+                Loại chứng chỉ
+            </div>
+            @Html.DropDownListFor(m => m.TypeCertificateID, (IEnumerable<SelectListItem>)ViewBag.TypeCertificateID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
+            <div class="label" style="left: 10px;top: 100px;">
+                Ngày cấp
+            </div>
+            <input type="date" name="CertificateDate" class="date" style="left: 10px; top: 130px; width: 200px;" />
+            <div class="label" style="left: 300px;top: 100px;">
+                Nơi cấp
+            </div>
+            @Html.TextBoxFor(model => model.CertificatePlace, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+        </div>
+        <div class="btn-add" id="btn-add-2" style="left: 10px; right: 10px; top: 1300px;" onclick="AddButton2()">
+            + Thêm
+        </div>
+    </div>
+    <div class="collapsible">
+        Hợp đồng
+    </div>
+    <div class="collapsible-content" style="left: 0px; top: 0px; height: 300px;">
+        <div class="label" style="left: 30px;">
+            Số hợp đồng
+        </div>
+        @Html.TextBoxFor(model => model.ContractID, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 300px;">
+            Loại hợp đồng
+        </div>
+        @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
+        <div class="label" style="left: 550px;">
+            Thời gian thử việc
+        </div>
+        @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
+        <div class="label" style="left: 30px; top: 100px;">
+            Lương cơ bản
+        </div>
+        @Html.TextBoxFor(model => model.BasicSalary, new { style = "left: 30px; top: 130px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+        <div class="label" style="left: 300px; top: 100px;">
+            Loại thuế thu nhập cá nhân
+        </div>
+        @Html.DropDownListFor(model => model.PersonalIncomeTax, (IEnumerable<SelectListItem>)ViewBag.PersonalIncomeTax, new { style = "left: 300px; top: 130px; width: 200px;", @class = "drop-down-list" })
+        <div class="label" style="left: 30px; top: 200px;">
+            Ngày vào làm
+        </div>
+        <input type="date" name="DateStartWork" class="date" style="left: 30px; top: 230px;" />
+        <div class="label" style="left: 300px; top: 200px;">
+            Ngày hết hạn
+        </div>
+        <input type="date" name="ContractExpirationDate" class="date" style="left: 300px; top: 230px;" />
+    </div>
+    <div class="collapsible">
+        Thông tin tài khoản
+    </div>
+    <div class="collapsible-content" style="height: 100px;">
+        <div class="label" style="left: 30px; top: 0px;">
+            Phân quyền
+        </div>
+        @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.Place, new { style = "left: 30px; top: 30px; width: 200px;", @class = "drop-down-list" })
+    </div>
+    <input type="submit" value="Lưu" class="btn-add" />
+    <button class="btn-cancel" onclick="GoHome()">
+        HỦY
+    </button>
+
+
+
+    <script>
+        function AddButton1() {
+            var element = document.getElementById("e1");
+            var node = element.cloneNode(true);
+            btn = document.getElementById("btn-add-1");
+            btn.before(node);
+        }
+        function AddButton2() {
+            var element = document.getElementById("e2");
+            var node = element.cloneNode(true);
+            btn = document.getElementById("btn-add-2");
+            btn.before(node);
+        }
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+        function GoHome() {
+            location.href = "https://localhost:44319/EMPLOYEEs/Index";
+        }
+
+            $(document).ready(function () {
+                $("#contracttype").change(function () {
+                    if (this.value === 'Hợp đồng thử việc')
+                        $("input[name='TrialTime']").prop('readonly', false);//enable it back again
+                    else
+                        $("input[name='TrialTime']").prop('readonly', true);
+                });
+            });
+
+        var loadFile = function (event) {
+           var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            var fileName = image.src;
+            alert(fileName);
+        };
+    </script>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

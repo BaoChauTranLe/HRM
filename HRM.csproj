@@ -180,6 +180,7 @@
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\GR.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -258,8 +259,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="File_Text\City.txt" />
+    <Content Include="File_Text\ContractType.txt" />
+    <Content Include="File_Text\Dictrict.txt" />
     <Content Include="File_Text\Nation.txt" />
+    <Content Include="File_Text\PersonalIncomeTax.txt" />
     <Content Include="File_Text\Place.txt" />
+    <Content Include="File_Text\Ward.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

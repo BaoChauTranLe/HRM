@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -103,7 +103,7 @@
             <PropertyRef Name="CertificateName" />
           </Key>
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="CertificateName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CertificateName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="TypeCertificateID" Type="char" MaxLength="3" />
           <Property Name="CertificateDate" Type="datetime" />
           <Property Name="CertificatePlace" Type="nvarchar" MaxLength="50" />
@@ -113,11 +113,11 @@
             <PropertyRef Name="ContractID" />
           </Key>
           <Property Name="ContractID" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="ContractType" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContractType" Type="nvarchar" MaxLength="30" />
           <Property Name="DateStartWork" Type="datetime" />
           <Property Name="ContractExpirationDate" Type="datetime" />
           <Property Name="BasicSalary" Type="int" />
-          <Property Name="PersonalIncomeTax" Type="char" MaxLength="10" />
+          <Property Name="PersonalIncomeTax" Type="nvarchar" MaxLength="50" />
           <Property Name="TrialTime" Type="int" />
         </EntityType>
         <EntityType Name="DATEINFORMATION">
@@ -132,7 +132,7 @@
             <PropertyRef Name="EducationID" />
           </Key>
           <Property Name="EducationID" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="EducationName" Type="nvarchar" MaxLength="20" />
+          <Property Name="EducationName" Type="nvarchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="EDUCATIONDETAIL">
           <Key>
@@ -153,13 +153,13 @@
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Image" Type="image" />
-          <Property Name="Sex" Type="bit" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
           <Property Name="DoB" Type="datetime" />
           <Property Name="Birthplace" Type="nvarchar" MaxLength="20" />
           <Property Name="HomeTown" Type="nvarchar" MaxLength="20" />
           <Property Name="Nation" Type="nvarchar" MaxLength="20" />
           <Property Name="Id" Type="varchar" MaxLength="13" />
-          <Property Name="Phone" Type="varchar" MaxLength="11" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="City" Type="nvarchar" MaxLength="70" />
           <Property Name="Ward" Type="nvarchar" MaxLength="70" />
@@ -167,11 +167,12 @@
           <Property Name="RoomID" Type="char" MaxLength="3" />
           <Property Name="PositionID" Type="char" MaxLength="3" />
           <Property Name="ContractID" Type="char" MaxLength="10" />
-          <Property Name="HealthInsurance" Type="bit" />
-          <Property Name="HealthInsuranceID" Type="varchar" MaxLength="16" />
+          <Property Name="HealthInsurance" Type="nvarchar" MaxLength="10" />
+          <Property Name="HealthInsuranceID" Type="varchar" MaxLength="15" />
           <Property Name="SocialInsuranceID" Type="varchar" MaxLength="16" />
-          <Property Name="DeductionPersonal" Type="bit" />
+          <Property Name="DeductionPersonal" Type="nvarchar" MaxLength="10" />
           <Property Name="DeductionDependent" Type="int" />
+          <Property Name="Street" Type="nvarchar" MaxLength="70" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -227,7 +228,7 @@
             <PropertyRef Name="MajorID" />
           </Key>
           <Property Name="MajorID" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="MajorName" Type="nvarchar" MaxLength="30" />
+          <Property Name="MajorName" Type="nvarchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="PARAMETER">
           <Key>
@@ -951,8 +952,7 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1066,7 +1066,7 @@
             <PropertyRef Name="CertificateName" />
           </Key>
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="CertificateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CertificateName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TypeCertificateID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="CertificateDate" Type="DateTime" Precision="3" />
           <Property Name="CertificatePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1078,11 +1078,11 @@
             <PropertyRef Name="ContractID" />
           </Key>
           <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="ContractType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContractType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="DateStartWork" Type="DateTime" Precision="3" />
           <Property Name="ContractExpirationDate" Type="DateTime" Precision="3" />
           <Property Name="BasicSalary" Type="Int32" />
-          <Property Name="PersonalIncomeTax" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="PersonalIncomeTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TrialTime" Type="Int32" />
           <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="CONTRACT" ToRole="EMPLOYEE" />
         </EntityType>
@@ -1099,7 +1099,7 @@
             <PropertyRef Name="EducationID" />
           </Key>
           <Property Name="EducationID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EducationName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EducationName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="EDUCATIONDETAIL">
@@ -1124,13 +1124,13 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Sex" Type="Boolean" />
+          <Property Name="Sex" Type="String" />
           <Property Name="DoB" Type="DateTime" Precision="3" />
           <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="HomeTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Nation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="Ward" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
@@ -1138,10 +1138,10 @@
           <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="HealthInsurance" Type="Boolean" />
-          <Property Name="HealthInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="HealthInsurance" Type="String" Nullable="true" />
+          <Property Name="HealthInsuranceID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="SocialInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DeductionPersonal" Type="Boolean" />
+          <Property Name="DeductionPersonal" Type="String" />
           <Property Name="DeductionDependent" Type="Int32" />
           <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
           <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
@@ -1162,6 +1162,7 @@
           <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
           <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
           <NavigationProperty Name="SHIFTs" Relationship="Self.SHIFTDETAIL" FromRole="EMPLOYEE" ToRole="SHIFT" />
+          <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1206,7 +1207,7 @@
             <PropertyRef Name="MajorID" />
           </Key>
           <Property Name="MajorID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="MajorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MajorName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="PARAMETER">
@@ -2024,6 +2025,7 @@
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
