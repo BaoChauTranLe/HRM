@@ -11,7 +11,7 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public byte[] Image { get; set; }
-        public bool Sex { get; set; }
+        public string Sex { get; set; }
         [Required(ErrorMessage = "Ngay sinh la truong bat buoc")]
         public DateTime DoB { get; set; }
         public string Birthplace { get; set; }
@@ -44,9 +44,9 @@ namespace HRM.Models
         public int BasicSalary { get; set; }
         public string PersonalIncomeTax { get; set; }
         public int TrialTime { get; set; }
-        public Nullable<bool> HealthInsurance { get; set; }
+        public string HealthInsurance { get; set; }
         public string HealthInsuranceID { get; set; }
-        public bool DeductionPersonal { get; set; }
+        public string DeductionPersonal { get; set; }
         public int DeductionDependent { get; set; }
     }
 }

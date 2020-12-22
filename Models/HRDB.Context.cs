@@ -12,8 +12,6 @@ namespace HRM.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class hrmserver_HRMEntities : DbContext
     {
@@ -27,140 +25,37 @@ namespace HRM.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ABSENT> ABSENTs { get; set; }
-        public virtual DbSet<ADVANCED> ADVANCEDs { get; set; }
-        public virtual DbSet<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
-        public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
-        public virtual DbSet<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
-        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        public virtual DbSet<BONU> BONUS { get; set; }
-        public virtual DbSet<BONUSDETAIL> BONUSDETAILs { get; set; }
-        public virtual DbSet<BONUSREPORT> BONUSREPORTs { get; set; }
-        public virtual DbSet<CERTIFICATE> CERTIFICATEs { get; set; }
-        public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
-        public virtual DbSet<CONTRACT> CONTRACTs { get; set; }
-        public virtual DbSet<DATEINFORMATION> DATEINFORMATIONs { get; set; }
-        public virtual DbSet<EDUCATION> EDUCATIONs { get; set; }
-        public virtual DbSet<EDUCATIONDETAIL> EDUCATIONDETAILs { get; set; }
-        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
-        public virtual DbSet<GR> GRs { get; set; }
-        public virtual DbSet<GROUPPERMISSION> GROUPPERMISSIONs { get; set; }
-        public virtual DbSet<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
-        public virtual DbSet<MAJOR> MAJORs { get; set; }
-        public virtual DbSet<PARAMETER> PARAMETERs { get; set; }
-        public virtual DbSet<PERMISSION> PERMISSIONs { get; set; }
-        public virtual DbSet<POSITION> POSITIONs { get; set; }
-        public virtual DbSet<ROOM> ROOMs { get; set; }
-        public virtual DbSet<SALARYREPORT> SALARYREPORTs { get; set; }
-        public virtual DbSet<SHIFT> SHIFTs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TAXRATE> TAXRATEs { get; set; }
-        public virtual DbSet<TAXREPORT> TAXREPORTs { get; set; }
-        public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
-        public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
+        public virtual DbSet<ABSENT> ABSENT { get; set; }
+        public virtual DbSet<ADVANCED> ADVANCED { get; set; }
+        public virtual DbSet<ADVANCEDREPORT> ADVANCEDREPORT { get; set; }
+        public virtual DbSet<ALLOWANCE> ALLOWANCE { get; set; }
+        public virtual DbSet<ALLOWANCEDETAIL> ALLOWANCEDETAIL { get; set; }
+        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORT { get; set; }
+        public virtual DbSet<BONUS> BONUS { get; set; }
+        public virtual DbSet<BONUSDETAIL> BONUSDETAIL { get; set; }
+        public virtual DbSet<BONUSREPORT> BONUSREPORT { get; set; }
+        public virtual DbSet<CERTIFICATE> CERTIFICATE { get; set; }
+        public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAIL { get; set; }
+        public virtual DbSet<CONTRACT> CONTRACT { get; set; }
+        public virtual DbSet<DATEINFORMATION> DATEINFORMATION { get; set; }
+        public virtual DbSet<EDUCATION> EDUCATION { get; set; }
+        public virtual DbSet<EDUCATIONDETAIL> EDUCATIONDETAIL { get; set; }
+        public virtual DbSet<EMPLOYEE> EMPLOYEE { get; set; }
+        public virtual DbSet<GR> GR { get; set; }
+        public virtual DbSet<GROUPPERMISSION> GROUPPERMISSION { get; set; }
+        public virtual DbSet<INSURANCEREPORT> INSURANCEREPORT { get; set; }
+        public virtual DbSet<MAJOR> MAJOR { get; set; }
+        public virtual DbSet<PARAMETER> PARAMETER { get; set; }
+        public virtual DbSet<PERMISSION> PERMISSION { get; set; }
+        public virtual DbSet<POSITION> POSITION { get; set; }
+        public virtual DbSet<ROOM> ROOM { get; set; }
+        public virtual DbSet<SALARYREPORT> SALARYREPORT { get; set; }
+        public virtual DbSet<SHIFT> SHIFT { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TAXRATE> TAXRATE { get; set; }
+        public virtual DbSet<TAXREPORT> TAXREPORT { get; set; }
+        public virtual DbSet<TIMEKEEPING> TIMEKEEPING { get; set; }
+        public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORT { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
     }
 }

@@ -17,16 +17,16 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GROUPPERMISSION()
         {
-            this.GRs = new HashSet<GR>();
-            this.PERMISSIONs = new HashSet<PERMISSION>();
+            this.GR = new HashSet<GR>();
+            this.PERMISSION = new HashSet<PERMISSION>();
         }
     
         public int GroupPermission1 { get; set; }
         public string GroupPermissionName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GR> GRs { get; set; }
+        public virtual ICollection<GR> GR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERMISSION> PERMISSIONs { get; set; }
+        public virtual ICollection<PERMISSION> PERMISSION { get; set; }
     }
 }

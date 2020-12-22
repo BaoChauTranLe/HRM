@@ -25,7 +25,7 @@ namespace HRM.Controllers
 
         public JsonResult GetShiftList()
         {
-            List<SHIFT> ShiftList = db.SHIFTs.ToList();
+            List<SHIFT> ShiftList = db.SHIFT.ToList();
             return Json(ShiftList, JsonRequestBehavior.AllowGet);
         }
 
@@ -36,7 +36,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
+            SHIFT sHIFT = db.SHIFT.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
@@ -61,7 +61,7 @@ namespace HRM.Controllers
             sHIFT.ShiftID = "4321";
             if (ModelState.IsValid)
             {
-                db.SHIFTs.Add(sHIFT);
+                db.SHIFT.Add(sHIFT);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -76,7 +76,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
+            SHIFT sHIFT = db.SHIFT.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
@@ -107,7 +107,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
+            SHIFT sHIFT = db.SHIFT.Find(id);
             if (sHIFT == null)
             {
                 return HttpNotFound();
@@ -120,8 +120,8 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            db.SHIFTs.Remove(sHIFT);
+            SHIFT sHIFT = db.SHIFT.Find(id);
+            db.SHIFT.Remove(sHIFT);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

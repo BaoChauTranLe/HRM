@@ -1,7 +1,6 @@
 ﻿@model HRM.Models.EmployeeViewModel
 
 @{
-    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -295,11 +294,11 @@
         <div class="label" style="left: 300px; top: 100px;">
             Giới tính
         </div>
-        <input name="Sex" type="radio" checked="checked" value="true" class="radio" style="left: 320px; top:133px" />
+        <input name="Sex" type="radio" checked="checked" value="Nam" class="radio" style="left: 320px; top:133px" />
         <div class="label" style="left: 345px; top: 130px;">
             Nam
         </div>
-        <input name="Sex" type="radio" value="false" class="radio" style="left: 380px; top:133px" />
+        <input name="Sex" type="radio" value="false" class="Nữ" style="left: 380px; top:133px" />
         <div class="label" style="left: 405px; top: 130px;">
             Nữ
         </div>
@@ -312,6 +311,7 @@
             Nơi sinh
         </div>
         @Html.DropDownList("Birthplace", (IEnumerable<SelectListItem>)ViewBag.Birthplace, new { style = "left: 700px; top: 130px; width: 160px;", @class = "drop-down-list" })
+        @Html.ValidationMessageFor(model => model.Birthplace, "", new { style = "left: 700px; top: 180px;", @class = "text-danger" })
         <div class="label" style="left: 300px; top: 200px;">
             Quê quán
         </div>
@@ -351,11 +351,11 @@
         <div class="label" style="left: 30px; top: 600px;">
             Miễn BHYT
         </div>
-        <input name="HealthInsurance" type="radio" checked="checked" value="true" class="radio" style="left: 50px; top:633px" />
+        <input name="HealthInsurance" type="radio" checked="checked" value="Có" class="radio" style="left: 50px; top:633px" />
         <div class="label" style="left: 75px; top: 630px;">
             Có
         </div>
-        <input name="HealthInsurance" type="radio" value="false" class="radio" style="left: 100px; top:633px" />
+        <input name="HealthInsurance" type="radio" value="false" class="Không" style="left: 100px; top:633px" />
         <div class="label" style="left: 125px; top: 630px;">
             Không
         </div>
@@ -366,11 +366,11 @@
         <div class="label" style="left: 30px; top: 700px;">
             Đăng ký giảm trừ bản thân
         </div>
-        <input name="DeductionPersonal" type="radio" checked="checked" value="true" class="radio" style="left: 50px; top:733px" />
+        <input name="DeductionPersonal" type="radio" checked="checked" value="Có" class="radio" style="left: 50px; top:733px" />
         <div class="label" style="left: 75px; top: 730px;">
             Có
         </div>
-        <input name="DeductionPersonal" type="radio" value="false" class="radio" style="left: 100px; top:733px" />
+        <input name="DeductionPersonal" type="radio" value="Không" class="radio" style="left: 100px; top:733px" />
         <div class="label" style="left: 125px; top: 730px;">
             Không
         </div>
@@ -512,107 +512,16 @@
             location.href = "https://localhost:44319/";
         }
         function EnableTrialTime() {
-            var x = document.getElementById("contracttype").value;
+            var x = document.getElementById("contracttype").nodeValue;
             if (x == "Hợp đồng thử việc")
                 document.getElementById("TrialTime").readonly = false;
             else
                 document.getElementById("TrialTime").readonly = true;
         }
         var loadFile = function (event) {
-            var image = document.getElementById('output');
+           var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-        // File javascript để lấy dữ liệu
-
-        // Khai báo URL service của bạn ở đây
-        var baseService = "/Service";
-        var countryUrl = baseService + "/GetAllCountries";
-        var provinceUrl = baseService + "/GetAllProvinceByCountryId";
-        var districtUrl = baseService + "/GetAllDistrictByProvinceId";
-        var wardUrl = baseService + "/GetAllWardByDistrictId";
-        $(document).ready(function () {
-            // load danh sách country
-            _getCountries();
-            $("#ddlCountry").on('change', function () {
-                var id = $(this).val();
-                if (id != undefined && id != '') {
-                    _getProvince(id);
-                }
-            });
-
-            $("#ddlProvince").on('change', function () {
-                var id = $(this).val();
-                if (id != undefined && id != '') {
-                    _getDistrict(id);
-                }
-            });
-            $("#ddlDistrict").on('change', function () {
-                var id = $(this).val();
-                if (id != undefined && id != '') {
-                    _getWard(id);
-                }
-            });
-            $("#ddlWard").on('change', function () {
-                var countryText = $("#ddlCountry option:selected").text();
-                var provinceText = $("#ddlProvince option:selected").text();
-                var districtText = $("#ddlDistrict option:selected").text();
-                var wardText = $("#ddlWard option:selected").text();
-                var html = "Quốc gia: " + countryText + " Tỉnh thành: " + provinceText + " " + "Quận huyện: " + districtText + " " + "Xã phường: " + wardText;
-                html += "</br>Quê bạn thật là đẹp. Chúc mừng bạn!!!";
-                $("#divResult").html(html);
-            });
-        });
-        function _getCountries() {
-            $.get(countryUrl, function (data) {
-                if (data != null && data != undefined && data.length) {
-                    var html = '';
-                    html += '<option value="">--Không chọn--</option>';
-                    $.each(data, function (key, item) {
-                        html += '<option value=' + item.Id + '>' + item.Name + '</option>';
-                    });
-                    $("#ddlCountry").html(html);
-                }
-            });
-        }
-        // truyền id của country vào
-        function _getProvince(id) {
-            $.get(provinceUrl + "/" + id, function (data) {
-                if (data != null && data != undefined && data.length) {
-                    var html = '';
-                    html += '<option value="">--Không chọn--</option>';
-                    $.each(data, function (key, item) {
-                        html += '<option value=' + item.Id + '>' + item.Name + '</option>';
-                    });
-                    $("#ddlProvince").html(html);
-                }
-            });
-        }
-        // truyền id của province vào
-        function _getDistrict(id) {
-            $.get(districtUrl + "/" + id, function (data) {
-                if (data != null && data != undefined && data.length) {
-                    var html = '';
-                    html += '<option value="">--Không chọn--</option>';
-                    $.each(data, function (key, item) {
-                        html += '<option value=' + item.Id + '>' + item.Name + '</option>';
-                    });
-                    $("#ddlDistrict").html(html);
-                }
-            });
-        }
-        // truyền id của district vào
-        function _getWard(id) {
-            $.get(wardUrl + "/" + id, function (data) {
-                if (data != null && data != undefined && data.length) {
-                    var html = '';
-                    html += '<option value="">--Không chọn--</option>';
-                    $.each(data, function (key, item) {
-                        html += '<option value=' + item.Id + '>' + item.Name + '</option>';
-                    });
-                    $("#ddlWard").html(html);
-                }
-            });
-        }
     </script>
 }
 

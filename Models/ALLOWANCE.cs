@@ -17,7 +17,7 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ALLOWANCE()
         {
-            this.ALLOWANCEDETAILs = new HashSet<ALLOWANCEDETAIL>();
+            this.ALLOWANCEDETAIL = new HashSet<ALLOWANCEDETAIL>();
         }
     
         public string AllowanceID { get; set; }
@@ -27,6 +27,6 @@ namespace HRM.Models
         public Nullable<int> FreeTax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
+        public virtual ICollection<ALLOWANCEDETAIL> ALLOWANCEDETAIL { get; set; }
     }
 }

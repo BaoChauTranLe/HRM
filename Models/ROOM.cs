@@ -17,16 +17,16 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ROOM()
         {
-            this.EMPLOYEEs = new HashSet<EMPLOYEE>();
-            this.POSITIONs = new HashSet<POSITION>();
+            this.EMPLOYEE = new HashSet<EMPLOYEE>();
+            this.POSITION = new HashSet<POSITION>();
         }
     
         public string RoomID { get; set; }
         public string RoomName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
+        public virtual ICollection<EMPLOYEE> EMPLOYEE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<POSITION> POSITIONs { get; set; }
+        public virtual ICollection<POSITION> POSITION { get; set; }
     }
 }
