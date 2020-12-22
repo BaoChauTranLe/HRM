@@ -199,7 +199,7 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("Index", "SHIFTs", FormMethod.Post, new { name = "efrm", id = "efrm" }))
+                @using (Html.BeginForm("Index", "SHIFTs", FormMethod.Post, new { name = "frm", id = "frm" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -210,7 +210,7 @@
                                 Tên ca
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control", id = "eShiftName"} })
+                                @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control"} })
                                 @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -331,148 +331,6 @@
         </div>
     </div>
 
-    <!-- The Edit Modal -->
-    <div id="editModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                Sửa ca làm việc
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ShiftID)
-                    <div class="form-group">
-                        <div class="modal__text">
-                            Tên ca
-                        </div>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="modal__text">
-                            Loại ca
-                        </div>
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="modal__text">
-                        Thời gian làm việc
-                    </div>
-
-                    <div class="form-group-time">
-                        <div class="col-md-10" style="display: inline; width: 45.5%;">
-                            @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-                    <span>đến</span>
-
-                    <div class="form-group-time">
-                        <div class="col-md-10" style="display: inline; width: 45.5%;">
-                            @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-
-                    <div class="modal__text">
-                        Các ngày làm việc trong tuần
-                    </div>
-
-                    <div class="form-group" style="display: inline-block; width: 100px;">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Monday) Thứ hai
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Tuesday) Thứ ba
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Wednesday) Thứ tư
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Thursday) Thứ năm
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Friday) Thứ sáu
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Saturday) Thứ bảy
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-                        <div class="col-md-10" style="display: inline;">
-                            <div class="checkbox" style="display: inline;">
-                                @Html.EditorFor(model => model.Sunday) Chủ nhật
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
-" />
-                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
-" />
-                        </div>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
-    </div>
-
     <div id="bg" onclick="closeModal()"></div>
 
 
@@ -501,7 +359,6 @@
         $("#LoadingStatus").html("Loading....");
         // Get the modal
         var create_modal = document.getElementById("createModal");
-        var edit_modal = document.getElementById("editModal");
 
         // Get the button that opens the modal
         var btn = document.getElementById("btn");
@@ -511,7 +368,9 @@
 
         // When the user clicks the button, open the modal
         btn.onclick = function () {
+            $("#modal-title").html("Thêm ca làm việc");
             create_modal.style.display = "block";
+
             document.getElementById("frm").reset();
 
             $("#bg").width("100%").height("100%");
@@ -597,16 +456,36 @@
         }
 
         function EditModule(id) {
-            document.getElementById("efrm").reset();
+            $("#modal-title").html("Sửa ca làm việc");
+            document.getElementById("frm").reset();
             id = String(id).padStart(4, "0");
             for (var i = 0; i < shifts.length; i++) {
                 if (shifts[i].ShiftID == id) {
-                    model = shifts[i];
+                    document.getElementById("ShiftName").value = shifts[i].ShiftName;
+                    var ddl = document.getElementById('ShiftType');
+                    var opts = ddl.options.length;
+                    for (var i = 0; i < opts; i++) {
+                        if (ddl.options[i].value == shifts[i].ShiftType) {
+                            ddl.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    
+                    document.getElementById("StartTime").value = moment(shifts[i].StartTime).format('HH:mm a');
+                    document.getElementById("EndTime").value = moment(shifts[i].EndTime);
+
+                    document.getElementById("Monday").checked = shifts[i].Monday;
+                    document.getElementById("Tuesday").checked = shifts[i].Tuesday;
+                    document.getElementById("Wednesday").checked = shifts[i].Wednesday;
+                    document.getElementById("Thursday").checked = shifts[i].Thursday;
+                    document.getElementById("Friday").checked = shifts[i].Friday;
+                    document.getElementById("Saturday").checked = shifts[i].Saturday;
+                    document.getElementById("Sunday").checked = shifts[i].Sunday;
                     break;
                 }
             }
 
-            edit_modal.style.display = "block";
+            create_modal.style.display = "block";
 
             $("#bg").width("100%").height("100%");
 

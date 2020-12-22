@@ -320,9 +320,8 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="int" Nullable="false" />
-          <Property Name="Min" Type="float" Nullable="false" />
-          <Property Name="Max" Type="float" />
-          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Min" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
@@ -1313,9 +1312,8 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Double" Nullable="false" />
-          <Property Name="Max" Type="Double" />
-          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="Min" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
@@ -2231,7 +2229,6 @@
               <MappingFragment StoreEntitySet="TAXRATE">
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="Max" ColumnName="Max" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
               </MappingFragment>
             </EntityTypeMapping>

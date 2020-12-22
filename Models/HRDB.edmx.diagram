@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="122b946dc73b43a997d551052ec1969d" Name="Diagram1">
+      <Diagram DiagramId="13133c4a6a9847d984a21d0f4d565496" Name="Diagram1">
         <EntityTypeShape EntityType="hrmserver_HRMModel.ABSENT" Width="1.5" PointX="11.25" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCED" Width="1.5" PointX="7.5" PointY="30" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCEDREPORT" Width="1.5" PointX="7.5" PointY="32.5" IsExpanded="true" />
