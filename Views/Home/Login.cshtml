@@ -56,7 +56,6 @@
             color: #4A4A4A;
         }
         .login-textbox {
-            margin-left: 44px;
             width: 400px;
             height: 50px;
             font-family: Montserrat;
@@ -64,7 +63,6 @@
             color: gray;
         }
         .login-btn {
-            margin-left: 44px;
             width: 408px;
             height: 50px;
             background-color: #3D76B5;
@@ -77,6 +75,13 @@
             color: #E4E4E4;
             border:none;
         }
+        .login-error-msg {
+            font-family: Montserrat;
+            color:red;
+        }
+        .login-margin {
+            margin-left: 44px;
+        }
     </style>
 </head>
 <body>
@@ -86,23 +91,23 @@
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            <div class="login-label" style="margin-top:50px; margin-left:44px;">
-                @Html.Label("Tên đăng nhập")
-            </div>
-            @Html.TextBoxFor(m => m.EmployeeID, "", new { @class = "login-textbox" })
-            <div style="margin-left:44px; font-family:Montserrat; color:red;">
-                @Html.ValidationMessageFor(m => m.EmployeeID)
-            </div>
-
-            <div class="login-label" style="margin-top:20px; margin-left:44px;">
-                @Html.Label("Mật khẩu")
-            </div>
-            @Html.PasswordFor(m => m.Password, new { @class = "login-textbox" })
-            <div style="margin-left:44px; font-family:Montserrat; color:red;">
-                @Html.ValidationMessageFor(m => m.Password)
+            <div class="form-group login-margin" style="margin-top:40px; height:120px;">
+                @Html.Label("Tên đăng nhập", htmlAttributes: new { @class = "login-label" })
+                <br />
+                @Html.TextBoxFor(m => m.EmployeeID, "", new { @class = "login-textbox" })
+                <br />
+                @Html.ValidationMessageFor(m => m.EmployeeID, "", new { @class = "login-error-msg" })
             </div>
 
-            <div style="margin-top:30px">
+            <div class="form-group login-margin" style="height: 120px;">
+                @Html.Label("Mật khẩu", htmlAttributes: new { @class = "login-label" })
+                <br />
+                @Html.PasswordFor(m => m.Password, new { @class = "login-textbox" })
+                <br />
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "login-error-msg" })
+            </div>
+
+            <div class="login-margin">
                 <input type="submit" name="login" class="login-btn" value="Đăng nhập" />
             </div>
 
