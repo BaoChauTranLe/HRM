@@ -48,6 +48,10 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Rank,Min,Max,Rate")] TAXRATE tAXRATE)
         {
+            tAXRATE.Rank = RankGenerator();
+            tAXRATE.Min = MinGenerator();
+            if (tAXRATE.Max != null && tAXRATE.Max <= tAXRATE.Min)
+                ModelState.AddModelError("Max", "Giá trị được nhập phải lớn hơn giá trị phía trước");
             if (ModelState.IsValid)
             {
                 db.TAXRATEs.Add(tAXRATE);
@@ -56,6 +60,30 @@ namespace HRM.Controllers
             }
 
             return View(tAXRATE);
+        }
+        
+        //Auto generate TAXRATE rank
+        public int RankGenerator()
+        {
+            int taxRank = 1;
+            var taxRateList = db.TAXRATEs.ToList();
+            if (taxRateList.Count > 0)
+                taxRank = taxRateList.Last().Rank + 1;
+            return taxRank;
+        }
+
+        public ActionResult BackToIndex()
+        {
+            return RedirectToAction("Index");
+        }
+
+        public int MinGenerator()
+        {
+            int min = 0;
+            var taxRateList = db.TAXRATEs.ToList();
+            if (taxRateList.Count > 0)
+                min = taxRateList.Last().Max;
+            return min;
         }
 
         // GET: TAXRATEs/Edit/5
