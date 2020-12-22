@@ -27,7 +27,7 @@ namespace HRM.Controllers
         {
             try
             {
-                List<SHIFT> ShiftList = db.SHIFTs.ToList();
+                List<SHIFT> ShiftList = db.SHIFT.ToList();
                 return Json(ShiftList, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -38,7 +38,7 @@ namespace HRM.Controllers
 
         public JsonResult GetShiftById(string id)
         {
-            SHIFT shift = db.SHIFTs.Find(id);
+            SHIFT shift = db.SHIFT.Find(id);
             return Json(shift, JsonRequestBehavior.AllowGet);
         }
 
@@ -66,7 +66,7 @@ namespace HRM.Controllers
         {
             //auto create shiftID
             int n = 0;
-            var shiftList = db.SHIFTs.ToList();
+            var shiftList = db.SHIFT.ToList();
             if (shiftList.Count > 0)
             {
                 SHIFT s = shiftList.Last();
@@ -136,8 +136,8 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            db.SHIFTs.Remove(sHIFT);
+            SHIFT sHIFT = db.SHIFT.Find(id);
+            db.SHIFT.Remove(sHIFT);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

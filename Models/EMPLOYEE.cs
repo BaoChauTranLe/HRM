@@ -25,13 +25,13 @@ namespace HRM.Models
             this.BONUSREPORT = new HashSet<BONUSREPORT>();
             this.CERTIFICATEDETAIL = new HashSet<CERTIFICATEDETAIL>();
             this.EDUCATIONDETAIL = new HashSet<EDUCATIONDETAIL>();
+            this.SHIFTDETAIL = new HashSet<SHIFTDETAIL>();
             this.INSURANCEREPORT = new HashSet<INSURANCEREPORT>();
             this.SALARYREPORT = new HashSet<SALARYREPORT>();
             this.TAXREPORT = new HashSet<TAXREPORT>();
             this.TIMEKEEPING = new HashSet<TIMEKEEPING>();
             this.TIMEKEEPINGREPORT = new HashSet<TIMEKEEPINGREPORT>();
             this.GR = new HashSet<GR>();
-            this.SHIFT = new HashSet<SHIFT>();
         }
     
         public string EmployeeID { get; set; }
@@ -78,9 +78,9 @@ namespace HRM.Models
         public virtual POSITION POSITION { get; set; }
         public virtual ROOM ROOM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
+        public virtual ICollection<SHIFTDETAIL> SHIFTDETAIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
+        public virtual ICollection<INSURANCEREPORT> INSURANCEREPORT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SALARYREPORT> SALARYREPORT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -89,8 +89,8 @@ namespace HRM.Models
         public virtual ICollection<TIMEKEEPING> TIMEKEEPING { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMEKEEPINGREPORT> TIMEKEEPINGREPORT { get; set; }
-        public virtual USER USERS { get; set; }
+        public virtual USERS USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GR> GRs { get; set; }
+        public virtual ICollection<GR> GR { get; set; }
     }
 }

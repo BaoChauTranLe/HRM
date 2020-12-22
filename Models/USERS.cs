@@ -12,7 +12,7 @@ namespace HRM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class USERS
     {
         public string EmployeeID { get; set; }
         public string Password { get; set; }

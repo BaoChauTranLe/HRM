@@ -22,7 +22,7 @@ namespace HRM.Controllers
         // GET: EMPLOYEEs
         public ActionResult Index(string searchString)
         {
-            var eMPLOYEEs = db.EMPLOYEEs.Include(e => e.CONTRACT).Include(e => e.POSITION).Include(e => e.ROOM).Include(e => e.USER).ToList();
+            var eMPLOYEEs = db.EMPLOYEE.Include(e => e.CONTRACT).Include(e => e.POSITION).Include(e => e.ROOM).Include(e => e.USERS).ToList();
             var list = new List<EmployeeViewModel>();
             foreach (var item in eMPLOYEEs)
             {
@@ -63,7 +63,7 @@ namespace HRM.Controllers
         public ActionResult Create()
         {
             //Tao ID nhan vien tu dong
-            var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
+            var emloyeeList = db.EMPLOYEE.SqlQuery("Select * from EMPLOYEE").ToList();
             int n = 0;
             string id;
             bool flag;
@@ -162,12 +162,12 @@ namespace HRM.Controllers
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
             ViewBag.PersonalIncomeTax = personalincometaxlist;
-            ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
-            ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.PositionID = new SelectList(db.POSITION, "PositionID", "PositionName");
+            ViewBag.RoomID = new SelectList(db.ROOM, "RoomID", "RoomName");
+            ViewBag.EducationID = new SelectList(db.EDUCATION, "EducationID", "EducationName");
+            ViewBag.MajorID = new SelectList(db.MAJOR, "MajorID", "MajorName");
+            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATE, "TypeCertificateID", "TypeCertificate");
+            ViewBag.User = new SelectList(db.GROUPPERMISSION, "GroupPermission1", "GroupPermissionName");
             ViewBag.EmployeeID = id;
             return View();
         }
@@ -180,7 +180,7 @@ namespace HRM.Controllers
         public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthcity,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,city,CertificateName,TypeCertificateID,CertificateDate,Certificatecity,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
-            var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
+            var emloyeeList = db.EMPLOYEE.SqlQuery("Select * from EMPLOYEE").ToList();
             int n = 0;
             string id;
             bool flag;
@@ -279,12 +279,12 @@ namespace HRM.Controllers
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
             ViewBag.PersonalIncomeTax = personalincometaxlist;
-            ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
-            ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.PositionID = new SelectList(db.POSITION, "PositionID", "PositionName");
+            ViewBag.RoomID = new SelectList(db.ROOM, "RoomID", "RoomName");
+            ViewBag.EducationID = new SelectList(db.EDUCATION, "EducationID", "EducationName");
+            ViewBag.MajorID = new SelectList(db.MAJOR, "MajorID", "MajorName");
+            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATE, "TypeCertificateID", "TypeCertificate");
+            ViewBag.User = new SelectList(db.GROUPPERMISSION, "GroupPermission1", "GroupPermissionName");
             ViewBag.EmployeeID = id; 
             if (ModelState.IsValid)
             {
@@ -319,7 +319,7 @@ namespace HRM.Controllers
                     eDUCATIONDETAIL.MajorID = employee.MajorID[i];
                     eDUCATIONDETAIL.Date = employee.Date[i];
                     eDUCATIONDETAIL.Place = employee.Place[i];
-                    db.EDUCATIONDETAILs.Add(eDUCATIONDETAIL);
+                    db.EDUCATIONDETAIL.Add(eDUCATIONDETAIL);
                 }
                 CERTIFICATEDETAIL cERTIFICATEDETAIL = new CERTIFICATEDETAIL();
                 for (int i = 0; i < employee.CertificateName.Count(); i++)
@@ -329,7 +329,7 @@ namespace HRM.Controllers
                     cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate[i];
                     cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace[i];
                     cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID[i];
-                    db.CERTIFICATEDETAILs.Add(cERTIFICATEDETAIL);
+                    db.CERTIFICATEDETAIL.Add(cERTIFICATEDETAIL);
                 }
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
@@ -338,8 +338,8 @@ namespace HRM.Controllers
                 cONTRACT.ContractExpirationDate = employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
                 cONTRACT.PersonalIncomeTax = employee.PersonalIncomeTax;
-                db.CONTRACTs.Add(cONTRACT);
-                db.EMPLOYEEs.Add(eMPLOYEE);
+                db.CONTRACT.Add(cONTRACT);
+                db.EMPLOYEE.Add(eMPLOYEE);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -358,12 +358,12 @@ namespace HRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
-            ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.PositionID = new SelectList(db.POSITION, "PositionID", "PositionName");
+            ViewBag.RoomID = new SelectList(db.ROOM, "RoomID", "RoomName");
+            ViewBag.EducationID = new SelectList(db.EDUCATION, "EducationID", "EducationName");
+            ViewBag.MajorID = new SelectList(db.MAJOR, "MajorID", "MajorName");
+            ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATE, "TypeCertificateID", "TypeCertificate");
+            ViewBag.User = new SelectList(db.GROUPPERMISSION, "GroupPermission1", "GroupPermissionName");
             return View(eMPLOYEE);
         }
 
@@ -403,20 +403,20 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
-            List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
-            CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
-            List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
+            EMPLOYEE eMPLOYEE = await db.EMPLOYEE.FindAsync(id);
+            List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAIL.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
+            CONTRACT cONTRACT = await db.CONTRACT.FindAsync(eMPLOYEE.ContractID);
+            List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAIL.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
             foreach(var item in eDUCATIONDETAIL)
             {
-                db.EDUCATIONDETAILs.Remove(item);
+                db.EDUCATIONDETAIL.Remove(item);
             }
             foreach (var item in cERTIFICATEDETAIL)
             {
-                db.CERTIFICATEDETAILs.Remove(item);
+                db.CERTIFICATEDETAIL.Remove(item);
             }
-            db.CONTRACTs.Remove(cONTRACT);
-            db.EMPLOYEEs.Remove(eMPLOYEE);
+            db.CONTRACT.Remove(cONTRACT);
+            db.EMPLOYEE.Remove(eMPLOYEE);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

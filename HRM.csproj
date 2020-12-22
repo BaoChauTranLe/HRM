@@ -229,7 +229,7 @@
     <Compile Include="Models\SHIFTDETAIL.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAXRATE.cs">
@@ -260,7 +260,6 @@
     <Content Include="File_Text\ContractType.txt" />
     <Content Include="File_Text\Dictrict.txt" />
     <Content Include="File_Text\Nation.txt" />
-    <Content Include="File_Text\Place.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

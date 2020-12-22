@@ -17,7 +17,7 @@ namespace HRM.Controllers
         // GET: TAXRATEs
         public ActionResult Index()
         {
-            return View(db.TAXRATEs.ToList());
+            return View(db.TAXRATE.ToList());
         }
 
         // GET: TAXRATEs/Details/5
@@ -27,7 +27,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
+            TAXRATE tAXRATE = db.TAXRATE.Find(id);
             if (tAXRATE == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace HRM.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TAXRATEs.Add(tAXRATE);
+                db.TAXRATE.Add(tAXRATE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
+            TAXRATE tAXRATE = db.TAXRATE.Find(id);
             if (tAXRATE == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace HRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
+            TAXRATE tAXRATE = db.TAXRATE.Find(id);
             if (tAXRATE == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TAXRATE tAXRATE = db.TAXRATEs.Find(id);
-            db.TAXRATEs.Remove(tAXRATE);
+            TAXRATE tAXRATE = db.TAXRATE.Find(id);
+            db.TAXRATE.Remove(tAXRATE);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -24,7 +24,7 @@ namespace HRM.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(USER _user)
+        public ActionResult Login(USERS _user)
         {
             
             if (ModelState.IsValid)

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -320,9 +320,9 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="int" Nullable="false" />
-          <Property Name="Min" Type="int" Nullable="false" />
-          <Property Name="Max" Type="int" Nullable="false" />
-          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Min" Type="float" Nullable="false" />
+          <Property Name="Max" Type="float" />
+          <Property Name="Rate" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
@@ -924,7 +924,8 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1072,7 +1073,7 @@
           </Key>
           <Property Name="EducationID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EducationName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATION" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="EDUCATIONDETAIL">
           <Key>
@@ -1110,33 +1111,31 @@
           <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="HealthInsurance" Type="String" Nullable="true" />
+          <Property Name="HealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="HealthInsuranceID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="SocialInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DeductionPersonal" Type="String" />
+          <Property Name="DeductionPersonal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeductionDependent" Type="Int32" />
           <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
-          <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
-          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
-          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
-          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
-          <NavigationProperty Name="BONUSREPORTs" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
-          <NavigationProperty Name="CERTIFICATEDETAILs" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
+          <NavigationProperty Name="ADVANCED" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
+          <NavigationProperty Name="ADVANCEDREPORT" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
+          <NavigationProperty Name="ALLOWANCEDETAIL" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
+          <NavigationProperty Name="ALLOWANCEREPORT" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
+          <NavigationProperty Name="BONUSDETAIL" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
+          <NavigationProperty Name="BONUSREPORT" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
+          <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
           <NavigationProperty Name="CONTRACT" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
           <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
           <NavigationProperty Name="POSITION" Relationship="Self.EMPLOYEE_FK_POSITION" FromRole="EMPLOYEE" ToRole="POSITION" />
           <NavigationProperty Name="ROOM" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="EMPLOYEE" ToRole="ROOM" />
-          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.FK_ShiftDetail_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
-          <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
-          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
-          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
-          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
-          <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
-          <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
-          <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
-          <NavigationProperty Name="SHIFTs" Relationship="Self.SHIFTDETAIL" FromRole="EMPLOYEE" ToRole="SHIFT" />
-          <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SHIFTDETAIL" Relationship="Self.FK_ShiftDetail_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
+          <NavigationProperty Name="INSURANCEREPORT" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
+          <NavigationProperty Name="SALARYREPORT" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="TAXREPORT" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
+          <NavigationProperty Name="TIMEKEEPING" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPINGREPORT" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
+          <NavigationProperty Name="USERS" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
+          <NavigationProperty Name="GR" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1182,7 +1181,7 @@
           </Key>
           <Property Name="MajorID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="MajorName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Major" FromRole="MAJOR" ToRole="EDUCATIONDETAIL" />
         </EntityType>
         <EntityType Name="PARAMETER">
           <Key>
@@ -1253,7 +1252,7 @@
           <Property Name="Friday" Type="Boolean" Nullable="false" />
           <Property Name="Saturday" Type="Boolean" Nullable="false" />
           <Property Name="Sunday" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.FK_ShiftDetail_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
+          <NavigationProperty Name="SHIFTDETAIL" Relationship="Self.FK_ShiftDetail_Shift" FromRole="SHIFT" ToRole="SHIFTDETAIL" />
         </EntityType>
         <EntityType Name="SHIFTDETAIL">
           <Key>
@@ -1283,9 +1282,9 @@
             <PropertyRef Name="Rank" />
           </Key>
           <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Int32" Nullable="false" />
-          <Property Name="Max" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Min" Type="Double" Nullable="false" />
+          <Property Name="Max" Type="Double" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="TAXREPORT">
           <Key>
@@ -1688,40 +1687,40 @@
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
-          <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
-          <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
-          <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
-          <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
-          <EntitySet Name="ALLOWANCEREPORTs" EntityType="Self.ALLOWANCEREPORT" />
-          <EntitySet Name="BONUS" EntityType="Self.BONU" />
-          <EntitySet Name="BONUSDETAILs" EntityType="Self.BONUSDETAIL" />
-          <EntitySet Name="BONUSREPORTs" EntityType="Self.BONUSREPORT" />
-          <EntitySet Name="CERTIFICATEs" EntityType="Self.CERTIFICATE" />
-          <EntitySet Name="CERTIFICATEDETAILs" EntityType="Self.CERTIFICATEDETAIL" />
-          <EntitySet Name="CONTRACTs" EntityType="Self.CONTRACT" />
-          <EntitySet Name="DATEINFORMATIONs" EntityType="Self.DATEINFORMATION" />
-          <EntitySet Name="EDUCATIONs" EntityType="Self.EDUCATION" />
-          <EntitySet Name="EDUCATIONDETAILs" EntityType="Self.EDUCATIONDETAIL" />
-          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
-          <EntitySet Name="GRs" EntityType="Self.GR" />
-          <EntitySet Name="GROUPPERMISSIONs" EntityType="Self.GROUPPERMISSION" />
-          <EntitySet Name="INSURANCEREPORTs" EntityType="Self.INSURANCEREPORT" />
-          <EntitySet Name="MAJORs" EntityType="Self.MAJOR" />
-          <EntitySet Name="PARAMETERs" EntityType="Self.PARAMETER" />
-          <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
-          <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
-          <EntitySet Name="ROOMs" EntityType="Self.ROOM" />
-          <EntitySet Name="SALARYREPORTs" EntityType="Self.SALARYREPORT" />
-          <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
-          <EntitySet Name="SHIFTDETAILs" EntityType="Self.SHIFTDETAIL" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TAXRATEs" EntityType="Self.TAXRATE" />
-          <EntitySet Name="TAXREPORTs" EntityType="Self.TAXREPORT" />
-          <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
-          <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
-          <EntitySet Name="USERS" EntityType="Self.USER" />
+        <EntityContainer Name="hrmserver_HRMEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABSENT" EntityType="Self.ABSENT" />
+          <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" />
+          <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" />
+          <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" />
+          <EntitySet Name="ALLOWANCEDETAIL" EntityType="Self.ALLOWANCEDETAIL" />
+          <EntitySet Name="ALLOWANCEREPORT" EntityType="Self.ALLOWANCEREPORT" />
+          <EntitySet Name="BONUS" EntityType="Self.BONUS" />
+          <EntitySet Name="BONUSDETAIL" EntityType="Self.BONUSDETAIL" />
+          <EntitySet Name="BONUSREPORT" EntityType="Self.BONUSREPORT" />
+          <EntitySet Name="CERTIFICATE" EntityType="Self.CERTIFICATE" />
+          <EntitySet Name="CERTIFICATEDETAIL" EntityType="Self.CERTIFICATEDETAIL" />
+          <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" />
+          <EntitySet Name="DATEINFORMATION" EntityType="Self.DATEINFORMATION" />
+          <EntitySet Name="EDUCATION" EntityType="Self.EDUCATION" />
+          <EntitySet Name="EDUCATIONDETAIL" EntityType="Self.EDUCATIONDETAIL" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="GR" EntityType="Self.GR" />
+          <EntitySet Name="GROUPPERMISSION" EntityType="Self.GROUPPERMISSION" />
+          <EntitySet Name="INSURANCEREPORT" EntityType="Self.INSURANCEREPORT" />
+          <EntitySet Name="MAJOR" EntityType="Self.MAJOR" />
+          <EntitySet Name="PARAMETER" EntityType="Self.PARAMETER" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" />
+          <EntitySet Name="POSITION" EntityType="Self.POSITION" />
+          <EntitySet Name="ROOM" EntityType="Self.ROOM" />
+          <EntitySet Name="SALARYREPORT" EntityType="Self.SALARYREPORT" />
+          <EntitySet Name="SHIFT" EntityType="Self.SHIFT" />
+          <EntitySet Name="SHIFTDETAIL" EntityType="Self.SHIFTDETAIL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TAXRATE" EntityType="Self.TAXRATE" />
+          <EntitySet Name="TAXREPORT" EntityType="Self.TAXREPORT" />
+          <EntitySet Name="TIMEKEEPING" EntityType="Self.TIMEKEEPING" />
+          <EntitySet Name="TIMEKEEPINGREPORT" EntityType="Self.TIMEKEEPINGREPORT" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" />
           <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
             <End Role="ABSENT" EntitySet="ABSENT" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
@@ -1791,12 +1790,12 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
           <AssociationSet Name="EMPLOYEE_FK_ROOM" Association="Self.EMPLOYEE_FK_ROOM">
-            <End Role="ROOM" EntitySet="ROOMs" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
           <AssociationSet Name="FK_ShiftDetail_Employee" Association="Self.FK_ShiftDetail_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
           </AssociationSet>
           <AssociationSet Name="InsuranceReport_FK_Employee" Association="Self.InsuranceReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
@@ -1831,8 +1830,8 @@
             <End Role="POSITION" EntitySet="POSITION" />
           </AssociationSet>
           <AssociationSet Name="FK_ShiftDetail_Shift" Association="Self.FK_ShiftDetail_Shift">
-            <End Role="SHIFT" EntitySet="SHIFTs" />
-            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
+            <End Role="SHIFT" EntitySet="SHIFT" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAIL" />
           </AssociationSet>
           <AssociationSet Name="GROUPACCESS" Association="Self.GROUPACCESS">
             <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSION" />
@@ -1842,43 +1841,13 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="GR" EntitySet="GR" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities">
+        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities1">
           <EntitySetMapping Name="ABSENT">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.ABSENT">
               <MappingFragment StoreEntitySet="ABSENT">
@@ -2026,7 +1995,6 @@
           <EntitySetMapping Name="EMPLOYEE">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
-                <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
@@ -2165,7 +2133,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SHIFTDETAILs">
+          <EntitySetMapping Name="SHIFTDETAIL">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFTDETAIL">
               <MappingFragment StoreEntitySet="SHIFTDETAIL">
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
@@ -2264,30 +2232,6 @@
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_HRMModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_HRMModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_HRMModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

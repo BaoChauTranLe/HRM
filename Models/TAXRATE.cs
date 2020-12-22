@@ -15,8 +15,8 @@ namespace HRM.Models
     public partial class TAXRATE
     {
         public int Rank { get; set; }
-        public int Min { get; set; }
-        public int Max { get; set; }
-        public int Rate { get; set; }
+        public double Min { get; set; }
+        public Nullable<double> Max { get; set; }
+        public double Rate { get; set; }
     }
 }
