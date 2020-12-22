@@ -128,6 +128,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
+    <Compile Include="Controllers\TIMEKEEPINGController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,6 +287,10 @@
       <DependentUpon>HRDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\dhtmlxscheduler_multisection.js" />
+    <Content Include="Scripts\dhtmlxscheduler_multiselect.js" />
+    <Content Include="Scripts\dhtmlxscheduler_recurring.js" />
+    <Content Include="Scripts\dhtmlxscheduler_units.js" />
     <Content Include="Scripts\fresh-bootstrap-table.css" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -296,6 +301,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locale_vn.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\DetailEmployee-BasicInfo.html" />
     <Content Include="Views\DetailEmployee-Certificates.html" />
@@ -336,6 +342,7 @@
     <Content Include="Views\TAXRATEs\Details.cshtml" />
     <Content Include="Views\TAXRATEs\Edit.cshtml" />
     <Content Include="Views\TAXRATEs\Index.cshtml" />
+    <Content Include="Views\TIMEKEEPING\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,6 +359,8 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\dhtmlxscheduler.js" />
+    <Content Include="Scripts\dhtmlxscheduler_timeline.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
