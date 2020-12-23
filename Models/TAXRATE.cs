@@ -17,12 +17,12 @@ namespace HRM.Models
     {
         public int Rank { get; set; }
         
-        [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Giá trị được nhập phải là một số")]
+        [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Phần thu nhập tính thuế / tháng phải là một số")]
         [Required(ErrorMessage = "Phần thu nhập tính thuế / tháng không được để trống")]
         public int Min { get; set; }
         
-        [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Giá trị được nhập phải là một số")]
-        [Required(ErrorMessage = "Thuế suất (%) không được để trống")]
+        [RegularExpression(@"[0-9]*\.?[0-9]*", ErrorMessage = "Thuế suất phải là một số")]
+        [Required(ErrorMessage = "Thuế suất không được để trống")]
         public int Rate { get; set; }
     }
 }

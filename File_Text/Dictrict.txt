@@ -1,0 +1,180 @@
+Phường Tân Ðịnh
+Phường 01
+Phường 02
+Phường 03
+Phường 04
+Phường 05
+Phường 06
+Phường 07
+Phường 08
+Phường 09
+Phường 10
+Phường 11
+Phường 12
+Phường 13
+Phường 14
+Phường 15
+Phường 16
+Phường 17
+Phường 18
+Phường 19
+Phường 20
+Phường 21
+Phường 22
+Phường 23
+Phường 24
+Phường 25
+Phường 26
+Phường 27
+Phường 28
+Phường An Khánh
+Phường An Lạc
+Phường An Lạc A
+Phường An Lợi Đông
+Phường An Phú
+Phường An Phú Đông
+Phường Bến Nghé
+Phường Bến Thành
+Phường Bình An
+Phường Bình Chiểu
+Phường Bình Hưng Hòa
+Phường Bình Hưng Hoà A
+Phường Bình Hưng Hoà B
+Phường Bình Khánh
+Phường Bình Thọ
+Phường Bình Thuận
+Phường Bình Trị Đông
+Phường Bình Trị Đông A
+Phường Bình Trị Đông B
+Phường Bình Trưng Đông
+Phường Bình Trưng Tây
+Phường Cát Lái
+Phường Cầu Kho
+Phường Cầu Ông Lãnh
+Phường Cô Giang
+Phường Đa Kao
+Phường Đông Hưng Thuận
+Phường Hiệp Bình Chánh
+Phường Hiệp Bình Phước
+Phường Hiệp Phú
+Phường Hiệp Tân
+Phường Hiệp Thành
+Phường Hoà Thạnh
+Phường Linh Chiểu
+Phường Linh Đông
+Phường Linh Tây
+Phường Linh Trung
+Phường Linh Xuân
+Phường Long Bình
+Phường Long Phước
+Phường Long Thạnh Mỹ
+Phường Long Trường
+Phường Nguyễn Cư Trinh
+Phường Nguyễn Thái Bình
+Phường Phạm Ngũ Lão
+Phường Phú Hữu
+Phường Phú Mỹ
+Phường Phú Thạnh
+Phường Phú Thọ Hoà
+Phường Phú Thuận
+Phường Phú Trung
+Phường Phước Bình
+Phường Phước Long A
+Phường Phước Long B
+Phường Sơn Kỳ
+Phường Tam Bình
+Phường Tam Phú
+Phường Tăng Nhơn Phú A
+Phường Tăng Nhơn Phú B
+Phường Tân Chánh Hiệp
+Phường Tân Định
+Phường Tân Hưng
+Phường Tân Hưng Thuận
+Phường Tân Kiểng
+Phường Tân Phong
+Phường Tân Phú
+Phường Tân Phú
+Phường Tân Qúy
+Phường Tân Quy
+Phường Tân Sơn Nhì
+Phường Tân Tạo
+Phường Tân Tạo A
+Phường Tân Thành
+Phường Tân Thới Hiệp
+Phường Tân Thới Hoà
+Phường Tân Thới Nhất
+Phường Tân Thuận Đông
+Phường Tân Thuận Tây
+Phường Tây Thạnh
+Phường Thạnh Lộc
+Phường Thạnh Mỹ Lợi
+Phường Thạnh Xuân
+Phường Thảo Điền
+Phường Thới An
+Phường Thủ Thiêm
+Phường Trung Mỹ Tây
+Phường Trường Thạnh
+Phường Trường Thọ
+Thị trấn Cần Thạnh
+Thị trấn Củ Chi
+Thị trấn Hóc Môn
+Thị trấn Nhà Bè
+Thị trấn Tân Túc
+Xã An Nhơn Tây
+Xã An Phú
+Xã An Phú Tây
+Xã An Thới Đông
+Xã Bà Điểm
+Xã Bình Chánh
+Xã Bình Hưng
+Xã Bình Khánh
+Xã Bình Lợi
+Xã Bình Mỹ
+Xã Đa Phước
+Xã Đông Thạnh
+Xã Hiệp Phước
+Xã Hòa Phú
+Xã Hưng Long
+Xã Lê Minh Xuân
+Xã Long Hòa
+Xã Long Thới
+Xã Lý Nhơn
+Xã Nhị Bình
+Xã Nhơn Đức
+Xã Nhuận Đức
+Xã Phạm Văn Cội
+Xã Phạm Văn Hai
+Xã Phong Phú
+Xã Phú Hòa Đông
+Xã Phú Mỹ Hưng
+Xã Phú Xuân
+Xã Phước Hiệp
+Xã Phước Kiển
+Xã Phước Lộc
+Xã Phước Thạnh
+Xã Phước Vĩnh An
+Xã Quy Đức
+Xã Tam Thôn Hiệp
+Xã Tân An Hội
+Xã Tân Hiệp
+Xã Tân Kiên
+Xã Tân Nhựt
+Xã Tân Phú Trung
+Xã Tân Quý Tây
+Xã Tân Thạnh Đông
+Xã Tân Thạnh Tây
+Xã Tân Thông Hội
+Xã Tân Thới Nhì
+Xã Tân Xuân
+Xã Thái Mỹ
+Xã Thạnh An
+Xã Thới Tam Thôn
+Xã Trung An
+Xã Trung Chánh
+Xã Trung Lập Hạ
+Xã Trung Lập Thượng
+Xã Vĩnh Lộc A
+Xã Vĩnh Lộc B
+Xã Xuân Thới Đông
+Xã Xuân Thới Sơn
+Xã Xuân Thới Thượng

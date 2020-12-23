@@ -38,7 +38,7 @@ namespace HRM.Models
         public string EmployeeName { get; set; }
         public byte[] Image { get; set; }
         public string Sex { get; set; }
-        public Nullable<System.DateTime> DoB { get; set; }
+        public DateTime? DoB { get; set; }
         public string Birthplace { get; set; }
         public string HomeTown { get; set; }
         public string Nation { get; set; }

@@ -1,160 +1,118 @@
-﻿@model IEnumerable<HRM.Models.EMPLOYEE>
+﻿@model IEnumerable<HRM.Models.EmployeeViewModel>
 
 @{
-    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .add__button {
+        display: block;
+        height: 36px;
+        width: 94px;
+        right: 36px;
+        top: 80px;
+        position: absolute;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+    }
+</style>
 
-<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Mã nhân viên: @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+<!-- The topbar -->
+<div class="topbar">
+    <div class="container">
+        <div class="title">
+            <div class="title__main">
+                Quản lý nhân sự
+            </div>
+            <span class="gg-chevron-double-right"></span>
+            <div class="title__sub">
+                Tra cứu nhân viên
+            </div>
+        </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <div class="user__name">
+            Tên
+        </div>
+
+        <div class="user__ava">
+            Anh
+        </div>
+
+        <div class="user__infor">
+            Chức vụ <span>/</span> Phòng
+        </div>
+
+        <div class="notify__icon">
+            <i class="fa fa-fw fa-user"></i>
+        </div>
+
+        <div class="logout__icon">
+            <a href="#"><i class="gg-log-in"></i></a>
+        </div>
+    </div>
+</div>
+<button class="add__button" onclick="window.location='https://localhost:44319/EMPLOYEEs/Create'">Thêm</button>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
+            @Html.DisplayName("Mã nhân viên")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayName("Ảnh")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sex)
+            @Html.DisplayName("Tên nhân viên")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoB)
+            @Html.DisplayName("Giới tính")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Birthplace)
+            @Html.DisplayName("Điện thoại")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HomeTown)
+            @Html.DisplayName("Phòng")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ward)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dictrict)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HealthInsurance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HealthInsuranceID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SocialInsuranceID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeductionPersonal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeductionDependent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONTRACT.ContractType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.POSITION.PositionName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ROOM.RoomName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USER.Password)
+            @Html.DisplayName("Chức vụ")
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sex)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DoB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Birthplace)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomeTown)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ward)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dictrict)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HealthInsurance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HealthInsuranceID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SocialInsuranceID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeductionPersonal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeductionDependent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONTRACT.ContractType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.POSITION.PositionName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROOM.RoomName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.USER.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositionName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+            </td>
+        </tr>
+    }
 
 </table>
