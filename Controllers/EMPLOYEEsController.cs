@@ -177,7 +177,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthcity,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,city,CertificateName,TypeCertificateID,CertificateDate,Certificatecity,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthcity,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,city,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -320,7 +320,7 @@ namespace HRM.Controllers
                     eDUCATIONDETAIL.EmployeeID = id;
                     eDUCATIONDETAIL.EducationID = employee.EducationID[i];
                     if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
-                        eDUCATIONDETAIL.MajorID = null;
+                        eDUCATIONDETAIL.MajorID = "M09";
                     else
                         eDUCATIONDETAIL.MajorID = employee.MajorID[i];
                     eDUCATIONDETAIL.Date = employee.Date[i];
@@ -353,7 +353,7 @@ namespace HRM.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Error");
         }
 
         // GET: EMPLOYEEs/Edit/5
@@ -659,9 +659,9 @@ namespace HRM.Controllers
             CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
             List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
             List<SHIFTDETAIL> sHIFTDETAILs = db.SHIFTDETAILs.SqlQuery("Select * from SHIFTDETAIL where employeeID = '" + id + "'").ToList();
-            if(sHIFTDETAILs.Count()==0)
+            if(sHIFTDETAILs.Count()!=0)
             {
-                RedirectToAction("Error");
+                return RedirectToAction("Error");
             }    
             foreach (var item in eDUCATIONDETAIL)
             {
