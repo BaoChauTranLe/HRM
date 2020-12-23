@@ -181,6 +181,7 @@
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\GR.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -262,8 +263,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="File_Text\City.txt" />
+    <Content Include="File_Text\ContractType.txt" />
+    <Content Include="File_Text\Dictrict.txt" />
     <Content Include="File_Text\Nation.txt" />
+    <Content Include="File_Text\PersonalIncomeTax.txt" />
     <Content Include="File_Text\Place.txt" />
+    <Content Include="File_Text\Ward.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -327,11 +333,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Create.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Delete.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Details.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\SHIFTs\Delete.cshtml" />
     <Content Include="Views\SHIFTs\Details.cshtml" />
@@ -341,6 +342,12 @@
     <Content Include="Views\TAXRATEs\Delete.cshtml" />
     <Content Include="Views\TAXRATEs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPING\Index.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Create.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Delete.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Details.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Index.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

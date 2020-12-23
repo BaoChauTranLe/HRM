@@ -4,39 +4,81 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<style>
+    .dt, dd{
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 30px;
+        /* identical to box height, or 22px */
+        letter-spacing: 0.01em;
+        background: none;
+        color: black;
+    }
+</style>
 <div>
-    <h4>EMPLOYEE</h4>
-    <hr />
+    <!-- The topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="title">
+                <div class="title__main">
+                    Quản lý nhân sự
+                </div>
+                <span class="gg-chevron-double-right"></span>
+                <div class="title__sub">
+                    Thông tin nhân viên
+                </div>
+            </div>
+
+            <div class="user__name">
+                Tên
+            </div>
+
+            <div class="user__ava">
+                Anh
+            </div>
+
+            <div class="user__infor">
+                Chức vụ <span>/</span> Phòng
+            </div>
+
+            <div class="notify__icon">
+                <i class="fa fa-fw fa-user"></i>
+            </div>
+
+            <div class="logout__icon">
+                <a href="#"><i class="gg-log-in"></i></a>
+            </div>
+        </div>
+    </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeName)
+            @Html.DisplayName("Mã nhân viên")
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeID)
+        </dd>
+        <dt>
+            @Html.DisplayName("Tên nhân viên")
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.EmployeeName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayName("Ảnh")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Image)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Sex)
+            @Html.DisplayName("Giới tính")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Sex)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.DoB)
+            @Html.DisplayName("Ngày sinh")
         </dt>
 
         <dd>
@@ -44,7 +86,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Birthplace)
+            @Html.DisplayName("Nơi sinh")
         </dt>
 
         <dd>
@@ -52,7 +94,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HomeTown)
+            @Html.DisplayName("Quê quán")
         </dt>
 
         <dd>
@@ -60,7 +102,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Nation)
+            @Html.DisplayName("Dân tộc")
         </dt>
 
         <dd>
@@ -68,7 +110,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayName("CMND/CCCD")
         </dt>
 
         <dd>
@@ -76,7 +118,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayName("Số điện thoại")
         </dt>
 
         <dd>
@@ -84,109 +126,84 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayName("Email")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayName("Phường / Xã")
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ward)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dictrict)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Dictrict)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.HealthInsurance)
+            @Html.DisplayName("Quận / Huyện")
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.Ward)
+        </dd>
+        <dt>
+            @Html.DisplayName("Thành phố")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayName("Đăng ký bảo hiểm y tế tại công ty")
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.HealthInsurance)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.HealthInsuranceID)
+            @Html.DisplayName("Mã bảo hiểm y tế")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.HealthInsuranceID)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.SocialInsuranceID)
+            @Html.DisplayName("Mã bảo hiểm xã hội")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.SocialInsuranceID)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.DeductionPersonal)
+            @Html.DisplayName("Đăng ký giảm trừ cá nhân")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.DeductionPersonal)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.DeductionDependent)
+            @Html.DisplayName("Đăng ký giảm trừ phụ thuộc")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.DeductionDependent)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.CONTRACT.ContractType)
+            @Html.DisplayName("Số hợp đồng")
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.CONTRACT.ContractID)
+        </dd>
+        <dt>
+            @Html.DisplayName("Loại hợp đồng")
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.CONTRACT.ContractType)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.POSITION.PositionName)
+            @Html.DisplayName("Phòng")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.POSITION.PositionName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.ROOM.RoomName)
+            @Html.DisplayName("Chức vụ")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ROOM.RoomName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.USER.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.USER.Password)
-        </dd>
-
     </dl>
 </div>
 <p>

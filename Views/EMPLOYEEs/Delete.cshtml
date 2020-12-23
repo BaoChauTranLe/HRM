@@ -7,195 +7,30 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc muốn xóa nhân viên này?</h3>
 <div>
-    <h4>EMPLOYEE</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeName)
+            @Html.DisplayName("Mã nhân viên")
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeID)
+        </dd>
+        <dt>
+            @Html.DisplayName("Tên nhân viên")
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.EmployeeName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DoB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DoB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthplace)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Birthplace)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeTown)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HomeTown)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ward)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dictrict)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dictrict)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HealthInsurance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HealthInsurance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HealthInsuranceID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HealthInsuranceID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SocialInsuranceID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SocialInsuranceID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeductionPersonal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeductionPersonal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeductionDependent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeductionDependent)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CONTRACT.ContractType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CONTRACT.ContractType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.POSITION.PositionName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.POSITION.PositionName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ROOM.RoomName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ROOM.RoomName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.USER.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.USER.Password)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về danh sách nhân viên", "Index")
         </div>
     }
 </div>
