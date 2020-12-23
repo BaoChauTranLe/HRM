@@ -22,6 +22,8 @@ namespace HRM.Models
     
         public string BonusID { get; set; }
         public string BonusName { get; set; }
+        public Nullable<bool> isFreedTax { get; set; }
+        public Nullable<int> TaxFreeValue { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BONUSDETAIL> BONUSDETAILs { get; set; }

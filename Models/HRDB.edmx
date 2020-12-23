@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hrmserver_hRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -69,6 +69,8 @@
           </Key>
           <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="BonusName" Type="nvarchar" MaxLength="20" />
+          <Property Name="isFreedTax" Type="bit" />
+          <Property Name="TaxFreeValue" Type="int" />
         </EntityType>
         <EntityType Name="BONUSDETAIL">
           <Key>
@@ -257,7 +259,7 @@
             <PropertyRef Name="RoomID" />
           </Key>
           <Property Name="RoomID" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="RoomName" Type="nvarchar" MaxLength="20" />
+          <Property Name="RoomName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SALARYREPORT">
           <Key>
@@ -789,7 +791,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="hrmserver_HRMModelStoreContainer">
+        <EntityContainer Name="hrmserver_hRMModelStoreContainer">
           <EntitySet Name="ABSENT" EntityType="Self.ABSENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" Schema="dbo" store:Type="Tables" />
@@ -958,7 +960,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="hrmserver_hRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -1030,6 +1032,8 @@
           </Key>
           <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="BonusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="isFreedTax" Type="Boolean" />
+          <Property Name="TaxFreeValue" Type="Int32" />
           <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUS" ToRole="BONUSDETAIL" />
         </EntityType>
         <EntityType Name="BONUSDETAIL">
@@ -1243,7 +1247,7 @@
             <PropertyRef Name="RoomID" />
           </Key>
           <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="RoomName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RoomName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_ROOM" FromRole="ROOM" ToRole="EMPLOYEE" />
           <NavigationProperty Name="POSITIONs" Relationship="Self.Position_FK_Room" FromRole="ROOM" ToRole="POSITION" />
         </EntityType>
@@ -1716,7 +1720,7 @@
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="hrmserver_hRMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
           <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
           <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
@@ -1886,11 +1890,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_hRMModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_hRMModel.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1917,9 +1921,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="hrmserver_HRMModelStoreContainer" CdmEntityContainer="hrmserver_HRMEntities">
+        <EntityContainerMapping StorageEntityContainer="hrmserver_hRMModelStoreContainer" CdmEntityContainer="hrmserver_hRMEntities">
           <EntitySetMapping Name="ABSENTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ABSENT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ABSENT">
               <MappingFragment StoreEntitySet="ABSENT">
                 <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
                 <ScalarProperty Name="AbsentName" ColumnName="AbsentName" />
@@ -1929,7 +1933,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ADVANCEDs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ADVANCED">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ADVANCED">
               <MappingFragment StoreEntitySet="ADVANCED">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="DateAdvanced" ColumnName="DateAdvanced" />
@@ -1938,7 +1942,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ADVANCEDREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ADVANCEDREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ADVANCEDREPORT">
               <MappingFragment StoreEntitySet="ADVANCEDREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -1947,7 +1951,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ALLOWANCEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCE">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCE">
               <MappingFragment StoreEntitySet="ALLOWANCE">
                 <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
                 <ScalarProperty Name="AllowanceName" ColumnName="AllowanceName" />
@@ -1958,7 +1962,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ALLOWANCEDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCEDETAIL">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCEDETAIL">
               <MappingFragment StoreEntitySet="ALLOWANCEDETAIL">
                 <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -1967,7 +1971,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ALLOWANCEREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCEREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCEREPORT">
               <MappingFragment StoreEntitySet="ALLOWANCEREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -1977,15 +1981,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BONUS">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONU">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONU">
               <MappingFragment StoreEntitySet="BONUS">
                 <ScalarProperty Name="BonusID" ColumnName="BonusID" />
                 <ScalarProperty Name="BonusName" ColumnName="BonusName" />
+                <ScalarProperty Name="isFreedTax" ColumnName="isFreedTax" />
+                <ScalarProperty Name="TaxFreeValue" ColumnName="TaxFreeValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BONUSDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONUSDETAIL">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONUSDETAIL">
               <MappingFragment StoreEntitySet="BONUSDETAIL">
                 <ScalarProperty Name="BonusID" ColumnName="BonusID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -1994,7 +2000,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BONUSREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.BONUSREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONUSREPORT">
               <MappingFragment StoreEntitySet="BONUSREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2004,7 +2010,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CERTIFICATEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.CERTIFICATE">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.CERTIFICATE">
               <MappingFragment StoreEntitySet="CERTIFICATE">
                 <ScalarProperty Name="TypeCertificateID" ColumnName="TypeCertificateID" />
                 <ScalarProperty Name="TypeCertificate" ColumnName="TypeCertificate" />
@@ -2012,7 +2018,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CERTIFICATEDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.CERTIFICATEDETAIL">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.CERTIFICATEDETAIL">
               <MappingFragment StoreEntitySet="CERTIFICATEDETAIL">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="CertificateName" ColumnName="CertificateName" />
@@ -2023,7 +2029,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CONTRACTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.CONTRACT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.CONTRACT">
               <MappingFragment StoreEntitySet="CONTRACT">
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="ContractType" ColumnName="ContractType" />
@@ -2036,7 +2042,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DATEINFORMATIONs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.DATEINFORMATION">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.DATEINFORMATION">
               <MappingFragment StoreEntitySet="DATEINFORMATION">
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -2044,7 +2050,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EDUCATIONs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.EDUCATION">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.EDUCATION">
               <MappingFragment StoreEntitySet="EDUCATION">
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
                 <ScalarProperty Name="EducationName" ColumnName="EducationName" />
@@ -2052,7 +2058,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EDUCATIONDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.EDUCATIONDETAIL">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.EDUCATIONDETAIL">
               <MappingFragment StoreEntitySet="EDUCATIONDETAIL">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
@@ -2063,7 +2069,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
@@ -2092,7 +2098,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GRs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.GR">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.GR">
               <MappingFragment StoreEntitySet="GR">
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="GroupPermission" ColumnName="GroupPermission" />
@@ -2101,7 +2107,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GROUPPERMISSIONs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.GROUPPERMISSION">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.GROUPPERMISSION">
               <MappingFragment StoreEntitySet="GROUPPERMISSION">
                 <ScalarProperty Name="GroupPermission1" ColumnName="GroupPermission" />
                 <ScalarProperty Name="GroupPermissionName" ColumnName="GroupPermissionName" />
@@ -2109,7 +2115,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INSURANCEREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.INSURANCEREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.INSURANCEREPORT">
               <MappingFragment StoreEntitySet="INSURANCEREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2127,7 +2133,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MAJORs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.MAJOR">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.MAJOR">
               <MappingFragment StoreEntitySet="MAJOR">
                 <ScalarProperty Name="MajorID" ColumnName="MajorID" />
                 <ScalarProperty Name="MajorName" ColumnName="MajorName" />
@@ -2135,7 +2141,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PARAMETERs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.PARAMETER">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.PARAMETER">
               <MappingFragment StoreEntitySet="PARAMETER">
                 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -2143,7 +2149,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERMISSIONs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.PERMISSION">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.PERMISSION">
               <MappingFragment StoreEntitySet="PERMISSION">
                 <ScalarProperty Name="Permission1" ColumnName="Permission" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2151,7 +2157,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="POSITIONs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.POSITION">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.POSITION">
               <MappingFragment StoreEntitySet="POSITION">
                 <ScalarProperty Name="PositionID" ColumnName="PositionID" />
                 <ScalarProperty Name="PositionName" ColumnName="PositionName" />
@@ -2160,7 +2166,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ROOMs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.ROOM">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ROOM">
               <MappingFragment StoreEntitySet="ROOM">
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
                 <ScalarProperty Name="RoomName" ColumnName="RoomName" />
@@ -2168,7 +2174,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SALARYREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.SALARYREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.SALARYREPORT">
               <MappingFragment StoreEntitySet="SALARYREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2186,7 +2192,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SHIFTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.SHIFT">
               <MappingFragment StoreEntitySet="SHIFT">
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
@@ -2204,7 +2210,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SHIFTDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.SHIFTDETAIL">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.SHIFTDETAIL">
               <MappingFragment StoreEntitySet="SHIFTDETAIL">
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2214,7 +2220,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.sysdiagram">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -2225,7 +2231,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TAXRATEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXRATE">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.TAXRATE">
               <MappingFragment StoreEntitySet="TAXRATE">
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="Min" ColumnName="Min" />
@@ -2234,7 +2240,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TAXREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.TAXREPORT">
               <MappingFragment StoreEntitySet="TAXREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2249,7 +2255,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIMEKEEPINGs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPING">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.TIMEKEEPING">
               <MappingFragment StoreEntitySet="TIMEKEEPING">
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2261,7 +2267,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIMEKEEPINGREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPINGREPORT">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.TIMEKEEPINGREPORT">
               <MappingFragment StoreEntitySet="TIMEKEEPINGREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2278,14 +2284,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USERS">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.USER">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.USER">
               <MappingFragment StoreEntitySet="USERS">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="GROUPACCESS" TypeName="hrmserver_HRMModel.GROUPACCESS" StoreEntitySet="GROUPACCESS">
+          <AssociationSetMapping Name="GROUPACCESS" TypeName="hrmserver_hRMModel.GROUPACCESS" StoreEntitySet="GROUPACCESS">
             <EndProperty Name="GROUPPERMISSION">
               <ScalarProperty Name="GroupPermission1" ColumnName="GroupPermission" />
             </EndProperty>
@@ -2293,7 +2299,7 @@
               <ScalarProperty Name="Permission1" ColumnName="Permission" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="GROUPMEMBER" TypeName="hrmserver_HRMModel.GROUPMEMBER" StoreEntitySet="GROUPMEMBER">
+          <AssociationSetMapping Name="GROUPMEMBER" TypeName="hrmserver_hRMModel.GROUPMEMBER" StoreEntitySet="GROUPMEMBER">
             <EndProperty Name="EMPLOYEE">
               <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
             </EndProperty>
@@ -2301,20 +2307,20 @@
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_HRMModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_HRMModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_HRMModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_hRMModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_hRMModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_hRMModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_hRMModel.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="hrmserver_hRMModel.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_hRMModel.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="hrmserver_hRMModel.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -2323,8 +2329,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_hRMModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_hRMModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

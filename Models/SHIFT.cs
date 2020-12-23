@@ -20,6 +20,7 @@ namespace HRM.Models
         {
             this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
         }
+
         public string ShiftID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tên ca.")]
         public string ShiftName { get; set; }
@@ -41,7 +42,7 @@ namespace HRM.Models
         public bool Friday { get; set; }
         public bool Saturday { get; set; }
         public bool Sunday { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
     }
