@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HRM.Models.ROOM>
+﻿@model IEnumerable<HRM.Models.BONU>
 
 @{
     ViewBag.Title = "Index";
@@ -46,7 +46,7 @@
 </style>
 
 <div class="fresh-table">
-    <a href="@Url.Action("Create","ROOMs")">
+    <a href="@Url.Action("Create","BONUSs")">
         <input type="button" id="btn" class="add__button" value="Thêm" />
     </a>
 
@@ -54,7 +54,13 @@
         <thead>
             <tr>
                 <th data-sortable="true">
-                    @Html.DisplayName("Phòng")
+                    @Html.DisplayName("Tên loại trợ cấp / phụ cấp / thưởng")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Được miễn thuế")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Số tiền được miễn")
                 </th>
             </tr>
         </thead>
@@ -63,11 +69,27 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RoomName)
+                        @Html.DisplayFor(modelItem => item.BonusName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.RoomID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.RoomID })
+                        @if (item.isFreedTax == true)
+                        {
+                            @Html.DisplayName("Có")
+                        }
+                        else
+                        {
+                            @Html.DisplayName("Không")
+                        }
+                    </td>
+                    <td>
+                        @if (item.isFreedTax == true)
+                        {
+                            @Html.DisplayFor(modelItem => item.TaxFreeValue)
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BonusID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BonusID })
                     </td>
                 </tr>
             }

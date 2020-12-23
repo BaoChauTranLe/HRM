@@ -61,11 +61,6 @@ namespace HRM.Controllers
             return View(tAXRATE);
         }
 
-        public ActionResult BackToIndex()
-        {
-            return RedirectToAction("Index");
-        }
-
         // GET: BONUSs/Edit/5
         public ActionResult Edit(int? id)
         {
