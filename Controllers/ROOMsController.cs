@@ -13,10 +13,7 @@ namespace HRM.Controllers
     public class ROOMsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
-        public ActionResult ToCreate()
-        {
-            return RedirectToAction("Create");
-        }
+
         // GET: ROOMs
         public ActionResult Index()
         {
