@@ -126,6 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\POSITIONsController.cs" />
     <Compile Include="Controllers\ROOMsController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
@@ -354,6 +355,10 @@
     <Content Include="Views\ROOMs\Delete.cshtml" />
     <Content Include="Views\ROOMs\Edit.cshtml" />
     <Content Include="Views\ROOMs\Index.cshtml" />
+    <Content Include="Views\POSITIONs\Create.cshtml" />
+    <Content Include="Views\POSITIONs\Delete.cshtml" />
+    <Content Include="Views\POSITIONs\Edit.cshtml" />
+    <Content Include="Views\POSITIONs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
