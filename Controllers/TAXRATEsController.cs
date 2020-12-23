@@ -13,10 +13,6 @@ namespace HRM.Controllers
     public class TAXRATEsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
-        public ActionResult ToCreate()
-        {
-            return RedirectToAction("Create");
-        }
 
         // GET: TAXRATEs
         public ActionResult Index()
@@ -59,11 +55,6 @@ namespace HRM.Controllers
             }
 
             return View(tAXRATE);
-        }
-
-        public ActionResult BackToIndex()
-        {
-            return RedirectToAction("Index");
         }
 
         // GET: BONUSs/Edit/5
