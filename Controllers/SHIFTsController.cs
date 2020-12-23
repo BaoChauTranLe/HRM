@@ -27,7 +27,9 @@ namespace HRM.Controllers
         {
             try
             {
-                List<SHIFT> ShiftList = db.SHIFTs.ToList();
+                List<SHIFT> list = db.SHIFTs.ToList();
+                var ShiftList = from s in list
+                               select new { s.ShiftID, s.ShiftName, s.ShiftType, s.StartTime, s.EndTime, s.Monday, s.Tuesday, s.Wednesday, s.Thursday, s.Friday, s.Saturday, s.Sunday };
                 return Json(ShiftList, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -64,22 +66,32 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
         {
-            //auto create shiftID
-            int n = 0;
-            var shiftList = db.SHIFTs.ToList();
-            if (shiftList.Count > 0)
-            {
-                SHIFT s = shiftList.Last();
-                n = Int32.Parse(s.ShiftID) + 1;
-            }
-
-            string id = String.Format("{0:0000}", n);
-            sHIFT.ShiftID = id;
             if (ModelState.IsValid)
             {
-                db.SHIFTs.Add(sHIFT);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (sHIFT.ShiftID == null)
+                {
+                    //auto create shiftID
+                    int n = 0;
+                    var shiftList = db.SHIFTs.ToList();
+                    if (shiftList.Count > 0)
+                    {
+                        SHIFT s = shiftList.Last();
+                        n = Int32.Parse(s.ShiftID.Substring(s.ShiftID.Length - 3)) + 1;
+                    }
+
+                    string id = String.Format("{0:000}", n);
+                    sHIFT.ShiftID = "S" + id;
+
+                    db.SHIFTs.Add(sHIFT);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    db.Entry(sHIFT).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(sHIFT);
@@ -132,7 +144,7 @@ namespace HRM.Controllers
         }
 
         // POST: SHIFTs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteComfirmed")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
