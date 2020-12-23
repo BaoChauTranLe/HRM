@@ -6,13 +6,29 @@
 }
 
 <head>
+    <!-- Style -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
     <style>
+        table, th, td, tr {
+            border-color: #DFE0EB !important;
+            border-radius: 5px !important;
+        }
+
         .add__button {
             display: block;
             height: 36px;
             width: 94px;
-            right: 36px;
-            top: 80px;
+            margin-right: 36px;
+            margin-top: 80px;
             position: absolute;
             background: #E3F2FD;
             border: 1px solid #3D76B5;
@@ -31,42 +47,65 @@
 </head>
 
 <body>
-    <a href="@Url.Action("ToCreate","TAXRATEs")">
-        <input type="button" id="btn" class="add__button" value="+ Thêm" />
-    </a>
-    
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Rank)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Min)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rate)
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rank)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Min)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rate)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Rank })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Rank })
-                </td>
-            </tr>
-        }
-
-    </table>
-
+    <div class="fresh-table">
+        <a href="@Url.Action("ToCreate","TAXRATEs")">
+            <input type="button" id="btn" class="add__button" value="+ Thêm" />
+        </a>
+        <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+            <thead>
+                <tr>
+                    <th data-sortable="true">
+                        @Html.DisplayNameFor(model => model.Rank)
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayNameFor(model => model.Min)
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayNameFor(model => model.Rate)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rank)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Min)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Rank }) | 
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Rank })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
+
+<script>
+    var $table = $('#fresh-table')
+    $(function () {
+        $table.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+</script>

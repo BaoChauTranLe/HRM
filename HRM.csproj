@@ -351,14 +351,12 @@
     <Content Include="Views\EMPLOYEEs\Error.cshtml" />
     <Content Include="Views\BONUSs\Create.cshtml" />
     <Content Include="Views\BONUSs\Delete.cshtml" />
-    <Content Include="Views\BONUSs\Details.cshtml" />
     <Content Include="Views\BONUSs\Edit.cshtml" />
     <Content Include="Views\BONUSs\Index.cshtml" />
     <Content Include="Views\TAXRATEs\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\SHIFT\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

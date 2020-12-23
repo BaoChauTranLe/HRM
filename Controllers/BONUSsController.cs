@@ -20,21 +20,6 @@ namespace HRM.Controllers
             return View(db.BONUS.ToList());
         }
 
-        // GET: BONUSs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BONU bONU = db.BONUS.Find(id);
-            if (bONU == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bONU);
-        }
-
         // GET: BONUSs/Create
         public ActionResult Create()
         {
