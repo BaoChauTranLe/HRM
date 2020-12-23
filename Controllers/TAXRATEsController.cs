@@ -13,16 +13,15 @@ namespace HRM.Controllers
     public class TAXRATEsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
+        public ActionResult ToCreate()
+        {
+            return RedirectToAction("Create");
+        }
 
         // GET: TAXRATEs
         public ActionResult Index()
         {
             return View(db.TAXRATEs.ToList());
-        }
-
-        public ActionResult ToCreate()
-        {
-            return RedirectToAction("Create");
         }
 
         // GET: TAXRATEs/Create

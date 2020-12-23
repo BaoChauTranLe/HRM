@@ -27,8 +27,8 @@
             display: block;
             height: 36px;
             width: 94px;
-            margin-right: 36px;
-            margin-top: 80px;
+            right: 36px;
+            top: 80px;
             position: absolute;
             background: #E3F2FD;
             border: 1px solid #3D76B5;
@@ -49,19 +49,19 @@
 <body>
     <div class="fresh-table">
         <a href="@Url.Action("ToCreate","TAXRATEs")">
-            <input type="button" id="btn" class="add__button" value="+ Thêm" />
+            <input type="button" id="btn" class="add__button" value="Thêm" />
         </a>
-        <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+        <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
             <thead>
                 <tr>
                     <th data-sortable="true">
-                        @Html.DisplayNameFor(model => model.Rank)
+                        @Html.DisplayName("Bậc thuế")
                     </th>
                     <th data-sortable="true">
-                        @Html.DisplayNameFor(model => model.Min)
+                        @Html.DisplayName("Phần thu nhập tính thuế / tháng")
                     </th>
                     <th data-sortable="true">
-                        @Html.DisplayNameFor(model => model.Rate)
+                        @Html.DisplayName("Thuế suất (%)")
                     </th>
                 </tr>
             </thead>
@@ -73,10 +73,13 @@
                             @Html.DisplayFor(modelItem => item.Rank)
                         </td>
                         <td>
+                            Từ 
                             @Html.DisplayFor(modelItem => item.Min)
+                            triệu đồng
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Rate)
+                            %
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Rank }) | 

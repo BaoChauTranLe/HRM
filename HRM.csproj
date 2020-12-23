@@ -127,6 +127,7 @@
     <Compile Include="Controllers\BONUSsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ROOMsController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGController.cs" />
@@ -354,6 +355,10 @@
     <Content Include="Views\BONUSs\Edit.cshtml" />
     <Content Include="Views\BONUSs\Index.cshtml" />
     <Content Include="Views\TAXRATEs\Edit.cshtml" />
+    <Content Include="Views\ROOMs\Create.cshtml" />
+    <Content Include="Views\ROOMs\Delete.cshtml" />
+    <Content Include="Views\ROOMs\Edit.cshtml" />
+    <Content Include="Views\ROOMs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
