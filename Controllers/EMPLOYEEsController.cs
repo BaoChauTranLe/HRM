@@ -177,7 +177,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthcity,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,city,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,Place,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -344,10 +344,15 @@ namespace HRM.Controllers
                 cONTRACT.ContractExpirationDate = employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
                 cONTRACT.PersonalIncomeTax = employee.PersonalIncomeTax;
-                if (cONTRACT.ContractType == "Hợp đồng thử việc")
-                    cONTRACT.TrialTime = employee.TrialTime;
-                else
+                if (employee.TrialTime == null)
                     cONTRACT.TrialTime = 0;
+                else
+                {
+                    if (cONTRACT.ContractType == "Hợp đồng thử việc")
+                        cONTRACT.TrialTime = employee.TrialTime;
+                    else
+                        cONTRACT.TrialTime = 0;
+                }
                 db.CONTRACTs.Add(cONTRACT);
                 db.EMPLOYEEs.Add(eMPLOYEE);
                 await db.SaveChangesAsync();

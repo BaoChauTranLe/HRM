@@ -205,7 +205,8 @@
         color: white;
         width: 80px;
         height: 40px;
-        left: 40px;
+        left: 350px;
+        position: absolute;
     }
 
     .btn-cancel {
@@ -216,7 +217,8 @@
         width: 80px;
         height: 40px;
         color: white;
-        left: 100px;
+        left: 450px;
+        position: absolute;
     }
     /*phan tu goc*/
     .first-element {
@@ -240,72 +242,72 @@
         /* Text / Status - Failed */
         color: #FF0C3E;
     }
-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 11; /* Sit on top */
-    float: left;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    -webkit-animation-name: fadeIn; /* Fade in the background */
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s;
-    vertical-align: middle;
-    border-left: 100px;
-    border-right: 100px;
-}
 
-/* Modal Content */
-modal-content {
-    position: fixed;
-    bottom: 0;
-    background-color: #fefefe;
-    width: 100%;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s
-}
-
-/* The Close Button */
-close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-    close:hover,
-    close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
+    modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 11; /* Sit on top */
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s;
+        vertical-align: middle;
+        border-left: 100px;
+        border-right: 100px;
     }
 
-modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
+    /* Modal Content */
+    modal-content {
+        position: fixed;
+        bottom: 0;
+        background-color: #fefefe;
+        width: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s
+    }
 
-modal-body {
-    padding: 2px 16px;
-}
+    /* The Close Button */
+    close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
+        close:hover,
+        close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
+    modal-header {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
+
+    modal-body {
+        padding: 2px 16px;
+    }
+
+    modal-footer {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
 </style>
 @using (Html.BeginForm())
 {
@@ -465,8 +467,8 @@ modal-footer {
             <div class="label" style="left: 10px;">
                 Trình độ
             </div>
-            @Html.DropDownListFor(m => m.EducationID, (IEnumerable<SelectListItem>)ViewBag.EducationID, new { style = "margin-left: 10px; margin-top: 28px; width: 180px;", @class = "drop-down-list", id = "eduid" })
-            @Html.ValidationMessageFor(model => model.EducationID, "", new { style = "left: 320px; top: 780px;", @class = "text-danger" })
+            @Html.DropDownListFor(m => m.EducationID[0], (IEnumerable<SelectListItem>)ViewBag.EducationID, new { style = "margin-left: 10px; margin-top: 28px; width: 180px;", @class = "drop-down-list", id = "eduid" })
+            @Html.ValidationMessageFor(model => model.EducationID[0], "", new { style = "left: 320px; top: 780px;", @class = "text-danger" })
             <div class="label" style="left: 300px;">
                 Chuyên ngành
             </div>
@@ -480,122 +482,127 @@ modal-footer {
                 Nơi đào tạo
             </div>
             @Html.TextBoxFor(model => model.Place, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+            @Html.ValidationMessageFor(model => model.Place, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
         </div>
-        <div class="btn-add" id="btn-add-1" style="left: 10px; right: 10px; top: 1030px;" onclick=AddButton1("e1","btn-add-1")>
-            + Thêm
-        </div>
-    </div>
-    <div class="collapsible">
-        Chứng chỉ chuyên ngành
-    </div>
-    <div class="collapsible-content">
-        <!--phan tu ban dau trong hop-->
-        <div class="first-element" id="e2" style="left: 0px; top: 0px;">
-            <div class="label" style="left: 10px;">
-                Tên chứng chỉ
+            <div class="btn-add" id="btn-add-1" style="left: 10px; right: 10px; top: 1030px;" onclick=AddButton1("e1","btn-add-1")>
+                + Thêm
             </div>
-            @Html.TextBoxFor(model => model.CertificateName, new { style = "margin-left: 10px; margin-top: 28px; width: 200px", @class = "text-box", })
-            @Html.ValidationMessageFor(model => model.CertificateName, "", new { style = "left: 10px; top: 78px;", @class = "text-danger" })
+        </div>
+        <div class="collapsible">
+            Chứng chỉ chuyên ngành
+        </div>
+        <div class="collapsible-content">
+            <!--phan tu ban dau trong hop-->
+            <div class="first-element" id="e2" style="left: 0px; top: 0px;">
+                <div class="label" style="left: 10px;">
+                    Tên chứng chỉ
+                </div>
+                @Html.TextBoxFor(model => model.CertificateName, new { style = "margin-left: 10px; margin-top: 28px; width: 200px", @class = "text-box", })
+                @Html.ValidationMessageFor(model => model.CertificateName, "", new { style = "left: 10px; top: 78px;", @class = "text-danger" })
+                <div class="label" style="left: 300px;">
+                    Loại chứng chỉ
+                </div>
+                @Html.DropDownListFor(m => m.TypeCertificateID, (IEnumerable<SelectListItem>)ViewBag.TypeCertificateID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
+                <div class="label" style="left: 10px;top: 100px;">
+                    Ngày cấp
+                </div>
+                <input type="date" name="CertificateDate" class="date" style="left: 10px; top: 130px; width: 200px;" />
+                @Html.ValidationMessageFor(model => model.CertificateDate, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
+                <div class="label" style="left: 300px;top: 100px;">
+                    Nơi cấp
+                </div>
+                @Html.TextBoxFor(model => model.CertificatePlace, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+                @Html.ValidationMessageFor(model => model.CertificatePlace, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
+            </div>
+            <div class="btn-add" id="btn-add-2" style="left: 10px; right: 10px; top: 1300px;" onclick="AddButton2()">
+                + Thêm
+            </div>
+        </div>
+        <div class="collapsible">
+            Hợp đồng
+        </div>
+        <div class="collapsible-content" style="left: 0px; top: 0px; height: 300px;">
+            <div class="label" style="left: 30px;">
+                Số hợp đồng
+            </div>
+            @Html.TextBoxFor(model => model.ContractID, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+            @Html.ValidationMessageFor(model => model.ContractID, "", new { style = "left: 30px; top: 80px;", @class = "text-danger" })
             <div class="label" style="left: 300px;">
-                Loại chứng chỉ
+                Loại hợp đồng
             </div>
-            @Html.DropDownListFor(m => m.TypeCertificateID, (IEnumerable<SelectListItem>)ViewBag.TypeCertificateID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
-            <div class="label" style="left: 10px;top: 100px;">
-                Ngày cấp
+            @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
+            <div class="label" style="left: 550px;">
+                Thời gian thử việc
             </div>
-            <input type="date" name="CertificateDate" class="date" style="left: 10px; top: 130px; width: 200px;" />
-            @Html.ValidationMessageFor(model => model.CertificateDate, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
-            <div class="label" style="left: 300px;top: 100px;">
-                Nơi cấp
+            @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
+            <div class="label" style="left: 30px; top: 100px;">
+                Lương cơ bản
             </div>
-            @Html.TextBoxFor(model => model.CertificatePlace, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+            @Html.TextBoxFor(model => model.BasicSalary, new { style = "left: 30px; top: 130px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+            @Html.ValidationMessageFor(model => model.BasicSalary, "", new { style = "left: 30px; top: 180px;", @class = "text-danger" })
+            <div class="label" style="left: 300px; top: 100px;">
+                Loại thuế thu nhập cá nhân
+            </div>
+            @Html.DropDownListFor(model => model.PersonalIncomeTax, (IEnumerable<SelectListItem>)ViewBag.PersonalIncomeTax, new { style = "left: 300px; top: 130px; width: 200px;", @class = "drop-down-list" })
+            <div class="label" style="left: 30px; top: 200px;">
+                Ngày vào làm
+            </div>
+            <input type="date" name="DateStartWork" class="date" style="left: 30px; top: 230px;" />
+            @Html.ValidationMessageFor(model => model.DateStartWork, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
+            <div class="label" style="left: 300px; top: 200px;">
+                Ngày hết hạn
+            </div>
+            <input type="date" name="ContractExpirationDate" class="date" style="left: 300px; top: 230px;" />
+            @Html.ValidationMessageFor(model => model.ContractExpirationDate, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
         </div>
-        <div class="btn-add" id="btn-add-2" style="left: 10px; right: 10px; top: 1300px;" onclick="AddButton2()">
-            + Thêm
+        <div class="collapsible">
+            Thông tin tài khoản
         </div>
-    </div>
-    <div class="collapsible">
-        Hợp đồng
-    </div>
-    <div class="collapsible-content" style="left: 0px; top: 0px; height: 300px;">
-        <div class="label" style="left: 30px;">
-            Số hợp đồng
+        <div class="collapsible-content" style="height: 100px;">
+            <div class="label" style="left: 30px; top: 0px;">
+                Phân quyền
+            </div>
+            @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.Place, new { style = "left: 30px; top: 30px; width: 200px;", @class = "drop-down-list" })
         </div>
-        @Html.TextBoxFor(model => model.ContractID, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
-        @Html.ValidationMessageFor(model => model.ContractID, "", new { style = "left: 30px; top: 80px;", @class = "text-danger" })
-        <div class="label" style="left: 300px;">
-            Loại hợp đồng
+        <div style="position: relative">
+            <input type="submit" value="Lưu" class="btn-save" />
+            <button class="btn-cancel" onclick="GoHome()">
+                HỦY
+            </button>
         </div>
-        @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
-        <div class="label" style="left: 550px;">
-            Thời gian thử việc
-        </div>
-        @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
-        <div class="label" style="left: 30px; top: 100px;">
-            Lương cơ bản
-        </div>
-        @Html.TextBoxFor(model => model.BasicSalary, new { style = "left: 30px; top: 130px; width: 200px; background: #F8FAFA;", @class = "text-box", })
-        @Html.ValidationMessageFor(model => model.BasicSalary, "", new { style = "left: 30px; top: 180px;", @class = "text-danger" })
-        <div class="label" style="left: 300px; top: 100px;">
-            Loại thuế thu nhập cá nhân
-        </div>
-        @Html.DropDownListFor(model => model.PersonalIncomeTax, (IEnumerable<SelectListItem>)ViewBag.PersonalIncomeTax, new { style = "left: 300px; top: 130px; width: 200px;", @class = "drop-down-list" })
-        <div class="label" style="left: 30px; top: 200px;">
-            Ngày vào làm
-        </div>
-        <input type="date" name="DateStartWork" class="date" style="left: 30px; top: 230px;" />
-        @Html.ValidationMessageFor(model => model.DateStartWork, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
-        <div class="label" style="left: 300px; top: 200px;">
-            Ngày hết hạn
-        </div>
-        <input type="date" name="ContractExpirationDate" class="date" style="left: 300px; top: 230px;" />
-        @Html.ValidationMessageFor(model => model.ContractExpirationDate, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
-    </div>
-    <div class="collapsible">
-        Thông tin tài khoản
-    </div>
-    <div class="collapsible-content" style="height: 100px;">
-        <div class="label" style="left: 30px; top: 0px;">
-            Phân quyền
-        </div>
-        @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.Place, new { style = "left: 30px; top: 30px; width: 200px;", @class = "drop-down-list" })
-    </div>
-    <input type="submit" value="Lưu" class="btn-save"/>
-    <button class="btn-cancel" onclick="GoHome()">
-        HỦY
-    </button>
+        
 
 
 
-    <script>
-        function AddButton1() {
-            var element = document.getElementById("e1");
-            var node = element.cloneNode(true);
-            btn = document.getElementById("btn-add-1");
-            btn.before(node);
-        }
-        function AddButton2() {
-            var element = document.getElementById("e2");
-            var node = element.cloneNode(true);
-            btn = document.getElementById("btn-add-2");
-            btn.before(node);
-        }
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        }
-        function GoHome() {
-            location.href = "https://localhost:44319/EMPLOYEEs/Index";
-        }
+        <script>
+            function AddButton1() {
+                var element = document.getElementById("e1");
+                var node = element.cloneNode(true);
+                btn = document.getElementById("btn-add-1");
+                btn.before(node);
+            }
+            function AddButton2() {
+                var element = document.getElementById("e2");
+                var node = element.cloneNode(true);
+                btn = document.getElementById("btn-add-2");
+                btn.before(node);
+            }
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+            function GoHome() {
+                location.href = "https://localhost:44319/EMPLOYEEs/Index";
+            }
 
             $(document).ready(function () {
                 $("#contracttype").change(function () {
@@ -606,13 +613,13 @@ modal-footer {
                 });
             });
 
-        var loadFile = function (event) {
-           var image = document.getElementById('output');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        };
-    </script>
-}
+            var loadFile = function (event) {
+                var image = document.getElementById('output');
+                image.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
+        }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
