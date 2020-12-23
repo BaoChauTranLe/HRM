@@ -1,7 +1,7 @@
 ﻿@model HRM.Models.TAXRATE
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -67,6 +67,7 @@
             text-transform: uppercase;
             color: #FFFFFF;
         }
+
         .taxrate-error-msg {
             font-family: Montserrat;
             color: red;
@@ -74,35 +75,33 @@
     </style>
 </head>
 
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Rank)
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Rank)
 
-        <div class="form-group taxrate-create-margin" style="margin-top: 96px; height: 110px;">
-            @Html.Label("Phần thu nhập tính thuế / tháng (triệu đồng)", htmlAttributes: new { @class = "taxrate-create-lbl" })
-            <br />
-            @Html.TextBoxFor(model => model.Min, "", new { @id = "min", @class = "taxrate-create-txtbox", @placeholder = "Từ ..." })
-            @Html.ValidationMessageFor(model => model.Min, "", new { @class = "taxrate-error-msg" })
-        </div>
+    <div class="form-group taxrate-create-margin" style="margin-top: 96px; height: 110px;">
+        @Html.Label("Phần thu nhập tính thuế / tháng (triệu đồng)", htmlAttributes: new { @class = "taxrate-create-lbl" })
+        <br />
+        @Html.TextBoxFor(model => model.Min, "", new { @id = "min", @class = "taxrate-create-txtbox", @placeholder = "Từ ..." })
+        @Html.ValidationMessageFor(model => model.Min, "", new { @class = "taxrate-error-msg" })
+    </div>
 
-        <div class="form-group taxrate-create-margin" style="height:110px;">
-            @Html.Label("Thuế suất (%)", htmlAttributes: new { @class = "taxrate-create-lbl" })
-            <br />
-            @Html.TextBoxFor(model => model.Rate, "", new { @id = "rate", @class = "taxrate-create-txtbox" })
-            @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "taxrate-error-msg" })
-        </div>
+    <div class="form-group taxrate-create-margin" style="height:110px;">
+        @Html.Label("Thuế suất (%)", htmlAttributes: new { @class = "taxrate-create-lbl" })
+        <br />
+        @Html.TextBoxFor(model => model.Rate, "", new { @id = "rate", @class = "taxrate-create-txtbox" })
+        @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "taxrate-error-msg" })
+    </div>
 
-        <div class="form-group" style="margin-left:395px;">
-            <input type="submit" value="Thêm" class="btn taxrate-create-btn" style="background: #3D76B5;" />
-            <a href="@Url.Action("BackToIndex","TAXRATEs")">
-                <input type="button" value="Hủy" class="btn taxrate-create-btn" style="background: #C33333;" />
-            </a>
-        </div>
-    }
+    <div class="form-group" style="margin-left:395px;">
+        <input type="submit" value="Lưu" class="btn taxrate-create-btn" style="background: #3D76B5;" />
+        <a href="@Url.Action("BackToIndex","TAXRATEs")">
+            <input type="button" value="Hủy" class="btn taxrate-create-btn" style="background: #C33333;" />
+        </a>
+    </div>
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
