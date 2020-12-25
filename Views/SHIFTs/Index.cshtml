@@ -540,13 +540,12 @@
                     }
 
                     function deleteByID() {
-                        //error
                         $.ajax({
                             type: 'POST',
-                            url: "../../SHIFTs/DeleteConfirmed",
+                            url: '/SHIFTs/DeleteConfirmed',
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
-                            data: deleteId,
+                            data: JSON.stringify({"id": deleteId}),
                             success: function (data) {
                                 // do what ever you want with the server response
                                 alert("Xóa thành công");
@@ -558,7 +557,7 @@
                                 console.log();
                             }
                         });
-                        
+                        closeModal();
                     }
                 </script>
 

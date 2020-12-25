@@ -38,27 +38,8 @@ namespace HRM.Controllers
             }
         }
 
-        public JsonResult GetShiftById(string id)
-        {
-            SHIFT shift = db.SHIFTs.Find(id);
-            return Json(shift, JsonRequestBehavior.AllowGet);
-        }
 
-        // GET: SHIFTs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            if (sHIFT == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sHIFT);
-        }
-
+        // Process Create and Edit Shifts
         // POST: SHIFTs/Index
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -97,60 +78,18 @@ namespace HRM.Controllers
             return View(sHIFT);
         }
 
-        // GET: SHIFTs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            if (sHIFT == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sHIFT);
-        }
-
-        // POST: SHIFTs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sHIFT).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sHIFT);
-        }
-
-        // GET: SHIFTs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            if (sHIFT == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sHIFT);
-        }
-
         // POST: SHIFTs/Delete/5
-        [HttpPost, ActionName("DeleteComfirmed")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteConfirmed")]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SHIFT sHIFT = db.SHIFTs.Find(id);
-            db.SHIFTs.Remove(sHIFT);
-            db.SaveChanges();
+            try
+            {
+                SHIFT sHIFT = db.SHIFTs.Find(id);
+                db.SHIFTs.Remove(sHIFT);
+                db.SaveChanges();
+            }
+            catch { }
             return RedirectToAction("Index");
         }
 
