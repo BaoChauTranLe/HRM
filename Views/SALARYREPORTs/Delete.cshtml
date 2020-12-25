@@ -1,0 +1,113 @@
+﻿@model HRM.Models.SALARYREPORT
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SALARYREPORT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryStandard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryStandard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryWorkDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryWorkDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Insurance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Insurance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Overtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Overtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Advance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Advance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RealSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RealSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

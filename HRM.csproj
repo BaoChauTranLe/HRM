@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\POSITIONsController.cs" />
     <Compile Include="Controllers\ROOMsController.cs" />
+    <Compile Include="Controllers\SALARYREPORTsController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGTABLEController.cs" />
@@ -372,6 +373,11 @@
     <Content Include="Views\TIMEKEEPINGs\Edit.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGTABLE\Index.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Create.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Delete.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Details.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Edit.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
