@@ -16,9 +16,27 @@
 	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 </head>
 <style>
-	table, th, td, tr {
-		border-color: #DFE0EB !important;
-		border-radius: 5px !important;
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 12; /* Sit on top */
+		float: left;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		text-align: left;
+		width: 490px;
+		height: 554px;
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		-webkit-animation-name: fadeIn; /* Fade in the background */
+		-webkit-animation-duration: 0.4s;
+		animation-name: fadeIn;
+		animation-duration: 0.4s;
+		vertical-align: middle;
+		margin-left: 122px;
+		margin-top: 30px;
 	}
 
     .add__button {

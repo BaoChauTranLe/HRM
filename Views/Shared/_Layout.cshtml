@@ -249,7 +249,7 @@
 			color: black;
 		}
 
-		/* MODAL STYLE */
+		/*MODAL STYLE*/
 		.modal {
 			display: none; /* Hidden by default */
 			position: fixed; /* Stay in place */
@@ -260,7 +260,7 @@
 			transform: translate(-50%, -50%);
 			text-align: left;
 			width: 490px;
-			height: 558px;
+			height: 554px;
 			overflow: auto; /* Enable scroll if needed */
 			background-color: rgb(0,0,0); /* Fallback color */
 			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -270,8 +270,8 @@
 			animation-duration: 0.4s;
 			vertical-align: middle;
 			margin-left: 122px;
+			margin-top: 30px;
 		}
-
 		.modal-content {
 			position: fixed;
 			background-color: #fefefe;
@@ -287,7 +287,6 @@
 			top: 0px;
 			height: 32px;
 			padding: 2px 16px;
-			padding-top: 10px;
 			background-color: #E0EFFF;
 			color: #4282BB;
 			font-size: 20px;
@@ -297,7 +296,7 @@
 		}
 
 		.modal-body {
-			padding-top: 33px;
+			padding-top: 10px;
 			padding-left: 37px;
 			padding-right: 37px;
 		}
@@ -306,7 +305,13 @@
 			font-size: 15px;
 			font-family: 'IBM Plex Sans', sans-serif;
 			font-style: normal;
+			margin-top: 13px;
 			margin-bottom: 7px;
+		}
+
+		.modal-title {
+			display: inline-block;
+			width: 50%;
 		}
 
 		#bg {
@@ -353,7 +358,47 @@
 					margin-top: 25px;
 					color: white;
 				}
+		/*LABEL STYLE*/
+		.label {
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 30px;
+			/* identical to box height, or 22px */
+			letter-spacing: 0.01em;
+			background: none;
+			position: absolute;
+			color: black;
+		}
 
+		/*TEXTBOX STYLE*/
+		.text-box {
+			align-items: flex-start;
+			padding: 12px;
+			height: 47px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/* Inside Auto Layout */
+			flex: none;
+			order: 1;
+			align-self: stretch;
+			flex-grow: 0;
+			margin: 0px 2px;
+			/*Text*/
+			color: #060606;
+			padding-left: 10px;
+			position: absolute;
+			font-size: 15px;
+		}
+		/*TABLE*/
+		table, th, td, tr {
+			border-color: #DFE0EB !important;
+			border-radius: 5px !important;
+		}
 		/* MAIN STYLE */
 		.main {
 			font-family: Montserrat;
@@ -517,7 +562,7 @@
                 <a href="#" onclick="openLogoutModal()"><i class="gg-log-in"></i></a>
             </div>
 
-            <div id="logoutModal" class="modal">
+            <div id="logoutModal" class="modal" style="height:200px !important">
                 <!-- Modal content -->
                 <div class="modal-content">
                     <div class="modal-header">
