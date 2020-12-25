@@ -1,0 +1,131 @@
+﻿@model IEnumerable<HRM.Models.ADVANCED>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
+
+<style>
+    table, th, td, tr {
+        border-color: #DFE0EB !important;
+        border-radius: 5px !important;
+    }
+
+    .add__button {
+        display: block;
+        height: 36px;
+        width: 94px;
+        right: 36px;
+        top: 80px;
+        position: absolute;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+        /* Text */
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #3D76B5;
+    }
+</style>
+
+<div class="fresh-table">
+    <a href="@Url.Action("Create","ADVANCEDs")">
+        <input type="button" id="btn" class="add__button" value="Thêm" />
+    </a>
+    <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
+        <thead>
+            <tr>
+                <th data-sortable="true">
+                    @Html.DisplayName("STT")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Mã nhân viên")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Tên nhân viên")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Phòng")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Chức vụ")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Ngày tạm ứng")
+                </th>
+                <th data-sortable="true">
+                    @Html.DisplayName("Số tiền")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdvanced)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var $table = $('#fresh-table')
+    $(function () {
+        $table.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+</script>
