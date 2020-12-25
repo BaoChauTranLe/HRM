@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DHTMLX">
+      <HintPath>packages\DHTMLX\DHTMLX.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -131,7 +134,8 @@
     <Compile Include="Controllers\ROOMsController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
-    <Compile Include="Controllers\TIMEKEEPINGController.cs" />
+    <Compile Include="Controllers\TIMEKEEPINGTABLEController.cs" />
+    <Compile Include="Controllers\TIMEKEEPINGsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +269,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fresh-bootstrap-table.css" />
     <Content Include="favicon.ico" />
     <Content Include="File_Text\City.txt" />
     <Content Include="File_Text\ContractType.txt" />
@@ -344,7 +349,6 @@
     <Content Include="Views\TAXRATEs\Create.cshtml" />
     <Content Include="Views\TAXRATEs\Delete.cshtml" />
     <Content Include="Views\TAXRATEs\Index.cshtml" />
-    <Content Include="Views\TIMEKEEPING\Index.cshtml" />
     <Content Include="Views\EMPLOYEEs\Create.cshtml" />
     <Content Include="Views\EMPLOYEEs\Delete.cshtml" />
     <Content Include="Views\EMPLOYEEs\Details.cshtml" />
@@ -364,6 +368,12 @@
     <Content Include="Views\ALLOWANCEs\Delete.cshtml" />
     <Content Include="Views\ALLOWANCEs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEs\Index.cshtml" />
+    <Content Include="Views\TIMEKEEPINGs\Create.cshtml" />
+    <Content Include="Views\TIMEKEEPINGs\Delete.cshtml" />
+    <Content Include="Views\TIMEKEEPINGs\Details.cshtml" />
+    <Content Include="Views\TIMEKEEPINGs\Edit.cshtml" />
+    <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
+    <Content Include="Views\TIMEKEEPINGTABLE\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

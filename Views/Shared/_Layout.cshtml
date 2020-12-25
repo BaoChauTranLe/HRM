@@ -249,28 +249,6 @@
 			color: black;
 		}
 
-		/* MODAL STYLE */
-		.modal {
-			display: none; /* Hidden by default */
-			position: fixed; /* Stay in place */
-			z-index: 12; /* Sit on top */
-			float: left;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			text-align: left;
-			width: 490px;
-			height: 558px;
-			overflow: auto; /* Enable scroll if needed */
-			background-color: rgb(0,0,0); /* Fallback color */
-			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-			-webkit-animation-name: fadeIn; /* Fade in the background */
-			-webkit-animation-duration: 0.4s;
-			animation-name: fadeIn;
-			animation-duration: 0.4s;
-			vertical-align: middle;
-			margin-left: 122px;
-		}
 
 		.modal-content {
 			position: fixed;
@@ -287,7 +265,6 @@
 			top: 0px;
 			height: 32px;
 			padding: 2px 16px;
-			padding-top: 10px;
 			background-color: #E0EFFF;
 			color: #4282BB;
 			font-size: 20px;
@@ -297,7 +274,7 @@
 		}
 
 		.modal-body {
-			padding-top: 33px;
+			padding-top: 10px;
 			padding-left: 37px;
 			padding-right: 37px;
 		}
@@ -306,6 +283,7 @@
 			font-size: 15px;
 			font-family: 'IBM Plex Sans', sans-serif;
 			font-style: normal;
+			margin-top: 13px;
 			margin-bottom: 7px;
 		}
 
@@ -517,7 +495,7 @@
                 <a href="#" onclick="openLogoutModal()"><i class="gg-log-in"></i></a>
             </div>
 
-            <div id="logoutModal" class="modal">
+            <div id="logoutModal" class="modal" style="height:200px !important">
                 <!-- Modal content -->
                 <div class="modal-content">
                     <div class="modal-header">
