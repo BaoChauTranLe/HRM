@@ -209,156 +209,156 @@
                 {
                     @Html.AntiForgeryToken()
 
-				<div class="form-horizontal" id="newForm">
-					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-					@Html.HiddenFor(model => model.ShiftID)
-					<div class="row">
-						<div class="form-group">
-							<div class="modal__text">
-								Tên ca
-							</div>
-							<div class="col">
-								@Html.EditorFor(model => model.ShiftName, "--Tên ca--", new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group">
-							<div class="modal__text">
-								Loại ca
-							</div>
-							<div class="col">
-								@Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                    <div class="form-horizontal" id="newForm">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ShiftID)
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="modal__text">
+                                    Tên ca
+                                </div>
+                                <div class="col">
+                                    @Html.EditorFor(model => model.ShiftName, "--Tên ca--", new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="modal__text">
+                                    Loại ca
+                                </div>
+                                <div class="col">
+                                    @Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="">
+                                <div class="form-group">
+                                    <div class="modal__text">
+                                        Thời gian làm việc
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 col-md-4">
+                                            <div class="form-group-time">
+                                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <span>đến</span>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="form-group-time">
+                                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="modal__text">
+                                    Các ngày làm việc trong tuần
+                                </div>
+                                <div class="row" style="padding-right: 15px !important;">
+                                    <div class="col-md-12">
+                                        <div class="row" style="padding: 0px 20px !important;">
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="display: inline-block; width: 100px;">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Monday) Thứ hai
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Tuesday) Thứ ba
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Wednesday) Thứ tư
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Thursday) Thứ năm
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding: 0px 20px !important;">
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Friday) Thứ sáu
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="        display: inline-block;
+        width: 100px;
+">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Saturday) Thứ bảy
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group" style="display: inline-block;width: 100px;">
+                                                    <div class="col" style="display: inline;">
+                                                        <div class="checkbox" style="display: inline;">
+                                                            @Html.EditorFor(model => model.Sunday) Chủ nhật
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
+" />
+                                    <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
+" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-					<div class="row">
-						<div class="">
-							<div class="form-group">
-								<div class="modal__text">
-									Thời gian làm việc
-								</div>
-								<div class="row">
-									<div class="col-6 col-md-4">
-										<div class="form-group-time">
-											@Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-										</div>
-									</div>
-									<div class="col-6 col-md-4">
-										<span>đến</span>
-									</div>
-									<div class="col-6 col-md-4">
-										<div class="form-group-time">
-											@Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-										</div>
-									</div>
-									@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-									@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<div class="modal__text">
-								Các ngày làm việc trong tuần
-							</div>
-							<div class="row" style="padding-right: 15px !important;">
-								<div class="col-md-12" >
-									<div class="row" style="padding: 0px 20px !important;">
-										<div class="col-md-3">
-											<div class="form-group" style="display: inline-block; width: 100px;">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Monday) Thứ hai
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Tuesday) Thứ ba
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Wednesday) Thứ tư
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Thursday) Thứ năm
-													</div>
-												</div>
-											</div>
-                                        </div>
-										</div>
-									<div class="row" style="padding: 0px 20px !important;">
-										<div class="col-md-3">
-											<div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Friday) Thứ sáu
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group" style="        display: inline-block;
-        width: 100px;
-">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Saturday) Thứ bảy
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group" style="display: inline-block;width: 100px;">
-												<div class="col" style="display: inline;">
-													<div class="checkbox" style="display: inline;">
-														@Html.EditorFor(model => model.Sunday) Chủ nhật
-													</div>
-												</div>
-											</div>
-                                        </div>
-										</div>
-									</div>
-								</div>
-							</div>
-						<div class="form-group">
-							<div class="col-md-offset-2 col-md-10">
-								<input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
-" />
-								<input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
-" />
-							</div>
-						</div>
-					</div>
-					</div>
-					}
-				</div>
+                }
+            </div>
         </div>
     </div>
 
@@ -376,7 +376,7 @@
                 <ul class="button">
                     <li>
                         <a>
-                            <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()"/>
+                            <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
                         </a>
                     </li>
                     <li>
@@ -387,238 +387,239 @@
         </div>
     </div>
 
-                <div id="bg" onclick="closeModal()"></div>
+    <div id="bg" onclick="closeModal()"></div>
 
 
-                <br />
-                <br />
-                <br />
+    <br />
+    <br />
+    <br />
     <!--Display list of shifts-->
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên ca</th>
-                            <th>Loại ca</th>
-                            <th>Thời gian</th>
-                            <th>Thời lượng</th>
-                            <th>Các ngày làm việc trong tuần</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="SetShiftList">
-                        <tr id="LoadingStatus" style="color:red"></tr>
-                    </tbody>
-                </table>
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên ca</th>
+                <th>Loại ca</th>
+                <th>Thời gian</th>
+                <th>Thời lượng</th>
+                <th>Các ngày làm việc trong tuần</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="SetShiftList">
+            <tr id="LoadingStatus" style="color:red"></tr>
+        </tbody>
+    </table>
 
-                <script>
-                    $("#LoadingStatus").html("Loading....");
-                    // Get the modal
-                    var create_modal = document.getElementById("createModal");
-                    var delete_modal = document.getElementById("deleteModal");
+    <!--script for interactive with user-->
+    <script>
+        $("#LoadingStatus").html("Loading....");
+        // Get the modal
+        var create_modal = document.getElementById("createModal");
+        var delete_modal = document.getElementById("deleteModal");
 
-                    // Get the button that opens the modal
-                    var btn = document.getElementById("btn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("btn");
 
-                    // Get the <span> element that closes the modal
-                    var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-                    // When the user clicks the button, open the modal
-                    btn.onclick = function () {
-                        $("#modal-title").html("Thêm ca làm việc");
-                        create_modal.style.display = "block";
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            $("#modal-title").html("Thêm ca làm việc");
+            create_modal.style.display = "block";
 
-                        document.getElementById("frm").reset();
+            document.getElementById("frm").reset();
 
-                        $("#bg").width("100%").height("100%");
+            $("#bg").width("100%").height("100%");
 
-                        $("#bg").fadeTo("slow", 0.8);
-                    }
+            $("#bg").fadeTo("slow", 0.8);
+        }
 
-                    //close create modal
-                    function closeModal() {
-                        window.location.reload();
-                        create_modal.style.display = "none";
-                        delete_modal.style.display = "none";
-                        $("#bg").fadeOut();
-                    }
+        //close create modal
+        function closeModal() {
+            window.location.reload();
+            create_modal.style.display = "none";
+            delete_modal.style.display = "none";
+            $("#bg").fadeOut();
+        }
 
-                    //function to get list of shift and display on table
-                    var shifts;
-                    $.get("/SHIFTs/GetShiftList", null, DataBind);
-                    function DataBind(ShiftList) {
-                        var SetData = $("#SetShiftList");
-                        shifts = ShiftList;
-                        if (ShiftList.length == 0)
-                            $("#LoadingStatus").html("Có lỗi xảy ra khi tải dữ liệu, vui lòng tải lại trang để tải lại dữ liệu.");
-                        for (var i = 0; i < ShiftList.length; i++) {
-                            var start = moment(ShiftList[i].StartTime);
-                            var end = moment(ShiftList[i].EndTime);
-                            var Data = "<tr class='row_" + ShiftList[i].ShiftID + "'>" +
-                                "<td>" + (i + 1) + "</td>" +
-                                "<td>" + ShiftList[i].ShiftName + "</td>" +
-                                "<td>" + ShiftList[i].ShiftType + "</td>" +
-                                "<td>" + start.format("HH:mm") + " - " + end.format("HH:mm") + "</td>" +
-                                "<td>" + end.diff(start, 'hours', true) + "h" + "</td>" +
-                                "<td>";
+        //function to get list of shift and display on table
+        var shifts;
+        $.get("/SHIFTs/GetShiftList", null, DataBind);
+        function DataBind(ShiftList) {
+            var SetData = $("#SetShiftList");
+            shifts = ShiftList;
+            if (ShiftList.length == 0)
+                $("#LoadingStatus").html("Có lỗi xảy ra khi tải dữ liệu, vui lòng tải lại trang để tải lại dữ liệu.");
+            for (var i = 0; i < ShiftList.length; i++) {
+                var start = moment(ShiftList[i].StartTime);
+                var end = moment(ShiftList[i].EndTime);
+                var Data = "<tr class='row_" + ShiftList[i].ShiftID + "'>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + ShiftList[i].ShiftName + "</td>" +
+                    "<td>" + ShiftList[i].ShiftType + "</td>" +
+                    "<td>" + start.format("HH:mm") + " - " + end.format("HH:mm") + "</td>" +
+                    "<td>" + end.diff(start, 'hours', true) + "h" + "</td>" +
+                    "<td>";
 
-                            var flag = 0;
-                            if (ShiftList[i].Monday == true) {
-                                Data = Data + "T2";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Tuesday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "T3";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Wednesday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "T4";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Thursday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "T5";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Friday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "T6";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Saturday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "T7";
-                                flag = 1;
-                            }
-                            if (ShiftList[i].Sunday == true) {
-                                if (flag == 1)
-                                    Data = Data + ", ";
-                                Data = Data + "CN";
-                                flag = 1;
-                            }
-                            Data = Data + "</td>" + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\">"
-                                + "<i class='fa fa-edit pa-5 text-warning'></i>" +
-                                "</td>" +
-                                " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\" >"
-                                + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
-                                "</td>" +
-                                "</tr>";
-                            SetData.append(Data);
-                            $("#LoadingStatus").html(" ");
+                var flag = 0;
+                if (ShiftList[i].Monday == true) {
+                    Data = Data + "T2";
+                    flag = 1;
+                }
+                if (ShiftList[i].Tuesday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T3";
+                    flag = 1;
+                }
+                if (ShiftList[i].Wednesday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T4";
+                    flag = 1;
+                }
+                if (ShiftList[i].Thursday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T5";
+                    flag = 1;
+                }
+                if (ShiftList[i].Friday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T6";
+                    flag = 1;
+                }
+                if (ShiftList[i].Saturday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "T7";
+                    flag = 1;
+                }
+                if (ShiftList[i].Sunday == true) {
+                    if (flag == 1)
+                        Data = Data + ", ";
+                    Data = Data + "CN";
+                    flag = 1;
+                }
+                Data = Data + "</td>" + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\">"
+                    + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+                    "</td>" +
+                    " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\" >"
+                    + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+                    "</td>" +
+                    "</tr>";
+                SetData.append(Data);
+                $("#LoadingStatus").html(" ");
+            }
+        }
+
+        //function to show information of a shift on modal
+        function EditModule(id) {
+            $("#modal-title").html("Sửa ca làm việc");
+            document.getElementById("frm").reset();
+            for (var i = 0; i < shifts.length; i++) {
+                if (shifts[i].ShiftID == id) {
+                    document.getElementById("ShiftID").value = shifts[i].ShiftID;
+                    document.getElementById("ShiftName").value = shifts[i].ShiftName;
+                    //error
+                    document.getElementById("StartTime").value = moment(shifts[i].StartTime).format('HH:mm a');
+                    document.getElementById("EndTime").value = moment(shifts[i].EndTime);
+
+                    document.getElementById("Monday").checked = shifts[i].Monday;
+                    document.getElementById("Tuesday").checked = shifts[i].Tuesday;
+                    document.getElementById("Wednesday").checked = shifts[i].Wednesday;
+                    document.getElementById("Thursday").checked = shifts[i].Thursday;
+                    document.getElementById("Friday").checked = shifts[i].Friday;
+                    document.getElementById("Saturday").checked = shifts[i].Saturday;
+                    document.getElementById("Sunday").checked = shifts[i].Sunday;
+                    var ddl = document.getElementById('ShiftType');
+                    var opts = ddl.options.length;
+                    for (var j = 0; j < opts; j++) {
+                        if (ddl.options[j].value == shifts[i].ShiftType) {
+                            ddl.options[j].selected = true;
+                            break;
                         }
                     }
+                    break;
+                }
+            }
 
-                    //function to show information of a shift on modal
-                    function EditModule(id) {
-                        $("#modal-title").html("Sửa ca làm việc");
-                        document.getElementById("frm").reset();
-                        for (var i = 0; i < shifts.length; i++) {
-                            if (shifts[i].ShiftID == id) {
-                                document.getElementById("ShiftID").value = shifts[i].ShiftID;
-                                document.getElementById("ShiftName").value = shifts[i].ShiftName;
-                                //error
-                                document.getElementById("StartTime").value = moment(shifts[i].StartTime).format('HH:mm a');
-                                document.getElementById("EndTime").value = moment(shifts[i].EndTime);
+            create_modal.style.display = "block";
 
-                                document.getElementById("Monday").checked = shifts[i].Monday;
-                                document.getElementById("Tuesday").checked = shifts[i].Tuesday;
-                                document.getElementById("Wednesday").checked = shifts[i].Wednesday;
-                                document.getElementById("Thursday").checked = shifts[i].Thursday;
-                                document.getElementById("Friday").checked = shifts[i].Friday;
-                                document.getElementById("Saturday").checked = shifts[i].Saturday;
-                                document.getElementById("Sunday").checked = shifts[i].Sunday;
-                                var ddl = document.getElementById('ShiftType');
-                                var opts = ddl.options.length;
-                                for (var j = 0; j < opts; j++) {
-                                    if (ddl.options[j].value == shifts[i].ShiftType) {
-                                        ddl.options[j].selected = true;
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
+            $("#bg").width("100%").height("100%");
 
-                        create_modal.style.display = "block";
+            $("#bg").fadeTo("slow", 0.8);
+        }
 
-                        $("#bg").width("100%").height("100%");
+        //functions to show delete confirm
+        var deleteId;
+        function DeleteModule(id) {
+            deleteId = id;
+            var name;
+            for (var i = 0; i < shifts.length; i++) {
+                if (shifts[i].ShiftID == id) {
+                    name = shifts[i].ShiftName;
+                }
+            }
+            var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
+            $("#modal__text").html(noticeString);
+            delete_modal.style.display = "block";
+            $("#bg").width("100%").height("100%");
 
-                        $("#bg").fadeTo("slow", 0.8);
-                    }
+            $("#bg").fadeTo("slow", 0.8);
+        }
 
-                    //functions to show delete confirm
-                    var deleteId;
-                    function DeleteModule(id) {
-                        deleteId = id;
-                        var name;
-                        for (var i = 0; i < shifts.length; i++) {
-                            if (shifts[i].ShiftID == id) {
-                                name = shifts[i].ShiftName;
-                            }
-                        }
-                        var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
-                        $("#modal__text").html(noticeString);
-                        delete_modal.style.display = "block";
-                        $("#bg").width("100%").height("100%");
+        function deleteByID() {
+            $.ajax({
+                type: 'POST',
+                url: '/SHIFTs/DeleteConfirmed',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ "id": deleteId }),
+                success: function (data) {
+                    // do what ever you want with the server response
+                    alert("Xóa thành công");
+                    closeModal();
+                },
+                error: function (error) {
+                    // error handling
+                    alert("Thao tác không thực hiện được do ca bạn muốn xóa vẫn có nhân viên đang làm việc.");
+                    console.log();
+                }
+            });
+        }
+    </script>
 
-                        $("#bg").fadeTo("slow", 0.8);
-                    }
+    <!-- Script for validate start time and end time-->
+    <script type="text/javascript">
+        $.validator.unobtrusive.adapters.add('isgreater', ['otherproperty'], function (options) {
+            options.rules['isgreater'] = { otherproperty: options.params.otherproperty };
+            options.messages['isgreater'] = options.message;
+        });
 
-                    function deleteByID() {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/SHIFTs/DeleteConfirmed',
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify({"id": deleteId}),
-                            success: function (data) {
-                                // do what ever you want with the server response
-                                alert("Xóa thành công");
-                                closeModal(); 
-                            },
-                            error: function (error) {
-                                // error handling
-                                alert("Thao tác không thực hiện được do ca bạn muốn xóa vẫn có nhân viên đang làm việc.");
-                                console.log();
-                            }
-                        });
-                    }
-                </script>
+        $.validator.addMethod("isgreater", function (value, element, param) {
+            var otherProp = $('#' + param.otherproperty);
+            if (otherProp.val() != '') {
+                var Start = new moment(otherProp.val(), 'HH:mm a');
 
-                <!-- Script for validate start time and end time-->
-                <script type="text/javascript">
-                    $.validator.unobtrusive.adapters.add('isgreater', ['otherproperty'], function (options) {
-                        options.rules['isgreater'] = { otherproperty: options.params.otherproperty };
-                        options.messages['isgreater'] = options.message;
-                    });
-
-                    $.validator.addMethod("isgreater", function (value, element, param) {
-                        var otherProp = $('#' + param.otherproperty);
-                        if (otherProp.val() != '') {
-                            var Start = new moment(otherProp.val(), 'HH:mm a');
-
-                            var End = new moment(value, 'HH:mm a');
-                            if (Start != '') {
-                                if (Start.get('hour') > End.get('hour'))
-                                    return false;
-                                if (Start.get('hour') == End.get('hour') && Start.get('minute') >= End.get('minute'))
-                                    return false;
-                                return true;
-                            }
-                        }
-                        return true;
-                    });
-                </script>
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/jqueryval")
-                <script src="/Scripts/jquery.validate.js"></script>
-                <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+                var End = new moment(value, 'HH:mm a');
+                if (Start != '') {
+                    if (Start.get('hour') > End.get('hour'))
+                        return false;
+                    if (Start.get('hour') == End.get('hour') && Start.get('minute') >= End.get('minute'))
+                        return false;
+                    return true;
+                }
+            }
+            return true;
+        });
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
 </body>

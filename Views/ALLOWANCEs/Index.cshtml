@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HRM.Models.ALLOWANCE>
+﻿@model HRM.Models.ALLOWANCE
 
 @{
     ViewBag.Title = "Index";
@@ -48,7 +48,7 @@
     <input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()" />
 </a>
 <div class="fresh-table">
-    
+
     <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
         <thead>
             <tr>
@@ -64,47 +64,12 @@
                 <th data-sortable="true">
                     @Html.DisplayName("Số tiền được miễn")
                 </th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AllowanceName)
-                    </td>
-                    <td>
-                        @if (item.Insurance == true)
-                        {
-                            @Html.DisplayName("Có")
-                        }
-                        else
-                        {
-                            @Html.DisplayName("Không")
-                        }
-                    </td>
-                    <td>
-                        @if (item.Tax == true)
-                        {
-                            @Html.DisplayName("Có")
-                        }
-                        else
-                        {
-                            @Html.DisplayName("Không")
-                        }
-                    </td>
-                    <td>
-                        @if (item.Tax == true)
-                        {
-                            @Html.DisplayFor(modelItem => item.FreeTax)
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.AllowanceID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.AllowanceID })
-                    </td>
-                </tr>
-            }
+        <tbody id="SetAllowanceList">
+            <tr id="LoadingStatus" style="color:red"></tr>
         </tbody>
     </table>
 </div>
@@ -128,4 +93,143 @@
             }
         })
     })
+
+
+</script>
+<!--script for interactive with user-->
+<script>
+    $("#LoadingStatus").html("Loading....");
+    // Get the modal
+    var create_modal = document.getElementById("createModal");
+    var delete_modal = document.getElementById("deleteModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    function openCreateModal() {
+        $("#modal-title").html("Thêm loại thưởng, phụ cấp, trợ cấp");
+        create_modal.style.display = "block";
+
+        document.getElementById("frm").reset();
+
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    //close create modal
+    function closeModal() {
+        window.location.reload();
+        create_modal.style.display = "none";
+        delete_modal.style.display = "none";
+        $("#bg").fadeOut();
+    }
+
+    //function to get list of shift and display on table
+    var allowances;
+    $.get("/ALLOWANCEs/GetAllowanceList", null, DataBind);
+    function DataBind(AllowanceList) {
+        var SetData = $("#SetAllowanceList");
+        allowances = AllowanceList;
+        if (AllowanceList.length == 0)
+            $("#LoadingStatus").html("Có lỗi xảy ra khi tải dữ liệu, vui lòng tải lại trang để tải lại dữ liệu.");
+        for (var i = 0; i < AllowanceList.length; i++) {
+            var start = moment(AllowanceList[i].StartTime);
+            var end = moment(AllowanceList[i].EndTime);
+            var Data = "<tr class='row_" + AllowanceList[i].ShiftID + "'>" +
+                "<td>" + (i + 1) + "</td>" +
+                "<td>" + AllowanceList[i].AllowanceName + "</td>";
+            if (AllowanceList[i].Insurance == true) {
+                Data = Data + "<td> Có </td>";
+            }
+            else {
+                Data = Data + "<td> Không </td>";
+            }
+            if (AllowanceList[i].Tax == true) {
+                Data = Data + "<td> Có </td>";
+            }
+            else {
+                Data = Data + "<td> Không </td>";
+            }
+            Data = Data + "<td>" + AllowanceList[i].FreeTax + "</td>";
+
+            Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + AllowanceList[i].AllowanceID + "'" + ")\">"
+                + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+                "</td>" +
+                " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + AllowanceList[i].AllowanceID + "'" + ")\" >"
+                + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+                "</td>" +
+                "</tr>";
+            SetData.append(Data);
+            $("#LoadingStatus").html(" ");
+        }
+    }
+
+    //function to show information of a shift on modal
+    function EditModule(id) {
+        $("#modal-title").html("Sửa loại thưởng, trợ cấp, phụ cấp");
+        document.getElementById("frm").reset();
+        for (var i = 0; i < allowances.length; i++) {
+            if (allowances[i].AllowancesID == id) {
+                document.getElementById("ShiftID").value = allowances[i].ShiftID;
+                document.getElementById("ShiftName").value = allowances[i].ShiftName;
+                document.getElementById("Monday").checked = shifts[i].Monday;
+                document.getElementById("Tuesday").checked = shifts[i].Tuesday;
+                var ddl = document.getElementById('ShiftType');
+                var opts = ddl.options.length;
+                for (var j = 0; j < opts; j++) {
+                    if (ddl.options[j].value == shifts[i].ShiftType) {
+                        ddl.options[j].selected = true;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        create_modal.style.display = "block";
+
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    //functions to show delete confirm
+    var deleteId;
+    function DeleteModule(id) {
+        deleteId = id;
+        var name;
+        for (var i = 0; i < shifts.length; i++) {
+            if (shifts[i].ShiftID == id) {
+                name = shifts[i].ShiftName;
+            }
+        }
+        var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
+        $("#modal__text").html(noticeString);
+        delete_modal.style.display = "block";
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    function deleteByID() {
+        $.ajax({
+            type: 'POST',
+            url: '/SHIFTs/DeleteConfirmed',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ "id": deleteId }),
+            success: function (data) {
+                // do what ever you want with the server response
+                alert("Xóa thành công");
+                closeModal();
+            },
+            error: function (error) {
+                // error handling
+                alert("Thao tác không thực hiện được do ca bạn muốn xóa vẫn có nhân viên đang làm việc.");
+                console.log();
+            }
+        });
+    }
 </script>
