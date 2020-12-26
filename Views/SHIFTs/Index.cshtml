@@ -114,18 +114,20 @@
             margin-bottom: 7px;
         }
 
-        .form-control, select {
-            height: 47px;
-            width: 100%;
+		.form-control, select {
+			height: 47px;
+			width: calc(100% - 4px);
             font-size: 15px;
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-style: normal;
-            padding-left: 10px;
-            background: #F8FAFA;
-            border: 1px solid #DBDBDB;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
+			font-family: 'IBM Plex Sans', sans-serif;
+			font-style: normal;
+			padding-left: 10px;
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			left: 0 !important;
+			right: 0 !important;
+		}
 
         .check-box {
             margin-top: 2px;
@@ -158,8 +160,6 @@
         }
 
         input#StartTime, input#EndTime {
-            height: 47px;
-            width: 45.5%;
             font-size: 15px;
             font-family: 'IBM Plex Sans', sans-serif;
             font-style: normal;
@@ -175,9 +175,6 @@
 			margin-left: 0px;
 		}
 
-        .form-group-time {
-            display: inline;
-        }
 
         .text-danger.field-validation-error {
             color: red;
@@ -197,7 +194,7 @@
     <button id="btn" class="add__button">Thêm</button>
 
     <!-- The Create Modal -->
-    <div id="createModal" class="modal">
+<div id="createModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -217,15 +214,15 @@
 							<div class="modal__text">
 								Tên ca
 							</div>
-							<div class="col">
+							<div class="col-md-12">
 								@Html.EditorFor(model => model.ShiftName, "--Tên ca--", new { htmlAttributes = new { @class = "form-control" } })
 								@Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group">
-							<div class="modal__text">
+						<div class="form-group" style="margin-bottom:0 !important;">
+							<div class="modal__text" style="margin-top: 35px !important; ">
 								Loại ca
 							</div>
 							<div class="col">
@@ -240,13 +237,13 @@
 								<div class="modal__text">
 									Thời gian làm việc
 								</div>
-								<div class="row">
+								
 									<div class="col-6 col-md-4">
 										<div class="form-group-time">
 											@Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
 										</div>
 									</div>
-									<div class="col-6 col-md-4">
+									<div class="col-6 col-md-4" style="width:15% !important">
 										<span>đến</span>
 									</div>
 									<div class="col-6 col-md-4">
@@ -256,7 +253,7 @@
 									</div>
 									@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
 									@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -356,11 +353,11 @@
 							</div>
 						</div>
 					</div>
-					</div>
-					}
 				</div>
+					}
+			</div>
         </div>
-    </div>
+</div>
 
     <!-- The Delete Modal -->
     <div id="deleteModal" class="modal" style="height:200px !important">
