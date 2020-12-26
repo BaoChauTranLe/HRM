@@ -445,73 +445,84 @@
         //function to get list of shift and display on table
         var shifts;
         $.get("/SHIFTs/GetShiftList", null, DataBind);
-        function DataBind(ShiftList) {
-            var SetData = $("#SetShiftList");
-            shifts = ShiftList;
-            if (ShiftList.length == 0)
-                $("#LoadingStatus").html("Có lỗi xảy ra khi tải dữ liệu, vui lòng tải lại trang để tải lại dữ liệu.");
-            for (var i = 0; i < ShiftList.length; i++) {
-                var start = moment(ShiftList[i].StartTime);
-                var end = moment(ShiftList[i].EndTime);
-                var Data = "<tr class='row_" + ShiftList[i].ShiftID + "'>" +
-                    "<td>" + (i + 1) + "</td>" +
-                    "<td>" + ShiftList[i].ShiftName + "</td>" +
-                    "<td>" + ShiftList[i].ShiftType + "</td>" +
-                    "<td>" + start.format("HH:mm") + " - " + end.format("HH:mm") + "</td>" +
-                    "<td>" + end.diff(start, 'hours', true) + "h" + "</td>" +
-                    "<td>";
-
-                var flag = 0;
-                if (ShiftList[i].Monday == true) {
-                    Data = Data + "T2";
-                    flag = 1;
+        function DataBind(result) {
+            if (result.str == "success") {
+                var SetData = $("#SetShiftList");
+                shifts = result.list;
+                if (shifts.length == 0) {
+                    $("#LoadingStatus").html("Chưa có dữ liệu nào.");
+                    return;
+                }   
+                for (var i = 0; i < shifts.length; i++) {
+                    SetData.append(GetDataString(shifts[i], i));
+                    $("#LoadingStatus").html(" ");
                 }
-                if (ShiftList[i].Tuesday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "T3";
-                    flag = 1;
-                }
-                if (ShiftList[i].Wednesday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "T4";
-                    flag = 1;
-                }
-                if (ShiftList[i].Thursday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "T5";
-                    flag = 1;
-                }
-                if (ShiftList[i].Friday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "T6";
-                    flag = 1;
-                }
-                if (ShiftList[i].Saturday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "T7";
-                    flag = 1;
-                }
-                if (ShiftList[i].Sunday == true) {
-                    if (flag == 1)
-                        Data = Data + ", ";
-                    Data = Data + "CN";
-                    flag = 1;
-                }
-                Data = Data + "</td>" + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\">"
-                    + "<i class='fa fa-edit pa-5 text-warning'></i>" +
-                    "</td>" +
-                    " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + ShiftList[i].ShiftID + "'" + ")\" >"
-                    + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
-                    "</td>" +
-                    "</tr>";
-                SetData.append(Data);
-                $("#LoadingStatus").html(" ");
             }
+            else {
+                $("#LoadingStatus").html("Có lỗi xảy ra trong quá trình tải dữ liệu.");
+            }
+        }
+
+        function GetDataString(shift, n) {
+            var start = moment(shift.StartTime);
+            var end = moment(shift.EndTime);
+            var Data = "<tr class='row_" + shift.ShiftID + "'>" +
+                "<td>" + (n + 1) + "</td>" +
+                "<td>" + shift.ShiftName + "</td>" +
+                "<td>" + shift.ShiftType + "</td>" +
+                "<td>" + start.format("HH:mm") + " - " + end.format("HH:mm") + "</td>" +
+                "<td>" + end.diff(start, 'hours', true) + "h" + "</td>" +
+                "<td>";
+
+            var flag = 0;
+            if (shift.Monday == true) {
+                Data = Data + "T2";
+                flag = 1;
+            }
+            if (shift.Tuesday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "T3";
+                flag = 1;
+            }
+            if (shift.Wednesday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "T4";
+                flag = 1;
+            }
+            if (shift.Thursday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "T5";
+                flag = 1;
+            }
+            if (shift.Friday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "T6";
+                flag = 1;
+            }
+            if (shift.Saturday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "T7";
+                flag = 1;
+            }
+            if (shift.Sunday == true) {
+                if (flag == 1)
+                    Data = Data + ", ";
+                Data = Data + "CN";
+                flag = 1;
+            }
+            Data = Data + "</td>" + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + shift.ShiftID + "'" + ")\">"
+                + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+                "</td>" +
+                " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + shift.ShiftID + "'" + ")\" >"
+                + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+                "</td>" +
+                "</tr>";
+            return Data;
         }
 
         //function to show information of a shift on modal

@@ -30,11 +30,13 @@ namespace HRM.Controllers
                 List<SHIFT> list = db.SHIFTs.ToList();
                 var ShiftList = from s in list
                                select new { s.ShiftID, s.ShiftName, s.ShiftType, s.StartTime, s.EndTime, s.Monday, s.Tuesday, s.Wednesday, s.Thursday, s.Friday, s.Saturday, s.Sunday };
-                return Json(ShiftList, JsonRequestBehavior.AllowGet);
+                var result = new { list = ShiftList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return null;
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
 

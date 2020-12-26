@@ -27,11 +27,13 @@ namespace HRM.Controllers
                 List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
                 var AllowanceList = from a in list
                                 select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.Tax, a.FreeTax};
-                return Json(AllowanceList, JsonRequestBehavior.AllowGet);
+                var result = new { list = AllowanceList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return null;
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
 
