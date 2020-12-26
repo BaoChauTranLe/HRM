@@ -54,6 +54,9 @@
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
@@ -111,9 +114,6 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\POSITIONsController.cs" />
     <Compile Include="Controllers\ROOMsController.cs" />
+    <Compile Include="Controllers\SALARYREPORTsController.cs" />
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGTABLEController.cs" />
@@ -372,6 +373,11 @@
     <Content Include="Views\TIMEKEEPINGs\Edit.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGTABLE\Index.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Create.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Delete.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Details.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Edit.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

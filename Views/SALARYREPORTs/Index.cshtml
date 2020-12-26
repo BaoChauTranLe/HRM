@@ -1,0 +1,94 @@
+﻿@model IEnumerable<HRM.Models.SALARYREPORT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Allowance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryStandard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryWorkDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bonus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Insurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Overtime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Advance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RealSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allowance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryStandard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryWorkDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bonus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Insurance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Overtime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncomeTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Advance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RealSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

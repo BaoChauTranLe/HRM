@@ -390,6 +390,7 @@
                 <br />
                 <br />
                 <br />
+    <!--Display list of shifts-->
                 <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
@@ -439,6 +440,8 @@
                         delete_modal.style.display = "none";
                         $("#bg").fadeOut();
                     }
+
+                    //function to get list of shift and display on table
                     var shifts;
                     $.get("/SHIFTs/GetShiftList", null, DataBind);
                     function DataBind(ShiftList) {
@@ -510,6 +513,7 @@
                         }
                     }
 
+                    //function to show information of a shift on modal
                     function EditModule(id) {
                         $("#modal-title").html("Sửa ca làm việc");
                         document.getElementById("frm").reset();
@@ -546,6 +550,8 @@
 
                         $("#bg").fadeTo("slow", 0.8);
                     }
+
+                    //functions to show delete confirm
                     var deleteId;
                     function DeleteModule(id) {
                         deleteId = id;
@@ -577,11 +583,10 @@
                             },
                             error: function (error) {
                                 // error handling
-                                //alert("Thao tác không thực hiện được do ca bạn muốn xóa vẫn có nhân viên đang làm việc.");
+                                alert("Thao tác không thực hiện được do ca bạn muốn xóa vẫn có nhân viên đang làm việc.");
                                 console.log();
                             }
                         });
-                        closeModal();
                     }
                 </script>
 
