@@ -89,8 +89,10 @@ namespace HRM.Controllers
                 db.SHIFTs.Remove(sHIFT);
                 db.SaveChanges();
             }
-            catch { }
-            return RedirectToAction("Index");
+            catch {
+                return Json(new { success = false });
+            }
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)
