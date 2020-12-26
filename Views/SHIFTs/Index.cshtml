@@ -114,18 +114,20 @@
             margin-bottom: 7px;
         }
 
-        .form-control, select {
-            height: 47px;
-            width: 100%;
+		.form-control, select {
+			height: 47px;
+			width: calc(100% - 4px);
             font-size: 15px;
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-style: normal;
-            padding-left: 10px;
-            background: #F8FAFA;
-            border: 1px solid #DBDBDB;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
+			font-family: 'IBM Plex Sans', sans-serif;
+			font-style: normal;
+			padding-left: 10px;
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			left: 0 !important;
+			right: 0 !important;
+		}
 
         .check-box {
             margin-top: 2px;
@@ -158,8 +160,6 @@
         }
 
         input#StartTime, input#EndTime {
-            height: 47px;
-            width: 45.5%;
             font-size: 15px;
             font-family: 'IBM Plex Sans', sans-serif;
             font-style: normal;
@@ -175,9 +175,6 @@
 			margin-left: 0px;
 		}
 
-        .form-group-time {
-            display: inline;
-        }
 
         .text-danger.field-validation-error {
             color: red;
@@ -197,7 +194,7 @@
     <button id="btn" class="add__button">Thêm</button>
 
     <!-- The Create Modal -->
-    <div id="createModal" class="modal">
+<div id="createModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -209,76 +206,76 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal" id="newForm">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.ShiftID)
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="modal__text">
-                                    Tên ca
-                                </div>
-                                <div class="col">
-                                    @Html.EditorFor(model => model.ShiftName, "--Tên ca--", new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="modal__text">
-                                    Loại ca
-                                </div>
-                                <div class="col">
-                                    @Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="">
-                                <div class="form-group">
-                                    <div class="modal__text">
-                                        Thời gian làm việc
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 col-md-4">
-                                            <div class="form-group-time">
-                                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-4">
-                                            <span>đến</span>
-                                        </div>
-                                        <div class="col-6 col-md-4">
-                                            <div class="form-group-time">
-                                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-                                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="modal__text">
-                                    Các ngày làm việc trong tuần
-                                </div>
-                                <div class="row" style="padding-right: 15px !important;">
-                                    <div class="col-md-12">
-                                        <div class="row" style="padding: 0px 20px !important;">
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="display: inline-block; width: 100px;">
-                                                    <div class="col" style="display: inline;">
-                                                        <div class="checkbox" style="display: inline;">
-                                                            @Html.EditorFor(model => model.Monday) Thứ hai
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="        display: inline-block;
+				<div class="form-horizontal" id="newForm">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					@Html.HiddenFor(model => model.ShiftID)
+					<div class="row">
+						<div class="form-group">
+							<div class="modal__text">
+								Tên ca
+							</div>
+							<div class="col-md-12">
+								@Html.EditorFor(model => model.ShiftName, "--Tên ca--", new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group" style="margin-bottom:0 !important;">
+							<div class="modal__text" style="margin-top: 35px !important; ">
+								Loại ca
+							</div>
+							<div class="col">
+								@Html.DropDownListFor(model => model.ShiftType, (IEnumerable<SelectListItem>)ViewBag.ListOfShiftType, "--Chọn loại ca--", new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.ShiftType, "", new { @class = "text-danger" })
+							</div>
+						</div>
+                    </div>
+					<div class="row">
+						<div class="">
+							<div class="form-group">
+								<div class="modal__text">
+									Thời gian làm việc
+								</div>
+								
+									<div class="col-6 col-md-4">
+										<div class="form-group-time">
+											@Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+										</div>
+									</div>
+									<div class="col-6 col-md-4" style="width:15% !important">
+										<span>đến</span>
+									</div>
+									<div class="col-6 col-md-4">
+										<div class="form-group-time">
+											@Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+										</div>
+									</div>
+									@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+									@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="modal__text">
+								Các ngày làm việc trong tuần
+							</div>
+							<div class="row" style="padding-right: 15px !important;">
+								<div class="col-md-12" >
+									<div class="row" style="padding: 0px 20px !important;">
+										<div class="col-md-3">
+											<div class="form-group" style="display: inline-block; width: 100px;">
+												<div class="col" style="display: inline;">
+													<div class="checkbox" style="display: inline;">
+														@Html.EditorFor(model => model.Monday) Thứ hai
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group" style="        display: inline-block;
         width: 100px;
 ">
                                                     <div class="col" style="display: inline;">
@@ -353,14 +350,14 @@
 " />
                                     <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
 " />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
+							</div>
+						</div>
+					</div>
+				</div>
+					}
+			</div>
         </div>
-    </div>
+</div>
 
     <!-- The Delete Modal -->
     <div id="deleteModal" class="modal" style="height:200px !important">
