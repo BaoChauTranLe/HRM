@@ -15,75 +15,153 @@
 	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
 	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
 </head>
-<h2>Index</h2>
+<style>
+	.main {
+		padding: 20px 10px !important;
+	}
+	.btn-select {
+		background: #3D76B5;
+		/* 1 dp */
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+		border-radius: 4px;
+		color: white;
+		width: 80px;
+		height: 40px;
+		position: absolute;
+	}
+	.form-control{
+		border-radius: 7px !important;
+	}
+</style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-hover table-responsive">
-	<tr>
-		<th>
-			Tên nhân viên
-		</th>
-		<th>
-			Phòng
-		</th>
-		<th>
-			Chức vụ
-		</th>
-		<th>
-			Trạng thái
-		</th>
-		<th>
-			Ca làm
-		</th>
-		<th>
-			Giờ vào
-		</th>
-		<th>
-			Giờ ra
-		</th>
-		<th>
-			Thời lượng
-		</th>
-		<th>
-			Nghỉ
-		</th>
-		<th>
-			Ngày lễ
-		</th>
-		<th>
-			OT
-		</th>
-	</tr>
+<body>
+	<br />
+	<div class="tool-bar">
+		<div class="row">
+			<div class="input-daterange">
+				<div class="col-md-2">
+					<input type="date" name="select_date" id="select_date" class="form-control" />
+				</div>
+			</div>
+			<div class="input-daterange">
+				<div class="col-md-2">
+					<input type="text" name="select_room" id="select_room" class="form-control" />
+				</div>
+				<div class="col-md-2">
+					<input type="text" name="select_position" id="select_position" class="form-control" />
+				</div>
+				<div class="col-md-2">
+					<input type="search" name="find_name" id="find_name" class="form-control search-input" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<input type="button" name="search" id="search" value="Tìm" class="btn-select" />
+			</div>
+		</div>
+	</div>
+	<div class="fresh-table">
+		<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+			<thead>
+				<tr>
+					<th data-field="name" data-sortable="true">
+						Tên nhân viên
+					</th>
+					<th>
+						Phòng
+					</th>
+					<th data-field="position" data-sortable="true">
+						Chức vụ
+					</th>
+					<th data-field="state" data-sortable="true">
+						Trạng thái
+					</th>
+					<th data-field="shiftname" data-sortable="true">
+						Ca làm
+					</th>
+					<th data-field="entertime">
+						Giờ vào
+					</th>
+					<th data-field="outtime">
+						Giờ ra
+					</th>
+					<th data-field="worktime">
+						Thời lượng
+					</th>
+					<th data-field="absent" data-sortable="true">
+						Nghỉ
+					</th>
+					<th data-field="holiday" data-sortable="true">
+						Ngày lễ
+					</th>
+					<th data-field="overtime" data-sortable="true">
+						OT
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						Nguyen Ha
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+					</td>
+				</tr>
+				@*@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.State)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.HoursWorkDay)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.HoursWorkNight)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.ABSENT.AbsentName)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.DATEINFORMATION.Date)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+							</td>
+							
+						</tr>
+					}*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoursWorkDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoursWorkNight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ABSENT.AbsentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DATEINFORMATION.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
 
-</table>
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
+	
+</script>

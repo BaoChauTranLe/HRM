@@ -17,7 +17,24 @@ namespace HRM.Controllers
         // GET: ALLOWANCEs
         public ActionResult Index()
         {
-            return View(db.ALLOWANCEs.ToList());
+            return View();
+        }
+
+        public JsonResult GetAllowanceList()
+        {
+            try
+            {
+                List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
+                var AllowanceList = from a in list
+                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.Tax, a.FreeTax};
+                var result = new { list = AllowanceList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: ALLOWANCEs/Details/5
