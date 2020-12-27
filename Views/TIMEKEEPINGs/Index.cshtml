@@ -16,7 +16,6 @@
 
 	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 
-	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
@@ -49,15 +48,17 @@
 					<input type="date" name="select_date" id="select_date" class="form-control" />
 				</div>
 			</div>
-			<div class="input-daterange">
+			<div class="search-panel">
 				<div class="col-md-2">
-					<input type="text" name="select_room" id="select_room" class="form-control" />
+					<input type="text" name="select_room" id="select_room" placeholder="Chọn phòng" class="form-control" />
+					
 				</div>
 				<div class="col-md-2">
-					<input type="text" name="select_position" id="select_position" class="form-control" />
+					<input type="text" name="select_position" id="select_position" placeholder="Chọn chức vụ" class="form-control" />
+
 				</div>
 				<div class="col-md-2">
-					<input type="search" name="find_name" id="find_name" class="form-control search-input" />
+					<input type="search" name="find_name" id="find_name" placeholder="Tìm tên nhân viên" class="form-control search-input" />
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -78,9 +79,6 @@
 					<th data-field="position" data-sortable="true">
 						Chức vụ
 					</th>
-					<th data-field="state" data-sortable="true">
-						Trạng thái
-					</th>
 					<th data-field="shiftname" data-sortable="true">
 						Ca làm
 					</th>
@@ -93,8 +91,8 @@
 					<th data-field="worktime">
 						Thời lượng
 					</th>
-					<th data-field="absent" data-sortable="true">
-						Nghỉ
+					<th data-field="state" data-sortable="true">
+						Trạng thái
 					</th>
 					<th data-field="holiday" data-sortable="true">
 						Ngày lễ
@@ -105,16 +103,6 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						Nguyen Ha
-					</td>
-					<td>
-						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-					</td>
-				</tr>
 				@*@foreach (var item in Model)
 					{
 						<tr>
