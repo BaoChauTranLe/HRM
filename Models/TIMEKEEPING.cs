@@ -17,11 +17,9 @@ namespace HRM.Models
         public System.DateTime Date { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<int> State { get; set; }
-        public string AbsentID { get; set; }
         public Nullable<int> HoursWorkDay { get; set; }
         public Nullable<int> HoursWorkNight { get; set; }
     
-        public virtual ABSENT ABSENT { get; set; }
         public virtual DATEINFORMATION DATEINFORMATION { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

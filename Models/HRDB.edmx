@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_hRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_hRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENT">
           <Key>
             <PropertyRef Name="AbsentID" />
@@ -38,18 +38,10 @@
             <PropertyRef Name="AllowanceID" />
           </Key>
           <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="AllowanceName" Type="varchar" MaxLength="20" />
-          <Property Name="Insurance" Type="bit" />
-          <Property Name="Tax" Type="bit" />
+          <Property Name="AllowanceName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Insurance" Type="bit" Nullable="false" />
+          <Property Name="Tax" Type="bit" Nullable="false" />
           <Property Name="FreeTax" Type="int" />
-        </EntityType>
-        <EntityType Name="ALLOWANCEDETAIL">
-          <Key>
-            <PropertyRef Name="AllowanceID" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="Value" Type="int" />
         </EntityType>
         <EntityType Name="ALLOWANCEREPORT">
@@ -61,35 +53,6 @@
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="Value" Type="int" />
-        </EntityType>
-        <EntityType Name="BONUS">
-          <Key>
-            <PropertyRef Name="BonusID" />
-          </Key>
-          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="BonusName" Type="nvarchar" MaxLength="20" />
-          <Property Name="isFreedTax" Type="bit" />
-          <Property Name="TaxFreeValue" Type="int" />
-        </EntityType>
-        <EntityType Name="BONUSDETAIL">
-          <Key>
-            <PropertyRef Name="BonusID" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="Value" Type="int" />
-        </EntityType>
-        <EntityType Name="BONUSREPORT">
-          <Key>
-            <PropertyRef Name="Month" />
-            <PropertyRef Name="EmployeeID" />
-            <PropertyRef Name="BonusID" />
-          </Key>
-          <Property Name="Month" Type="datetime" Nullable="false" />
-          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="BonusID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="Value" Type="int" />
         </EntityType>
         <EntityType Name="CERTIFICATE">
@@ -348,7 +311,6 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="State" Type="int" />
-          <Property Name="AbsentID" Type="char" MaxLength="3" />
           <Property Name="HoursWorkDay" Type="int" />
           <Property Name="HoursWorkNight" Type="int" />
         </EntityType>
@@ -400,30 +362,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AllowanceDetail_FK_Allowance">
-          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
-          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ALLOWANCE">
-              <PropertyRef Name="AllowanceID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEDETAIL">
-              <PropertyRef Name="AllowanceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AllowanceDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AllowanceReport_FK_Employee">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="ALLOWANCEREPORT" Type="Self.ALLOWANCEREPORT" Multiplicity="*" />
@@ -432,42 +370,6 @@
               <PropertyRef Name="EmployeeID" />
             </Principal>
             <Dependent Role="ALLOWANCEREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusDetail_FK_Bonus">
-          <End Role="BONUS" Type="Self.BONUS" Multiplicity="1" />
-          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BONUS">
-              <PropertyRef Name="BonusID" />
-            </Principal>
-            <Dependent Role="BONUSDETAIL">
-              <PropertyRef Name="BonusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="BONUSDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="BONUSREPORT" Type="Self.BONUSREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="BONUSREPORT">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -700,18 +602,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TimeKeeping_FK_Absent">
-          <End Role="ABSENT" Type="Self.ABSENT" Multiplicity="0..1" />
-          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ABSENT">
-              <PropertyRef Name="AbsentID" />
-            </Principal>
-            <Dependent Role="TIMEKEEPING">
-              <PropertyRef Name="AbsentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="TimeKeeping_FK_DateInformation">
           <End Role="DATEINFORMATION" Type="Self.DATEINFORMATION" Multiplicity="1" />
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
@@ -796,11 +686,7 @@
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ALLOWANCEDETAIL" EntityType="Self.ALLOWANCEDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALLOWANCEREPORT" EntityType="Self.ALLOWANCEREPORT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BONUS" EntityType="Self.BONUS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BONUSDETAIL" EntityType="Self.BONUSDETAIL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BONUSREPORT" EntityType="Self.BONUSREPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATE" EntityType="Self.CERTIFICATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATEDETAIL" EntityType="Self.CERTIFICATEDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" Schema="dbo" store:Type="Tables" />
@@ -835,29 +721,9 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORT" />
           </AssociationSet>
-          <AssociationSet Name="AllowanceDetail_FK_Allowance" Association="Self.AllowanceDetail_FK_Allowance">
-            <End Role="ALLOWANCE" EntitySet="ALLOWANCE" />
-            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="AllowanceDetail_FK_Employee" Association="Self.AllowanceDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
-          </AssociationSet>
           <AssociationSet Name="AllowanceReport_FK_Employee" Association="Self.AllowanceReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORT" />
-          </AssociationSet>
-          <AssociationSet Name="BonusDetail_FK_Bonus" Association="Self.BonusDetail_FK_Bonus">
-            <End Role="BONUS" EntitySet="BONUS" />
-            <End Role="BONUSDETAIL" EntitySet="BONUSDETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="BonusDetail_FK_Employee" Association="Self.BonusDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="BONUSDETAIL" EntitySet="BONUSDETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="BonusReport_FK_Employee" Association="Self.BonusReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="BONUSREPORT" EntitySet="BONUSREPORT" />
           </AssociationSet>
           <AssociationSet Name="CertificateDetail_FK_Certificate" Association="Self.CertificateDetail_FK_Certificate">
             <End Role="CERTIFICATE" EntitySet="CERTIFICATE" />
@@ -935,10 +801,6 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TAXREPORT" EntitySet="TAXREPORT" />
           </AssociationSet>
-          <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
-            <End Role="ABSENT" EntitySet="ABSENT" />
-            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
-          </AssociationSet>
           <AssociationSet Name="TimeKeeping_FK_DateInformation" Association="Self.TimeKeeping_FK_DateInformation">
             <End Role="DATEINFORMATION" EntitySet="DATEINFORMATION" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
@@ -956,21 +818,10 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_hRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ABSENT">
-          <Key>
-            <PropertyRef Name="AbsentID" />
-          </Key>
-          <Property Name="AbsentID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="AbsentName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="AbsentType" Type="Int32" />
-          <Property Name="MaxDay" Type="Int32" />
-          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Absent" FromRole="ABSENT" ToRole="TIMEKEEPING" />
-        </EntityType>
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -997,67 +848,11 @@
             <PropertyRef Name="AllowanceID" />
           </Key>
           <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="AllowanceName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Insurance" Type="Boolean" />
-          <Property Name="Tax" Type="Boolean" />
+          <Property Name="AllowanceName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Insurance" Type="Boolean" Nullable="false" />
+          <Property Name="Tax" Type="Boolean" Nullable="false" />
           <Property Name="FreeTax" Type="Int32" />
-          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Allowance" FromRole="ALLOWANCE" ToRole="ALLOWANCEDETAIL" />
-        </EntityType>
-        <EntityType Name="ALLOWANCEDETAIL">
-          <Key>
-            <PropertyRef Name="AllowanceID" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="ALLOWANCE" Relationship="Self.AllowanceDetail_FK_Allowance" FromRole="ALLOWANCEDETAIL" ToRole="ALLOWANCE" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="ALLOWANCEDETAIL" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="ALLOWANCEREPORT">
-          <Key>
-            <PropertyRef Name="Month" />
-            <PropertyRef Name="EmployeeID" />
-            <PropertyRef Name="AllowanceID" />
-          </Key>
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="BONU">
-          <Key>
-            <PropertyRef Name="BonusID" />
-          </Key>
-          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="BonusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="isFreedTax" Type="Boolean" />
-          <Property Name="TaxFreeValue" Type="Int32" />
-          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUS" ToRole="BONUSDETAIL" />
-        </EntityType>
-        <EntityType Name="BONUSDETAIL">
-          <Key>
-            <PropertyRef Name="BonusID" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="BONU" Relationship="Self.BonusDetail_FK_Bonus" FromRole="BONUSDETAIL" ToRole="BONUS" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.BonusDetail_FK_Employee" FromRole="BONUSDETAIL" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="BONUSREPORT">
-          <Key>
-            <PropertyRef Name="Month" />
-            <PropertyRef Name="EmployeeID" />
-            <PropertyRef Name="BonusID" />
-          </Key>
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="BonusID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.BonusReport_FK_Employee" FromRole="BONUSREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="CERTIFICATE">
           <Key>
@@ -1153,10 +948,6 @@
           <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
           <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
-          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.AllowanceDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
-          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
-          <NavigationProperty Name="BONUSDETAILs" Relationship="Self.BonusDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSDETAIL" />
-          <NavigationProperty Name="BONUSREPORTs" Relationship="Self.BonusReport_FK_Employee" FromRole="EMPLOYEE" ToRole="BONUSREPORT" />
           <NavigationProperty Name="CERTIFICATEDETAILs" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
           <NavigationProperty Name="CONTRACT" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
           <NavigationProperty Name="EDUCATIONDETAILs" Relationship="Self.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
@@ -1170,6 +961,7 @@
           <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
           <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
           <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
+          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="hrmserver_hRMModel.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1343,10 +1135,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="State" Type="Int32" />
-          <Property Name="AbsentID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="HoursWorkDay" Type="Int32" />
           <Property Name="HoursWorkNight" Type="Int32" />
-          <NavigationProperty Name="ABSENT" Relationship="Self.TimeKeeping_FK_Absent" FromRole="TIMEKEEPING" ToRole="ABSENT" />
           <NavigationProperty Name="DATEINFORMATION" Relationship="Self.TimeKeeping_FK_DateInformation" FromRole="TIMEKEEPING" ToRole="DATEINFORMATION" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.TimeKeeping_FK_Employee" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
         </EntityType>
@@ -1376,18 +1166,6 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.User_FK" FromRole="USERS" ToRole="EMPLOYEE" />
         </EntityType>
-        <Association Name="TimeKeeping_FK_Absent">
-          <End Role="ABSENT" Type="Self.ABSENT" Multiplicity="0..1" />
-          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ABSENT">
-              <PropertyRef Name="AbsentID" />
-            </Principal>
-            <Dependent Role="TIMEKEEPING">
-              <PropertyRef Name="AbsentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Advanced_FK_Employee">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="ADVANCED" Type="Self.ADVANCED" Multiplicity="*" />
@@ -1408,78 +1186,6 @@
               <PropertyRef Name="EmployeeID" />
             </Principal>
             <Dependent Role="ADVANCEDREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AllowanceDetail_FK_Allowance">
-          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
-          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ALLOWANCE">
-              <PropertyRef Name="AllowanceID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEDETAIL">
-              <PropertyRef Name="AllowanceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AllowanceDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AllowanceReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ALLOWANCEREPORT" Type="Self.ALLOWANCEREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusDetail_FK_Bonus">
-          <End Role="BONUS" Type="Self.BONU" Multiplicity="1" />
-          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BONUS">
-              <PropertyRef Name="BonusID" />
-            </Principal>
-            <Dependent Role="BONUSDETAIL">
-              <PropertyRef Name="BonusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="BONUSDETAIL" Type="Self.BONUSDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="BONUSDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="BONUSREPORT" Type="Self.BONUSREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="BONUSREPORT">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1721,15 +1427,9 @@
           <End Role="GR" Type="Self.GR" Multiplicity="*" />
         </Association>
         <EntityContainer Name="hrmserver_hRMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ABSENTs" EntityType="Self.ABSENT" />
           <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
           <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
           <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
-          <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
-          <EntitySet Name="ALLOWANCEREPORTs" EntityType="Self.ALLOWANCEREPORT" />
-          <EntitySet Name="BONUS" EntityType="Self.BONU" />
-          <EntitySet Name="BONUSDETAILs" EntityType="Self.BONUSDETAIL" />
-          <EntitySet Name="BONUSREPORTs" EntityType="Self.BONUSREPORT" />
           <EntitySet Name="CERTIFICATEs" EntityType="Self.CERTIFICATE" />
           <EntitySet Name="CERTIFICATEDETAILs" EntityType="Self.CERTIFICATEDETAIL" />
           <EntitySet Name="CONTRACTs" EntityType="Self.CONTRACT" />
@@ -1754,10 +1454,6 @@
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
-          <AssociationSet Name="TimeKeeping_FK_Absent" Association="Self.TimeKeeping_FK_Absent">
-            <End Role="ABSENT" EntitySet="ABSENTs" />
-            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
-          </AssociationSet>
           <AssociationSet Name="Advanced_FK_Employee" Association="Self.Advanced_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ADVANCED" EntitySet="ADVANCEDs" />
@@ -1765,30 +1461,6 @@
           <AssociationSet Name="AdvancedReport_FK_Employee" Association="Self.AdvancedReport_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="AllowanceDetail_FK_Allowance" Association="Self.AllowanceDetail_FK_Allowance">
-            <End Role="ALLOWANCE" EntitySet="ALLOWANCEs" />
-            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="AllowanceDetail_FK_Employee" Association="Self.AllowanceDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="AllowanceReport_FK_Employee" Association="Self.AllowanceReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="BonusDetail_FK_Bonus" Association="Self.BonusDetail_FK_Bonus">
-            <End Role="BONUS" EntitySet="BONUS" />
-            <End Role="BONUSDETAIL" EntitySet="BONUSDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="BonusDetail_FK_Employee" Association="Self.BonusDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="BONUSDETAIL" EntitySet="BONUSDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="BonusReport_FK_Employee" Association="Self.BonusReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="BONUSREPORT" EntitySet="BONUSREPORTs" />
           </AssociationSet>
           <AssociationSet Name="CertificateDetail_FK_Certificate" Association="Self.CertificateDetail_FK_Certificate">
             <End Role="CERTIFICATE" EntitySet="CERTIFICATEs" />
@@ -1904,6 +1576,12 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="ALLOWANCEREPORTs" EntityType="hrmserver_hRMModel.ALLOWANCEREPORT" />
+          <AssociationSet Name="AllowanceReport_FK_Employee" Association="hrmserver_hRMModel.AllowanceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
+          </AssociationSet>
+          <EntitySet Name="ABSENTs" EntityType="hrmserver_hRMModel.ABSENT" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1916,22 +1594,45 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="ALLOWANCEREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="AllowanceID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="AllowanceID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_hRMModel.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <Association Name="AllowanceReport_FK_Employee">
+          <End Type="hrmserver_hRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_hRMModel.ALLOWANCEREPORT" Role="ALLOWANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ABSENT">
+          <Key>
+            <PropertyRef Name="AbsentID" />
+          </Key>
+          <Property Name="AbsentID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="AbsentName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AbsentType" Type="Int32" />
+          <Property Name="MaxDay" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="hrmserver_hRMModelStoreContainer" CdmEntityContainer="hrmserver_hRMEntities">
-          <EntitySetMapping Name="ABSENTs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.ABSENT">
-              <MappingFragment StoreEntitySet="ABSENT">
-                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
-                <ScalarProperty Name="AbsentName" ColumnName="AbsentName" />
-                <ScalarProperty Name="AbsentType" ColumnName="AbsentType" />
-                <ScalarProperty Name="MaxDay" ColumnName="MaxDay" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ADVANCEDs">
             <EntityTypeMapping TypeName="hrmserver_hRMModel.ADVANCED">
               <MappingFragment StoreEntitySet="ADVANCED">
@@ -1953,59 +1654,12 @@
           <EntitySetMapping Name="ALLOWANCEs">
             <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCE">
               <MappingFragment StoreEntitySet="ALLOWANCE">
+                <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
                 <ScalarProperty Name="AllowanceName" ColumnName="AllowanceName" />
                 <ScalarProperty Name="Insurance" ColumnName="Insurance" />
                 <ScalarProperty Name="Tax" ColumnName="Tax" />
                 <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ALLOWANCEDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCEDETAIL">
-              <MappingFragment StoreEntitySet="ALLOWANCEDETAIL">
-                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ALLOWANCEREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCEREPORT">
-              <MappingFragment StoreEntitySet="ALLOWANCEREPORT">
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BONUS">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONU">
-              <MappingFragment StoreEntitySet="BONUS">
-                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
-                <ScalarProperty Name="BonusName" ColumnName="BonusName" />
-                <ScalarProperty Name="isFreedTax" ColumnName="isFreedTax" />
-                <ScalarProperty Name="TaxFreeValue" ColumnName="TaxFreeValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BONUSDETAILs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONUSDETAIL">
-              <MappingFragment StoreEntitySet="BONUSDETAIL">
-                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BONUSREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.BONUSREPORT">
-              <MappingFragment StoreEntitySet="BONUSREPORT">
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2260,7 +1914,6 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
                 <ScalarProperty Name="HoursWorkDay" ColumnName="HoursWorkDay" />
                 <ScalarProperty Name="HoursWorkNight" ColumnName="HoursWorkNight" />
               </MappingFragment>
@@ -2331,6 +1984,26 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_hRMModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_hRMModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="ALLOWANCEREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ALLOWANCEREPORT">
+              <MappingFragment StoreEntitySet="ALLOWANCEREPORT">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABSENTs">
+            <EntityTypeMapping TypeName="hrmserver_hRMModel.ABSENT">
+              <MappingFragment StoreEntitySet="ABSENT">
+                <ScalarProperty Name="MaxDay" ColumnName="MaxDay" />
+                <ScalarProperty Name="AbsentType" ColumnName="AbsentType" />
+                <ScalarProperty Name="AbsentName" ColumnName="AbsentName" />
+                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

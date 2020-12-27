@@ -18,7 +18,7 @@ namespace HRM.Models
     public partial class hrmserver_HRMEntities : DbContext
     {
         public hrmserver_HRMEntities()
-            : base("name=hrmserver_hRMEntities")
+            : base("name=hrmserver_HRMEntities")
         {
         }
     
@@ -27,15 +27,9 @@ namespace HRM.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ABSENT> ABSENTs { get; set; }
         public virtual DbSet<ADVANCED> ADVANCEDs { get; set; }
         public virtual DbSet<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
         public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
-        public virtual DbSet<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
-        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        public virtual DbSet<BONU> BONUS { get; set; }
-        public virtual DbSet<BONUSDETAIL> BONUSDETAILs { get; set; }
-        public virtual DbSet<BONUSREPORT> BONUSREPORTs { get; set; }
         public virtual DbSet<CERTIFICATE> CERTIFICATEs { get; set; }
         public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
         public virtual DbSet<CONTRACT> CONTRACTs { get; set; }
@@ -60,6 +54,8 @@ namespace HRM.Models
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
+        public virtual DbSet<ABSENT> ABSENTs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

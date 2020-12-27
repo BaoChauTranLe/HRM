@@ -153,19 +153,7 @@
     <Compile Include="Models\ALLOWANCE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ALLOWANCEDETAIL.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ALLOWANCEREPORT.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BONU.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BONUSDETAIL.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BONUSREPORT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CERTIFICATE.cs">

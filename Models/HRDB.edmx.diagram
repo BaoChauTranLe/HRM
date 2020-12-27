@@ -5,15 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="be8b7e3ec6564d1c89398e778db3e9e1" Name="Diagram1">
-        <EntityTypeShape EntityType="hrmserver_hRMModel.ABSENT" Width="1.5" PointX="11.25" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.ADVANCED" Width="1.5" PointX="7.5" PointY="30" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.ADVANCEDREPORT" Width="1.5" PointX="7.5" PointY="32.5" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.ALLOWANCE" Width="1.5" PointX="5.25" PointY="50.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.ALLOWANCEDETAIL" Width="1.5" PointX="7.5" PointY="46.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.ALLOWANCEREPORT" Width="1.5" PointX="7.5" PointY="37.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.BONU" Width="1.5" PointX="8.25" PointY="52.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.BONUSDETAIL" Width="1.5" PointX="10.5" PointY="43.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.BONUSREPORT" Width="1.5" PointX="7.5" PointY="43.25" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.CERTIFICATE" Width="1.5" PointX="8.25" PointY="35.375" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.CERTIFICATEDETAIL" Width="1.5" PointX="10.5" PointY="40" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.CONTRACT" Width="1.5" PointX="3" PointY="42.875" IsExpanded="true" />
@@ -38,15 +32,8 @@
         <EntityTypeShape EntityType="hrmserver_hRMModel.TIMEKEEPING" Width="1.5" PointX="13.5" PointY="38.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.TIMEKEEPINGREPORT" Width="1.5" PointX="7.5" PointY="73.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.USER" Width="1.5" PointX="7.5" PointY="77.875" IsExpanded="true" />
-        <AssociationConnector Association="hrmserver_hRMModel.TimeKeeping_FK_Absent" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.Advanced_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.AdvancedReport_FK_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.AllowanceDetail_FK_Allowance" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.AllowanceDetail_FK_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.AllowanceReport_FK_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.BonusDetail_FK_Bonus" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.BonusDetail_FK_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_hRMModel.BonusReport_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.CertificateDetail_FK_Certificate" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.CertificateDetail_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.EMPLOYEE_FK_CONTRACT" ManuallyRouted="false" />
@@ -68,6 +55,9 @@
         <AssociationConnector Association="hrmserver_hRMModel.FK_ShiftDetail_Shift" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.GROUPACCESS" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_hRMModel.GROUPMEMBER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="hrmserver_hRMModel.ALLOWANCEREPORT" Width="1.5" PointX="7.5" PointY="42.875" />
+        <AssociationConnector Association="hrmserver_hRMModel.AllowanceReport_FK_Employee" />
+        <EntityTypeShape EntityType="hrmserver_hRMModel.ABSENT" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

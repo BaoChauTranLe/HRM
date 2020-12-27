@@ -14,18 +14,9 @@ namespace HRM.Models
     
     public partial class ABSENT
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ABSENT()
-        {
-            this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
-        }
-    
         public string AbsentID { get; set; }
         public string AbsentName { get; set; }
         public Nullable<int> AbsentType { get; set; }
         public Nullable<int> MaxDay { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
     }
 }

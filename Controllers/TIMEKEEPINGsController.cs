@@ -17,7 +17,7 @@ namespace HRM.Controllers
         // GET: TIMEKEEPINGs
         public ActionResult Index()
         {
-            var tIMEKEEPINGs = db.TIMEKEEPINGs.Include(t => t.ABSENT).Include(t => t.DATEINFORMATION).Include(t => t.EMPLOYEE);
+            var tIMEKEEPINGs = db.TIMEKEEPINGs.Include(t => t.DATEINFORMATION).Include(t => t.EMPLOYEE);
             return View(tIMEKEEPINGs.ToList());
         }
 
@@ -39,7 +39,6 @@ namespace HRM.Controllers
         // GET: TIMEKEEPINGs/Create
         public ActionResult Create()
         {
-            ViewBag.AbsentID = new SelectList(db.ABSENTs, "AbsentID", "AbsentName");
             ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date");
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
@@ -59,7 +58,6 @@ namespace HRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AbsentID = new SelectList(db.ABSENTs, "AbsentID", "AbsentName", tIMEKEEPING.AbsentID);
             ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date", tIMEKEEPING.Date);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", tIMEKEEPING.EmployeeID);
             return View(tIMEKEEPING);
@@ -77,7 +75,6 @@ namespace HRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AbsentID = new SelectList(db.ABSENTs, "AbsentID", "AbsentName", tIMEKEEPING.AbsentID);
             ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date", tIMEKEEPING.Date);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", tIMEKEEPING.EmployeeID);
             return View(tIMEKEEPING);
@@ -96,7 +93,6 @@ namespace HRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AbsentID = new SelectList(db.ABSENTs, "AbsentID", "AbsentName", tIMEKEEPING.AbsentID);
             ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date", tIMEKEEPING.Date);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", tIMEKEEPING.EmployeeID);
             return View(tIMEKEEPING);
