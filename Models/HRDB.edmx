@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="hrmserver_hRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ABSENT">
-          <Key>
-            <PropertyRef Name="AbsentID" />
-          </Key>
-          <Property Name="AbsentID" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="AbsentName" Type="varchar" MaxLength="40" />
-          <Property Name="AbsentType" Type="int" />
-          <Property Name="MaxDay" Type="int" />
-        </EntityType>
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -235,7 +226,6 @@
           <Property Name="SalaryStandard" Type="int" />
           <Property Name="WorkDay" Type="int" />
           <Property Name="SalaryWorkDay" Type="int" />
-          <Property Name="Bonus" Type="int" />
           <Property Name="Insurance" Type="int" />
           <Property Name="Overtime" Type="int" />
           <Property Name="IncomeTax" Type="int" />
@@ -682,7 +672,6 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hrmserver_hRMModelStoreContainer">
-          <EntitySet Name="ABSENT" EntityType="Self.ABSENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" Schema="dbo" store:Type="Tables" />
@@ -1054,7 +1043,6 @@
           <Property Name="SalaryStandard" Type="Int32" />
           <Property Name="WorkDay" Type="Int32" />
           <Property Name="SalaryWorkDay" Type="Int32" />
-          <Property Name="Bonus" Type="Int32" />
           <Property Name="Insurance" Type="Int32" />
           <Property Name="Overtime" Type="Int32" />
           <Property Name="IncomeTax" Type="Int32" />
@@ -1581,7 +1569,6 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
           </AssociationSet>
-          <EntitySet Name="ABSENTs" EntityType="hrmserver_hRMModel.ABSENT" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1618,15 +1605,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ABSENT">
-          <Key>
-            <PropertyRef Name="AbsentID" />
-          </Key>
-          <Property Name="AbsentID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="AbsentName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="AbsentType" Type="Int32" />
-          <Property Name="MaxDay" Type="Int32" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1836,7 +1814,6 @@
                 <ScalarProperty Name="SalaryStandard" ColumnName="SalaryStandard" />
                 <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
                 <ScalarProperty Name="SalaryWorkDay" ColumnName="SalaryWorkDay" />
-                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
                 <ScalarProperty Name="Insurance" ColumnName="Insurance" />
                 <ScalarProperty Name="Overtime" ColumnName="Overtime" />
                 <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
@@ -1991,16 +1968,6 @@
                 <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ABSENTs">
-            <EntityTypeMapping TypeName="hrmserver_hRMModel.ABSENT">
-              <MappingFragment StoreEntitySet="ABSENT">
-                <ScalarProperty Name="MaxDay" ColumnName="MaxDay" />
-                <ScalarProperty Name="AbsentType" ColumnName="AbsentType" />
-                <ScalarProperty Name="AbsentName" ColumnName="AbsentName" />
-                <ScalarProperty Name="AbsentID" ColumnName="AbsentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

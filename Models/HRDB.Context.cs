@@ -18,7 +18,7 @@ namespace HRM.Models
     public partial class hrmserver_HRMEntities : DbContext
     {
         public hrmserver_HRMEntities()
-            : base("name=hrmserver_HRMEntities")
+            : base("name=Hrmserver_hRMEntities")
         {
         }
     
@@ -55,7 +55,6 @@ namespace HRM.Models
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
         public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        public virtual DbSet<ABSENT> ABSENTs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

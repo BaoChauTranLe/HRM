@@ -20,7 +20,6 @@ namespace HRM.Models
         public Nullable<int> SalaryStandard { get; set; }
         public Nullable<int> WorkDay { get; set; }
         public Nullable<int> SalaryWorkDay { get; set; }
-        public Nullable<int> Bonus { get; set; }
         public Nullable<int> Insurance { get; set; }
         public Nullable<int> Overtime { get; set; }
         public Nullable<int> IncomeTax { get; set; }

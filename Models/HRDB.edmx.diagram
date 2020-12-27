@@ -57,7 +57,6 @@
         <AssociationConnector Association="hrmserver_hRMModel.GROUPMEMBER" ManuallyRouted="false" />
         <EntityTypeShape EntityType="hrmserver_hRMModel.ALLOWANCEREPORT" Width="1.5" PointX="7.5" PointY="42.875" />
         <AssociationConnector Association="hrmserver_hRMModel.AllowanceReport_FK_Employee" />
-        <EntityTypeShape EntityType="hrmserver_hRMModel.ABSENT" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
