@@ -129,6 +129,7 @@
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INSURANCEREPORTsController.cs" />
+    <Compile Include="Controllers\PARAMETERsController.cs" />
     <Compile Include="Controllers\POSITIONsController.cs" />
     <Compile Include="Controllers\ROOMsController.cs" />
     <Compile Include="Controllers\SALARYREPORTsController.cs" />
@@ -362,6 +363,7 @@
     <Content Include="Views\ADVANCEDs\Delete.cshtml" />
     <Content Include="Views\ADVANCEDs\Edit.cshtml" />
     <Content Include="Views\ADVANCEDs\Index.cshtml" />
+    <Content Include="Views\PARAMETERs\Employee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
