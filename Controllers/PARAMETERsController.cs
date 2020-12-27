@@ -17,6 +17,13 @@ namespace HRM.Controllers
         {
             return View();
         }
-
+        public ActionResult CoefficientsOTSalary()
+        {
+            return View();
+        }
+        public ActionResult IncomeTax()
+        {
+            return View();
+        }
     }
 }

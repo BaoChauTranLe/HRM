@@ -138,6 +138,7 @@
     <Compile Include="Controllers\TAXREPORTsController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGTABLEController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGsController.cs" />
+    <Compile Include="Controllers\USERsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -364,6 +365,13 @@
     <Content Include="Views\ADVANCEDs\Edit.cshtml" />
     <Content Include="Views\ADVANCEDs\Index.cshtml" />
     <Content Include="Views\PARAMETERs\Employee.cshtml" />
+    <Content Include="Views\PARAMETERs\CoefficientsOTSalary.cshtml" />
+    <Content Include="Views\PARAMETERs\IncomeTax.cshtml" />
+    <Content Include="Views\USERs\Create.cshtml" />
+    <Content Include="Views\USERs\Delete.cshtml" />
+    <Content Include="Views\USERs\Details.cshtml" />
+    <Content Include="Views\USERs\Edit.cshtml" />
+    <Content Include="Views\USERs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
