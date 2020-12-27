@@ -1,9 +1,10 @@
-﻿@model IEnumerable<HRM.Models.TIMEKEEPING>
+﻿@model IEnumerable<HRM.Models.INSURANCEREPORT>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <head>
 	<!-- Style -->
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -24,6 +25,7 @@
 	.main {
 		padding: 20px 10px !important;
 	}
+
 	.btn-search {
 		background: #3D76B5;
 		/* 1 dp */
@@ -35,11 +37,11 @@
 		background: #E3F2FD;
 		border: 1px solid #3D76B5;
 	}
-	.form-control{
+
+	.form-control {
 		border-radius: 7px !important;
 	}
 </style>
-
 <body>
 	<br />
 	<div class="tool-bar">
@@ -51,12 +53,12 @@
 			</div>
 			<div class="search-panel">
 				<div class="col-md-2">
-					<input type="text" name="select_room" id="select_room" placeholder="Chọn phòng" class="form-control" />
-					@*@Html.DropDownListFor()*@
+					<input type="text" name="select_room" id="select_room" placeholder="Tất cả phòng" class="form-control" />
+					@*@Html.DropDownList("RoomID", (IEnumerable<SelectListItem>)ViewBag.RoomID, new { @class = "drop-down-list" })*@
 				</div>
 				<div class="col-md-2">
-					<input type="text" name="select_position" id="select_position" placeholder="Chọn chức vụ" class="form-control" />
-					@*@Html.DropDownListFor()*@
+					<input type="text" name="select_position" id="select_position" placeholder="Tất cả chức vụ" class="form-control" />
+					@*@Html.DropDownList("PositionID", (IEnumerable<SelectListItem>)ViewBag.PositionID, new { @class = "drop-down-list" })*@
 				</div>
 				<div class="col-md-2">
 					<input type="search" name="find_name" id="find_name" placeholder="Tìm tên nhân viên" class="form-control search-input" />
@@ -67,71 +69,54 @@
 			</div>
 		</div>
 	</div>
-	<div class="fresh-table">
-		<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
-			<thead>
+	<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+		<thead>
+			<tr>
+				<th data-field="name" data-sortable="true">
+					@Html.DisplayName("Tên nhân viên")
+				</th>
+				<th data-field="department" data-sortable="true">
+					@Html.DisplayName("Phòng")
+				</th>
+				<th data-field="position" data-sortable="true">
+					@Html.DisplayName("Chức vụ")
+				</th>
+				<th data-field="insurance_sum" data-sortable="true">
+					@Html.DisplayName("Tổng tiền đóng bảo hiểm")
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
 				<tr>
-					<th data-field="name" data-sortable="true">
-						Tên nhân viên
-					</th>
-					<th>
-						Phòng
-					</th>
-					<th data-field="position" data-sortable="true">
-						Chức vụ
-					</th>
-					<th data-field="shiftname" data-sortable="true">
-						Ca làm
-					</th>
-					<th data-field="entertime">
-						Giờ vào
-					</th>
-					<th data-field="outtime">
-						Giờ ra
-					</th>
-					<th data-field="worktime">
-						Thời lượng
-					</th>
-					<th data-field="state" data-sortable="true">
-						Trạng thái
-					</th>
-					<th data-field="holiday" data-sortable="true">
-						Ngày lễ
-					</th>
-					<th data-field="overtime" data-sortable="true">
-						OT
-					</th>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+					</td>
+					<td>
+					</td>
+					<td>
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-				@*@foreach (var item in Model)
-					{
-						<tr>
-							<td>
-								@Html.DisplayFor(modelItem => item.State)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.HoursWorkDay)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.HoursWorkNight)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.ABSENT.AbsentName)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.DATEINFORMATION.Date)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-							</td>
-							
-						</tr>
-					}*@
-
-			</tbody>
-		</table>
-	</div>
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>Tổng tiền đóng bảo hiểm của doanh nghiệp: </td>
+				<td id="total_insurance"></td>
+			</tr>
+		</tfoot>
+	</table>
 </body>
 <script>
 	var $table = $('#fresh-table')
@@ -152,5 +137,11 @@
 			}
 		})
 	})
-	
+	var total_insurance = 0;
+
+	$(data).each(function (i) {
+		total_insurance = total_insurance + parseInt(data[i].insurance_sum);
+	});
+	$('#total_insurance').html(total_insurance);
+
 </script>
