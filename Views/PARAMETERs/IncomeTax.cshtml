@@ -1,7 +1,7 @@
 ﻿@model HRM.Models.PARAMETER
 
 @{
-    ViewBag.Title = "Employee";
+    ViewBag.Title = "IncomeTax";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -78,41 +78,32 @@
         letter-spacing: 0.01em;
         color: #060606;
     }
+
     .margin {
         margin-left: 24px;
     }
 </style>
 
 
-<a href="@Url.Action("EmployeeEdit","PARAMETERs")">
+<a href="@Url.Action("IncomeTaxEdit","PARAMETERs")">
     <input type="button" id="btn" class="edit__button" value="Chỉnh sửa" />
 </a>
 
 <div class="top-title" style="margin-top:60px;">
-    Quy định về hồ sơ nhân viên
+    Quy định về việc đóng thuế TNCN
 </div>
 <div class="form-group margin" style="margin-top: 40px; height: 110px;">
-    @Html.Label("Tuổi tối thiểu đối với nữ", htmlAttributes: new { @class = "lbl" })
+    @Html.Label("Mức thu nhập tối thiểu phải đóng thuế (triệu đồng / tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="15" disabled />
+    <input type="text" class="disabled-txtbox" value="11.000.000" disabled />
 </div>
 <div class="form-group margin" style="height: 110px;">
-    @Html.Label("Tuổi tối đa đối với nữ", htmlAttributes: new { @class = "lbl" })
+    @Html.Label("Mức giảm trừ bản thân (triệu đồng / tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="55" disabled />
+    <input type="text" class="disabled-txtbox" value="11.000.000" disabled />
 </div>
 <div class="form-group margin" style="height: 110px;">
-    @Html.Label("Tuổi tối thiểu đối với nam", htmlAttributes: new { @class = "lbl" })
+    @Html.Label("Mức giảm trừ ứng với mỗi người phụ thuộc (triệu đồng / tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="15" disabled />
-</div>
-<div class="form-group margin" style="height: 110px;">
-    @Html.Label("Tuổi tối đa đối với nam", htmlAttributes: new { @class = "lbl" })
-    <br />
-    <input type="text" class="disabled-txtbox" value="60" disabled />
-</div>
-<div class="form-group margin" style="height: 110px;">
-    @Html.Label("Mức lương tối thiểu vùng", htmlAttributes: new { @class = "lbl" })
-    <br />
-    <input type="text" class="disabled-txtbox" value="4.420.000" disabled />
+    <input type="text" class="disabled-txtbox" value="4.400.000" disabled />
 </div>
