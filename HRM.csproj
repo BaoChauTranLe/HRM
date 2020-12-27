@@ -128,6 +128,7 @@
     <Compile Include="Controllers\ALLOWANCEsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INSURANCEREPORTsController.cs" />
     <Compile Include="Controllers\POSITIONsController.cs" />
     <Compile Include="Controllers\ROOMsController.cs" />
     <Compile Include="Controllers\SALARYREPORTsController.cs" />
@@ -352,15 +353,14 @@
     <Content Include="Views\ALLOWANCEs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Create.cshtml" />
-    <Content Include="Views\TIMEKEEPINGs\Delete.cshtml" />
-    <Content Include="Views\TIMEKEEPINGs\Details.cshtml" />
-    <Content Include="Views\TIMEKEEPINGs\Edit.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGTABLE\Index.cshtml" />
     <Content Include="Views\SALARYREPORTs\Details.cshtml" />
     <Content Include="Views\SALARYREPORTs\Index.cshtml" />
     <Content Include="Views\TAXREPORTs\Details.cshtml" />
     <Content Include="Views\TAXREPORTs\Index.cshtml" />
+    <Content Include="Views\INSURANCEREPORTs\Details.cshtml" />
+    <Content Include="Views\INSURANCEREPORTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

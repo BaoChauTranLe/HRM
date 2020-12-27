@@ -1,0 +1,290 @@
+﻿@model HRM.Models.INSURANCEREPORT
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+
+	<link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
+
+<style>
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
+	}
+
+	.detail-title {
+		background: #E0EFFF;
+		width: 100%;
+		height: 50px;
+		color: #4282BB;
+		font-weight: bold;
+		font-family: IBM Plex Sans;
+		font-size: 20px;
+		padding-left: 24px;
+		padding-top: 13px;
+	}
+
+	.detail-top-info-title {
+		padding-right: 25px;
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.detail-top-info-content {
+		padding-right: 25px;
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+	}
+</style>
+
+<div class="detail-title">
+	Chi tiết đóng bảo hiểm
+</div>
+
+<fieldset style="border: 1px solid #C1C1C1; box-sizing: border-box;">
+	<table style="margin-left:24px; margin-top:20px;">
+		<tr>
+			<th class="detail-top-info-title">
+				Mã nhân viên:
+			</th>
+			<th class="detail-top-info-title">
+				Tên nhân viên:
+			</th>
+			<th class="detail-top-info-title">
+				Phòng:
+			</th>
+			<th class="detail-top-info-title">
+				@Html.DisplayName("Chức vụ:")
+			</th>
+			<th class="detail-top-info-title">
+				@Html.DisplayName("Tháng/Năm:")
+			</th>
+		</tr>
+		<tr>
+			<td class="detail-top-info-content">
+				@Html.DisplayFor(model => model.EmployeeID)
+			</td>
+			<td class="detail-top-info-content">
+				@Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+			</td>
+			<td class="detail-top-info-content">
+				@Html.DisplayFor(model => model.EMPLOYEE.ROOM.RoomName)
+			</td>
+			<td class="detail-top-info-content">
+				@Html.DisplayFor(model => model.EMPLOYEE.POSITION.PositionName)
+			</td>
+			<td class="detail-top-info-content">
+				@Html.DisplayFor(model => model.Month)
+				/
+				Năm
+			</td>
+		</tr>
+	</table>
+
+	<div class="col-md-6">
+		<table class="fresh-table" id="fresh-table1" style="grid-column: 1/4">
+			<thead>
+				<tr>
+					<th data-sortable="true">
+						Tên cột
+					</th>
+					<th data-sortable="true">
+						Giá trị
+					</th>
+					<th data-sortable="true">
+						Đơn vị
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Lương đóng bảo hiểm")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.SalaryInsurance)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr colspan="3">
+					Tỷ lệ trích bảo hiểm của doanh nghiệp
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("KPCĐ (2%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("BHXH (17,5%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("BHTN (1%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Trích BH và KPCĐ tính vào chi phí")
+					</th>
+					<td>
+						
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-md-6">
+		<table class="fresh-table" id="fresh-table2" style="grid-column: 1/4">
+			<thead>
+				<tr>
+					<th data-sortable="true">
+						@Html.DisplayName("Tên cột")
+					</th>
+					<th data-sortable="true">
+						@Html.DisplayName("Giá trị")
+					</th>
+					<th data-sortable="true">
+						@Html.DisplayName("Đơn vị")
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Lương đóng bảo hiểm")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.SalaryInsurance)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr colspan="3">
+					Tỷ lệ trích bảo hiểm của người lao động
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("KPCĐ (8%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("BHYT (1,5%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("BHTN (1%)")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Trích BH trừ vào lương")
+					</th>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</fieldset>
+
+<p style="margin-top:20px">
+	@Html.ActionLink("< Trở về danh sách thuế TNCN", "Index")
+</p>
+
+<script>
+	var $table1 = $('#fresh-table1')
+	var $table2 = $('#fresh-table2')
+	$(function () {
+		$table1.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
+
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
+	$(function () {
+		$table2.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
+
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
+</script>
