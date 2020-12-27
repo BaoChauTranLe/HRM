@@ -1,0 +1,83 @@
+﻿@model HRM.Models.TAXREPORT
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TAXREPORT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FreeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FreeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverTimeHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverTimeHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverTimeFreeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverTimeFreeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxableIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxableIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

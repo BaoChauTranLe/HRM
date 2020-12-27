@@ -1,0 +1,89 @@
+﻿@model HRM.Models.TAXREPORT
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TAXREPORT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FreeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FreeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverTimeHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverTimeHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverTimeFreeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverTimeFreeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxableIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxableIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncomeTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

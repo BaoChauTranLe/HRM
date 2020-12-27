@@ -1,0 +1,76 @@
+﻿@model IEnumerable<HRM.Models.TAXREPORT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FreeTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deduction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OverTimeHour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OverTimeFreeTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxableIncome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalIncome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FreeTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deduction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OverTimeHour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OverTimeFreeTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxableIncome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncomeTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
