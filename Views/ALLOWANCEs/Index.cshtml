@@ -258,90 +258,113 @@
             {
                 @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.AllowanceID)
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.AllowanceID)
 
-                <div class="form-group">
-                    <div class="modal__text">
-                        Tên loại phụ cấp/trợ cấp/thưởng
+                    <div class="form-group">
+                        <div class="modal__text">
+                            Tên loại phụ cấp/trợ cấp/thưởng
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="modal__text">
-                        Số tiền
+                    <div class="form-group">
+                        <div class="modal__text">
+                            Số tiền
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.Insurance)
-                            @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" }) Phải tính vào lương đóng bảo hiểm
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Insurance)
+                                @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" }) Phải tính vào lương đóng bảo hiểm
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Tax)
+                                @Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" }) Được miễn thuế
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="modal__text">
+                            Khoản tiền được miễn
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.Tax)
-                            @Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" }) Được miễn thuế
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="modal__text">
-                        Khoản tiền được miễn
-                    </div>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
             }
         </div>
     </div>
 </div>
 
-            <script>
-                var $table = $('#fresh-table')
-                $(function () {
-                    $table.bootstrapTable({
-                        classes: 'table table-hover table-responsive',
-                        toolbar: '.toolbar',
-                        pagination: true,
-                        striped: true,
-                        pageSize: 8,
-                        pageList: [8, 10, 25, 50, 100],
+<!-- The Delete Modal -->
+<div id="deleteModal" class="modal" style="height:200px !important">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Xóa trợ cấp/phụ cấp/thưởng</div>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="modal__text" id="modal__text">
+            </div>
+            <ul class="button">
+                <li>
+                    <a>
+                        <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
+                    </a>
+                </li>
+                <li>
+                    <input type="button" id="declinebtn" value="Không" style="background: #C33333" onclick="closeModal()">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-                        formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                            return ''
-                        },
-                        formatRecordsPerPage: function (pageNumber) {
-                            return pageNumber + ' rows visible'
-                        }
-                    })
-                })
+<script>
+    var $table = $('#fresh-table')
+    $(function () {
+        $table.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
 
-
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
 </script>
 <!--script for interactive with user-->
 <script>
@@ -355,7 +378,7 @@
 
     // When the user clicks the button, open the modal
     function openCreateModal() {
-        $("#modal-title").html("Thêm loại thưởng, phụ cấp, trợ cấp");
+        $("#modal-title").html("Thêm loại phụ cấp/trợ cấp/thưởng");
         create_modal.style.display = "block";
 
         document.getElementById("frm").reset();
@@ -395,7 +418,8 @@
     function GetDataString(allowance, n) {
         var Data = "<tr class='row_" + allowance.ShiftID + "'>" +
             "<td>" + (n + 1) + "</td>" +
-            "<td>" + allowance.AllowanceName + "</td>";
+            "<td>" + allowance.AllowanceName + "</td>" +
+            "<td>" + allowance.Value + "</td>";
         if (allowance.Insurance == true) {
             Data = Data + "<td> Có </td>";
         }
@@ -408,8 +432,7 @@
         else {
             Data = Data + "<td> Không </td>";
         }
-        Data = Data + "<td>" + allowance.FreeTax + "</td>"
-                    + "<td>" + allowance.Value + "</td>";
+        Data = Data + "<td>" + allowance.FreeTax + "</td>";
 
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
@@ -423,7 +446,7 @@
 
     //function to show information of a shift on modal
     function EditModule(id) {
-        $("#modal-title").html("Sửa loại thưởng, trợ cấp, phụ cấp");
+        $("#modal-title").html("Sửa loại trợ cấp/phụ cấp/thưởng");
         document.getElementById("frm").reset();
         for (var i = 0; i < allowances.length; i++) {
             if (allowances[i].AllowancesID == id) {

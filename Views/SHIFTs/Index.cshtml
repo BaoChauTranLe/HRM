@@ -169,6 +169,7 @@
             box-sizing: border-box;
             border-radius: 4px;
             display: inline;
+            
         }
 		.form-horizontal .form-group {
 			margin-right: 0px; 
@@ -186,6 +187,10 @@
         .modal-title {
             display: inline-block;
             width: 50%;
+        }
+
+        .span {
+            display: inline-block;
         }
     </style>
 </head>
@@ -238,21 +243,21 @@
 									Thời gian làm việc
 								</div>
 								
-									<div class="col-6 col-md-4">
-										<div class="form-group-time">
-											@Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-										</div>
+								<div class="col-6 col-md-4">
+									<div class="form-group-time">
+										@Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
 									</div>
-									<div class="col-6 col-md-4" style="width:15% !important">
-										<span>đến</span>
+								</div>
+								<div class="col-6 col-md-4" style="width:15% !important">
+									<span>đến</span>
+								</div>
+								<div class="col-6 col-md-4">
+									<div class="form-group-time">
+										@Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
 									</div>
-									<div class="col-6 col-md-4">
-										<div class="form-group-time">
-											@Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-										</div>
-									</div>
-									@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-									@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+								</div>
+								@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+								@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
 								
 							</div>
 						</div>

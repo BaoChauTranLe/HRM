@@ -37,99 +37,66 @@ namespace HRM.Controllers
             }
         }
 
-        // GET: ALLOWANCEs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
-            if (aLLOWANCE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aLLOWANCE);
-        }
-
         // GET: ALLOWANCEs/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ALLOWANCEs/Create
+        // POST: ALLOWANCEs/Index
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
+        public ActionResult Index([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
         {
             if (ModelState.IsValid)
             {
-                db.ALLOWANCEs.Add(aLLOWANCE);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (aLLOWANCE.AllowanceID == null)
+                {
+                    //auto create allowanceID
+                    int n = 0;
+                    var allowanceList = db.ALLOWANCEs.ToList();
+                    if (allowanceList.Count > 0)
+                    {
+                        ALLOWANCE s = allowanceList.Last();
+                        n = Int32.Parse(s.AllowanceID.Substring(s.AllowanceID.Length - 3)) + 1;
+                    }
+
+                    string id = String.Format("{0:000}", n);
+                    aLLOWANCE.AllowanceID = "A" + id;
+
+                    db.ALLOWANCEs.Add(aLLOWANCE);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    db.Entry(aLLOWANCE).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
-            return View(aLLOWANCE);
-        }
-
-        // GET: ALLOWANCEs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
-            if (aLLOWANCE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aLLOWANCE);
-        }
-
-        // POST: ALLOWANCEs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(aLLOWANCE).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(aLLOWANCE);
-        }
-
-        // GET: ALLOWANCEs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
-            if (aLLOWANCE == null)
-            {
-                return HttpNotFound();
-            }
             return View(aLLOWANCE);
         }
 
         // POST: ALLOWANCEs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
-            db.ALLOWANCEs.Remove(aLLOWANCE);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
+                db.ALLOWANCEs.Remove(aLLOWANCE);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)
