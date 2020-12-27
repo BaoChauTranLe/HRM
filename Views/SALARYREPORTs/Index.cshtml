@@ -5,90 +5,144 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Allowance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryStandard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkDay)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryWorkDay)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bonus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Insurance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Overtime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncomeTax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Advance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RealSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
-        </th>
-        <th></th>
-    </tr>
+    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Allowance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryStandard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryWorkDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bonus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Insurance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Overtime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncomeTax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Advance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RealSalary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
-</table>
+    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
+
+<style>
+    table, th, td, tr {
+        border-color: #DFE0EB !important;
+        border-radius: 5px !important;
+    }
+
+    .index-txtbox {
+        height: 40px;
+        width: 180px;
+        /* Surface/Light */
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /*Text*/
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        padding-left: 10px;
+    }
+    .drop-down-list {
+        /* Inside Auto Layout */
+        order: 1;
+        flex-grow: 0;
+        margin: 0px 2px;
+    }
+    .search-button {
+        height:40px;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+    }
+</style>
+
+<div style="margin-top:20px;">
+    <input type="month" class="index-txtbox">
+
+    <select class="index-txtbox drop-down-list">
+        <option value="Tất cả phòng">Tất cả phòng</option>
+        <option value="Phòng nhân sự">Phòng nhân sự</option>
+        <option value="Phòng kế toán">Phòng kế toán</option>
+        <option value="Phòng giám đốc">Phòng giám đốc</option>
+    </select>
+
+    <select class="index-txtbox drop-down-list">
+        <option value="Tất cả chức vụ">Tất cả chức vụ</option>
+        <option value="Giám đốc">Giám đốc</option>
+        <option value="Trưởng phòng">Trưởng phòng</option>
+        <option value="Phó phòng">Phó phòng</option>
+        <option value="Nhân viên">Nhân viên</option>
+    </select>
+
+    <input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;"/>
+    <input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px"/>
+</div>
+
+<div class="fresh-table">
+    <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("STT")
+                </th>
+                <th>
+                    @Html.DisplayName("Tên nhân viên")
+                </th>
+                <th>
+                    @Html.DisplayName("Phòng")
+                </th>
+                <th>
+                    @Html.DisplayName("Chức vụ")
+                </th>
+                <th>
+                    @Html.DisplayName("Thực lĩnh")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealSalary)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    var $table = $('#fresh-table')
+    $(function () {
+        $table.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+</script>
