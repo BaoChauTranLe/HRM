@@ -367,6 +367,7 @@
     <Content Include="Views\ADVANCEDs\Edit.cshtml" />
     <Content Include="Views\ADVANCEDs\Index.cshtml" />
     <Content Include="Views\PARAMETERs\Employee.cshtml" />
+    <Content Include="Views\PARAMETERs\CoefficientsOTSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,147 @@
+﻿@model HRM.Models.PARAMETER
+
+@{
+    ViewBag.Title = "CoefficientsOTSalary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .edit__button {
+        display: block;
+        height: 36px;
+        width: 94px;
+        right: 36px;
+        top: 80px;
+        position: absolute;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+        /* Text */
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.2px;
+        color: #3D76B5;
+    }
+
+    .top-title {
+        background: #E0EFFF;
+        width: 100%;
+        height: 40px;
+        color: #4282BB;
+        font-weight: bold;
+        font-family: IBM Plex Sans;
+        font-size: 20px;
+        padding-left: 24px;
+        padding-top: 13px;
+    }
+
+    .lbl {
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        /* identical to box height, or 22px */
+        letter-spacing: 0.01em;
+        color: #000000;
+    }
+
+    .disabled-txtbox {
+        /* Text Block */
+        /* Auto Layout */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 500px;
+        height: 50px;
+        /* Surface/Light */
+        background: #E8E8E8;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /* Inside Auto Layout */
+        flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 0;
+        /*Inside Text*/
+        padding: 12px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        letter-spacing: 0.01em;
+        color: #060606;
+    }
+
+    .margin {
+        margin-left: 24px;
+    }
+</style>
+
+
+<a href="@Url.Action("CoefficientsOTSalaryEdit","PARAMETERs")">
+    <input type="button" id="btn" class="edit__button" value="Chỉnh sửa" />
+</a>
+
+<div class="top-title" style="margin-top:60px;">
+    Hệ số lương làm thêm ban ngày (6:00 - 22:00)
+</div>
+<div class="form-group margin" style="margin-top: 40px; height: 110px;">
+    @Html.Label("Ngày bình thường", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="150" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ hằng tuần", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="200" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ có hưởng lương", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="300" disabled />
+</div>
+
+<div class="top-title">
+    Hệ số lương làm thêm ban đêm (6:00 - 22:00) - Chưa làm thêm ban ngày
+</div>
+<div class="form-group margin" style="margin-top: 40px; height: 110px;">
+    @Html.Label("Ngày bình thường", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="200" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ hằng tuần", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="270" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ có hưởng lương", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="390" disabled />
+</div>
+
+<div class="top-title">
+    Hệ số lương làm thêm ban đêm (6:00 - 22:00) - Đã làm thêm ban ngày
+</div>
+<div class="form-group margin" style="margin-top: 40px; height: 110px;">
+    @Html.Label("Ngày bình thường", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="210" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ hằng tuần", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="270" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Ngày nghỉ có hưởng lương", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="390" disabled />
+</div>
