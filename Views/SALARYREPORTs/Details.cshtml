@@ -5,103 +5,347 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
 
-<div>
-    <h4>SALARYREPORT</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Allowance)
-        </dt>
+    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
-        <dd>
-            @Html.DisplayFor(model => model.Allowance)
-        </dd>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SalaryStandard)
-        </dt>
+    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
 
-        <dd>
-            @Html.DisplayFor(model => model.SalaryStandard)
-        </dd>
+<style>
+    table, th, td, tr {
+        border-color: #DFE0EB !important;
+        border-radius: 5px !important;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkDay)
-        </dt>
+    .detail-title {
+        background: #E0EFFF;
+        width: 100%;
+        height: 50px;
+        color: #4282BB;
+        font-weight: bold;
+        font-family: IBM Plex Sans;
+        font-size: 20px;
+        padding-left: 24px;
+        padding-top: 13px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.WorkDay)
-        </dd>
+    .detail-top-info-title {
+        padding-right: 25px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SalaryWorkDay)
-        </dt>
+    .detail-top-info-content {
+        padding-right: 25px;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.SalaryWorkDay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bonus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bonus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Insurance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Insurance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Overtime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Overtime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IncomeTax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IncomeTax)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Advance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Advance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RealSalary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RealSalary)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
-        </dd>
-
-    </dl>
+<div class="detail-title">
+    Chi tiết phiếu lương
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+
+<fieldset style="border: 1px solid #C1C1C1; box-sizing: border-box;">
+    <table style="margin-left:24px; margin-top:20px;">
+        <tr>
+            <th class="detail-top-info-title">
+                @Html.DisplayName("Mã nhân viên:")
+            </th>
+            <th class="detail-top-info-title">
+                @Html.DisplayName("Tên nhân viên:")
+            </th>
+            <th class="detail-top-info-title">
+                @Html.DisplayName("Phòng:")
+            </th>
+            <th class="detail-top-info-title">
+                @Html.DisplayName("Chức vụ:")
+            </th>
+            <th class="detail-top-info-title">
+                @Html.DisplayName("Tháng/Năm:")
+            </th>
+        </tr>
+        <tr>
+            <td class="detail-top-info-content">
+                @Html.DisplayFor(model => model.EmployeeID)
+            </td>
+            <td class="detail-top-info-content">
+                @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+            </td>
+            <td class="detail-top-info-content">
+                @Html.DisplayFor(model => model.EMPLOYEE.ROOM.RoomName)
+            </td>
+            <td class="detail-top-info-content">
+                @Html.DisplayFor(model => model.EMPLOYEE.POSITION.PositionName)
+            </td>
+            <td class="detail-top-info-content">
+                @Html.DisplayFor(model => model.Month)
+                /
+                Năm
+            </td>
+        </tr>
+    </table>
+
+    <div class="col-md-6">
+        <table class="fresh-table" id="fresh-table1" style="grid-column: 1/4">
+            <thead>
+                <tr>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Tên cột")
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Giá trị")
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Đơn vị")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương cơ bản")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.EMPLOYEE.CONTRACT.BasicSalary)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương theo ngày công chuẩn")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.SalaryStandard)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Số ngày đi làm")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.WorkDay)
+                    </td>
+                    <td>
+                        @Html.DisplayName("Ngày")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương theo số ngày đi làm")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.SalaryWorkDay)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Tổng tiền phụ cấp, trợ cấp, thưởng")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Allowance)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Khoản tiền trích đóng BH")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Insurance)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Thuế TNCN")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.IncomeTax)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Tạm ứng")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Advance)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+        <table class="fresh-table" id="fresh-table2" style="grid-column: 1/4">
+            <thead>
+                <tr>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Tên cột")
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Giá trị")
+                    </th>
+                    <th data-sortable="true">
+                        @Html.DisplayName("Đơn vị")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban ngày")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban đêm")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban ngày (nghỉ hằng tuần)")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban đêm (nghỉ hằng tuần)")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban ngày (nghỉ có lương)")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Lương làm thêm ban đêm (nghỉ có lương)")
+                    </th>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Tổng lương làm thêm")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Overtime)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Thực lĩnh")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.RealSalary)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+
+<p style="margin-top:20px">
+    @Html.ActionLink("< Trở về danh sách phiếu lương", "Index")
 </p>
+
+<script>
+    var $table1 = $('#fresh-table1')
+    var $table2 = $('#fresh-table2')
+    $(function () {
+        $table1.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+    $(function () {
+        $table2.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+</script>
