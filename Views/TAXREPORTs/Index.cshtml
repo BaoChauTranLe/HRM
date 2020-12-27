@@ -39,38 +39,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalIncome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FreeTax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deduction)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OverTimeHour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OverTimeFreeTax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaxableIncome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncomeTax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalIncome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreeTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deduction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverTimeHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverTimeFreeTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxableIncome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncomeTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -357,15 +357,9 @@
     <Content Include="Views\TIMEKEEPINGs\Edit.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGTABLE\Index.cshtml" />
-    <Content Include="Views\SALARYREPORTs\Create.cshtml" />
-    <Content Include="Views\SALARYREPORTs\Delete.cshtml" />
     <Content Include="Views\SALARYREPORTs\Details.cshtml" />
-    <Content Include="Views\SALARYREPORTs\Edit.cshtml" />
     <Content Include="Views\SALARYREPORTs\Index.cshtml" />
-    <Content Include="Views\TAXREPORTs\Create.cshtml" />
-    <Content Include="Views\TAXREPORTs\Delete.cshtml" />
     <Content Include="Views\TAXREPORTs\Details.cshtml" />
-    <Content Include="Views\TAXREPORTs\Edit.cshtml" />
     <Content Include="Views\TAXREPORTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
