@@ -15,74 +15,166 @@
 	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
 	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
 </head>
+<style>
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
+	}
+	.btn-select {
+		background: #3D76B5;
+		/* 1 dp */
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+		border-radius: 4px;
+		color: white;
+		width: 80px;
+		height: 40px;
+		position: absolute;
+	}
+	.form-control {
+		border-radius: 7px !important;
+	}
+</style>
+<body>
+	<div class="col-md-6">
+		<div class="fresh-table">
+			<div class="toolbar">
+				<div class="search-panel">
+					<div class="col-md-3">
+						<input type="text" name="select_room" id="select_room" placeholder="Chọn phòng" class="form-control" />
 
-<h2>Create</h2>
+					</div>
+					<div class="col-md-3">
+						<input type="text" name="select_position" id="select_position" placeholder="Chọn chức vụ" class="form-control" />
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>TIMEKEEPING</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, "Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Date", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+					</div>
+					<div class="col-md-3">
+						<input type="search" name="find_name" id="find_name" placeholder="Tìm tên nhân viên" class="form-control search-input" />
+					</div>
+					<div class="col-md-3">
+						<input type="button" name="search" id="search" value="Tìm" class="btn-select" />
+					</div>
+				</div>
+			</div>
+			<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+				<thead>
+					<tr>
+						<th data-field="state" data-checkbox="true"></th>
+						<th data-field="name" data-sortable="true">
+							@Html.DisplayName("Tên nhân viên")
+						</th>
+						<th data-field="department" data-sortable="true">
+							@Html.DisplayName("Phòng")
+						</th>
+						<th data-field="position" data-sortable="true">
+							@Html.DisplayName("Chức vụ")
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-6" style="padding-top:90px ">
+		<div class="col-md-6">
+			<label>Từ ngày</label>
+			<input type="date" name="select_date" id="select_date" class="form-control" />
+			<label style="margin-top:30px">Chọn ca làm việc</label>
+			<input type="text" name="select_shift" id="select_shift" class="form-control"  />
+		</div>
+		<div class="col-md-6">
+			<label>Đến ngày</label>
+			<input type="date" name="select_date" id="select_date" class="form-control" />
+		</div>
+	</div>
+		@*@using (Html.BeginForm())
+			{
+				@Html.AntiForgeryToken()
+				<hr />
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<div class="form-group">
+					@Html.LabelFor(model => model.Date, "Date", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("Date", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-            </div>
-        </div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AbsentID, "AbsentID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("AbsentID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AbsentID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.AbsentID, "AbsentID", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("AbsentID", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.AbsentID, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HoursWorkDay, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HoursWorkDay, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HoursWorkDay, "", new { @class = "text-danger" })
-            </div>
-        </div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.HoursWorkDay, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.HoursWorkDay, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.HoursWorkDay, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HoursWorkNight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HoursWorkNight, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HoursWorkNight, "", new { @class = "text-danger" })
-            </div>
-        </div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.HoursWorkNight, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.HoursWorkNight, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.HoursWorkNight, "", new { @class = "text-danger" })
+					</div>
+				</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Create" class="btn btn-default" />
+					</div>
+				</div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+		}*@
+</body>
+
+<script>
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			checkboxHeader: true,
+			clickToSelect: true,
+			pageList: [8, 10, 25, 50, 100],
+
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
+
+</script>
