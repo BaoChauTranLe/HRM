@@ -349,9 +349,6 @@
     <Content Include="Views\POSITIONs\Delete.cshtml" />
     <Content Include="Views\POSITIONs\Edit.cshtml" />
     <Content Include="Views\POSITIONs\Index.cshtml" />
-    <Content Include="Views\ALLOWANCEs\Create.cshtml" />
-    <Content Include="Views\ALLOWANCEs\Delete.cshtml" />
-    <Content Include="Views\ALLOWANCEs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Create.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Index.cshtml" />
