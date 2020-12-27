@@ -213,7 +213,7 @@
         width: 80%;
     }
 </style>
-
+<div id="bg" onclick="closeModal()"></div>
 <input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()" />
 
 <div class="fresh-table">
@@ -224,7 +224,7 @@
                     @Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
                 </th>
                 <th>
-                    @Html.DisplayName("Số tiền")
+                    @Html.DisplayName("Số tiền (ngàn đồng)")
                 </th>
                 <th>
                     @Html.DisplayName("Phải tính vào lương đóng bảo hiểm")
@@ -233,7 +233,7 @@
                     @Html.DisplayName("Được miễn thuế")
                 </th>
                 <th>
-                    @Html.DisplayName("khoản tiền được miễn")
+                    @Html.DisplayName("Khoản tiền được miễn (ngàn đồng)")
                 </th>
                 <th></th>
                 <th></th>
@@ -274,7 +274,7 @@
 
                     <div class="form-group">
                         <div class="modal__text">
-                            Số tiền
+                            Số tiền (ngàn đồng)
                         </div>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
@@ -302,7 +302,7 @@
 
                     <div class="form-group">
                         <div class="modal__text">
-                            Khoản tiền được miễn
+                            Khoản tiền được miễn (ngàn đồng)
                         </div>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
@@ -312,7 +312,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
+" />
+                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
+" />
                         </div>
                     </div>
                 </div>
@@ -345,6 +348,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var $table = $('#fresh-table')
@@ -381,7 +385,7 @@
         $("#modal-title").html("Thêm loại phụ cấp/trợ cấp/thưởng");
         create_modal.style.display = "block";
 
-        document.getElementById("frm").reset();
+        //document.getElementById("frm").reset();
 
         $("#bg").width("100%").height("100%");
 
@@ -504,3 +508,7 @@
         });
     }
 </script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.js"></script>
