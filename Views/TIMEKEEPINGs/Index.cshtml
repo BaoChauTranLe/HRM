@@ -21,56 +21,75 @@
 
 </head>
 <style>
-	.main {
-		padding: 20px 10px !important;
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
 	}
-	.btn-search {
-		background: #3D76B5;
-		/* 1 dp */
-		border-radius: 4px;
-		color: #3D76B5;
-		width: 80px;
+
+	.index-txtbox {
 		height: 40px;
-		position: absolute;
+		width: 180px;
+		/* Surface/Light */
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		/*Text*/
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 150%;
+		padding-left: 10px;
+	}
+
+	.drop-down-list {
+		/* Inside Auto Layout */
+		order: 1;
+		flex-grow: 0;
+		margin: 0px 2px;
+	}
+
+	.search-button {
+		height: 40px;
 		background: #E3F2FD;
 		border: 1px solid #3D76B5;
-	}
-	.form-control{
-		border-radius: 7px !important;
+		border-radius: 4px;
 	}
 </style>
 
 <body>
 	<br />
 	<div class="tool-bar">
-		<div class="row">
-			<div class="input-daterange">
-				<div class="col-md-2">
-					<input type="month" name="select_date" id="select_date" class="form-control" />
-				</div>
-			</div>
-			<div class="search-panel">
-				<div class="col-md-2">
-					<input type="text" name="select_room" id="select_room" placeholder="Chọn phòng" class="form-control" />
-					@*@Html.DropDownListFor()*@
-				</div>
-				<div class="col-md-2">
-					<input type="text" name="select_position" id="select_position" placeholder="Chọn chức vụ" class="form-control" />
-					@*@Html.DropDownListFor()*@
-				</div>
-				<div class="col-md-2">
-					<input type="search" name="find_name" id="find_name" placeholder="Tìm tên nhân viên" class="form-control search-input" />
-				</div>
-			</div>
-			<div class="col-md-2">
-				<input type="button" name="search" id="search" value="Tìm kiếm" class="btn-search" />
-			</div>
+		<div style="margin-top:20px;">
+			<input type="month" class="index-txtbox">
+
+			<select class="index-txtbox drop-down-list">
+				<option value="Tất cả phòng">Tất cả phòng</option>
+				<option value="Phòng nhân sự">Phòng nhân sự</option>
+				<option value="Phòng kế toán">Phòng kế toán</option>
+				<option value="Phòng giám đốc">Phòng giám đốc</option>
+			</select>
+
+			<select class="index-txtbox drop-down-list">
+				<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+				<option value="Giám đốc">Giám đốc</option>
+				<option value="Trưởng phòng">Trưởng phòng</option>
+				<option value="Phó phòng">Phó phòng</option>
+				<option value="Nhân viên">Nhân viên</option>
+			</select>
+
+			<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+			<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
 		</div>
 	</div>
 	<div class="fresh-table">
 		<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
 			<thead>
 				<tr>
+					<th>
+						STT
+					</th>
 					<th data-field="name" data-sortable="true">
 						Tên nhân viên
 					</th>

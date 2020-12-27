@@ -15,6 +15,7 @@
 	<script src="~/Scripts/dhtmlxscheduler_units.js" type="text/javascript" charset="utf-8"></script>
 	<script src="~/Scripts/dhtmlxscheduler_multiselect.js" type="text/javascript" charset="utf-8"></script>
 	<script src="~/Scripts/locale_vn.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 	<style>
 		.main {
 			padding: 0px 0px !important;
@@ -49,6 +50,27 @@
 </body>
 
 <script>
+	var details;
+	var employees;
+	$.get("/TIMEKEEPINGTABLE/GetShiftDetailList", null, DataBind);
+	function DataBind(result) {
+		details = result.list;
+		for (var i = 0; i < details.length; i++) {
+			GetDataString(details[i], i);
+		}
+	}
+	function GetDataString(detail, n) {
+		var startdate = moment(detail.StartDate);
+		var enddate = moment(detail.EndDate);
+	}
+	$.get("/TIMEKEEPINGTABLE/GetEmployeeList", null, DataBind);
+	function DataBind(result) {
+		employees = result.list;
+		for (var i = 0; i < employees.length; i++) {
+			var section[i] = { key: employees.EmployeeID, label: employees.EmployeeName  }
+		}
+	}
+
 	document.addEventListener("DOMContentLoaded", function (event) {
 		scheduler.config.multi_day = true;
 		scheduler.config.multisection = true;
@@ -57,12 +79,7 @@
 		scheduler.config.repeat_precise = true;
 		scheduler.locale.labels.timeline_tab = "Timeline";
 
-		var sections = [
-			{ key: 1, label: "Nhân viên 1" },
-			{ key: 2, label: "Nhân viên 2" },
-			{ key: 3, label: "Nhân viên 3" },
-			{ key: 4, label: "Nhân viên 4" }
-		];
+		
 
 		scheduler.createTimelineView({
 			name: "timeline",
@@ -81,10 +98,10 @@
 
 		scheduler.locale.labels.section_holidayselect = " ";
 
-		scheduler.attachEvent("onClick", function (id, e) {
-			dhtmlx.message(scheduler.getEvent(id).text);
-			return true;
-		});
+		//scheduler.attachEvent("onClick", function (id, e) {
+		//	dhtmlx.message(scheduler.getEvent(id).text);
+		//	return true;
+		//});
 
 		scheduler.config.lightbox.sections = [
 			{ name: "description", height: 130, map_to: "text", type: "textarea", focus: true },

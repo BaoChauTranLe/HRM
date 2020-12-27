@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HRM.Models;
 using HRM.Util;
+using DHTMLX.Scheduler;
 
 namespace HRM.Controllers
 {
@@ -18,48 +19,46 @@ namespace HRM.Controllers
         public ActionResult Index()
         {
             ViewBag.ListOfShiftType = SelectListItemHelper.GetShiftTypeList();
+            
             return View();
         }
-        
-        public JsonResult GetShiftDetail()
+        public JsonResult GetShiftDetailList()
         {
             try
             {
-                List<SHIFTDETAIL> ShiftDetailList = db.SHIFTDETAILs.ToList();
-                return Json(ShiftDetailList, JsonRequestBehavior.AllowGet);
+                List<SHIFTDETAIL> list = db.SHIFTDETAILs.ToList();
+                var ShiftDetailList = from s in list
+                                select new { s.ShiftID, s.EmployeeID, s.StartDate, s.EndDate };
+                var result = new { list = ShiftDetailList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return null;
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
-
-        public JsonResult GetEmployeeById(string id)
-        {
-            EMPLOYEE employee = db.EMPLOYEEs.Find(id);
-            return Json(employee, JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult GetEmployeeList()
         {
             try
             {
-                List<EMPLOYEE> EmployeeList = db.EMPLOYEEs.ToList();
-                return Json(EmployeeList, JsonRequestBehavior.AllowGet);
+                List<EMPLOYEE> list = db.EMPLOYEEs.ToList();
+                var employee = from s in list
+                                      select new { s.EmployeeID, s.EmployeeName, s.ROOM.RoomName, s.POSITION.PositionName };
+                var result = new { list = employee, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return null;
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "ShiftID,ShiftName,ShiftType,StartTime,EndTime,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")] SHIFT sHIFT)
-        {
-            
+        public ActionResult TimeKeepingView()
+		{
+            var scheduler = new DHXScheduler(this);
+            return View(scheduler);
 
-            return View();
         }
     }
-   
 }
