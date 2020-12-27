@@ -124,7 +124,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ADVANCEDsController.cs" />
     <Compile Include="Controllers\ALLOWANCEsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
