@@ -62,7 +62,7 @@
 	<br />
 	<div class="tool-bar">
 		<div style="margin-top:20px;">
-			<input type="month" class="index-txtbox">
+			<input type="date" class="index-txtbox">
 
 			<select class="index-txtbox drop-down-list">
 				<option value="Tất cả phòng">Tất cả phòng</option>
@@ -117,7 +117,7 @@
 					<th data-field="holiday" data-sortable="true">
 						Ngày lễ
 					</th>
-					<th data-field="overtime" data-sortable="true">
+					<th data-field="state" data-sortable="true">
 						OT
 					</th>
 				</tr>
@@ -160,6 +160,7 @@
 			toolbar: '.toolbar',
 			pagination: true,
 			striped: true,
+			checkboxHeader: false,
 			pageSize: 8,
 			pageList: [8, 10, 25, 50, 100],
 
