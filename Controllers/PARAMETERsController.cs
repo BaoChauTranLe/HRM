@@ -86,6 +86,25 @@ namespace HRM.Controllers
             }
             return View();
         }
+        public ActionResult StandardWorkDay()
+        {
+            return View();
+        }
+        public ActionResult StandardWorkDayEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult StandardWorkDayEdit(int WorkDayNum)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("SoNgayCongChuan").Value = WorkDayNum;
+                db.SaveChanges();
+                return RedirectToAction("StandardWorkDay");
+            }
+            return View();
+        }
         public double getValueByName(string paraName)
         {
             var parameter = db.PARAMETERs.Find(paraName);

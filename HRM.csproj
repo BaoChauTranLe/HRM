@@ -372,6 +372,8 @@
     <Content Include="Views\PARAMETERs\EmployeeEdit.cshtml" />
     <Content Include="Views\PARAMETERs\IncomeTaxEdit.cshtml" />
     <Content Include="Views\PARAMETERs\CoefficientsOTSalaryEdit.cshtml" />
+    <Content Include="Views\PARAMETERs\StandardWorkDay.cshtml" />
+    <Content Include="Views\PARAMETERs\StandardWorkDayEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
