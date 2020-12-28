@@ -22,10 +22,8 @@ namespace HRM.Models
     
         public string PositionID { get; set; }
         public string PositionName { get; set; }
-        public string RoomID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
-        public virtual ROOM ROOM { get; set; }
     }
 }

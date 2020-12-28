@@ -50,6 +50,7 @@ namespace HRM.Models
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<SHIFTDETAIL> SHIFTDETAILs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TaxKeepingReport> TaxKeepingReports { get; set; }
         public virtual DbSet<TAXRATE> TAXRATEs { get; set; }
         public virtual DbSet<TAXREPORT> TAXREPORTs { get; set; }
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }

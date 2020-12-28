@@ -17,7 +17,7 @@ namespace HRM.Controllers
         // GET: POSITIONs
         public ActionResult Index()
         {
-            var pOSITIONs = db.POSITIONs.Include(p => p.ROOM);
+            var pOSITIONs = db.POSITIONs;
             return View(pOSITIONs.ToList());
         }
 
@@ -57,7 +57,7 @@ namespace HRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName", pOSITION.RoomID);
+            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
             return View(pOSITION);
         }
 
@@ -73,7 +73,7 @@ namespace HRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName", pOSITION.RoomID);
+            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
             return View(pOSITION);
         }
 
@@ -90,7 +90,7 @@ namespace HRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName", pOSITION.RoomID);
+            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
             return View(pOSITION);
         }
 

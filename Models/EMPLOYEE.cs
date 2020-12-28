@@ -20,9 +20,8 @@ namespace HRM.Models
             this.ADVANCEDs = new HashSet<ADVANCED>();
             this.ADVANCEDREPORTs = new HashSet<ADVANCEDREPORT>();
             this.ALLOWANCEREPORTs = new HashSet<ALLOWANCEREPORT>();
-            this.CERTIFICATEDETAILs = new HashSet<CERTIFICATEDETAIL>();
-            this.EDUCATIONDETAILs = new HashSet<EDUCATIONDETAIL>();
             this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
+            this.TaxKeepingReports = new HashSet<TaxKeepingReport>();
             this.INSURANCEREPORTs = new HashSet<INSURANCEREPORT>();
             this.SALARYREPORTs = new HashSet<SALARYREPORT>();
             this.TAXREPORTs = new HashSet<TAXREPORT>();
@@ -61,15 +60,15 @@ namespace HRM.Models
         public virtual ICollection<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
+        public virtual CERTIFICATEDETAIL CERTIFICATEDETAIL { get; set; }
         public virtual CONTRACT CONTRACT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EDUCATIONDETAIL> EDUCATIONDETAILs { get; set; }
+        public virtual EDUCATIONDETAIL EDUCATIONDETAIL { get; set; }
         public virtual POSITION POSITION { get; set; }
         public virtual ROOM ROOM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaxKeepingReport> TaxKeepingReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
