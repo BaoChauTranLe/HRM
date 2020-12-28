@@ -12,17 +12,14 @@ namespace HRM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TIMEKEEPING
+    public partial class TaxKeepingReport
     {
-        public System.DateTime Date { get; set; }
         public string EmployeeID { get; set; }
-        public Nullable<int> State { get; set; }
-        public Nullable<int> HoursWorkDay { get; set; }
-        public Nullable<int> HoursWorkNight { get; set; }
-        public string ShiftID { get; set; }
+        public System.DateTime Month { get; set; }
+        public int DayWorking { get; set; }
+        public int DayAbsentHaveSalary { get; set; }
+        public int DayAbsentNotSalary { get; set; }
     
-        public virtual DATEINFORMATION DATEINFORMATION { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual SHIFT SHIFT { get; set; }
     }
 }

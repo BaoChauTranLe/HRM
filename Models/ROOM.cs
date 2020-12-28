@@ -18,7 +18,6 @@ namespace HRM.Models
         public ROOM()
         {
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
-            this.POSITIONs = new HashSet<POSITION>();
         }
     
         public string RoomID { get; set; }
@@ -26,7 +25,5 @@ namespace HRM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<POSITION> POSITIONs { get; set; }
     }
 }

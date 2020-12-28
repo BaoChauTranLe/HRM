@@ -238,6 +238,9 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaxKeepingReport.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TAXRATE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
