@@ -207,7 +207,7 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("Index", "SHIFTs", FormMethod.Post, new { name = "frm", id = "frm" }))
+                @using (Html.BeginForm("CreateOrEdit", "SHIFTs", FormMethod.Post, new { name = "frm", id = "frm" }))
                 {
                     @Html.AntiForgeryToken()
 

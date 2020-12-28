@@ -48,7 +48,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
+        public ActionResult CreateOrEdit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
         {
             if (ModelState.IsValid)
             {

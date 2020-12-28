@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HRM.Models;
 using HRM.Util;
-using DHTMLX.Scheduler;
+//using DHTMLX.Scheduler;
 
 namespace HRM.Controllers
 {
@@ -51,11 +51,10 @@ namespace HRM.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult TimeKeepingView()
-		{
-            var scheduler = new DHXScheduler(this);
-            return View(scheduler);
-
-        }
+        //public ActionResult TimeKeepingView()
+		//{
+        //    var scheduler = new DHXScheduler(this);
+        //    return View(scheduler);
+        //}
     }
 }
