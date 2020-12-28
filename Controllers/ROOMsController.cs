@@ -25,8 +25,8 @@ namespace HRM.Controllers
             try
             {
                 List<ROOM> list = db.ROOMs.ToList();
-                var RoomList = from a in list
-                                    select new { a.RoomID, a.RoomName};
+                var RoomList = from r in list
+                                    select new { r.RoomID, r.RoomName};
                 var result = new { list = RoomList, str = "success" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
