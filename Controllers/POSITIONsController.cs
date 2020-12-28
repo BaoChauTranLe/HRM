@@ -17,30 +17,24 @@ namespace HRM.Controllers
         // GET: POSITIONs
         public ActionResult Index()
         {
-            var pOSITIONs = db.POSITIONs;
-            return View(pOSITIONs.ToList());
-        }
-
-        // GET: POSITIONs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            POSITION pOSITION = db.POSITIONs.Find(id);
-            if (pOSITION == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pOSITION);
-        }
-
-        // GET: POSITIONs/Create
-        public ActionResult Create()
-        {
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
             return View();
+        }
+
+        public JsonResult GetPositionList()
+        {
+            try
+            {
+                List<POSITION> list = db.POSITIONs.ToList();
+                var PositionList = from p in list
+                               select new { p.PositionID, p.PositionName };
+                var result = new { list = PositionList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // POST: POSITIONs/Create
@@ -48,76 +42,54 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,PositionName,RoomID")] POSITION pOSITION)
+        public ActionResult CreateOrEdit([Bind(Include = "PositionID,PositionName,RoomID")] POSITION pOSITION)
         {
             if (ModelState.IsValid)
             {
-                db.POSITIONs.Add(pOSITION);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (pOSITION.PositionID == null)
+                {
+                    //auto create allowanceID
+                    int n = 0;
+                    var positionList = db.POSITIONs.ToList();
+                    if (positionList.Count > 0)
+                    {
+                        POSITION r = positionList.Last();
+                        n = Int32.Parse(r.PositionID.Substring(r.PositionID.Length - 2)) + 1;
+                    }
 
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            return View(pOSITION);
-        }
+                    string id = String.Format("{0:00}", n);
+                    pOSITION.PositionID = "P" + id;
 
-        // GET: POSITIONs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            POSITION pOSITION = db.POSITIONs.Find(id);
-            if (pOSITION == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            return View(pOSITION);
-        }
-
-        // POST: POSITIONs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PositionID,PositionName,RoomID")] POSITION pOSITION)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(pOSITION).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            return View(pOSITION);
-        }
-
-        // GET: POSITIONs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            POSITION pOSITION = db.POSITIONs.Find(id);
-            if (pOSITION == null)
-            {
-                return HttpNotFound();
+                    db.POSITIONs.Add(pOSITION);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    db.Entry(pOSITION).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             return View(pOSITION);
         }
 
         // POST: POSITIONs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteConfirmed")]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            POSITION pOSITION = db.POSITIONs.Find(id);
-            db.POSITIONs.Remove(pOSITION);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                POSITION pOSITION = db.POSITIONs.Find(id);
+                db.POSITIONs.Remove(pOSITION);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

@@ -350,13 +350,7 @@
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\EMPLOYEEs\Error.cshtml" />
     <Content Include="Views\TAXRATEs\Edit.cshtml" />
-    <Content Include="Views\ROOMs\Create.cshtml" />
-    <Content Include="Views\ROOMs\Delete.cshtml" />
-    <Content Include="Views\ROOMs\Edit.cshtml" />
     <Content Include="Views\ROOMs\Index.cshtml" />
-    <Content Include="Views\POSITIONs\Create.cshtml" />
-    <Content Include="Views\POSITIONs\Delete.cshtml" />
-    <Content Include="Views\POSITIONs\Edit.cshtml" />
     <Content Include="Views\POSITIONs\Index.cshtml" />
     <Content Include="Views\ALLOWANCEs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGs\Create.cshtml" />
@@ -384,6 +378,7 @@
     <Content Include="Views\TIMEKEEPINGREPORTs\OvertimeIndex.cshtml" />
     <Content Include="Views\PARAMETERs\EmployeeEdit.cshtml" />
     <Content Include="Views\PARAMETERs\IncomeTaxEdit.cshtml" />
+    <Content Include="Views\PARAMETERs\CoefficientsOTSalaryEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

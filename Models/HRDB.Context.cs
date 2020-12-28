@@ -51,11 +51,11 @@ namespace HRM.Models
         public virtual DbSet<SHIFTDETAIL> SHIFTDETAILs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaxKeepingReport> TaxKeepingReports { get; set; }
-        public virtual DbSet<TAXRATE> TAXRATEs { get; set; }
-        public virtual DbSet<TAXREPORT> TAXREPORTs { get; set; }
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<TAXRATE> TAXRATEs { get; set; }
+        public virtual DbSet<TAXREPORT> TAXREPORTs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

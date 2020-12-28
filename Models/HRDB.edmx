@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -293,8 +293,8 @@
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="TotalIncome" Type="int" />
-          <Property Name="FreeTax" Type="int" />
-          <Property Name="Deduction" Type="int" />
+          <Property Name="DependentDeduction" Type="int" />
+          <Property Name="SelfDeduction" Type="int" />
           <Property Name="OverTimeHour" Type="int" />
           <Property Name="OverTimeFreeTax" Type="int" />
           <Property Name="TaxableIncome" Type="int" />
@@ -849,8 +849,7 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -999,11 +998,11 @@
           <NavigationProperty Name="TaxKeepingReports" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TaxKeepingReport" />
           <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
           <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
-          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
           <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
           <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
           <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
           <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
+          <NavigationProperty Name="TAXREPORTs" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1154,30 +1153,6 @@
           <Property Name="DayAbsentHaveSalary" Type="Int32" Nullable="false" />
           <Property Name="DayAbsentNotSalary" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="TaxKeepingReport" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="TAXRATE">
-          <Key>
-            <PropertyRef Name="Rank" />
-          </Key>
-          <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TAXREPORT">
-          <Key>
-            <PropertyRef Name="Month" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="TotalIncome" Type="Int32" />
-          <Property Name="FreeTax" Type="Int32" />
-          <Property Name="Deduction" Type="Int32" />
-          <Property Name="OverTimeHour" Type="Int32" />
-          <Property Name="OverTimeFreeTax" Type="Int32" />
-          <Property Name="TaxableIncome" Type="Int32" />
-          <Property Name="IncomeTax" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -1414,18 +1389,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TaxReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="TAXREPORT" Type="Self.TAXREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TAXREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="TimeKeeping_FK_Employee">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
@@ -1543,8 +1506,6 @@
           <EntitySet Name="SHIFTDETAILs" EntityType="Self.SHIFTDETAIL" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaxKeepingReports" EntityType="Self.TaxKeepingReport" />
-          <EntitySet Name="TAXRATEs" EntityType="Self.TAXRATE" />
-          <EntitySet Name="TAXREPORTs" EntityType="Self.TAXREPORT" />
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
@@ -1612,10 +1573,6 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
           </AssociationSet>
-          <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
-          </AssociationSet>
           <AssociationSet Name="TimeKeeping_FK_Employee" Association="Self.TimeKeeping_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
@@ -1682,6 +1639,12 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="TAXRATEs" EntityType="hrmserver_HRMModel.TAXRATE" />
+          <EntitySet Name="TAXREPORTs" EntityType="hrmserver_HRMModel.TAXREPORT" />
+          <AssociationSet Name="TaxReport_FK_Employee" Association="hrmserver_HRMModel.TaxReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1694,6 +1657,42 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="TAXRATE">
+          <Key>
+            <PropertyRef Name="Rank" />
+          </Key>
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Min" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAXREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="TotalIncome" Type="Int32" />
+          <Property Name="DependentDeduction" Type="Int32" />
+          <Property Name="SelfDeduction" Type="Int32" />
+          <Property Name="OverTimeHour" Type="Int32" />
+          <Property Name="OverTimeFreeTax" Type="Int32" />
+          <Property Name="TaxableIncome" Type="Int32" />
+          <Property Name="IncomeTax" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
+        </EntityType>
+        <Association Name="TaxReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.TAXREPORT" Role="TAXREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TAXREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1970,30 +1969,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TAXRATEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXRATE">
-              <MappingFragment StoreEntitySet="TAXRATE">
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-                <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAXREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
-              <MappingFragment StoreEntitySet="TAXREPORT">
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
-                <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
-                <ScalarProperty Name="Deduction" ColumnName="Deduction" />
-                <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
-                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
-                <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
-                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TIMEKEEPINGs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPING">
               <MappingFragment StoreEntitySet="TIMEKEEPING">
@@ -2072,6 +2047,30 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="TAXRATEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXRATE">
+              <MappingFragment StoreEntitySet="TAXRATE">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAXREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
+              <MappingFragment StoreEntitySet="TAXREPORT">
+                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+                <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
+                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
+                <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
+                <ScalarProperty Name="SelfDeduction" ColumnName="SelfDeduction" />
+                <ScalarProperty Name="DependentDeduction" ColumnName="DependentDeduction" />
+                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

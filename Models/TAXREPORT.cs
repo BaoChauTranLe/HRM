@@ -17,8 +17,8 @@ namespace HRM.Models
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<int> TotalIncome { get; set; }
-        public Nullable<int> FreeTax { get; set; }
-        public Nullable<int> Deduction { get; set; }
+        public Nullable<int> DependentDeduction { get; set; }
+        public Nullable<int> SelfDeduction { get; set; }
         public Nullable<int> OverTimeHour { get; set; }
         public Nullable<int> OverTimeFreeTax { get; set; }
         public Nullable<int> TaxableIncome { get; set; }

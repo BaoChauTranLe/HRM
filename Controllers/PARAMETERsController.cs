@@ -42,6 +42,29 @@ namespace HRM.Controllers
         {
             return View();
         }
+        public ActionResult CoefficientsOTSalaryEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CoefficientsOTSalaryEdit(int WorkDay, int AnnualDayOff, int SpecialDayOff, int NightWorkDay, int NightAnnualDayOff, int NightSpecialDayOff, int AdditionalNightWorkDay, int AdditionalNightAnnualDayOff, int AdditionalNightSpecialDayOff)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("HSLNgayThuong").Value = WorkDay;
+                db.PARAMETERs.Find("HSLNgayNghi").Value = AnnualDayOff;
+                db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value = SpecialDayOff;
+                db.PARAMETERs.Find("HSLDemNgayThuong").Value = NightWorkDay;
+                db.PARAMETERs.Find("HSLDemNgayNghi").Value = NightAnnualDayOff;
+                db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value = NightSpecialDayOff;
+                db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value = AdditionalNightWorkDay;
+                db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value = AdditionalNightAnnualDayOff;
+                db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value = AdditionalNightSpecialDayOff;
+                db.SaveChanges();
+                return RedirectToAction("CoefficientsOTSalary");
+            }
+            return View();
+        }
         public ActionResult IncomeTax()
         {
             return View();
