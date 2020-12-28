@@ -16,6 +16,7 @@ namespace HRM.Models
     {
         public System.DateTime Date { get; set; }
         public string EmployeeID { get; set; }
+        public string ShiftID { get; set; }
         public Nullable<int> State { get; set; }
         public Nullable<int> HoursWorkDay { get; set; }
         public Nullable<int> HoursWorkNight { get; set; }

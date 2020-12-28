@@ -223,6 +223,7 @@
     <Compile Include="Models\SALARYREPORT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SetShiftViewModel.cs" />
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
