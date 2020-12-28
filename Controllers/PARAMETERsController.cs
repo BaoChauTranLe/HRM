@@ -46,6 +46,23 @@ namespace HRM.Controllers
         {
             return View();
         }
+        public ActionResult IncomeTaxEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult IncomeTaxEdit(int MinIncomeMustPayTax, int SelfDeduction, int DependentDeduction)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("MucThuNhapToiThieuPhaiDongThue").Value = MinIncomeMustPayTax;
+                db.PARAMETERs.Find("MucGiamTruBanThan").Value = SelfDeduction;
+                db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value = DependentDeduction;
+                db.SaveChanges();
+                return RedirectToAction("IncomeTax");
+            }
+            return View();
+        }
         public int getValueByName(string paraName)
         {
             var parameter = db.PARAMETERs.Find(paraName);

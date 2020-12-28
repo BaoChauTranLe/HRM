@@ -1,7 +1,7 @@
 ﻿@model HRM.Models.PARAMETER
 
 @{
-    ViewBag.Title = "EmployeeEdit";
+    ViewBag.Title = "IncomeTaxEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -85,40 +85,30 @@
     }
 </style>
 
-@using (Html.BeginForm("EmployeeEdit", "PARAMETERs"))
+@using (Html.BeginForm("IncomeTaxEdit", "PARAMETERs"))
 {
     <div class="top-title" style="margin-top:60px;">
-        Quy định về hồ sơ nhân viên
+        Quy định về việc đóng thuế TNCN
     </div>
     <div class="form-group margin" style="margin-top: 40px; height: 110px;">
-        @Html.Label("Tuổi tối thiểu đối với nữ", htmlAttributes: new { @class = "lbl" })
+        @Html.Label("Mức thu nhập tối thiểu phải đóng thuế (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
         <br />
-        <input name="MinFemaleAge" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiThieuNu" })" />
+        <input name="MinIncomeMustPayTax" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucThuNhapToiThieuPhaiDongThue" })" />
     </div>
     <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Tuổi tối đa đối với nữ", htmlAttributes: new { @class = "lbl" })
+        @Html.Label("Mức giảm trừ bản thân (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
         <br />
-        <input name="MaxFemaleAge" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiDaNu" })" />
+        <input name="SelfDeduction" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucGiamTruBanThan" })" />
     </div>
     <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Tuổi tối thiểu đối với nam", htmlAttributes: new { @class = "lbl" })
+        @Html.Label("Mức giảm trừ ứng với mỗi người phụ thuộc (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
         <br />
-        <input name="MinMaleAge" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiThieuNam" })" />
-    </div>
-    <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Tuổi tối đa đối với nam", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="MaxMaleAge" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiDaNam" })" />
-    </div>
-    <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Mức lương tối thiểu vùng", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="AreaMinSalary" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucLuongToiThieuVung" })" />
+        <input name="DependentDeduction" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucGiamTruNguoiPhuThuoc" })" />
     </div>
 
     <div class="form-group" style="margin-left:395px;">
         <input type="submit" value="Lưu" class="edit-btn" style="background: #3D76B5;" />
-        <a href="@Url.Action("Employee","PARAMETERs")">
+        <a href="@Url.Action("IncomeTax","PARAMETERs")">
             <input type="button" value="Hủy" class="edit-btn" style="background: #C33333;" />
         </a>
     </div>
