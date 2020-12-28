@@ -139,6 +139,7 @@
     <Compile Include="Controllers\SHIFTsController.cs" />
     <Compile Include="Controllers\TAXRATEsController.cs" />
     <Compile Include="Controllers\TAXREPORTsController.cs" />
+    <Compile Include="Controllers\TIMEKEEPINGREPORTsController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGTABLEController.cs" />
     <Compile Include="Controllers\TIMEKEEPINGsController.cs" />
     <Compile Include="Controllers\USERsController.cs" />
@@ -375,6 +376,8 @@
     <Content Include="Views\USERs\Details.cshtml" />
     <Content Include="Views\USERs\Edit.cshtml" />
     <Content Include="Views\USERs\Index.cshtml" />
+    <Content Include="Views\TIMEKEEPINGREPORTs\Index.cshtml" />
+    <Content Include="Views\TIMEKEEPINGREPORTs\OvertimeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
