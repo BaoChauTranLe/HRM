@@ -8,7 +8,7 @@
 <head>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
     <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
@@ -216,11 +216,8 @@
         width: 80%;
     }
 </style>
-
+<input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()"/>
 <div class="fresh-table">
-    <a href="@Url.Action("Create","ADVANCEDs")">
-        <input type="button" id="btn" class="add__button" value="Thêm" />
-    </a>
     <table class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
         <thead>
             <tr>
@@ -249,6 +246,86 @@
     </table>
 </div>
 
+<!-- The Create Modal -->
+<div id="createModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Thêm ca làm việc</div>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("CreateOrEdit", "ADVANCEDs", FormMethod.Post, new { name = "frm", id = "frm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.DateAdvanced)
+                @Html.HiddenFor(model => model.EmployeeID)
+                <div class="form-horizontal" id="newForm">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="modal__text">
+                                Mã nhân viên
+                            </div>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.EmployeeID, "--Mã nhân viên--", new { htmlAttributes = new { @class = "form-control", @id = "AdDateInput"} })
+                                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="modal__text">
+                                Số tiền
+                            </div>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Value, "--Tiền tạm ứng--", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
+" />
+                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
+" />
+                        </div>
+                    </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- The Delete Modal -->
+<div id="deleteModal" class="modal" style="height:200px !important">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Xóa tạm ứng</div>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="modal__text" id="modal__text">
+            </div>
+            <ul class="button">
+                <li>
+                    <a>
+                        <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
+                    </a>
+                </li>
+                <li>
+                    <input type="button" id="declinebtn" value="Không" style="background: #C33333" onclick="closeModal()">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="bg" onclick="closeModal()"></div>
+
 <script>
     var $table = $('#fresh-table')
     $(function () {
@@ -269,7 +346,7 @@
         })
     })
 
-    
+
 </script>
 
 <!--script for interactive with user-->
@@ -308,7 +385,8 @@
     function DataBind(result) {
         if (result.str == "success") {
             var SetData = $("#SetAdvancedList");
-            advanceds = result.list;
+            advanceds = result.lista;
+            employees = result.liste;
             if (advanceds.length == 0)
                 $("#LoadingStatus").html("Chưa có dữ liệu nào.");
             for (var i = 0; i < advanceds.length; i++) {
@@ -323,34 +401,17 @@
 
     function GetDataString(advanced, n) {
         var name;
-
-        //$.ajax({
-        //    type: 'GET',
-        //    url: '/EMPLOYEEs/GetNameByID',
-        //    dataType: "json",
-        //    contentType: "application/json; charset=utf-8",
-        //    data: JSON.stringify({ id: advanced.EmployeeID }),
-        //    success: function (data) {
-        //        // do what ever you want with the server response
-        //        alert(data);
-        //        closeModal();
-        //    },
-        //    error: function (error) {
-        //        // error handling
-        //        alert("Xóa không thành công");
-        //        console.log();
-        //    }
-        //});
-
-        $.getJSON("/EMPLOYEEs/GetNameByID", { id: advanced.EmployeeID }, function (data, status) {
-            name = data.name;
-        });
+        for (var i = 0; i < employees.length; i++) {
+            if (employees[i].EmployeeID == advanced.EmployeeID) {
+                name = employees[i].EmployeeName;
+            }
+        }
         var Data = "<tr class='row_" + advanced.DateAdvanced + "'>" +
             "<td>" + (n + 1) + "</td>" +
             "<td>" + advanced.EmployeeID + "</td>" +
             "<td>" + name + "</td>" +
-            "<td>" + advanced.DateAdvanced + "</td>"
-            "<td>" + advanced.Value + "</td>";
+            "<td>" + moment(advanced.DateAdvanced).format("DD/MM/yyyy") + "</td>"
+        "<td>" + advanced.Value + "</td>";
 
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + advanced.DateAdvanced + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
@@ -366,10 +427,12 @@
     function EditModule(id) {
         $("#modal-title").html("Sửa tạm ứng");
         document.getElementById("frm").reset();
-        for (var i = 0; i < rooms.length; i++) {
-            if (advanceds[i].RoomID == id) {
+        for (var i = 0; i < advanceds.length; i++) {
+            if (advanceds[i].DateAdvanced == id) {
                 document.getElementById("EmployeeID").value = advanceds[i].EmployeeID;
+                document.getElementById("DateAdvanced").value = advanceds[i].DateAdvanced;
                 document.getElementById("Value").value = advanceds[i].Value;
+                document.getElementById("AdDateInput").value = advanceds[i].EmployeeID;
             }
         }
 
@@ -382,15 +445,10 @@
 
     //functions to show delete confirm
     var deleteId;
+    var deleteEmployee;
     function DeleteModule(id) {
         deleteId = id;
-        var name;
-        for (var i = 0; i < rooms.length; i++) {
-            if (rooms[i].RoomID == id) {
-                name = rooms[i].RoomName;
-            }
-        }
-        var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
+        var noticeString = "Dữ liệu này sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
         $("#modal__text").html(noticeString);
         delete_modal.style.display = "block";
         $("#bg").width("100%").height("100%");
@@ -401,10 +459,10 @@
     function deleteByID() {
         $.ajax({
             type: 'POST',
-            url: '/ROOMs/DeleteConfirmed',
+            url: '/ADVANCEDs/DeleteConfirmed',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ "id": deleteId }),
+            data: JSON.stringify({ "id": deleteId, "employee": deleteEmployee }),
             success: function (data) {
                 // do what ever you want with the server response
                 alert("Xóa thành công");

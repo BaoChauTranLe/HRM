@@ -698,27 +698,5 @@ namespace HRM.Controllers
             //Upcase like Title
             return textInfo.ToTitleCase(str);
         }
-        public ActionResult Error()
-        {
-            return View();
-        }
-        [HttpGet, ActionName("GetNameByID")]
-        public async Task<JsonResult> GetNameByID(string id)
-        {
-            EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
-            string name = "";
-            try
-            {
-                name = eMPLOYEE.EmployeeName;
-            }
-            catch { }
-            var result = new { name = name, str = "success" };
-            if (eMPLOYEE != null)
-            {
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            result = new { name = name, str = "fail" };
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
     }
 }
