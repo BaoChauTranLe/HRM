@@ -19,6 +19,7 @@ namespace HRM.Models
         {
             this.ADVANCEDs = new HashSet<ADVANCED>();
             this.ADVANCEDREPORTs = new HashSet<ADVANCEDREPORT>();
+            this.ALLOWANCEREPORTs = new HashSet<ALLOWANCEREPORT>();
             this.CERTIFICATEDETAILs = new HashSet<CERTIFICATEDETAIL>();
             this.EDUCATIONDETAILs = new HashSet<EDUCATIONDETAIL>();
             this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
@@ -28,7 +29,6 @@ namespace HRM.Models
             this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
             this.TIMEKEEPINGREPORTs = new HashSet<TIMEKEEPINGREPORT>();
             this.GRs = new HashSet<GR>();
-            this.ALLOWANCEREPORTs = new HashSet<ALLOWANCEREPORT>();
         }
     
         public string EmployeeID { get; set; }
@@ -60,6 +60,8 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
         public virtual CONTRACT CONTRACT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -81,7 +83,5 @@ namespace HRM.Models
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GR> GRs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
     }
 }

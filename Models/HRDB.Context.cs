@@ -30,6 +30,7 @@ namespace HRM.Models
         public virtual DbSet<ADVANCED> ADVANCEDs { get; set; }
         public virtual DbSet<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
         public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
+        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
         public virtual DbSet<CERTIFICATE> CERTIFICATEs { get; set; }
         public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
         public virtual DbSet<CONTRACT> CONTRACTs { get; set; }
@@ -54,7 +55,6 @@ namespace HRM.Models
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
-        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

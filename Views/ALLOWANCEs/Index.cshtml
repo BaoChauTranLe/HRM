@@ -221,19 +221,26 @@
         <thead>
             <tr>
                 <th>
+                    STT
+                </th>
+                <th>
                     @Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
                 </th>
                 <th>
-                    @Html.DisplayName("Số tiền (ngàn đồng)")
+                    @Html.DisplayName("Số tiền")
+                    <br/>
+                    (ngàn đồng)
                 </th>
                 <th>
-                    @Html.DisplayName("Phải tính vào lương đóng bảo hiểm")
+                    @Html.DisplayName("Được miễn bảo hiểm")
                 </th>
                 <th>
                     @Html.DisplayName("Được miễn thuế")
                 </th>
                 <th>
-                    @Html.DisplayName("Khoản tiền được miễn (ngàn đồng)")
+                    @Html.DisplayName("Khoản tiền được miễn")
+                    <br />
+                    (ngàn đồng)
                 </th>
                 <th></th>
                 <th></th>
@@ -420,7 +427,7 @@
     }
 
     function GetDataString(allowance, n) {
-        var Data = "<tr class='row_" + allowance.ShiftID + "'>" +
+        var Data = "<tr class='row_" + allowance.AllowanceID + "'>" +
             "<td>" + (n + 1) + "</td>" +
             "<td>" + allowance.AllowanceName + "</td>" +
             "<td>" + allowance.Value + "</td>";

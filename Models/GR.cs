@@ -17,6 +17,7 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GR()
         {
+            this.USERS = new HashSet<USER>();
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
         }
     
@@ -24,6 +25,8 @@ namespace HRM.Models
         public Nullable<int> GroupPermission { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USER> USERS { get; set; }
         public virtual GROUPPERMISSION GROUPPERMISSION1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }

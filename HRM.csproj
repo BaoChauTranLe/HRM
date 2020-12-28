@@ -284,6 +284,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fresh-bootstrap-table.css.map" />
     <EntityDeploy Include="Models\HRDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HRDB.Designer.cs</LastGenOutput>
@@ -291,7 +292,6 @@
     <Content Include="Models\HRDB.edmx.diagram">
       <DependentUpon>HRDB.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\fresh-bootstrap-table.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxscheduler_multisection.js" />
     <Content Include="Scripts\dhtmlxscheduler_multiselect.js" />
