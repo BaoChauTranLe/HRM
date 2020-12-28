@@ -1,381 +1,384 @@
 ﻿@model HRM.Models.ALLOWANCE
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
 
-    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+	<link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 </head>
 <style>
-    table, th, td, tr {
-        border-color: #DFE0EB !important;
-        border-radius: 5px !important;
-    }
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
+	}
 
-    .add__button {
-        display: block;
-        height: 36px;
-        width: 94px;
-        right: 36px;
-        top: 80px;
-        position: absolute;
-        background: #E3F2FD;
-        border: 1px solid #3D76B5;
-        border-radius: 4px;
-        /* Text */
-        font-family: IBM Plex Sans;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 20px;
-        text-align: center;
-        letter-spacing: 0.2px;
-        color: #3D76B5;
-    }
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+		/* Text */
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: #3D76B5;
+	}
 
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 12; /* Sit on top */
-        float: left;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        text-align: left;
-        width: 490px;
-        height: 554px;
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        -webkit-animation-name: fadeIn; /* Fade in the background */
-        -webkit-animation-duration: 0.4s;
-        animation-name: fadeIn;
-        animation-duration: 0.4s;
-        vertical-align: middle;
-        margin-left: 122px;
-        margin-top: 30px;
-    }
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 12; /* Sit on top */
+		float: left;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		text-align: left;
+		width: 490px;
+		height: 554px;
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		-webkit-animation-name: fadeIn; /* Fade in the background */
+		-webkit-animation-duration: 0.4s;
+		animation-name: fadeIn;
+		animation-duration: 0.4s;
+		vertical-align: middle;
+		margin-left: 122px;
+		margin-top: 30px;
+	}
 
-    /* Modal Content */
-    .modal-content {
-        position: fixed;
-        background-color: #fefefe;
-        width: 100%;
-        height: 100%;
-        -webkit-animation-name: slideIn;
-        -webkit-animation-duration: 0.4s;
-        animation-name: slideIn;
-        animation-duration: 0.4s
-    }
+	/* Modal Content */
+	.modal-content {
+		position: fixed;
+		background-color: #fefefe;
+		width: 100%;
+		height: 100%;
+		-webkit-animation-name: slideIn;
+		-webkit-animation-duration: 0.4s;
+		animation-name: slideIn;
+		animation-duration: 0.4s
+	}
 
-    /* The Close Button */
-    .close {
-        color: #4282BB;
-        float: right;
-        font-weight: bold;
-    }
+	/* The Close Button */
+	.close {
+		color: #4282BB;
+		float: right;
+		font-weight: bold;
+	}
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
 
-    .modal-header {
-        top: 0px;
-        height: 32px;
-        padding: 2px 16px;
-        background-color: #E0EFFF;
-        color: #4282BB;
-        font-size: 20px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        font-weight: bold;
-    }
+	.modal-header {
+		top: 0px;
+		height: 32px;
+		padding: 2px 16px;
+		background-color: #E0EFFF;
+		color: #4282BB;
+		font-size: 20px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		font-weight: bold;
+	}
 
-    .modal-body {
-        padding-top: 10px;
-        padding-left: 37px;
-        padding-right: 37px;
-    }
+	.modal-body {
+		padding-top: 10px;
+		padding-left: 37px;
+		padding-right: 37px;
+	}
 
-    #bg {
-        background-color: black;
-        width: 0;
-        height: 0;
-        display: none;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-    }
+	#bg {
+		background-color: black;
+		width: 0;
+		height: 0;
+		display: none;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
 
-    .add__button {
-        display: block;
-        height: 36px;
-        width: 94px;
-        right: 36px;
-        top: 80px;
-        position: absolute;
-        background: #E3F2FD;
-        border: 1px solid #3D76B5;
-        border-radius: 4px;
-    }
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
 
-    .modal__text {
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        margin-top: 13px;
-        margin-bottom: 7px;
-    }
+	.modal__text {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		margin-top: 13px;
+		margin-bottom: 7px;
+	}
 
-    .form-control, select {
-        height: 47px;
-        width: calc(100% - 4px);
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-        left: 0 !important;
-        right: 0 !important;
-    }
+	.form-control, select {
+		height: 47px;
+		width: calc(100% - 4px);
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		left: 0 !important;
+		right: 0 !important;
+	}
 
-    .check-box {
-        margin-top: 2px;
-        margin-bottom: 2px;
-        padding: 0;
-        list-style: none;
-        width: 20px;
-        height: 20px;
-        box-sizing: border-box;
-        border-radius: 2px;
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-top: 8px;
-        margin-bottom: 8px;
-    }
+	.check-box {
+		margin-top: 2px;
+		margin-bottom: 2px;
+		padding: 0;
+		list-style: none;
+		width: 20px;
+		height: 20px;
+		box-sizing: border-box;
+		border-radius: 2px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
 
-    .btn.btn-default {
-        position: fixed;
-        display: block;
-        text-align: center;
-        padding: 0px;
-        bottom: 37px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        width: 126px;
-        height: 40px;
-        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-        border-radius: 4px;
-        color: white;
-    }
+	.btn.btn-default {
+		position: fixed;
+		display: block;
+		text-align: center;
+		padding: 0px;
+		bottom: 37px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 126px;
+		height: 40px;
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+		border-radius: 4px;
+		color: white;
+	}
 
-    input#StartTime, input#EndTime {
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-        display: inline;
-    }
+	input#StartTime, input#EndTime {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		display: inline;
+	}
 
-    .form-horizontal .form-group {
-        margin-right: 0px;
-        margin-left: 0px;
-    }
+	.form-horizontal .form-group {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
 
 
-    .text-danger.field-validation-error {
-        color: red;
-        font-size: 13px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-    }
+	.text-danger.field-validation-error {
+		color: red;
+		font-size: 13px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+	}
 
-    .modal-title {
-        display: inline-block;
-        width: 80%;
-    }
+	.modal-title {
+		display: inline-block;
+		width: 80%;
+	}
 </style>
 <div id="bg" onclick="closeModal()"></div>
 <input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()" />
 
 <div class="fresh-table">
-    <table class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
-        <thead>
-            <tr>
-                <th>
-                    STT
-                </th>
-                <th>
-                    @Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
-                </th>
-                <th>
-                    @Html.DisplayName("Số tiền")
-                    <br/>
-                    (ngàn đồng)
-                </th>
-                <th>
-                    @Html.DisplayName("Được miễn bảo hiểm")
-                </th>
-                <th>
-                    @Html.DisplayName("Được miễn thuế")
-                </th>
-                <th>
-                    @Html.DisplayName("Khoản tiền được miễn")
-                    <br />
-                    (ngàn đồng)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="SetAllowanceList">
-            <tr id="LoadingStatus" style="color:red"></tr>
-        </tbody>
-    </table>
+	<table class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
+		<thead>
+			<tr>
+				<th>
+					STT
+				</th>
+				<th>
+					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+				</th>
+				<th>
+					@Html.DisplayName("Số tiền")
+					<br />
+					(ngàn đồng)
+				</th>
+				<th>
+					@Html.DisplayName("Được miễn bảo hiểm")
+				</th>
+				<th>
+					@Html.DisplayName("Được miễn thuế")
+				</th>
+				<th>
+					@Html.DisplayName("Khoản tiền được miễn")
+					<br />
+					(ngàn đồng)
+				</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="SetAllowanceList">
+			<tr id="LoadingStatus" style="color:red"></tr>
+		</tbody>
+	</table>
 </div>
 
 <!-- The Create Modal -->
 <div id="createModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Thêm loại phụ cấp/trợ cấp/thưởng</div>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            @using (Html.BeginForm("CreateOrEdit", "ALLOWANCEs", FormMethod.Post, new { name = "frm", id = "frm" }))
-            {
-                @Html.AntiForgeryToken()
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<div class="modal-title">Thêm loại phụ cấp/trợ cấp/thưởng</div>
+			<span class="close" onclick="closeModal()">&times;</span>
+		</div>
+		<div class="modal-body">
+			@using (Html.BeginForm("CreateOrEdit", "ALLOWANCEs", FormMethod.Post, new { name = "frm", id = "frm" }))
+			{
+				@Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.AllowanceID)
+				<div class="form-horizontal">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					@Html.HiddenFor(model => model.AllowanceID)
 
-                    <div class="form-group">
-                        <div class="modal__text">
-                            Tên loại phụ cấp/trợ cấp/thưởng
-                        </div>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-10">
+							<div class="modal__text">
+								Tên loại phụ cấp/trợ cấp/thưởng
+							</div>
 
-                    <div class="form-group">
-                        <div class="modal__text">
-                            Số tiền (ngàn đồng)
-                        </div>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+							@Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Insurance)
-                                @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" }) Phải tính vào lương đóng bảo hiểm
-                            </div>
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-10" style="padding-top:40px;">
+							<div class="modal__text">
+								Số tiền (ngàn đồng)
+							</div>
 
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Tax)
-                                @Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" }) Được miễn thuế
-                            </div>
-                        </div>
-                    </div>
+							@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="modal__text">
-                            Khoản tiền được miễn (ngàn đồng)
-                        </div>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+					<div class="form-group">
+						<div class="col-md-10" style="padding-top:40px;">
+							<div class="checkbox">
+								@Html.EditorFor(model => model.Insurance)
+								@Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" }) Phải tính vào lương đóng bảo hiểm
+							</div>
+						</div>
+					</div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
+					<div class="form-group">
+						<div class="col-md-10">
+							<div class="checkbox">
+								@Html.EditorFor(model => model.Tax)
+								@Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" }) Được miễn thuế
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-10">
+							<div class="modal__text">
+								Khoản tiền được miễn (ngàn đồng)
+							</div>
+
+							@Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
 " />
-                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
+							<input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
 " />
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 </div>
 
 <!-- The Delete Modal -->
 <div id="deleteModal" class="modal" style="height:200px !important">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Xóa trợ cấp/phụ cấp/thưởng</div>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="modal__text" id="modal__text">
-            </div>
-            <ul class="button">
-                <li>
-                    <a>
-                        <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
-                    </a>
-                </li>
-                <li>
-                    <input type="button" id="declinebtn" value="Không" style="background: #C33333" onclick="closeModal()">
-                </li>
-            </ul>
-        </div>
-    </div>
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-header">
+			<div class="modal-title">Xóa trợ cấp/phụ cấp/thưởng</div>
+			<span class="close" onclick="closeModal()">&times;</span>
+		</div>
+		<div class="modal-body">
+			<div class="modal__text" id="modal__text">
+			</div>
+			<ul class="button">
+				<li>
+					<a>
+						<input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
+					</a>
+				</li>
+				<li>
+					<input type="button" id="declinebtn" value="Không" style="background: #C33333" onclick="closeModal()">
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 
 <script>
-    var $table = $('#fresh-table')
-    $(function () {
-        $table.bootstrapTable({
-            classes: 'table table-hover table-responsive',
-            toolbar: '.toolbar',
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return ''
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + ' rows visible'
-            }
-        })
-    })
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
 </script>
 <!--script for interactive with user-->
 <script>
@@ -514,6 +517,141 @@
             }
         });
     }
+	$("#LoadingStatus").html("Loading....");
+	// Get the modal
+	var create_modal = document.getElementById("createModal");
+	var delete_modal = document.getElementById("deleteModal");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal
+	function openCreateModal() {
+		$("#modal-title").html("Thêm loại phụ cấp/trợ cấp/thưởng");
+		create_modal.style.display = "block";
+
+		//document.getElementById("frm").reset();
+
+		$("#bg").width("100%").height("100%");
+
+		$("#bg").fadeTo("slow", 0.8);
+	}
+
+	//close create modal
+	function closeModal() {
+		window.location.reload();
+		create_modal.style.display = "none";
+		delete_modal.style.display = "none";
+		$("#bg").fadeOut();
+	}
+
+	//function to get list of allowance and display on table
+	var allowances;
+	$.get("/ALLOWANCEs/GetAllowanceList", null, DataBind);
+	function DataBind(result) {
+		if (result.str == "success") {
+			var SetData = $("#SetAllowanceList");
+			allowances = result.list;
+			if (allowances.length == 0)
+				$("#LoadingStatus").html("Chưa có dữ liệu nào.");
+			for (var i = 0; i < allowances.length; i++) {
+				SetData.append(GetDataString(allowances[i], i));
+				$("#LoadingStatus").html(" ");
+			}
+		}
+		else {
+			$("#LoadingStatus").html("Có lỗi xảy ra trong quá trình tải dữ liệu.");
+		}
+	}
+
+	function GetDataString(allowance, n) {
+		var Data = "<tr class='row_" + allowance.AllowanceID + "'>" +
+			"<td>" + (n + 1) + "</td>" +
+			"<td>" + allowance.AllowanceName + "</td>" +
+			"<td>" + allowance.Value + "</td>";
+		if (allowance.Insurance == true) {
+			Data = Data + "<td> Có </td>";
+		}
+		else {
+			Data = Data + "<td> Không </td>";
+		}
+		if (allowance.Tax == true) {
+			Data = Data + "<td> Có </td>";
+		}
+		else {
+			Data = Data + "<td> Không </td>";
+		}
+		Data = Data + "<td>" + allowance.FreeTax + "</td>";
+
+		Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
+			+ "<i class='fa fa-edit pa-5 text-warning'></i>" +
+			"</td>" +
+			" <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + allowance.AllowanceID + "'" + ")\" >"
+			+ "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+			"</td>" +
+			"</tr>";
+		return Data;
+	}
+
+	//function to show information of a allowance on modal
+	function EditModule(id) {
+		$("#modal-title").html("Sửa loại trợ cấp/phụ cấp/thưởng");
+		document.getElementById("frm").reset();
+		for (var i = 0; i < allowances.length; i++) {
+			if (allowances[i].AllowancesID == id) {
+				document.getElementById("AllowancesID").value = allowances[i].AllowancesID;
+				document.getElementById("AllowancesName").value = allowances[i].AllowancesName;
+				document.getElementById("Insurance").checked = allowances[i].Insurance;
+				document.getElementById("Tax").checked = allowances[i].Tax;
+				document.getElementById("FreeTax").value = allowances[i].FreeTax;
+				document.getElementById("Value").value = allowances[i].Value;
+			}
+		}
+
+		create_modal.style.display = "block";
+
+		$("#bg").width("100%").height("100%");
+
+		$("#bg").fadeTo("slow", 0.8);
+	}
+
+	//functions to show delete confirm
+	var deleteId;
+	function DeleteModule(id) {
+		deleteId = id;
+		var name;
+		for (var i = 0; i < allowances.length; i++) {
+			if (allowances[i].ShiftID == id) {
+				name = allowances[i].AllowanceName;
+			}
+		}
+		var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
+		$("#modal__text").html(noticeString);
+		delete_modal.style.display = "block";
+		$("#bg").width("100%").height("100%");
+
+		$("#bg").fadeTo("slow", 0.8);
+	}
+
+	function deleteByID() {
+		$.ajax({
+			type: 'POST',
+			url: '/ALLOWANCEs/DeleteConfirmed',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({ "id": deleteId }),
+			success: function (data) {
+				// do what ever you want with the server response
+				alert("Xóa thành công");
+				closeModal();
+			},
+			error: function (error) {
+				// error handling
+				alert("Xóa không thành công");
+				console.log();
+			}
+		});
+	}
 </script>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
