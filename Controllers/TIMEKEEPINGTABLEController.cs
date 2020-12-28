@@ -24,19 +24,16 @@ namespace HRM.Controllers
         }
         public JsonResult GetShiftDetailList()
         {
-            try
+            var results = db.SHIFTDETAILs.Select(e => new
             {
-                List<SHIFTDETAIL> list = db.SHIFTDETAILs.ToList();
-                var ShiftDetailList = from s in list
-                                select new { s.ShiftID, s.EmployeeID, s.StartDate, s.EndDate };
-                var result = new { list = ShiftDetailList, str = "success" };
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch
-            {
-                var result = new { str = "fail" };
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
+                id = e.ShiftID,
+                start_date = e.StartDate,
+                end_date = e.EndDate,
+                event_length="7200",
+                rec_type =""
+            }).ToList();
+
+            return new JsonResult() { Data = results, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         public JsonResult GetEmployeeList()
         {

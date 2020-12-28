@@ -78,59 +78,64 @@
 </div>
 
 <div class="fresh-table">
-    <table class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
-        <thead>
+	<table class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayName("STT")
+				</th>
+				<th>
+					@Html.DisplayName("Mã nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Tên nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Phòng")
+				</th>
+				<th>
+					@Html.DisplayName("Chức vụ")
+				</th>
+				<th>
+					@Html.DisplayName("Thuế TNCN")
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmployeeID)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IncomeTax)
+					</td>
+					<td>
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+					</td>
+				</tr>
+			}
             <tr>
-                <th>
-                    @Html.DisplayName("STT")
-                </th>
-                <th>
-                    @Html.DisplayName("Mã nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Tên nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Phòng")
-                </th>
-                <th>
-                    @Html.DisplayName("Chức vụ")
-                </th>
-                <th>
-                    @Html.DisplayName("Thuế TNCN")
-                </th>
-                <th></th>
+                <td colspan="5" style="border-color: #DFE0EB !important;">
+	                Tổng
+                </td>
+                <td>@Model.Sum(i => i.IncomeTax) </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IncomeTax)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+		</tbody>
+	</table>
 </div>
 
 <script>
