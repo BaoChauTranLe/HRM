@@ -308,7 +308,6 @@ namespace HRM.Controllers
                 eMPLOYEE.ContractID = employee.ContractID;
                 eMPLOYEE.HealthInsurance = employee.HealthInsurance;
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                eMPLOYEE.SocialInsuranceID = employee.HealthInsuranceID.Substring(employee.HealthInsuranceID.Length - 10, 10);
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
@@ -477,9 +476,9 @@ namespace HRM.Controllers
             employee.RoomID = eMPLOYEE.RoomID;
             employee.PositionID = eMPLOYEE.PositionID;
             employee.ContractID = eMPLOYEE.ContractID;
-            employee.HealthInsurance = eMPLOYEE.HealthInsurance;
+            employee.HealthInsurance = (bool)eMPLOYEE.HealthInsurance;
             employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
-            employee.DeductionPersonal = eMPLOYEE.DeductionPersonal;
+            employee.DeductionPersonal = (bool)eMPLOYEE.DeductionPersonal;
             employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
             employee.RoomName = eMPLOYEE.ROOM.RoomName;
             employee.PositionName = eMPLOYEE.POSITION.PositionName;
@@ -601,7 +600,6 @@ namespace HRM.Controllers
                 eMPLOYEE.ContractID = employee.ContractID;
                 eMPLOYEE.HealthInsurance = employee.HealthInsurance;
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                eMPLOYEE.SocialInsuranceID = employee.HealthInsuranceID.Substring(employee.HealthInsuranceID.Length - 10, 10);
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
                 db.Entry(eMPLOYEE).State = EntityState.Modified;
