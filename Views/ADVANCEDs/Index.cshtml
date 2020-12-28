@@ -76,36 +76,8 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateAdvanced)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-            }
+        <tbody id="SetAdvancedList">
+            <tr id="LoadingStatus" style="color:red"></tr>
         </tbody>
     </table>
 </div>
@@ -129,4 +101,33 @@
             }
         })
     })
+
+    function GetDataString(advanced, n) {
+        var Data = "<tr class='row_" + advanced.ShiftID + "'>" +
+            "<td>" + (n + 1) + "</td>" +
+            "<td>" + advanced.AllowanceName + "</td>" +
+            "<td>" + advanced.Value + "</td>";
+        if (advanced.Insurance == true) {
+            Data = Data + "<td> Có </td>";
+        }
+        else {
+            Data = Data + "<td> Không </td>";
+        }
+        if (advanced.Tax == true) {
+            Data = Data + "<td> Có </td>";
+        }
+        else {
+            Data = Data + "<td> Không </td>";
+        }
+        Data = Data + "<td>" + advanced.FreeTax + "</td>";
+
+        Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
+            + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+            "</td>" +
+            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + allowance.AllowanceID + "'" + ")\" >"
+            + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+            "</td>" +
+            "</tr>";
+        return Data;
+    }
 </script>

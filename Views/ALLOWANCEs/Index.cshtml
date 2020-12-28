@@ -400,7 +400,7 @@
         $("#bg").fadeOut();
     }
 
-    //function to get list of shift and display on table
+    //function to get list of allowance and display on table
     var allowances;
     $.get("/ALLOWANCEs/GetAllowanceList", null, DataBind);
     function DataBind(result) {
@@ -448,7 +448,7 @@
         return Data;
     }
 
-    //function to show information of a shift on modal
+    //function to show information of a allowance on modal
     function EditModule(id) {
         $("#modal-title").html("Sửa loại trợ cấp/phụ cấp/thưởng");
         document.getElementById("frm").reset();

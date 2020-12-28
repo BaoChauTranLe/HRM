@@ -11,11 +11,9 @@ namespace HRM.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class SALARYREPORT
     {
-        [DisplayFormat(DataFormatString = "{0:MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<int> Allowance { get; set; }
