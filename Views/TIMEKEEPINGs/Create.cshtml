@@ -87,32 +87,36 @@
 				</div>
 			</div>
 			<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
-				<thead>
-					<tr>
-						<th data-field="state" data-checkbox="true"></th>
-						<th data-field="name" data-sortable="true">
-							@Html.DisplayName("Tên nhân viên")
-						</th>
-						<th data-field="department" data-sortable="true">
-							@Html.DisplayName("Phòng")
-						</th>
-						<th data-field="position" data-sortable="true">
-							@Html.DisplayName("Chức vụ")
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model.eMPLOYEEs)
-					{
+				@using (Html.BeginForm("Create", "TIMEKEEPINGs", FormMethod.Post, new { name = "frm", id = "frm" }))
+				{
+					@Html.AntiForgeryToken()
+					<thead>
 						<tr>
-							<td></td>
-							<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
-							<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
-							<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="name" data-sortable="true">
+								@Html.DisplayName("Tên nhân viên")
+							</th>
+							<th data-field="department" data-sortable="true">
+								@Html.DisplayName("Phòng")
+							</th>
+							<th data-field="position" data-sortable="true">
+								@Html.DisplayName("Chức vụ")
+							</th>
 						</tr>
-					}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.eMPLOYEEs)
+						{
+							<tr>
+								<td></td>
+								<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
+								<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
+								<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
+							</tr>
+						}
+					</tbody>
+				}
+				</table>
 		</div>
 	</div>
 	<div class="col-md-6" style="padding-top:3% ">
@@ -124,7 +128,7 @@
 			<select class="index-txtbox drop-down-list" style="width:100%;">
 				@foreach (var item in Model.sHIFTs)
 				{
-					<option value="">@Html.DisplayFor(modelItem => item.ShiftName)</option>
+					<option id="shift">@Html.DisplayFor(modelItem => item.ShiftName)</option>
 				}
 			</select>
 		</div>
@@ -132,73 +136,18 @@
 			<label>Đến ngày</label>
 			<input type="date" name="select_date" id="select_date" class="form-control" />
 		</div>
+		<div class="row" style="padding-top:200px">
+			<div class="col-md-6 col-md-offset-3">
+				<input type="submit" value="Lưu" class="btn-save" id="btn-save" />
+			</div>
+			<div class="col-md-6 col-md-offset-6">
+				<button class="btn-cancel" onclick="GoHome()">
+					HỦY
+				</button>
+			</div>
+		</div>
 	</div>
-	@*@using (Html.BeginForm())
-			{
-				@Html.AntiForgeryToken()
-				<hr />
-				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-				<div class="form-group">
-					@Html.LabelFor(model => model.Date, "Date", htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.DropDownList("Date", null, htmlAttributes: new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					@Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					@Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-						@Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					@Html.LabelFor(model => model.AbsentID, "AbsentID", htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.DropDownList("AbsentID", null, htmlAttributes: new { @class = "form-control" })
-						@Html.ValidationMessageFor(model => model.AbsentID, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					@Html.LabelFor(model => model.HoursWorkDay, htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.EditorFor(model => model.HoursWorkDay, new { htmlAttributes = new { @class = "form-control" } })
-						@Html.ValidationMessageFor(model => model.HoursWorkDay, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					@Html.LabelFor(model => model.HoursWorkNight, htmlAttributes: new { @class = "control-label col-md-2" })
-					<div class="col-md-10">
-						@Html.EditorFor(model => model.HoursWorkNight, new { htmlAttributes = new { @class = "form-control" } })
-						@Html.ValidationMessageFor(model => model.HoursWorkNight, "", new { @class = "text-danger" })
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-md-offset-2 col-md-10">
-						<input type="submit" value="Create" class="btn btn-default" />
-					</div>
-				</div>
-
-		}*@
-	<div style="position: relative">
-		<input type="submit" value="Lưu" class="btn-save" />
-		<button class="btn-cancel" onclick="GoHome()">
-			HỦY
-		</button>
-	</div>
+	
 </body>
 
 <script>
@@ -223,8 +172,8 @@
 		})
 	})
 	$(function () {
-		$button.click(function () {
-			alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')))
+		$btn-save.click(function () {
+			($table.bootstrapTable('getSelections'))
 		})
 	})
 </script>
