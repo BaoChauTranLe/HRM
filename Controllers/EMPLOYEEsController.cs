@@ -476,9 +476,9 @@ namespace HRM.Controllers
             employee.RoomID = eMPLOYEE.RoomID;
             employee.PositionID = eMPLOYEE.PositionID;
             employee.ContractID = eMPLOYEE.ContractID;
-            employee.HealthInsurance = eMPLOYEE.HealthInsurance;
+            employee.HealthInsurance = (bool)eMPLOYEE.HealthInsurance;
             employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
-            employee.DeductionPersonal = eMPLOYEE.DeductionPersonal;
+            employee.DeductionPersonal = (bool)eMPLOYEE.DeductionPersonal;
             employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
             employee.RoomName = eMPLOYEE.ROOM.RoomName;
             employee.PositionName = eMPLOYEE.POSITION.PositionName;
