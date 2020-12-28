@@ -29,8 +29,6 @@
         <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFTDETAIL" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TaxKeepingReport" Width="1.5" PointX="5.25" PointY="40.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXRATE" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXREPORT" Width="1.5" PointX="5.25" PointY="43.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPING" Width="1.5" PointX="8.25" PointY="28" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPINGREPORT" Width="1.5" PointX="5.25" PointY="50.875" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.USER" Width="1.5" PointX="10.5" PointY="23.375" IsExpanded="true" />
@@ -50,7 +48,6 @@
         <AssociationConnector Association="hrmserver_HRMModel.FK_TaxKeepingReport_EMPLOYEE" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.InsuranceReport_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.SalaryReport_FK_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="hrmserver_HRMModel.TaxReport_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.TimeKeeping_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.TimekeepingReport_FK_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.User_FK" ManuallyRouted="false" />
@@ -60,6 +57,9 @@
         <AssociationConnector Association="hrmserver_HRMModel.TimeKeeping_FK_Shift" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.GROUPACCESS" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.GROUPMEMBER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXRATE" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXREPORT" Width="1.5" PointX="6.25" PointY="44.125" />
+        <AssociationConnector Association="hrmserver_HRMModel.TaxReport_FK_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
