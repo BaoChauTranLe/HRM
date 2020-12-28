@@ -15,6 +15,7 @@
 	<script src="~/Scripts/dhtmlxscheduler_units.js" type="text/javascript" charset="utf-8"></script>
 	<script src="~/Scripts/dhtmlxscheduler_multiselect.js" type="text/javascript" charset="utf-8"></script>
 	<script src="~/Scripts/locale_vn.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 	<style>
 		.main {
 			padding: 0px 0px !important;
@@ -49,6 +50,13 @@
 </body>
 
 <script>
+	var details;
+	var employees;
+	$.get("/TIMEKEEPINGTABLE/GetShiftDetailList", null, DataBind);
+	function DataBind(result1) {
+	}
+	
+
 	document.addEventListener("DOMContentLoaded", function (event) {
 		scheduler.config.multi_day = true;
 		scheduler.config.multisection = true;
@@ -56,14 +64,7 @@
 		scheduler.config.include_end_by = true;
 		scheduler.config.repeat_precise = true;
 		scheduler.locale.labels.timeline_tab = "Timeline";
-
-		var sections = [
-			{ key: 1, label: "Nhân viên 1" },
-			{ key: 2, label: "Nhân viên 2" },
-			{ key: 3, label: "Nhân viên 3" },
-			{ key: 4, label: "Nhân viên 4" }
-		];
-
+		var sections = [];
 		scheduler.createTimelineView({
 			name: "timeline",
 			x_unit: "hour",
@@ -81,10 +82,10 @@
 
 		scheduler.locale.labels.section_holidayselect = " ";
 
-		scheduler.attachEvent("onClick", function (id, e) {
-			dhtmlx.message(scheduler.getEvent(id).text);
-			return true;
-		});
+		//scheduler.attachEvent("onClick", function (id, e) {
+		//	dhtmlx.message(scheduler.getEvent(id).text);
+		//	return true;
+		//});
 
 		scheduler.config.lightbox.sections = [
 			{ name: "description", height: 130, map_to: "text", type: "textarea", focus: true },
@@ -97,8 +98,8 @@
 		];
 
 		scheduler.init('scheduler_here', new Date(), "timeline");
-
-		scheduler.parse([
+		scheduler.load(result1);
+		//scheduler.parse([
 
 			//{ start_date: "2017-06-30 10:00", end_date: "2017-06-30 16:00", text: "Task A-89411", section_id: '2' },
 			//{ start_date: "2017-06-30 4:00", end_date: "2017-06-30 15:00", text: "Sections 1,3", section_id: '1,3' },
@@ -113,6 +114,6 @@
 
 			//{ start_date: "2017-07-05 11:40", end_date: "2017-07-05 16:30", text: "Sections 4,2,3", section_id: '4,2,3' },
 			//{ start_date: "2017-07-06 12:00", end_date: "2017-07-06 18:00", text: "Task D-12458", section_id: '4' }
-		]);
+		//]);
 	});
 </script>
