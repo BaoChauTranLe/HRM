@@ -26,7 +26,7 @@ namespace HRM.Controllers
             {
                 List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
                 var AllowanceList = from a in list
-                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.Tax, a.FreeTax};
+                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.Tax, a.FreeTax, a.Value};
                 var result = new { list = AllowanceList, str = "success" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -48,7 +48,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrEdit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax")] ALLOWANCE aLLOWANCE)
+        public ActionResult CreateOrEdit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax,Value")] ALLOWANCE aLLOWANCE)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace HRM.Controllers
 
         // POST: ALLOWANCEs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
             try
