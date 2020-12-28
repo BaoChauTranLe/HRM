@@ -86,7 +86,47 @@ namespace HRM.Controllers
             }
             return View();
         }
-        public int getValueByName(string paraName)
+        public ActionResult Insurance()
+        {
+            return View();
+        }
+        public ActionResult InsuranceEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult InsuranceEdit(double SocialInsurance, double HealthInsurance, double WorkInsurance)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("BHXH").Value = SocialInsurance;
+                db.PARAMETERs.Find("BHYT").Value = HealthInsurance;
+                db.PARAMETERs.Find("BHTN").Value = WorkInsurance;
+                db.SaveChanges();
+                return RedirectToAction("Insurance");
+            }
+            return View();
+        }
+        public ActionResult StandardWorkDay()
+        {
+            return View();
+        }
+        public ActionResult StandardWorkDayEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult StandardWorkDayEdit(int WorkDayNum)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("SoNgayCongChuan").Value = WorkDayNum;
+                db.SaveChanges();
+                return RedirectToAction("StandardWorkDay");
+            }
+            return View();
+        }
+        public double getValueByName(string paraName)
         {
             var parameter = db.PARAMETERs.Find(paraName);
             return parameter.Value;
