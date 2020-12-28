@@ -1,0 +1,162 @@
+﻿@model IEnumerable<HRM.Models.TIMEKEEPINGREPORT>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+</head>
+
+<style>
+    table, th, td, tr {
+        border-color: #DFE0EB !important;
+        border-radius: 5px !important;
+    }
+
+    .index-txtbox {
+        height: 40px;
+        width: 180px;
+        /* Surface/Light */
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        /*Text*/
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        padding-left: 10px;
+    }
+
+    .drop-down-list {
+        /* Inside Auto Layout */
+        order: 1;
+        flex-grow: 0;
+        margin: 0px 2px;
+    }
+
+    .search-button {
+        height: 40px;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+    }
+</style>
+
+<div style="margin-top:20px;">
+    <input type="month" class="index-txtbox">
+
+    <select class="index-txtbox drop-down-list">
+        <option value="Tất cả phòng">Tất cả phòng</option>
+        <option value="Phòng nhân sự">Phòng nhân sự</option>
+        <option value="Phòng kế toán">Phòng kế toán</option>
+        <option value="Phòng giám đốc">Phòng giám đốc</option>
+    </select>
+
+    <select class="index-txtbox drop-down-list">
+        <option value="Tất cả chức vụ">Tất cả chức vụ</option>
+        <option value="Giám đốc">Giám đốc</option>
+        <option value="Trưởng phòng">Trưởng phòng</option>
+        <option value="Phó phòng">Phó phòng</option>
+        <option value="Nhân viên">Nhân viên</option>
+    </select>
+
+    <input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+    <input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+</div>
+
+<div class="fresh-table">
+    <table class="fresh-table" id="fresh-table" width="100%">
+        <thead>
+            <tr>
+                <th rowspan="2">
+                    @Html.DisplayName("STT")
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayName("Tên nhân viên")
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayName("Phòng")
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayName("Chức vụ")
+                </th>
+                <th colspan="3">
+                    @Html.DisplayName("Số giờ làm thêm ban ngày")
+                </th>
+                <th colspan="3">
+                    @Html.DisplayName("Số ngày làm thêm ban đêm")
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Ngày thường</th>
+                <th>Ngày nghỉ hằng tuần</th>
+                <th>Ngày nghỉ có lương</th>
+                <th>Ngày thường</th>
+                <th>Ngày nghỉ hằng tuần</th>
+                <th>Ngày nghỉ có lương</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var $table = $('#fresh-table')
+    $(function () {
+        $table.bootstrapTable({
+            classes: 'table table-hover table-responsive',
+            toolbar: '.toolbar',
+            pagination: true,
+            striped: true,
+            pageSize: 8,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return ''
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return pageNumber + ' rows visible'
+            }
+        })
+    })
+</script>
