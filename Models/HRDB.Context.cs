@@ -18,7 +18,7 @@ namespace HRM.Models
     public partial class hrmserver_HRMEntities : DbContext
     {
         public hrmserver_HRMEntities()
-            : base("name=Hrmserver_hRMEntities")
+            : base("name=hrmserver_HRMEntities")
         {
         }
     
