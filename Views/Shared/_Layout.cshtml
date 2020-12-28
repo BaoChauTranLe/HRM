@@ -463,35 +463,31 @@
 				<span class="fa fa-folder"></span> Nhân sự <i class="gg-chevron-down"></i>   <!-- Dấu mũi tên xuống -->
 			</button>
 
-            <div class="dropdown-container">
-                @Html.ActionLink("Thêm nhân viên", "Create", "EMPLOYEEs")
-                @Html.ActionLink("Tra cứu nhân viên", "Index", "EMPLOYEEs")
-                <a href="#">Tài khoản</a>
-            </div>
+			<div class="dropdown-container">
+				@Html.ActionLink("Thêm nhân viên", "Create", "EMPLOYEEs")
+				@Html.ActionLink("Tra cứu nhân viên", "Index", "EMPLOYEEs")
+				@Html.ActionLink("Tài khoản nhân viên", "Index", "USERs")
+			</div>
 
             <button class="dropdown-btn">
                 <!-- Icon -->                                    <!-- Dấu mũi tên xuống -->
                 <span class="fa fa-clock-o"></span> Chấm công <i class="gg-chevron-down"></i>
             </button>
 
-            <div class="dropdown-container">
-                <a href="#">Xem bảng chấm công</a>
-                <a href="#">Lập bảng chấm công ngày</a>
-                <a href="#">Lập bảng chấm công giờ làm thêm</a>
-            </div>
+			<div class="dropdown-container">
+				@Html.ActionLink("Xem bảng chấm công", "Index", "TIMEKEEPINGTABLE")
+			</div>
 
 			<button class="dropdown-btn">
 				<i class="fa fa-dollar-sign"></i> &nbsp Tiền lương <i class="gg-chevron-down"></i>     <!-- Dấu mũi tên xuống -->
 			</button>
 
-            <div class="dropdown-container">
-                <a href="#">Lập phiếu lương</a>
-                <a href="#">Bảng lương ngày công</a>
-                <a href="#">Bảng lương làm thêm</a>
-                <a href="#">Bảng lương tạm ứng</a>
-                <a href="#">Bảng phụ cấp trợ cấp</a>
-                <a href="#">Bảng tiền thưởng</a>
-            </div>
+			<div class="dropdown-container">
+				<a href="#">Bảng lương ngày công</a>
+				<a href="#">Bảng lương làm thêm</a>
+				@Html.ActionLink("Bảng lương tạm ứng", "Index", "ADVANCEDs")
+				@Html.ActionLink("Bảng phụ cấp, trợ cấp, thưởng", "Index", "ALLOWANCEs")
+			</div>
 
             <button class="dropdown-btn">
                 <i class="fa fa-unlock-alt"></i> Tài khoản <i class="gg-chevron-down"></i>     <!-- Dấu mũi tên xuống -->
@@ -514,22 +510,21 @@
                 <i class="fa fa-clock-o"></i> Chấm công<i class="gg-chevron-down"></i>     <!-- Dấu mũi tên xuống -->
             </button>
 
-            <div class="dropdown-container">
-                <a href="#">Chấm công tháng</a>
-                <a href="#">Chấm công giờ làm thêm tháng</a>
-            </div>
+			<div class="dropdown-container">
+				@Html.ActionLink("Chấm công tháng", "Index", "TIMEKEEPINGREPORTs")
+				@Html.ActionLink("Chấm công tháng giờ làm thêm tháng", "OvertimeIndex", "TIMEKEEPINGREPORTs")
+			</div>
 
 			<button class="dropdown-btn">
 				<!-- Icon -->
 				<i class="fa fa-dollar-sign"></i> &nbsp Tiền lương<i class="gg-chevron-down"></i>     <!-- Dấu mũi tên xuống -->
 			</button>
 
-            <div class="dropdown-container">
-                <a href="#">Tiền lương</a>
-                <a href="#">Thuế thu nhập</a>
-                <a href="#">Bảo hiểm</a>
-                <a href="#">Phụ cấp trợ cấp</a>
-            </div>
+			<div class="dropdown-container">
+				@Html.ActionLink("Tiền lương", "Index", "SALARYREPORTs")
+				@Html.ActionLink("Thuế TNCN", "Index", "TAXREPORTs")
+				@Html.ActionLink("Bảo hiểm", "Index", "INSURANCEREPORTs")
+			</div>
         </div>
 
         <hr class="rounded">
@@ -539,11 +534,14 @@
                 <i class="fa fa-cog"></i> Thiết lập quy định<i class="gg-chevron-down"></i>     <!-- Dấu mũi tên xuống -->
             </button>
 
-            <div class="dropdown-container">
-                <a href="#">Tuyển nhân sự</a>
-                <a href="#">Chấm công</a>
-                <a href="#">Tính lương</a>
-            </div>
+			<div class="dropdown-container">
+				@Html.ActionLink("Hồ sơ nhân viên", "Employee", "PARAMETERs")
+				@Html.ActionLink("Phòng ban", "Index", "ROOMs")
+				@Html.ActionLink("Chức vụ", "Index", "POSITIONs")
+				@Html.ActionLink("Thuế thu nhập cá nhân", "IncomeTax", "PARAMETERs")
+				@Html.ActionLink("Thuế suất", "Index", "TAXRATEs")
+				@Html.ActionLink("Hệ số lương làm thêm", "CoefficientOTSalary", "PARAMETERs")
+			</div>
         </div>
 
         <div class="block">
@@ -554,7 +552,7 @@
     <!-- The topbar -->
     <div class="topbar">
         <div class="container">
-            <!-- <div class="title">
+             @*<div class="title">
         <div class="title__main">
             Title
         </div>
@@ -562,7 +560,7 @@
         <div class="title__sub">
             Title
         </div>
-    </div> -->
+		</div>*@ 
 
             <div class="user__name">
                 @if (Session["EmployeeID"] != null)
