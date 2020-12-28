@@ -102,14 +102,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(var item in Model.eMPLOYEEs)
+					@foreach (var item in Model.eMPLOYEEs)
 					{
-					<tr>
-						<td></td>
-						<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
-						<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
-						<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
-					</tr>
+						<tr>
+							<td></td>
+							<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
+							<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
+							<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
+						</tr>
 					}
 				</tbody>
 			</table>
@@ -117,7 +117,7 @@
 	</div>
 	<div class="col-md-6" style="padding-top:3% ">
 		<div class="col-md-6">
-			
+
 			<label>Từ ngày</label>
 			<input type="date" name="select_date" id="select_date" class="form-control" />
 			<label style="margin-top:30px">Chọn ca làm việc</label>
@@ -193,6 +193,12 @@
 				</div>
 
 		}*@
+	<div style="position: relative">
+		<input type="submit" value="Lưu" class="btn-save" />
+		<button class="btn-cancel" onclick="GoHome()">
+			HỦY
+		</button>
+	</div>
 </body>
 
 <script>
@@ -216,5 +222,9 @@
 			}
 		})
 	})
-
+	$(function () {
+		$button.click(function () {
+			alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')))
+		})
+	})
 </script>
