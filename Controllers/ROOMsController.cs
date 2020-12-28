@@ -17,7 +17,24 @@ namespace HRM.Controllers
         // GET: ROOMs
         public ActionResult Index()
         {
-            return View(db.ROOMs.ToList());
+            return View();
+        }
+
+        public JsonResult GetRoomList()
+        {
+            try
+            {
+                List<ROOM> list = db.ROOMs.ToList();
+                var RoomList = from a in list
+                                    select new { a.RoomID, a.RoomName};
+                var result = new { list = RoomList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: ROOMs/Details/5

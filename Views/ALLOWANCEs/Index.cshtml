@@ -359,7 +359,6 @@
 	</div>
 </div>
 
-
 <script>
 	var $table = $('#fresh-table')
 	$(function () {
@@ -464,8 +463,8 @@
         document.getElementById("frm").reset();
         for (var i = 0; i < allowances.length; i++) {
             if (allowances[i].AllowancesID == id) {
-                document.getElementById("AllowancesID").value = allowances[i].AllowancesID;
-                document.getElementById("AllowancesName").value = allowances[i].AllowancesName;
+                document.getElementById("AllowanceID").value = allowances[i].AllowanceID;
+                document.getElementById("AllowanceName").value = allowances[i].AllowanceName;
                 document.getElementById("Insurance").checked = allowances[i].Insurance;
                 document.getElementById("Tax").checked = allowances[i].Tax;
                 document.getElementById("FreeTax").value = allowances[i].FreeTax;
