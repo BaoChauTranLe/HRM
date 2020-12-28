@@ -87,24 +87,40 @@
 	</div>
 	<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
 		<thead>
-			<tr>
-				<th data-field="id" data-sortable="true">
-					@Html.DisplayName("STT")
-				</th>
-				<th data-field="name" data-sortable="true">
-					@Html.DisplayName("Tên nhân viên")
-				</th>
-				<th data-field="department" data-sortable="true">
-					@Html.DisplayName("Phòng")
-				</th>
-				<th data-field="position" data-sortable="true" >
-					@Html.DisplayName("Chức vụ")
-				</th>
-				<th data-field="insurance_sum" data-sortable="true">
-					@Html.DisplayName("Tổng tiền đóng bảo hiểm")
-				</th>
-				<th></th>
-			</tr>
+            <tr>
+                <th data-field="id" rowspan="2">
+                    @Html.DisplayName("STT")
+                </th>
+                <th data-field="name" data-sortable="true" rowspan="2">
+                    @Html.DisplayName("Tên nhân viên")
+                </th>
+                <th data-field="department" data-sortable="true" rowspan="2">
+                    @Html.DisplayName("Phòng")
+                </th>
+                <th data-field="position" data-sortable="true" rowspan="2">
+                    @Html.DisplayName("Chức vụ")
+                </th>
+                <th data-field="insurance_pay" data-sortable="true" rowspan="2">
+                    @Html.DisplayName("Lương đóng bảo hiểm")
+                </th>
+                <th colspan="3" data-halign="center">
+                    @Html.DisplayName("Trích BH trừ vào lương")
+                </th>
+                <th data-field="insurance_sum" data-sortable="true" rowspan="2">
+                    @Html.DisplayName("Tổng tiền bảo hiểm phải đóng")
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("BHXH")
+                </th>
+                <th>
+                    @Html.DisplayName("BHYT")
+                </th>
+                <th>
+                    @Html.DisplayName("BHTN")
+                </th>
+            </tr>
 		</thead>
 		<tbody>
 			@foreach (var item in Model)

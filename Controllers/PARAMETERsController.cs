@@ -86,7 +86,7 @@ namespace HRM.Controllers
             }
             return View();
         }
-        public int getValueByName(string paraName)
+        public double getValueByName(string paraName)
         {
             var parameter = db.PARAMETERs.Find(paraName);
             return parameter.Value;

@@ -354,7 +354,6 @@
     <Content Include="Views\SALARYREPORTs\Index.cshtml" />
     <Content Include="Views\TAXREPORTs\Details.cshtml" />
     <Content Include="Views\TAXREPORTs\Index.cshtml" />
-    <Content Include="Views\INSURANCEREPORTs\Details.cshtml" />
     <Content Include="Views\INSURANCEREPORTs\Index.cshtml" />
     <Content Include="Views\ADVANCEDs\Create.cshtml" />
     <Content Include="Views\ADVANCEDs\Delete.cshtml" />
