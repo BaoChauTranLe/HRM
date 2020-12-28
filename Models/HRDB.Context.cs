@@ -35,7 +35,6 @@ namespace HRM.Models
         public virtual DbSet<DATEINFORMATION> DATEINFORMATIONs { get; set; }
         public virtual DbSet<EDUCATION> EDUCATIONs { get; set; }
         public virtual DbSet<EDUCATIONDETAIL> EDUCATIONDETAILs { get; set; }
-        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<GR> GRs { get; set; }
         public virtual DbSet<GROUPPERMISSION> GROUPPERMISSIONs { get; set; }
         public virtual DbSet<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
@@ -54,5 +53,6 @@ namespace HRM.Models
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
     }
 }

@@ -47,10 +47,9 @@ namespace HRM.Models
         public string RoomID { get; set; }
         public string PositionID { get; set; }
         public string ContractID { get; set; }
-        public string HealthInsurance { get; set; }
+        public Nullable<bool> HealthInsurance { get; set; }
         public string HealthInsuranceID { get; set; }
-        public string SocialInsuranceID { get; set; }
-        public string DeductionPersonal { get; set; }
+        public Nullable<bool> DeductionPersonal { get; set; }
         public Nullable<int> DeductionDependent { get; set; }
         public string Street { get; set; }
     

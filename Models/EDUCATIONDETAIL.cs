@@ -21,7 +21,7 @@ namespace HRM.Models
         public string Place { get; set; }
     
         public virtual EDUCATION EDUCATION { get; set; }
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual MAJOR MAJOR { get; set; }
+        public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }
