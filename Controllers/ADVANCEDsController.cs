@@ -17,8 +17,25 @@ namespace HRM.Controllers
         // GET: ADVANCEDs
         public ActionResult Index()
         {
-            var aDVANCEDs = db.ADVANCEDs.Include(a => a.EMPLOYEE);
-            return View(aDVANCEDs.ToList());
+            //var aDVANCEDs = db.ADVANCEDs.Include(a => a.EMPLOYEE);
+            return View();
+        }
+
+        public JsonResult GetAdvancedList()
+        {
+            try
+            {
+                List<ADVANCED> list = db.ADVANCEDs.Include(a => a.EMPLOYEE).ToList();
+                var AdvancedList = from a in list
+                               select new { a.EmployeeID, a.DateAdvanced, a.Value };
+                var result = new { list = AdvancedList, str = "success" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                var result = new { str = "fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: ADVANCEDs/Details/5

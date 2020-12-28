@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -120,10 +120,9 @@
           <Property Name="RoomID" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="PositionID" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="ContractID" Type="char" MaxLength="10" />
-          <Property Name="HealthInsurance" Type="nvarchar" MaxLength="10" />
+          <Property Name="HealthInsurance" Type="bit" />
           <Property Name="HealthInsuranceID" Type="varchar" MaxLength="15" />
-          <Property Name="SocialInsuranceID" Type="varchar" MaxLength="16" />
-          <Property Name="DeductionPersonal" Type="nvarchar" MaxLength="10" />
+          <Property Name="DeductionPersonal" Type="bit" />
           <Property Name="DeductionDependent" Type="int" />
           <Property Name="Street" Type="nvarchar" MaxLength="70" />
         </EntityType>
@@ -818,8 +817,7 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -831,7 +829,7 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="DateAdvanced" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.Advanced_FK_Employee" FromRole="ADVANCED" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.Advanced_FK_Employee" FromRole="ADVANCED" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="ADVANCEDREPORT">
           <Key>
@@ -842,7 +840,7 @@
           <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Value" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AdvancedReport_FK_Employee" FromRole="ADVANCEDREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.AdvancedReport_FK_Employee" FromRole="ADVANCEDREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="ALLOWANCE">
           <Key>
@@ -865,7 +863,7 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Value" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.AllowanceReport_FK_Employee" FromRole="ALLOWANCEREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="CERTIFICATE">
           <Key>
@@ -885,7 +883,7 @@
           <Property Name="CertificateDate" Type="DateTime" Precision="3" />
           <Property Name="CertificatePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CERTIFICATE" Relationship="Self.CertificateDetail_FK_Certificate" FromRole="CERTIFICATEDETAIL" ToRole="CERTIFICATE" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.CertificateDetail_FK_Employee" FromRole="CERTIFICATEDETAIL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.CertificateDetail_FK_Employee" FromRole="CERTIFICATEDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
@@ -898,7 +896,7 @@
           <Property Name="BasicSalary" Type="Int32" />
           <Property Name="PersonalIncomeTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TrialTime" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="CONTRACT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="hrmserver_HRMModel.EMPLOYEE_FK_CONTRACT" FromRole="CONTRACT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="DATEINFORMATION">
           <Key>
@@ -926,53 +924,8 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EDUCATION" Relationship="Self.EducationDetail_FK_Education" FromRole="EDUCATIONDETAIL" ToRole="EDUCATION" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.EducationDetail_FK_Employee" FromRole="EDUCATIONDETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="MAJOR" Relationship="Self.EducationDetail_FK_Major" FromRole="EDUCATIONDETAIL" ToRole="MAJOR" />
-        </EntityType>
-        <EntityType Name="EMPLOYEE">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DoB" Type="DateTime" Precision="3" />
-          <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="HomeTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Nation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Id" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="Ward" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="Dictrict" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="HealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="HealthInsuranceID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="SocialInsuranceID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="DeductionPersonal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DeductionDependent" Type="Int32" />
-          <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ADVANCEDs" Relationship="Self.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
-          <NavigationProperty Name="ADVANCEDREPORTs" Relationship="Self.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
-          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="Self.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
-          <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="Self.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
-          <NavigationProperty Name="CONTRACT" Relationship="Self.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
-          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
-          <NavigationProperty Name="POSITION" Relationship="Self.Employee_FK_Position" FromRole="EMPLOYEE" ToRole="POSITION" />
-          <NavigationProperty Name="ROOM" Relationship="Self.Employee_FK_Room" FromRole="EMPLOYEE" ToRole="ROOM" />
-          <NavigationProperty Name="SHIFTDETAILs" Relationship="Self.FK_ShiftDetail_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
-          <NavigationProperty Name="TaxKeepingReports" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TaxKeepingReport" />
-          <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
-          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
-          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
-          <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
-          <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
-          <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
-          <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.EducationDetail_FK_Employee" FromRole="EDUCATIONDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -983,7 +936,7 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="USERS" Relationship="Self.FK__USERS__GroupID__72910220" FromRole="GR" ToRole="USERS" />
           <NavigationProperty Name="GROUPPERMISSION1" Relationship="Self.Gr_FK" FromRole="GR" ToRole="GROUPPERMISSION" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.GROUPMEMBER" FromRole="GR" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="hrmserver_HRMModel.GROUPMEMBER" FromRole="GR" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="GROUPPERMISSION">
           <Key>
@@ -1011,7 +964,7 @@
           <Property Name="HealthInsurance2" Type="Int32" />
           <Property Name="UnemployeeInsurance2" Type="Int32" />
           <Property Name="SubSalary" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.InsuranceReport_FK_Employee" FromRole="INSURANCEREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.InsuranceReport_FK_Employee" FromRole="INSURANCEREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="MAJOR">
           <Key>
@@ -1042,7 +995,7 @@
           </Key>
           <Property Name="PositionID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="PositionName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.Employee_FK_Position" FromRole="POSITION" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="hrmserver_HRMModel.Employee_FK_Position" FromRole="POSITION" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
@@ -1050,7 +1003,7 @@
           </Key>
           <Property Name="RoomID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="RoomName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.Employee_FK_Room" FromRole="ROOM" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEEs" Relationship="hrmserver_HRMModel.Employee_FK_Room" FromRole="ROOM" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="SALARYREPORT">
           <Key>
@@ -1068,7 +1021,7 @@
           <Property Name="IncomeTax" Type="Int32" />
           <Property Name="Advance" Type="Int32" />
           <Property Name="RealSalary" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.SalaryReport_FK_Employee" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.SalaryReport_FK_Employee" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -1099,8 +1052,8 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_ShiftDetail_Employee" FromRole="SHIFTDETAIL" ToRole="EMPLOYEE" />
           <NavigationProperty Name="SHIFT" Relationship="Self.FK_ShiftDetail_Shift" FromRole="SHIFTDETAIL" ToRole="SHIFT" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.FK_ShiftDetail_Employee" FromRole="SHIFTDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1122,7 +1075,7 @@
           <Property Name="DayWorking" Type="Int32" Nullable="false" />
           <Property Name="DayAbsentHaveSalary" Type="Int32" Nullable="false" />
           <Property Name="DayAbsentNotSalary" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="TaxKeepingReport" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.FK_TaxKeepingReport_EMPLOYEE" FromRole="TaxKeepingReport" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TAXRATE">
           <Key>
@@ -1146,7 +1099,7 @@
           <Property Name="OverTimeFreeTax" Type="Int32" />
           <Property Name="TaxableIncome" Type="Int32" />
           <Property Name="IncomeTax" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -1160,8 +1113,8 @@
           <Property Name="HoursWorkNight" Type="Int32" />
           <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="DATEINFORMATION" Relationship="Self.TimeKeeping_FK_DateInformation" FromRole="TIMEKEEPING" ToRole="DATEINFORMATION" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TimeKeeping_FK_Employee" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
           <NavigationProperty Name="SHIFT" Relationship="Self.TimeKeeping_FK_Shift" FromRole="TIMEKEEPING" ToRole="SHIFT" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.TimeKeeping_FK_Employee" FromRole="TIMEKEEPING" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPINGREPORT">
           <Key>
@@ -1179,7 +1132,7 @@
           <Property Name="SumHourDayOff" Type="Int32" />
           <Property Name="SumHourVacation" Type="Int32" />
           <Property Name="SumHourNight" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="TIMEKEEPINGREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.TimekeepingReport_FK_Employee" FromRole="TIMEKEEPINGREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -1188,45 +1141,9 @@
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="GroupID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.User_FK" FromRole="USERS" ToRole="EMPLOYEE" />
           <NavigationProperty Name="GR" Relationship="Self.FK__USERS__GroupID__72910220" FromRole="USERS" ToRole="GR" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.User_FK" FromRole="USER" ToRole="EMPLOYEE" />
         </EntityType>
-        <Association Name="Advanced_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ADVANCED" Type="Self.ADVANCED" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ADVANCED">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AdvancedReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ADVANCEDREPORT" Type="Self.ADVANCEDREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ADVANCEDREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AllowanceReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="ALLOWANCEREPORT" Type="Self.ALLOWANCEREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="ALLOWANCEREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="CertificateDetail_FK_Certificate">
           <End Role="CERTIFICATE" Type="Self.CERTIFICATE" Multiplicity="1" />
           <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="*" />
@@ -1236,30 +1153,6 @@
             </Principal>
             <Dependent Role="CERTIFICATEDETAIL">
               <PropertyRef Name="TypeCertificateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CertificateDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="CERTIFICATEDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EMPLOYEE_FK_CONTRACT">
-          <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="0..1" />
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTRACT">
-              <PropertyRef Name="ContractID" />
-            </Principal>
-            <Dependent Role="EMPLOYEE">
-              <PropertyRef Name="ContractID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1287,18 +1180,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EducationDetail_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="EDUCATIONDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="EducationDetail_FK_Major">
           <End Role="MAJOR" Type="Self.MAJOR" Multiplicity="1" />
           <End Role="EDUCATIONDETAIL" Type="Self.EDUCATIONDETAIL" Multiplicity="*" />
@@ -1308,126 +1189,6 @@
             </Principal>
             <Dependent Role="EDUCATIONDETAIL">
               <PropertyRef Name="MajorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Employee_FK_Position">
-          <End Role="POSITION" Type="Self.POSITION" Multiplicity="1" />
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="POSITION">
-              <PropertyRef Name="PositionID" />
-            </Principal>
-            <Dependent Role="EMPLOYEE">
-              <PropertyRef Name="PositionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Employee_FK_Room">
-          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROOM">
-              <PropertyRef Name="RoomID" />
-            </Principal>
-            <Dependent Role="EMPLOYEE">
-              <PropertyRef Name="RoomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ShiftDetail_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="SHIFTDETAIL" Type="Self.SHIFTDETAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="SHIFTDETAIL">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TaxKeepingReport_EMPLOYEE">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="TaxKeepingReport" Type="Self.TaxKeepingReport" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TaxKeepingReport">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="InsuranceReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="INSURANCEREPORT" Type="Self.INSURANCEREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="INSURANCEREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SalaryReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="SALARYREPORT" Type="Self.SALARYREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="SALARYREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TaxReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="TAXREPORT" Type="Self.TAXREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TAXREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TimeKeeping_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TIMEKEEPING">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TimekeepingReport_FK_Employee">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="TIMEKEEPINGREPORT" Type="Self.TIMEKEEPINGREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TIMEKEEPINGREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="User_FK">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="USERS" Type="Self.USER" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="USERS">
-              <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1483,10 +1244,6 @@
           <End Role="GROUPPERMISSION" Type="Self.GROUPPERMISSION" Multiplicity="*" />
           <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="*" />
         </Association>
-        <Association Name="GROUPMEMBER">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <End Role="GR" Type="Self.GR" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
           <EntitySet Name="ADVANCEDREPORTs" EntityType="Self.ADVANCEDREPORT" />
@@ -1498,7 +1255,6 @@
           <EntitySet Name="DATEINFORMATIONs" EntityType="Self.DATEINFORMATION" />
           <EntitySet Name="EDUCATIONs" EntityType="Self.EDUCATION" />
           <EntitySet Name="EDUCATIONDETAILs" EntityType="Self.EDUCATIONDETAIL" />
-          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
           <EntitySet Name="GRs" EntityType="Self.GR" />
           <EntitySet Name="GROUPPERMISSIONs" EntityType="Self.GROUPPERMISSION" />
           <EntitySet Name="INSURANCEREPORTs" EntityType="Self.INSURANCEREPORT" />
@@ -1517,29 +1273,9 @@
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
-          <AssociationSet Name="Advanced_FK_Employee" Association="Self.Advanced_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="ADVANCED" EntitySet="ADVANCEDs" />
-          </AssociationSet>
-          <AssociationSet Name="AdvancedReport_FK_Employee" Association="Self.AdvancedReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="AllowanceReport_FK_Employee" Association="Self.AllowanceReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
-          </AssociationSet>
           <AssociationSet Name="CertificateDetail_FK_Certificate" Association="Self.CertificateDetail_FK_Certificate">
             <End Role="CERTIFICATE" EntitySet="CERTIFICATEs" />
             <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="CertificateDetail_FK_Employee" Association="Self.CertificateDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="EMPLOYEE_FK_CONTRACT" Association="Self.EMPLOYEE_FK_CONTRACT">
-            <End Role="CONTRACT" EntitySet="CONTRACTs" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
           </AssociationSet>
           <AssociationSet Name="TimeKeeping_FK_DateInformation" Association="Self.TimeKeeping_FK_DateInformation">
             <End Role="DATEINFORMATION" EntitySet="DATEINFORMATIONs" />
@@ -1549,53 +1285,9 @@
             <End Role="EDUCATION" EntitySet="EDUCATIONs" />
             <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
           </AssociationSet>
-          <AssociationSet Name="EducationDetail_FK_Employee" Association="Self.EducationDetail_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
-          </AssociationSet>
           <AssociationSet Name="EducationDetail_FK_Major" Association="Self.EducationDetail_FK_Major">
             <End Role="MAJOR" EntitySet="MAJORs" />
             <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="Employee_FK_Position" Association="Self.Employee_FK_Position">
-            <End Role="POSITION" EntitySet="POSITIONs" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-          </AssociationSet>
-          <AssociationSet Name="Employee_FK_Room" Association="Self.Employee_FK_Room">
-            <End Role="ROOM" EntitySet="ROOMs" />
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShiftDetail_Employee" Association="Self.FK_ShiftDetail_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TaxKeepingReport_EMPLOYEE" Association="Self.FK_TaxKeepingReport_EMPLOYEE">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TaxKeepingReport" EntitySet="TaxKeepingReports" />
-          </AssociationSet>
-          <AssociationSet Name="InsuranceReport_FK_Employee" Association="Self.InsuranceReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="SalaryReport_FK_Employee" Association="Self.SalaryReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="TimeKeeping_FK_Employee" Association="Self.TimeKeeping_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
-          </AssociationSet>
-          <AssociationSet Name="TimekeepingReport_FK_Employee" Association="Self.TimekeepingReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORTs" />
-          </AssociationSet>
-          <AssociationSet Name="User_FK" Association="Self.User_FK">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
           <AssociationSet Name="FK__USERS__GroupID__72910220" Association="Self.FK__USERS__GroupID__72910220">
             <End Role="GR" EntitySet="GRs" />
@@ -1617,11 +1309,316 @@
             <End Role="GROUPPERMISSION" EntitySet="GROUPPERMISSIONs" />
             <End Role="PERMISSION" EntitySet="PERMISSIONs" />
           </AssociationSet>
-          <AssociationSet Name="GROUPMEMBER" Association="Self.GROUPMEMBER">
+          <EntitySet Name="EMPLOYEEs" EntityType="hrmserver_HRMModel.EMPLOYEE" />
+          <AssociationSet Name="Advanced_FK_Employee" Association="hrmserver_HRMModel.Advanced_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ADVANCED" EntitySet="ADVANCEDs" />
+          </AssociationSet>
+          <AssociationSet Name="AdvancedReport_FK_Employee" Association="hrmserver_HRMModel.AdvancedReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ADVANCEDREPORT" EntitySet="ADVANCEDREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="AllowanceReport_FK_Employee" Association="hrmserver_HRMModel.AllowanceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ALLOWANCEREPORT" EntitySet="ALLOWANCEREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="CertificateDetail_FK_Employee" Association="hrmserver_HRMModel.CertificateDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="CERTIFICATEDETAIL" EntitySet="CERTIFICATEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="EMPLOYEE_FK_CONTRACT" Association="hrmserver_HRMModel.EMPLOYEE_FK_CONTRACT">
+            <End Role="CONTRACT" EntitySet="CONTRACTs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="EducationDetail_FK_Employee" Association="hrmserver_HRMModel.EducationDetail_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="EDUCATIONDETAIL" EntitySet="EDUCATIONDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="Employee_FK_Position" Association="hrmserver_HRMModel.Employee_FK_Position">
+            <End Role="POSITION" EntitySet="POSITIONs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="Employee_FK_Room" Association="hrmserver_HRMModel.Employee_FK_Room">
+            <End Role="ROOM" EntitySet="ROOMs" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetail_Employee" Association="hrmserver_HRMModel.FK_ShiftDetail_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="SHIFTDETAIL" EntitySet="SHIFTDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxKeepingReport_EMPLOYEE" Association="hrmserver_HRMModel.FK_TaxKeepingReport_EMPLOYEE">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TaxKeepingReport" EntitySet="TaxKeepingReports" />
+          </AssociationSet>
+          <AssociationSet Name="InsuranceReport_FK_Employee" Association="hrmserver_HRMModel.InsuranceReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="SalaryReport_FK_Employee" Association="hrmserver_HRMModel.SalaryReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="TaxReport_FK_Employee" Association="hrmserver_HRMModel.TaxReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="TimeKeeping_FK_Employee" Association="hrmserver_HRMModel.TimeKeeping_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
+          </AssociationSet>
+          <AssociationSet Name="TimekeepingReport_FK_Employee" Association="hrmserver_HRMModel.TimekeepingReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="User_FK" Association="hrmserver_HRMModel.User_FK">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="USER" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="GROUPMEMBER" Association="hrmserver_HRMModel.GROUPMEMBER">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="GR" EntitySet="GRs" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HomeTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Nation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Ward" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Dictrict" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="PositionID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ContractID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="HealthInsurance" Type="Boolean" />
+          <Property Name="HealthInsuranceID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DeductionPersonal" Type="Boolean" />
+          <Property Name="DeductionDependent" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ADVANCEDs" Relationship="hrmserver_HRMModel.Advanced_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCED" />
+          <NavigationProperty Name="ADVANCEDREPORTs" Relationship="hrmserver_HRMModel.AdvancedReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ADVANCEDREPORT" />
+          <NavigationProperty Name="ALLOWANCEREPORTs" Relationship="hrmserver_HRMModel.AllowanceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="ALLOWANCEREPORT" />
+          <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="hrmserver_HRMModel.CertificateDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
+          <NavigationProperty Name="CONTRACT" Relationship="hrmserver_HRMModel.EMPLOYEE_FK_CONTRACT" FromRole="EMPLOYEE" ToRole="CONTRACT" />
+          <NavigationProperty Name="EDUCATIONDETAIL" Relationship="hrmserver_HRMModel.EducationDetail_FK_Employee" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
+          <NavigationProperty Name="POSITION" Relationship="hrmserver_HRMModel.Employee_FK_Position" FromRole="EMPLOYEE" ToRole="POSITION" />
+          <NavigationProperty Name="ROOM" Relationship="hrmserver_HRMModel.Employee_FK_Room" FromRole="EMPLOYEE" ToRole="ROOM" />
+          <NavigationProperty Name="SHIFTDETAILs" Relationship="hrmserver_HRMModel.FK_ShiftDetail_Employee" FromRole="EMPLOYEE" ToRole="SHIFTDETAIL" />
+          <NavigationProperty Name="TaxKeepingReports" Relationship="hrmserver_HRMModel.FK_TaxKeepingReport_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TaxKeepingReport" />
+          <NavigationProperty Name="INSURANCEREPORTs" Relationship="hrmserver_HRMModel.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
+          <NavigationProperty Name="SALARYREPORTs" Relationship="hrmserver_HRMModel.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="TAXREPORTs" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
+          <NavigationProperty Name="TIMEKEEPINGs" Relationship="hrmserver_HRMModel.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
+          <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="hrmserver_HRMModel.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
+          <NavigationProperty Name="USER" Relationship="hrmserver_HRMModel.User_FK" FromRole="EMPLOYEE" ToRole="USER" />
+          <NavigationProperty Name="GRs" Relationship="hrmserver_HRMModel.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
+        </EntityType>
+        <Association Name="Advanced_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.ADVANCED" Role="ADVANCED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCED">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdvancedReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.ADVANCEDREPORT" Role="ADVANCEDREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ADVANCEDREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AllowanceReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.ALLOWANCEREPORT" Role="ALLOWANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CertificateDetail_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.CERTIFICATEDETAIL" Role="CERTIFICATEDETAIL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CERTIFICATEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPLOYEE_FK_CONTRACT">
+          <End Type="hrmserver_HRMModel.CONTRACT" Role="CONTRACT" Multiplicity="0..1" />
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACT">
+              <PropertyRef Name="ContractID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EducationDetail_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.EDUCATIONDETAIL" Role="EDUCATIONDETAIL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EDUCATIONDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Employee_FK_Position">
+          <End Type="hrmserver_HRMModel.POSITION" Role="POSITION" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POSITION">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Employee_FK_Room">
+          <End Type="hrmserver_HRMModel.ROOM" Role="ROOM" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShiftDetail_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.SHIFTDETAIL" Role="SHIFTDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SHIFTDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxKeepingReport_EMPLOYEE">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.TaxKeepingReport" Role="TaxKeepingReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TaxKeepingReport">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InsuranceReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.INSURANCEREPORT" Role="INSURANCEREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="INSURANCEREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalaryReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.SALARYREPORT" Role="SALARYREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SALARYREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaxReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.TAXREPORT" Role="TAXREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TAXREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimeKeeping_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.TIMEKEEPING" Role="TIMEKEEPING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPING">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TimekeepingReport_FK_Employee">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.TIMEKEEPINGREPORT" Role="TIMEKEEPINGREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TIMEKEEPINGREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FK">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="hrmserver_HRMModel.USER" Role="USER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GROUPMEMBER">
+          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="*" />
+          <End Type="hrmserver_HRMModel.GR" Role="GR" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1724,35 +1721,6 @@
                 <ScalarProperty Name="MajorID" ColumnName="MajorID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Place" ColumnName="Place" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EMPLOYEEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
-              <MappingFragment StoreEntitySet="EMPLOYEE">
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="DoB" ColumnName="DoB" />
-                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
-                <ScalarProperty Name="HomeTown" ColumnName="HomeTown" />
-                <ScalarProperty Name="Nation" ColumnName="Nation" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Ward" ColumnName="Ward" />
-                <ScalarProperty Name="Dictrict" ColumnName="Dictrict" />
-                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
-                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
-                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
-                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
-                <ScalarProperty Name="HealthInsuranceID" ColumnName="HealthInsuranceID" />
-                <ScalarProperty Name="SocialInsuranceID" ColumnName="SocialInsuranceID" />
-                <ScalarProperty Name="DeductionPersonal" ColumnName="DeductionPersonal" />
-                <ScalarProperty Name="DeductionDependent" ColumnName="DeductionDependent" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1968,12 +1936,40 @@
               <ScalarProperty Name="Permission1" ColumnName="Permission" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EMPLOYEEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="DeductionDependent" ColumnName="DeductionDependent" />
+                <ScalarProperty Name="DeductionPersonal" ColumnName="DeductionPersonal" />
+                <ScalarProperty Name="HealthInsuranceID" ColumnName="HealthInsuranceID" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Dictrict" ColumnName="Dictrict" />
+                <ScalarProperty Name="Ward" ColumnName="Ward" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nation" ColumnName="Nation" />
+                <ScalarProperty Name="HomeTown" ColumnName="HomeTown" />
+                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="GROUPMEMBER" TypeName="hrmserver_HRMModel.GROUPMEMBER" StoreEntitySet="GROUPMEMBER">
-            <EndProperty Name="EMPLOYEE">
-              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-            </EndProperty>
             <EndProperty Name="GR">
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+            </EndProperty>
+            <EndProperty Name="EMPLOYEE">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

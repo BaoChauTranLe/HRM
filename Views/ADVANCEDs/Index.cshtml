@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HRM.Models.ADVANCED>
+﻿@model HRM.Models.ADVANCED
 
 @{
     ViewBag.Title = "Index";
@@ -239,9 +239,8 @@
                 <th>
                     @Html.DisplayName("Số tiền")
                 </th>
-                <th>
-
-                </th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="SetAdvancedList">
@@ -270,32 +269,152 @@
         })
     })
 
-    function GetDataString(advanced, n) {
-        var Data = "<tr class='row_" + advanced.ShiftID + "'>" +
-            "<td>" + (n + 1) + "</td>" +
-            "<td>" + advanced.AllowanceName + "</td>" +
-            "<td>" + advanced.Value + "</td>";
-        if (advanced.Insurance == true) {
-            Data = Data + "<td> Có </td>";
-        }
-        else {
-            Data = Data + "<td> Không </td>";
-        }
-        if (advanced.Tax == true) {
-            Data = Data + "<td> Có </td>";
-        }
-        else {
-            Data = Data + "<td> Không </td>";
-        }
-        Data = Data + "<td>" + advanced.FreeTax + "</td>";
+    
+</script>
 
-        Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
+<!--script for interactive with user-->
+<script>
+    $("#LoadingStatus").html("Loading....");
+    // Get the modal
+    var create_modal = document.getElementById("createModal");
+    var delete_modal = document.getElementById("deleteModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    function openCreateModal() {
+        $("#modal-title").html("Thêm phòng");
+        create_modal.style.display = "block";
+
+        //document.getElementById("frm").reset();
+
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    //close create modal
+    function closeModal() {
+        window.location.reload();
+        create_modal.style.display = "none";
+        delete_modal.style.display = "none";
+        $("#bg").fadeOut();
+    }
+
+    //function to get list of allowance and display on table
+    var advanceds;
+    $.get("/ADVANCEDs/GetAdvancedList", null, DataBind);
+    function DataBind(result) {
+        if (result.str == "success") {
+            var SetData = $("#SetAdvancedList");
+            advanceds = result.list;
+            if (advanceds.length == 0)
+                $("#LoadingStatus").html("Chưa có dữ liệu nào.");
+            for (var i = 0; i < advanceds.length; i++) {
+                SetData.append(GetDataString(advanceds[i], i));
+                $("#LoadingStatus").html(" ");
+            }
+        }
+        else {
+            $("#LoadingStatus").html("Có lỗi xảy ra trong quá trình tải dữ liệu.");
+        }
+    }
+
+    function GetDataString(advanced, n) {
+        var name;
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/EMPLOYEEs/GetNameByID',
+        //    dataType: "json",
+        //    contentType: "application/json; charset=utf-8",
+        //    data: JSON.stringify({ id: advanced.EmployeeID }),
+        //    success: function (data) {
+        //        // do what ever you want with the server response
+        //        alert(data);
+        //        closeModal();
+        //    },
+        //    error: function (error) {
+        //        // error handling
+        //        alert("Xóa không thành công");
+        //        console.log();
+        //    }
+        //});
+
+        $.getJSON("/EMPLOYEEs/GetNameByID", { id: advanced.EmployeeID }, function (data, status) {
+            name = data.name;
+        });
+        var Data = "<tr class='row_" + advanced.DateAdvanced + "'>" +
+            "<td>" + (n + 1) + "</td>" +
+            "<td>" + advanced.EmployeeID + "</td>" +
+            "<td>" + name + "</td>" +
+            "<td>" + advanced.DateAdvanced + "</td>"
+            "<td>" + advanced.Value + "</td>";
+
+        Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + advanced.DateAdvanced + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
             "</td>" +
-            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + allowance.AllowanceID + "'" + ")\" >"
+            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + advanced.DateAdvanced + "'" + ")\" >"
             + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
             "</td>" +
             "</tr>";
         return Data;
+    }
+
+    //function to show information of a allowance on modal
+    function EditModule(id) {
+        $("#modal-title").html("Sửa tạm ứng");
+        document.getElementById("frm").reset();
+        for (var i = 0; i < rooms.length; i++) {
+            if (advanceds[i].RoomID == id) {
+                document.getElementById("EmployeeID").value = advanceds[i].EmployeeID;
+                document.getElementById("Value").value = advanceds[i].Value;
+            }
+        }
+
+        create_modal.style.display = "block";
+
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    //functions to show delete confirm
+    var deleteId;
+    function DeleteModule(id) {
+        deleteId = id;
+        var name;
+        for (var i = 0; i < rooms.length; i++) {
+            if (rooms[i].RoomID == id) {
+                name = rooms[i].RoomName;
+            }
+        }
+        var noticeString = "Dữ liệu về " + name + " sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
+        $("#modal__text").html(noticeString);
+        delete_modal.style.display = "block";
+        $("#bg").width("100%").height("100%");
+
+        $("#bg").fadeTo("slow", 0.8);
+    }
+
+    function deleteByID() {
+        $.ajax({
+            type: 'POST',
+            url: '/ROOMs/DeleteConfirmed',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ "id": deleteId }),
+            success: function (data) {
+                // do what ever you want with the server response
+                alert("Xóa thành công");
+                closeModal();
+            },
+            error: function (error) {
+                // error handling
+                alert("Xóa không thành công");
+                console.log();
+            }
+        });
     }
 </script>
