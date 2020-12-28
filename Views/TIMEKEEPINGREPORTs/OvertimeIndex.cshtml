@@ -93,25 +93,21 @@
                 <th rowspan="2">
                     @Html.DisplayName("Chức vụ")
                 </th>
-                <th colspan="3">
+                <th colspan="3" data-halign="center">
                     @Html.DisplayName("Số giờ làm thêm ban ngày")
                 </th>
-                <th colspan="3">
+                <th colspan="3" data-halign="center">
                     @Html.DisplayName("Số ngày làm thêm ban đêm")
                 </th>
             </tr>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Ngày thường</th>
-                <th>Ngày nghỉ hằng tuần</th>
-                <th>Ngày nghỉ có lương</th>
-                <th>Ngày thường</th>
-                <th>Ngày nghỉ hằng tuần</th>
-                <th>Ngày nghỉ có lương</th>
-            </tr>
+			<tr>
+				<th>Ngày thường</th>
+				<th>Ngày nghỉ hằng tuần</th>
+				<th>Ngày nghỉ có lương</th>
+				<th>Ngày thường</th>
+				<th>Ngày nghỉ hằng tuần</th>
+				<th>Ngày nghỉ có lương</th>
+			</tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
