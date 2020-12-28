@@ -84,7 +84,6 @@
     }
 </style>
 
-
 <a href="@Url.Action("IncomeTaxEdit","PARAMETERs")">
     <input type="button" id="btn" class="edit__button" value="Chỉnh sửa" />
 </a>
@@ -95,15 +94,15 @@
 <div class="form-group margin" style="margin-top: 40px; height: 110px;">
     @Html.Label("Mức thu nhập tối thiểu phải đóng thuế (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="11.000.000" disabled />
+    <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucThuNhapToiThieuPhaiDongThue" })" disabled />
 </div>
 <div class="form-group margin" style="height: 110px;">
     @Html.Label("Mức giảm trừ bản thân (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="11.000.000" disabled />
+    <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucGiamTruBanThan" })" disabled />
 </div>
 <div class="form-group margin" style="height: 110px;">
     @Html.Label("Mức giảm trừ ứng với mỗi người phụ thuộc (VNĐ/tháng)", htmlAttributes: new { @class = "lbl" })
     <br />
-    <input type="text" class="disabled-txtbox" value="4.400.000" disabled />
+    <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucGiamTruNguoiPhuThuoc" })" disabled />
 </div>
