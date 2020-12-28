@@ -61,11 +61,11 @@ namespace HRM.Models
         public int BasicSalary { get; set; }
         public string PersonalIncomeTax { get; set; }
         public int? TrialTime { get; set; }
-        public string HealthInsurance { get; set; }
+        public bool? HealthInsurance { get; set; }
         [Required(ErrorMessage = "Mã bảo hiểm y tế bắt buộc")]
         [StringLength(maximumLength: 15, ErrorMessage = "Mã bảo hiểm y tế có 15 ký tự", MinimumLength = 15)]
         public string HealthInsuranceID { get; set; }
-        public string DeductionPersonal { get; set; }
+        public bool? DeductionPersonal { get; set; }
         [Required(ErrorMessage = "Số người đăng ký giảm trừ phụ thuộc bắt buộc")]
         public int DeductionDependent { get; set; }
         [Required(ErrorMessage = "Tên đường bắt buộc")]

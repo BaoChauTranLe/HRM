@@ -308,7 +308,6 @@ namespace HRM.Controllers
                 eMPLOYEE.ContractID = employee.ContractID;
                 eMPLOYEE.HealthInsurance = employee.HealthInsurance;
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                eMPLOYEE.SocialInsuranceID = employee.HealthInsuranceID.Substring(employee.HealthInsuranceID.Length - 10, 10);
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
@@ -601,7 +600,6 @@ namespace HRM.Controllers
                 eMPLOYEE.ContractID = employee.ContractID;
                 eMPLOYEE.HealthInsurance = employee.HealthInsurance;
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                eMPLOYEE.SocialInsuranceID = employee.HealthInsuranceID.Substring(employee.HealthInsuranceID.Length - 10, 10);
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
                 db.Entry(eMPLOYEE).State = EntityState.Modified;
