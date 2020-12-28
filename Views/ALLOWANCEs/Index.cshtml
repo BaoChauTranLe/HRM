@@ -228,8 +228,6 @@
 				</th>
 				<th>
 					@Html.DisplayName("Số tiền")
-					<br />
-					(ngàn đồng)
 				</th>
 				<th>
 					@Html.DisplayName("Được miễn bảo hiểm")
@@ -239,8 +237,6 @@
 				</th>
 				<th>
 					@Html.DisplayName("Khoản tiền được miễn")
-					<br />
-					(ngàn đồng)
 				</th>
 				<th></th>
 				<th></th>
@@ -283,7 +279,7 @@
 					<div class="form-group">
 						<div class="col-md-10" style="padding-top:40px;">
 							<div class="modal__text">
-								Số tiền (ngàn đồng)
+								Số tiền
 							</div>
 
 							@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
@@ -312,7 +308,7 @@
 					<div class="form-group">
 						<div class="col-md-10">
 							<div class="modal__text">
-								Khoản tiền được miễn (ngàn đồng)
+								Khoản tiền được miễn
 							</div>
 
 							@Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "form-control" } })
