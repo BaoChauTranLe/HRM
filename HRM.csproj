@@ -382,6 +382,7 @@
     <Content Include="Views\USERs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGREPORTs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGREPORTs\OvertimeIndex.cshtml" />
+    <Content Include="Views\PARAMETERs\EmployeeEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

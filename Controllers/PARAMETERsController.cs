@@ -19,6 +19,25 @@ namespace HRM.Controllers
         {
             return View();
         }
+        public ActionResult EmployeeEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EmployeeEdit(int MinFemaleAge, int MaxFemaleAge, int MinMaleAge, int MaxMaleAge, int AreaMinSalary)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("TuoiToiThieuNu").Value = MinFemaleAge;
+                db.PARAMETERs.Find("TuoiToiDaNu").Value = MaxFemaleAge;
+                db.PARAMETERs.Find("TuoiToiThieuNam").Value = MinMaleAge;
+                db.PARAMETERs.Find("TuoiToiDaNam").Value = MaxMaleAge;
+                db.PARAMETERs.Find("MucLuongToiThieuVung").Value = AreaMinSalary;
+                db.SaveChanges();
+                return RedirectToAction("Employee");
+            }    
+            return View();
+        }
         public ActionResult CoefficientsOTSalary()
         {
             return View();
