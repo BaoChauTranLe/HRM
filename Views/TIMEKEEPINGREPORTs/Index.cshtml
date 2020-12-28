@@ -78,62 +78,67 @@
 </div>
 
 <div class="fresh-table">
-    <table class="fresh-table" id="fresh-table" width="100%">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("STT")
-                </th>
-                <th>
-                    @Html.DisplayName("Tên nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Phòng")
-                </th>
-                <th>
-                    @Html.DisplayName("Chức vụ")
-                </th>
-                <th>
-                    @Html.DisplayName("Số ngày đi làm")
-                </th>
-                <th>
-                    @Html.DisplayName("Số ngày nghỉ có lương")
-                </th>
-                <th>
-                    @Html.DisplayName("Số ngày nghỉ không lương")
-                </th>
-            </tr>
-        </thead>
-        
+	<table class="fresh-table" id="fresh-table" width="100%">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayName("STT")
+				</th>
+				<th>
+					@Html.DisplayName("Tên nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Phòng")
+				</th>
+				<th>
+					@Html.DisplayName("Chức vụ")
+				</th>
+				<th>
+					@Html.DisplayName("Số ngày đi làm")
+				</th>
+				<th>
+					@Html.DisplayName("Số ngày nghỉ có lương")
+				</th>
+				<th>
+					@Html.DisplayName("Số ngày nghỉ không lương")
+				</th>
+			</tr>
+		</thead>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SumWorkDay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SumAbsent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SunAbsentNoSalary)
-                </td>
-            </tr>
-        }
 
-    </table>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SumWorkDay)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SumAbsent)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SunAbsentNoSalary)
+				</td>
+			</tr>
+		}
+	<tr>
+		<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
+		<td> @Model.Sum(i => i.SumWorkDay)</td>
+		<td> @Model.Sum(i => i.SumAbsent)</td>
+		<td> @Model.Sum(i => i.SunAbsentNoSalary)</td>
+	</tr>
+
+	</table>
 </div>
 
 <script>

@@ -88,29 +88,33 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rank)
-                        </td>
-                        <td>
-                            Từ 
-                            @Html.DisplayFor(modelItem => item.Min)
-                            triệu đồng
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rate)
-                            %
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Rank }) | 
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Rank })
-                        </td>
-                    </tr>
-                }
-            </tbody>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Rank)
+						</td>
+						<td>
+							Từ
+							@Html.DisplayFor(modelItem => item.Min)
+							triệu đồng
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Rate)
+							%
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.Rank }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.Rank })
+						</td>
+					</tr>
+				}
+				<tr>
+					<td colspan="5" style="border-color: #DFE0EB !important;">Tổng</td>
+					<td> </td>
+				</tr>
+			</tbody>
         </table>
     </div>
 </body>

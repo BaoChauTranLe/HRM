@@ -98,30 +98,34 @@
             </tr>
         </thead>
         
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RealSalary)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-            }
-        </tbody>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.RealSalary)
+					</td>
+					<td>
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+					</td>
+				</tr>
+			}
+			<tr>
+				<td colspan="8" style="border-color: #DFE0EB !important;">Tổng</td>
+				<td> @Model.Sum(i => i.RealSalary)</td>
+			</tr>
+		</tbody>
     </table>
 
 </div>
