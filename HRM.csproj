@@ -193,13 +193,13 @@
       <DependentUpon>HRDB.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>HRDB.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\HRDB.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>HRDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\INSURANCEREPORT.cs">
@@ -228,12 +228,6 @@
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SHIFTDETAIL.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -282,10 +276,13 @@
       <DependentUpon>HRDB.edmx</DependentUpon>
       <LastGenOutput>HRDB.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\HRDB.edmx.diagram">
+      <DependentUpon>HRDB.edmx</DependentUpon>
+    </Content>
     <Content Include="Models\HRDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRDB.edmx</DependentUpon>
       <LastGenOutput>HRDB.cs</LastGenOutput>
+      <DependentUpon>HRDB.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -294,9 +291,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HRDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\HRDB.edmx.diagram">
-      <DependentUpon>HRDB.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxscheduler_multisection.js" />
     <Content Include="Scripts\dhtmlxscheduler_multiselect.js" />

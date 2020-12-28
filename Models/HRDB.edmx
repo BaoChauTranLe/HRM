@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -188,7 +188,7 @@
             <PropertyRef Name="ParameterName" />
           </Key>
           <Property Name="ParameterName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -673,37 +673,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hrmserver_HRMModelStoreContainer">
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADVANCEDREPORT" EntityType="Self.ADVANCEDREPORT" Schema="dbo" store:Type="Tables" />
@@ -849,7 +818,8 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -998,11 +968,11 @@
           <NavigationProperty Name="TaxKeepingReports" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TaxKeepingReport" />
           <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.InsuranceReport_FK_Employee" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
           <NavigationProperty Name="SALARYREPORTs" Relationship="Self.SalaryReport_FK_Employee" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="TAXREPORTs" Relationship="Self.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
           <NavigationProperty Name="TIMEKEEPINGs" Relationship="Self.TimeKeeping_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPING" />
           <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.TimekeepingReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
           <NavigationProperty Name="USER" Relationship="Self.User_FK" FromRole="EMPLOYEE" ToRole="USERS" />
           <NavigationProperty Name="GRs" Relationship="Self.GROUPMEMBER" FromRole="EMPLOYEE" ToRole="GR" />
-          <NavigationProperty Name="TAXREPORTs" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
         </EntityType>
         <EntityType Name="GR">
           <Key>
@@ -1056,7 +1026,7 @@
             <PropertyRef Name="ParameterName" />
           </Key>
           <Property Name="ParameterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
@@ -1153,6 +1123,30 @@
           <Property Name="DayAbsentHaveSalary" Type="Int32" Nullable="false" />
           <Property Name="DayAbsentNotSalary" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_TaxKeepingReport_EMPLOYEE" FromRole="TaxKeepingReport" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="TAXRATE">
+          <Key>
+            <PropertyRef Name="Rank" />
+          </Key>
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Min" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAXREPORT">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TotalIncome" Type="Int32" />
+          <Property Name="DependentDeduction" Type="Int32" />
+          <Property Name="SelfDeduction" Type="Int32" />
+          <Property Name="OverTimeHour" Type="Int32" />
+          <Property Name="OverTimeFreeTax" Type="Int32" />
+          <Property Name="TaxableIncome" Type="Int32" />
+          <Property Name="IncomeTax" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -1389,6 +1383,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TaxReport_FK_Employee">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="TAXREPORT" Type="Self.TAXREPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TAXREPORT">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TimeKeeping_FK_Employee">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="TIMEKEEPING" Type="Self.TIMEKEEPING" Multiplicity="*" />
@@ -1506,6 +1512,8 @@
           <EntitySet Name="SHIFTDETAILs" EntityType="Self.SHIFTDETAIL" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaxKeepingReports" EntityType="Self.TaxKeepingReport" />
+          <EntitySet Name="TAXRATEs" EntityType="Self.TAXRATE" />
+          <EntitySet Name="TAXREPORTs" EntityType="Self.TAXREPORT" />
           <EntitySet Name="TIMEKEEPINGs" EntityType="Self.TIMEKEEPING" />
           <EntitySet Name="TIMEKEEPINGREPORTs" EntityType="Self.TIMEKEEPINGREPORT" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
@@ -1573,6 +1581,10 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
           </AssociationSet>
+          <AssociationSet Name="TaxReport_FK_Employee" Association="Self.TaxReport_FK_Employee">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
+          </AssociationSet>
           <AssociationSet Name="TimeKeeping_FK_Employee" Association="Self.TimeKeeping_FK_Employee">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPINGs" />
@@ -1609,90 +1621,7 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="GR" EntitySet="GRs" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(hrmserver_HRMModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="TAXRATEs" EntityType="hrmserver_HRMModel.TAXRATE" />
-          <EntitySet Name="TAXREPORTs" EntityType="hrmserver_HRMModel.TAXREPORT" />
-          <AssociationSet Name="TaxReport_FK_Employee" Association="hrmserver_HRMModel.TaxReport_FK_Employee">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="TAXREPORT" EntitySet="TAXREPORTs" />
-          </AssociationSet>
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="TAXRATE">
-          <Key>
-            <PropertyRef Name="Rank" />
-          </Key>
-          <Property Name="Rank" Type="Int32" Nullable="false" />
-          <Property Name="Min" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TAXREPORT">
-          <Key>
-            <PropertyRef Name="Month" />
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="TotalIncome" Type="Int32" />
-          <Property Name="DependentDeduction" Type="Int32" />
-          <Property Name="SelfDeduction" Type="Int32" />
-          <Property Name="OverTimeHour" Type="Int32" />
-          <Property Name="OverTimeFreeTax" Type="Int32" />
-          <Property Name="TaxableIncome" Type="Int32" />
-          <Property Name="IncomeTax" Type="Int32" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="hrmserver_HRMModel.TaxReport_FK_Employee" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
-        </EntityType>
-        <Association Name="TaxReport_FK_Employee">
-          <End Type="hrmserver_HRMModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
-          <End Type="hrmserver_HRMModel.TAXREPORT" Role="TAXREPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TAXREPORT">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1969,6 +1898,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TAXRATEs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXRATE">
+              <MappingFragment StoreEntitySet="TAXRATE">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAXREPORTs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
+              <MappingFragment StoreEntitySet="TAXREPORT">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+                <ScalarProperty Name="DependentDeduction" ColumnName="DependentDeduction" />
+                <ScalarProperty Name="SelfDeduction" ColumnName="SelfDeduction" />
+                <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
+                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
+                <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
+                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TIMEKEEPINGs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.TIMEKEEPING">
               <MappingFragment StoreEntitySet="TIMEKEEPING">
@@ -2023,54 +1976,6 @@
               <ScalarProperty Name="GroupID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="hrmserver_HRMModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="hrmserver_HRMModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="hrmserver_HRMModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="hrmserver_HRMModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="hrmserver_HRMModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="hrmserver_HRMModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="hrmserver_HRMModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="TAXRATEs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXRATE">
-              <MappingFragment StoreEntitySet="TAXRATE">
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAXREPORTs">
-            <EntityTypeMapping TypeName="hrmserver_HRMModel.TAXREPORT">
-              <MappingFragment StoreEntitySet="TAXREPORT">
-                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
-                <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
-                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
-                <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
-                <ScalarProperty Name="SelfDeduction" ColumnName="SelfDeduction" />
-                <ScalarProperty Name="DependentDeduction" ColumnName="DependentDeduction" />
-                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

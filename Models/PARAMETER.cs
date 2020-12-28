@@ -15,6 +15,6 @@ namespace HRM.Models
     public partial class PARAMETER
     {
         public string ParameterName { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }
