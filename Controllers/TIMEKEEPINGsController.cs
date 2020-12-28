@@ -20,28 +20,42 @@ namespace HRM.Controllers
             var tIMEKEEPINGs = db.TIMEKEEPINGs.Include(t => t.DATEINFORMATION).Include(t => t.EMPLOYEE);
             return View(tIMEKEEPINGs.ToList());
         }
-
-        // GET: TIMEKEEPINGs/Details/5
-        public ActionResult Details(DateTime id)
+        private List<EMPLOYEE> GetEmployee()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TIMEKEEPING tIMEKEEPING = db.TIMEKEEPINGs.Find(id);
-            if (tIMEKEEPING == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tIMEKEEPING);
+            List<EMPLOYEE> list = db.EMPLOYEEs.ToList();
+            return list;
         }
 
+        public List<SHIFT> GetShift()
+        {
+            List<SHIFT> list = db.SHIFTs.ToList();
+            return list;
+        }
+
+        public List<ROOM> GetRoom()
+        {
+            List<ROOM> list = db.ROOMs.ToList();
+            return list;
+        }
+        public List<POSITION> GetPosition()
+        {
+            List<POSITION> list = db.POSITIONs.ToList();
+            return list;
+        }
+        
         // GET: TIMEKEEPINGs/Create
         public ActionResult Create()
         {
-            ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date");
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
-            return View();
+            SetShiftViewModel mymodel = new SetShiftViewModel();
+            mymodel.eMPLOYEEs = GetEmployee();
+            mymodel.sHIFTs = GetShift();
+
+            List<EMPLOYEE> a = db.EMPLOYEEs.ToList();
+
+            ViewBag.Room = GetRoom();
+            ViewBag.Position = GetPosition();
+            //ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
+            return View(mymodel);
         }
 
         // POST: TIMEKEEPINGs/Create
@@ -49,18 +63,20 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Date,EmployeeID,State,AbsentID,HoursWorkDay,HoursWorkNight")] TIMEKEEPING tIMEKEEPING)
+        public ActionResult Create(SetShiftViewModel vmTK)
         {
+           
             if (ModelState.IsValid)
             {
-                db.TIMEKEEPINGs.Add(tIMEKEEPING);
+                db.TIMEKEEPINGs.Add(vmTK.tIMEKEEPING);
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date", tIMEKEEPING.Date);
-            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", tIMEKEEPING.EmployeeID);
-            return View(tIMEKEEPING);
+            //ViewBag.Date = new SelectList(db.DATEINFORMATIONs, "Date", "Date", tIMEKEEPING.Date);
+            //ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", tIMEKEEPING.EmployeeID);
+            return View(vmTK);
         }
 
         // GET: TIMEKEEPINGs/Edit/5

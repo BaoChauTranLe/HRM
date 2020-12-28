@@ -1,8 +1,7 @@
-﻿@model HRM.Models.TIMEKEEPING
-
+﻿@model HRM.Models.SetShiftViewModel
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
 	<!-- Style -->
@@ -26,39 +25,65 @@
 		border-color: #DFE0EB !important;
 		border-radius: 5px !important;
 	}
-	.btn-select {
-		background: #3D76B5;
-		/* 1 dp */
-		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-		border-radius: 4px;
-		color: white;
-		width: 80px;
+
+	.index-txtbox {
 		height: 40px;
-		position: absolute;
+		/* Surface/Light */
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		/*Text*/
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 150%;
+		padding-left: 10px;
 	}
-	.form-control {
-		border-radius: 7px !important;
+
+	.drop-down-list {
+		/* Inside Auto Layout */
+		order: 1;
+		flex-grow: 0;
+		margin: 0px 2px;
+	}
+
+	.search-button {
+		height: 40px;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
 	}
 </style>
 <body>
 	<div class="col-md-6">
 		<div class="fresh-table">
-			<div class="toolbar">
-				<div class="search-panel">
-					<div class="col-md-3">
-						<input type="text" name="select_room" id="select_room" placeholder="Chọn phòng" class="form-control" />
+			<div class="search-panel" style="padding-top:10px;padding-bottom:10px;">
+				<div class="col-md-3" style="padding-left: 0 !important;">
+					<select class="index-txtbox drop-down-list">
+						<option value="Tất cả phòng">Tất cả phòng</option>
+						<option value="Phòng nhân sự">Phòng nhân sự</option>
+						<option value="Phòng kế toán">Phòng kế toán</option>
+						<option value="Phòng giám đốc">Phòng giám đốc</option>
+					</select>
 
-					</div>
-					<div class="col-md-3">
-						<input type="text" name="select_position" id="select_position" placeholder="Chọn chức vụ" class="form-control" />
+				</div>
+				<div class="col-md-3" style="padding-left: 5px !important;">
+					<select class="index-txtbox drop-down-list">
+						<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+						<option value="Giám đốc">Giám đốc</option>
+						<option value="Trưởng phòng">Trưởng phòng</option>
+						<option value="Phó phòng">Phó phòng</option>
+						<option value="Nhân viên">Nhân viên</option>
+					</select>
 
-					</div>
-					<div class="col-md-3">
-						<input type="search" name="find_name" id="find_name" placeholder="Tìm tên nhân viên" class="form-control search-input" />
-					</div>
-					<div class="col-md-3">
-						<input type="button" name="search" id="search" value="Tìm" class="btn-select" />
-					</div>
+				</div>
+				<div class="col-md-3" style="padding-left: 0px !important;">
+					<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" />
+				</div>
+				<div class="col-md-3">
+					<input type="button" class="search-button" value="Tìm kiếm" style="width:100%;" />
 				</div>
 			</div>
 			<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
@@ -77,23 +102,38 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach (var item in Model.eMPLOYEEs)
+					{
+						<tr>
+							<td></td>
+							<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
+							<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
+							<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
+						</tr>
+					}
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class="col-md-6" style="padding-top:90px ">
+	<div class="col-md-6" style="padding-top:3% ">
 		<div class="col-md-6">
+
 			<label>Từ ngày</label>
 			<input type="date" name="select_date" id="select_date" class="form-control" />
 			<label style="margin-top:30px">Chọn ca làm việc</label>
-			<input type="text" name="select_shift" id="select_shift" class="form-control"  />
+			<select class="index-txtbox drop-down-list" style="width:100%;">
+				@foreach (var item in Model.sHIFTs)
+				{
+					<option value="">@Html.DisplayFor(modelItem => item.ShiftName)</option>
+				}
+			</select>
 		</div>
 		<div class="col-md-6">
 			<label>Đến ngày</label>
 			<input type="date" name="select_date" id="select_date" class="form-control" />
 		</div>
 	</div>
-		@*@using (Html.BeginForm())
+	@*@using (Html.BeginForm())
 			{
 				@Html.AntiForgeryToken()
 				<hr />
@@ -153,6 +193,12 @@
 				</div>
 
 		}*@
+	<div style="position: relative">
+		<input type="submit" value="Lưu" class="btn-save" />
+		<button class="btn-cancel" onclick="GoHome()">
+			HỦY
+		</button>
+	</div>
 </body>
 
 <script>
@@ -176,5 +222,9 @@
 			}
 		})
 	})
-
+	$(function () {
+		$button.click(function () {
+			alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')))
+		})
+	})
 </script>
