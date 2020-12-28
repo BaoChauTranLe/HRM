@@ -27,9 +27,9 @@ namespace HRM.Controllers
         {
             return View();
         }
-        public int getValueByName(string name)
+        public int getValueByName(string paraName)
         {
-            var parameter = db.PARAMETERs.Find(name);
+            var parameter = db.PARAMETERs.Find(paraName);
             return parameter.Value;
         }
     }
