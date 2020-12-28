@@ -37,99 +37,60 @@ namespace HRM.Controllers
             }
         }
 
-        // GET: ROOMs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ROOM rOOM = db.ROOMs.Find(id);
-            if (rOOM == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rOOM);
-        }
-
-        // GET: ROOMs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ROOMs/Create
+        // POST: ROOMs/CreateOrEdit
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoomID,RoomName")] ROOM rOOM)
+        public ActionResult CreateOrEdit([Bind(Include = "RoomID,RoomName")] ROOM rOOM)
         {
             if (ModelState.IsValid)
             {
-                db.ROOMs.Add(rOOM);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (rOOM.RoomID == null)
+                {
+                    //auto create allowanceID
+                    int n = 0;
+                    var roomList = db.ROOMs.ToList();
+                    if (roomList.Count > 0)
+                    {
+                        ROOM r = roomList.Last();
+                        n = Int32.Parse(r.RoomID.Substring(r.RoomID.Length - 2)) + 1;
+                    }
+
+                    string id = String.Format("{0:00}", n);
+                    rOOM.RoomID = "R" + id;
+
+                    db.ROOMs.Add(rOOM);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    db.Entry(rOOM).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(rOOM);
         }
-
-        // GET: ROOMs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ROOM rOOM = db.ROOMs.Find(id);
-            if (rOOM == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rOOM);
-        }
-
-        // POST: ROOMs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RoomID,RoomName")] ROOM rOOM)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(rOOM).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(rOOM);
-        }
-
-        // GET: ROOMs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ROOM rOOM = db.ROOMs.Find(id);
-            if (rOOM == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rOOM);
-        }
-
+        
         // POST: ROOMs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteConfirmed")]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            ROOM rOOM = db.ROOMs.Find(id);
-            db.ROOMs.Remove(rOOM);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                ROOM rOOM = db.ROOMs.Find(id);
+                db.ROOMs.Remove(rOOM);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

@@ -43,9 +43,181 @@
         letter-spacing: 0.2px;
         color: #3D76B5;
     }
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 12; /* Sit on top */
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: left;
+        width: 490px;
+        height: 554px;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s;
+        vertical-align: middle;
+        margin-left: 122px;
+        margin-top: 30px;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: fixed;
+        background-color: #fefefe;
+        width: 100%;
+        height: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s
+    }
+
+    /* The Close Button */
+    .close {
+        color: #4282BB;
+        float: right;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal-header {
+        top: 0px;
+        height: 32px;
+        padding: 2px 16px;
+        background-color: #E0EFFF;
+        color: #4282BB;
+        font-size: 20px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+    }
+
+    .modal-body {
+        padding-top: 10px;
+        padding-left: 37px;
+        padding-right: 37px;
+    }
+
+    #bg {
+        background-color: black;
+        width: 0;
+        height: 0;
+        display: none;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+    }
+
+    .add__button {
+        display: block;
+        height: 36px;
+        width: 94px;
+        right: 36px;
+        top: 80px;
+        position: absolute;
+        background: #E3F2FD;
+        border: 1px solid #3D76B5;
+        border-radius: 4px;
+    }
+
+    .modal__text {
+        font-size: 15px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        margin-top: 13px;
+        margin-bottom: 7px;
+    }
+
+    .form-control, select {
+        height: 47px;
+        width: calc(100% - 4px);
+        font-size: 15px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        padding-left: 10px;
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    .check-box {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        padding: 0;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .btn.btn-default {
+        position: fixed;
+        display: block;
+        text-align: center;
+        padding: 0px;
+        bottom: 37px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        width: 126px;
+        height: 40px;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+        color: white;
+    }
+
+    input#StartTime, input#EndTime {
+        font-size: 15px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        padding-left: 10px;
+        background: #F8FAFA;
+        border: 1px solid #DBDBDB;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: inline;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+
+    .text-danger.field-validation-error {
+        color: red;
+        font-size: 13px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+    }
+
+    .modal-title {
+        display: inline-block;
+        width: 80%;
+    }
 </style>
 
-<input type="button" id="btn" class="add__button" value="Thêm" />
+<input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()" />
 <div class="fresh-table">
     <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
         <thead>
@@ -56,6 +228,8 @@
                 <th data-sortable="true">
                     @Html.DisplayName("Phòng")
                 </th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="SetRoomList">
@@ -111,7 +285,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Xóa trợ cấp/phụ cấp/thưởng</div>
+            <div class="modal-title">Xóa phòng</div>
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
         <div class="modal-body">
@@ -187,7 +361,7 @@
     $.get("/ROOMs/GetRoomList", null, DataBind);
     function DataBind(result) {
         if (result.str == "success") {
-            var SetData = $("#SetAllowanceList");
+            var SetData = $("#SetRoomList");
             rooms = result.list;
             if (rooms.length == 0)
                 $("#LoadingStatus").html("Chưa có dữ liệu nào.");
@@ -204,15 +378,22 @@
     function GetDataString(room, n) {
         var Data = "<tr class='row_" + room.RoomID + "'>" +
             "<td>" + (n + 1) + "</td>" +
-            "<td>" + room.RoomName + "</td>" + "</tr>";
+            "<td>" + room.RoomName + "</td>" +
+            "<td class=\"text-center\" onclick=\"EditModule(" + "'" + room.RoomID + "'" + ")\">"
+                + "<i class='fa fa-edit pa-5 text-warning'></i>" +
+                "</td>" +
+                " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + room.RoomID + "'" + ")\" >"
+                + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
+                "</td>" +
+                "</tr>";;
         return Data;
     }
 
     //function to show information of a allowance on modal
     function EditModule(id) {
-        $("#modal-title").html("Sửa tên phòng");
+        $("#modal-title").html("Sửa phòng");
         document.getElementById("frm").reset();
-        for (var i = 0; i < allowances.length; i++) {
+        for (var i = 0; i < rooms.length; i++) {
             if (rooms[i].RoomID == id) {
                 document.getElementById("RoomID").value = rooms[i].RoomID;
                 document.getElementById("RoomName").value = rooms[i].RoomName;
