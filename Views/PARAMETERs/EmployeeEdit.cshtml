@@ -111,14 +111,9 @@
         <input name="MaxMaleAge" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiDaNam" })" />
     </div>
     <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Mức lương tối thiểu vùng (VNĐ)", htmlAttributes: new { @class = "lbl" })
+        @Html.Label("Mức lương tối thiểu vùng", htmlAttributes: new { @class = "lbl" })
         <br />
         <input name="AreaMinSalary" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucLuongToiThieuVung" })" />
-    </div>
-    <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Hệ số lương thử việc tối thiểu (%)", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="TrialMinSalary" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLThuViec" })" />
     </div>
 
     <div class="form-group" style="margin-left:395px;">
