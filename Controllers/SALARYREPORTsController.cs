@@ -83,13 +83,14 @@ namespace HRM.Controllers
                 income += (int)val.Value; //Standard income = BasicSalary + all kind of Allowances
             }
             insurance_pay = CalculateInsurancePay(e, (int)insurance_pay);
+            int absentVacationSalary = (int)(db.TIMEKEEPINGREPORTs.Find(id).SumVacation * income / db.PARAMETERs.Find("SoNgayCongChuan").Value);
             int incomeTax = CalculateTaxableIncome(e, income, insurance_pay);
 
             income = (int)(income * db.TIMEKEEPINGREPORTs.Find(id).SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
-            income = income - insurance_pay - incomeTax;
-            income = income - CalculateAdvanced(e);
+            income = income - insurance_pay - incomeTax - CalculateAdvanced(e);
+            income = income + absentVacationSalary;
             
-            return 0;
+            return income;
         }
         // GET: SALARYREPORTs
         public ActionResult Index()
