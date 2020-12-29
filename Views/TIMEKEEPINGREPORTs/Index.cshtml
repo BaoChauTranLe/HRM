@@ -1,82 +1,98 @@
 ﻿@model IEnumerable<HRM.Models.TIMEKEEPINGREPORT>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
 
-    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+	<link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
-    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 </head>
 
 <style>
-    table, th, td, tr {
-        border-color: #DFE0EB !important;
-        border-radius: 5px !important;
-    }
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
+	}
 
-    .index-txtbox {
-        height: 40px;
-        width: 180px;
-        /* Surface/Light */
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-        /*Text*/
-        font-family: IBM Plex Sans;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 15px;
-        line-height: 150%;
-        padding-left: 10px;
-    }
+	.index-txtbox {
+		height: 40px;
+		width: 180px;
+		/* Surface/Light */
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		/*Text*/
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 150%;
+		padding-left: 10px;
+	}
 
-    .drop-down-list {
-        /* Inside Auto Layout */
-        order: 1;
-        flex-grow: 0;
-        margin: 0px 2px;
-    }
+	.drop-down-list {
+		/* Inside Auto Layout */
+		order: 1;
+		flex-grow: 0;
+		margin: 0px 2px;
+	}
 
-    .search-button {
-        height: 40px;
-        background: #E3F2FD;
-        border: 1px solid #3D76B5;
-        border-radius: 4px;
-    }
+	.search-button, .update-button {
+		height: 40px;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
 </style>
 
 <div style="margin-top:20px;">
-    <input type="month" class="index-txtbox">
+	<input type="month" class="index-txtbox">
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả phòng">Tất cả phòng</option>
-        <option value="Phòng nhân sự">Phòng nhân sự</option>
-        <option value="Phòng kế toán">Phòng kế toán</option>
-        <option value="Phòng giám đốc">Phòng giám đốc</option>
-    </select>
+	<select class="index-txtbox drop-down-list">
+		<option value="Tất cả phòng">Tất cả phòng</option>
+		<option value="Phòng nhân sự">Phòng nhân sự</option>
+		<option value="Phòng kế toán">Phòng kế toán</option>
+		<option value="Phòng giám đốc">Phòng giám đốc</option>
+	</select>
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả chức vụ">Tất cả chức vụ</option>
-        <option value="Giám đốc">Giám đốc</option>
-        <option value="Trưởng phòng">Trưởng phòng</option>
-        <option value="Phó phòng">Phó phòng</option>
-        <option value="Nhân viên">Nhân viên</option>
-    </select>
+	<select class="index-txtbox drop-down-list">
+		<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+		<option value="Giám đốc">Giám đốc</option>
+		<option value="Trưởng phòng">Trưởng phòng</option>
+		<option value="Phó phòng">Phó phòng</option>
+		<option value="Nhân viên">Nhân viên</option>
+	</select>
 
-    <input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
-    <input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+	<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+	<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+
 </div>
+@using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-horizontal">
 
+
+	<div class="control-label" style="text-align:left;">File excel:</div>
+
+	<div class="col-md-1" style="padding-left: 0px;">
+		<input type="submit" value="Cập nhập" id="btnSubmit" class="" />
+	</div>
+	<div class="col-md-1" style="padding-top:2px; padding-left:5px;">
+		<input type="file" id="FileUpload" name="FileUpload" class="" />
+	</div>
+
+</div>
+}
 <div class="fresh-table">
 	<table class="fresh-table" id="fresh-table" width="100%">
 		<thead>
@@ -124,40 +140,40 @@
 					@Html.DisplayFor(modelItem => item.SumWorkDay)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.SumAbsent)
+					@Html.DisplayFor(modelItem => item.SumAbsentHaveSalary)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.SunAbsentNoSalary)
+					@Html.DisplayFor(modelItem => item.SumAbsentNoSalary)
 				</td>
 			</tr>
 		}
-	<tr>
-		<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
-		<td> @Model.Sum(i => i.SumWorkDay)</td>
-		<td> @Model.Sum(i => i.SumAbsent)</td>
-		<td> @Model.Sum(i => i.SunAbsentNoSalary)</td>
-	</tr>
+		<tr>
+			<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
+			<td> @Model.Sum(i => i.SumWorkDay)</td>
+			<td> @Model.Sum(i => i.SumAbsentHaveSalary)</td>
+			<td> @Model.Sum(i => i.SumAbsentNoSalary)</td>
+		</tr>
 
 	</table>
 </div>
 
 <script>
-    var $table = $('#fresh-table')
-    $(function () {
-        $table.bootstrapTable({
-            classes: 'table table-hover table-responsive',
-            toolbar: '.toolbar',
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			pagination: true,
+			striped: true,
+			toolbar: '.toolbar',
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return ''
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + ' rows visible'
-            }
-        })
-    })
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
 </script>
