@@ -16,15 +16,14 @@ namespace HRM.Models
     {
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
-        public Nullable<int> Allowance { get; set; }
-        public Nullable<int> SalaryStandard { get; set; }
-        public Nullable<int> WorkDay { get; set; }
-        public Nullable<int> SalaryWorkDay { get; set; }
-        public Nullable<int> Insurance { get; set; }
-        public Nullable<int> Overtime { get; set; }
-        public Nullable<int> IncomeTax { get; set; }
-        public Nullable<int> Advance { get; set; }
-        public Nullable<int> RealSalary { get; set; }
+        public int Allowance { get; set; }
+        public int WorkDay { get; set; }
+        public int WorkDaySalary { get; set; }
+        public int InsurancePay { get; set; }
+        public int OvertimeSalary { get; set; }
+        public int IncomeTax { get; set; }
+        public int Advance { get; set; }
+        public int RealSalary { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

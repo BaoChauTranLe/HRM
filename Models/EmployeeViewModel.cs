@@ -11,10 +11,10 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         [Required(ErrorMessage = "Tên nhân viên bắt buộc")]
         public string EmployeeName { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string Sex { get; set; }
         [Required(ErrorMessage = "Ngày sinh bắt buộc")]
-        public DateTime? DoB { get; set; }
+        public DateTime DoB { get; set; }
         public string Birthplace { get; set; }
         public string HomeTown { get; set; }
         public string Nation { get; set; }
@@ -41,7 +41,7 @@ namespace HRM.Models
         public string MajorID { get; set; }
         public string MajorName { get; set; }
         [Required(ErrorMessage = "Ngày cấp bắt buộc")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         [Required(ErrorMessage = "Nơi đào tạo bắt buộc")]
         public string Place { get; set; }
         [Required(ErrorMessage = "Tên chứng chỉ bắt buộc")]
@@ -49,7 +49,7 @@ namespace HRM.Models
         public string TypeCertificateID { get; set; }
         public string TypeCertificate { get; set; }
         [Required(ErrorMessage = "Ngày cấp bắt buộc")]
-        public DateTime? CertificateDate { get; set; }
+        public DateTime CertificateDate { get; set; }
         [Required(ErrorMessage = "Nơi cấp bắt buộc")]
         public string CertificatePlace { get; set; }
         [Required(ErrorMessage = "Mã hợp đồng bắt buộc")]

@@ -16,16 +16,10 @@ namespace HRM.Models
     {
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
-        public Nullable<int> SalaryInsurance { get; set; }
-        public Nullable<int> UnionFee { get; set; }
-        public Nullable<int> SocialInsurance1 { get; set; }
-        public Nullable<int> HealthInsurance1 { get; set; }
-        public Nullable<int> UnemployeeInsurance1 { get; set; }
-        public Nullable<int> InsuranceAndUnionFee { get; set; }
-        public Nullable<int> SocialInsurance2 { get; set; }
-        public Nullable<int> HealthInsurance2 { get; set; }
-        public Nullable<int> UnemployeeInsurance2 { get; set; }
-        public Nullable<int> SubSalary { get; set; }
+        public int InsurancePaySalary { get; set; }
+        public int SocialInsurancePay { get; set; }
+        public int HealthInsurancePay { get; set; }
+        public int TotalInsurancePay { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

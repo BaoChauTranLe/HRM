@@ -19,7 +19,6 @@ namespace HRM.Models
         public SHIFT()
         {
             this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
-            this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
         }
     
         public string ShiftID { get; set; }
@@ -46,7 +45,5 @@ namespace HRM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
     }
 }

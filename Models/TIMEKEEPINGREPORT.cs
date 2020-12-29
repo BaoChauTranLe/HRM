@@ -17,14 +17,17 @@ namespace HRM.Models
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<int> SumWorkDay { get; set; }
-        public Nullable<int> SumLateDay { get; set; }
-        public Nullable<int> SunAbsentNoSalary { get; set; }
-        public Nullable<int> SumVacation { get; set; }
-        public Nullable<int> SumAbsent { get; set; }
+        public Nullable<int> SumAbsentHaveSalary { get; set; }
+        public Nullable<int> SumAbsentNoSalary { get; set; }
         public Nullable<int> SumHourNormal { get; set; }
         public Nullable<int> SumHourDayOff { get; set; }
-        public Nullable<int> SumHourVacation { get; set; }
-        public Nullable<int> SumHourNight { get; set; }
+        public Nullable<int> SumHourSpecialDayOff { get; set; }
+        public Nullable<int> SumHourNightNormal { get; set; }
+        public Nullable<int> SumHourNightDayOff { get; set; }
+        public Nullable<int> SumHourNightSpecialDayOff { get; set; }
+        public Nullable<int> SumHourNightNormalExtra { get; set; }
+        public Nullable<int> SumHourNightDayOffExtra { get; set; }
+        public Nullable<int> SumHourNightSpecialDayOffExtra { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

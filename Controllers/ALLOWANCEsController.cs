@@ -26,7 +26,7 @@ namespace HRM.Controllers
             {
                 List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
                 var AllowanceList = from a in list
-                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.Tax, a.FreeTax, a.Value};
+                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.FreeTax, a.FreeTaxValue, a.Value};
                 var result = new { list = AllowanceList, str = "success" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }

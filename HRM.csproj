@@ -149,16 +149,7 @@
     <Compile Include="Models\ADVANCED.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ADVANCEDREPORT.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ALLOWANCE.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ALLOWANCEREPORT.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CERTIFICATE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CERTIFICATEDETAIL.cs">
@@ -171,9 +162,6 @@
     <Compile Include="Models\DATEINFORMATION.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EDUCATION.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EDUCATIONDETAIL.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
@@ -181,25 +169,19 @@
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeViewModel.cs" />
-    <Compile Include="Models\GR.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GROUPPERMISSION.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HRDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HRDB.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRDB.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRDB.Designer.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>HRDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\INSURANCEREPORT.cs">
@@ -209,9 +191,6 @@
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PARAMETER.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PERMISSION.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\POSITION.cs">
@@ -231,9 +210,6 @@
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>HRDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaxKeepingReport.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAXRATE.cs">
@@ -276,13 +252,10 @@
       <DependentUpon>HRDB.edmx</DependentUpon>
       <LastGenOutput>HRDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\HRDB.edmx.diagram">
-      <DependentUpon>HRDB.edmx</DependentUpon>
-    </Content>
     <Content Include="Models\HRDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HRDB.cs</LastGenOutput>
       <DependentUpon>HRDB.edmx</DependentUpon>
+      <LastGenOutput>HRDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -291,6 +264,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HRDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Models\HRDB.edmx.diagram">
+      <DependentUpon>HRDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxscheduler_multisection.js" />
     <Content Include="Scripts\dhtmlxscheduler_multiselect.js" />

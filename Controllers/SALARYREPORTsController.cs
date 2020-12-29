@@ -15,12 +15,12 @@ namespace HRM.Controllers
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
         public int CalculateInsurancePay(EMPLOYEE e, int insurancePay)
         {
-            if (e.HealthInsurance == false)
-            {
-                return (int)(insurancePay * db.PARAMETERs.Find("BHXH").Value + insurancePay
-                                          * db.PARAMETERs.Find("BHYT").Value + insurancePay
-                                          * db.PARAMETERs.Find("BHTN").Value);
-            }
+            //if (e.HealthInsurance == false)
+            //{
+            //    return (int)(insurancePay * db.PARAMETERs.Find("BHXH").Value + insurancePay
+            //                              * db.PARAMETERs.Find("BHYT").Value + insurancePay
+            //                              * db.PARAMETERs.Find("BHTN").Value);
+            //}
             return 0;
         }
         public int CalculateIncomeTax(EMPLOYEE e, int taxPay)
@@ -50,13 +50,13 @@ namespace HRM.Controllers
             {
                 taxPay = income - insurancePay;
                 var allowanceList = db.ALLOWANCEs.ToList();
-                var freeTaxList = allowanceList.Where(x => x.Tax == true).ToList();
-                for (int i = 0; i < freeTaxList.Count; i++)
-                    taxPay -= (int)freeTaxList[i].FreeTax;
-                if (e.DeductionPersonal == true)
-                    taxPay -= (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
-                if (e.DeductionDependent > 0)
-                    taxPay -= (int)(db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DeductionDependent);
+                //var freeTaxList = allowanceList.Where(x => x.Tax == true).ToList();
+                //for (int i = 0; i < freeTaxList.Count; i++)
+                //    taxPay -= (int)freeTaxList[i].FreeTax;
+                //if (e.DeductionPersonal == true)
+                //    taxPay -= (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
+                //if (e.DeductionDependent > 0)
+                //    taxPay -= (int)(db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DeductionDependent);
             }
             return taxPay;
         }
@@ -83,12 +83,12 @@ namespace HRM.Controllers
                 income += (int)val.Value; //Standard income = BasicSalary + all kind of Allowances
             }
             insurance_pay = CalculateInsurancePay(e, (int)insurance_pay);
-            int absentVacationSalary = (int)(db.TIMEKEEPINGREPORTs.Find(id).SumVacation * income / db.PARAMETERs.Find("SoNgayCongChuan").Value);
+            //int absentVacationSalary = (int)(db.TIMEKEEPINGREPORTs.Find(id).SumVacation * income / db.PARAMETERs.Find("SoNgayCongChuan").Value);
             int incomeTax = CalculateTaxableIncome(e, income, insurance_pay);
 
             income = (int)(income * db.TIMEKEEPINGREPORTs.Find(id).SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
             income = income - insurance_pay - incomeTax - CalculateAdvanced(e);
-            income = income + absentVacationSalary;
+            //income = income + absentVacationSalary;
             
             return income;
         }

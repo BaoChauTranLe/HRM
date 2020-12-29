@@ -19,7 +19,7 @@ namespace HRM.Models
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
     
-        public virtual SHIFT SHIFT { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual SHIFT SHIFT { get; set; }
     }
 }

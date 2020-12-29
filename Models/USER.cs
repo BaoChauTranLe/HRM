@@ -16,9 +16,7 @@ namespace HRM.Models
     {
         public string EmployeeID { get; set; }
         public string Password { get; set; }
-        public string GroupID { get; set; }
     
-        public virtual GR GR { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }

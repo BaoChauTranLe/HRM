@@ -15,13 +15,12 @@ namespace HRM.Models
     public partial class EDUCATIONDETAIL
     {
         public string EmployeeID { get; set; }
-        public string EducationID { get; set; }
+        public string EducationName { get; set; }
         public string MajorID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public string Place { get; set; }
     
-        public virtual EDUCATION EDUCATION { get; set; }
-        public virtual MAJOR MAJOR { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual MAJOR MAJOR { get; set; }
     }
 }

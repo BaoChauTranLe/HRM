@@ -22,7 +22,6 @@ namespace HRM.Models
         public string ShiftID { get; set; }
     
         public virtual DATEINFORMATION DATEINFORMATION { get; set; }
-        public virtual SHIFT SHIFT { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }

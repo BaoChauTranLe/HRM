@@ -18,23 +18,19 @@ namespace HRM.Models
         public EMPLOYEE()
         {
             this.ADVANCEDs = new HashSet<ADVANCED>();
-            this.ADVANCEDREPORTs = new HashSet<ADVANCEDREPORT>();
-            this.ALLOWANCEREPORTs = new HashSet<ALLOWANCEREPORT>();
-            this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
-            this.TaxKeepingReports = new HashSet<TaxKeepingReport>();
             this.INSURANCEREPORTs = new HashSet<INSURANCEREPORT>();
             this.SALARYREPORTs = new HashSet<SALARYREPORT>();
             this.TAXREPORTs = new HashSet<TAXREPORT>();
-            this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
             this.TIMEKEEPINGREPORTs = new HashSet<TIMEKEEPINGREPORT>();
-            this.GRs = new HashSet<GR>();
+            this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
+            this.TIMEKEEPINGs = new HashSet<TIMEKEEPING>();
         }
     
         public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string Sex { get; set; }
-        public Nullable<System.DateTime> DoB { get; set; }
+        public System.DateTime DoB { get; set; }
         public string Birthplace { get; set; }
         public string HomeTown { get; set; }
         public string Nation { get; set; }
@@ -47,27 +43,18 @@ namespace HRM.Models
         public string RoomID { get; set; }
         public string PositionID { get; set; }
         public string ContractID { get; set; }
-        public Nullable<bool> HealthInsurance { get; set; }
+        public bool FreeInsurance { get; set; }
         public string HealthInsuranceID { get; set; }
-        public Nullable<bool> DeductionPersonal { get; set; }
-        public Nullable<int> DeductionDependent { get; set; }
-        public string Street { get; set; }
+        public bool SelfDeduction { get; set; }
+        public int DependentDeduction { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ADVANCED> ADVANCEDs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
         public virtual CERTIFICATEDETAIL CERTIFICATEDETAIL { get; set; }
         public virtual CONTRACT CONTRACT { get; set; }
         public virtual EDUCATIONDETAIL EDUCATIONDETAIL { get; set; }
         public virtual POSITION POSITION { get; set; }
         public virtual ROOM ROOM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaxKeepingReport> TaxKeepingReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -75,11 +62,11 @@ namespace HRM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAXREPORT> TAXREPORTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GR> GRs { get; set; }
+        public virtual ICollection<SHIFTDETAIL> SHIFTDETAILs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TIMEKEEPING> TIMEKEEPINGs { get; set; }
     }
 }

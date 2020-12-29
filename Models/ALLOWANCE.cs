@@ -19,10 +19,10 @@ namespace HRM.Models
         [Required(ErrorMessage = "Vui lòng nhập tên trợ cấp/phụ cấp/thưởng.")]
         public string AllowanceName { get; set; }
         public bool Insurance { get; set; }
-        public bool Tax { get; set; }
+        public bool FreeTax { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Phần miễn thuế phải lớn hơn hoặc bằng 0")]
-        public Nullable<int> FreeTax { get; set; }
+        public Nullable<int> FreeTaxValue { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Giá trị phải lớn hơn hoặc bằng 0")]
-        public Nullable<int> Value { get; set; }
+        public int Value { get; set; }
     }
 }

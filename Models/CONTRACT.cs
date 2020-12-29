@@ -22,10 +22,9 @@ namespace HRM.Models
     
         public string ContractID { get; set; }
         public string ContractType { get; set; }
-        public Nullable<System.DateTime> DateStartWork { get; set; }
-        public Nullable<System.DateTime> ContractExpirationDate { get; set; }
-        public Nullable<int> BasicSalary { get; set; }
-        public string PersonalIncomeTax { get; set; }
+        public System.DateTime DateStartWork { get; set; }
+        public System.DateTime ContractExpirationDate { get; set; }
+        public int BasicSalary { get; set; }
         public Nullable<int> TrialTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

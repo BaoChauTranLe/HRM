@@ -16,11 +16,10 @@ namespace HRM.Models
     {
         public string EmployeeID { get; set; }
         public string CertificateName { get; set; }
-        public string TypeCertificateID { get; set; }
-        public Nullable<System.DateTime> CertificateDate { get; set; }
+        public string TypeCertificate { get; set; }
+        public System.DateTime CertificateDate { get; set; }
         public string CertificatePlace { get; set; }
     
-        public virtual CERTIFICATE CERTIFICATE { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }

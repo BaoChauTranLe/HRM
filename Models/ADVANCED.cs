@@ -11,15 +11,12 @@ namespace HRM.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ADVANCED
     {
         public string EmployeeID { get; set; }
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:DD/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public System.DateTime DateAdvanced { get; set; }
-        public Nullable<int> Value { get; set; }
+        public int Value { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

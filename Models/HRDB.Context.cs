@@ -26,33 +26,25 @@ namespace HRM.Models
         }
     
         public virtual DbSet<ADVANCED> ADVANCEDs { get; set; }
-        public virtual DbSet<ADVANCEDREPORT> ADVANCEDREPORTs { get; set; }
         public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
-        public virtual DbSet<ALLOWANCEREPORT> ALLOWANCEREPORTs { get; set; }
-        public virtual DbSet<CERTIFICATE> CERTIFICATEs { get; set; }
         public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
         public virtual DbSet<CONTRACT> CONTRACTs { get; set; }
         public virtual DbSet<DATEINFORMATION> DATEINFORMATIONs { get; set; }
-        public virtual DbSet<EDUCATION> EDUCATIONs { get; set; }
         public virtual DbSet<EDUCATIONDETAIL> EDUCATIONDETAILs { get; set; }
-        public virtual DbSet<GR> GRs { get; set; }
-        public virtual DbSet<GROUPPERMISSION> GROUPPERMISSIONs { get; set; }
+        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<INSURANCEREPORT> INSURANCEREPORTs { get; set; }
         public virtual DbSet<MAJOR> MAJORs { get; set; }
         public virtual DbSet<PARAMETER> PARAMETERs { get; set; }
-        public virtual DbSet<PERMISSION> PERMISSIONs { get; set; }
         public virtual DbSet<POSITION> POSITIONs { get; set; }
         public virtual DbSet<ROOM> ROOMs { get; set; }
         public virtual DbSet<SALARYREPORT> SALARYREPORTs { get; set; }
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<SHIFTDETAIL> SHIFTDETAILs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TaxKeepingReport> TaxKeepingReports { get; set; }
         public virtual DbSet<TAXRATE> TAXRATEs { get; set; }
         public virtual DbSet<TAXREPORT> TAXREPORTs { get; set; }
         public virtual DbSet<TIMEKEEPING> TIMEKEEPINGs { get; set; }
         public virtual DbSet<TIMEKEEPINGREPORT> TIMEKEEPINGREPORTs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
-        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
     }
 }
