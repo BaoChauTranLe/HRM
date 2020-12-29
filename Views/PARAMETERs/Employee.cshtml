@@ -112,7 +112,12 @@
     <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "TuoiToiDaNam" })" disabled />
 </div>
 <div class="form-group margin" style="height: 110px;">
-    @Html.Label("Mức lương tối thiểu vùng", htmlAttributes: new { @class = "lbl" })
+    @Html.Label("Mức lương tối thiểu vùng (VNĐ)", htmlAttributes: new { @class = "lbl" })
     <br />
     <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "MucLuongToiThieuVung" })" disabled />
+</div>
+<div class="form-group margin" style="height: 110px;">
+    @Html.Label("Hệ số lương thử việc tối thiểu (%)", htmlAttributes: new { @class = "lbl" })
+    <br />
+    <input type="text" class="disabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLThuViec" })" disabled />
 </div>
