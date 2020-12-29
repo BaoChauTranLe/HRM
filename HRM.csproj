@@ -127,6 +127,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\ADVANCEDsController.cs" />
     <Compile Include="Controllers\ALLOWANCEsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
@@ -291,6 +293,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HRDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxscheduler_multisection.js" />
     <Content Include="Scripts\dhtmlxscheduler_multiselect.js" />
@@ -379,6 +385,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
