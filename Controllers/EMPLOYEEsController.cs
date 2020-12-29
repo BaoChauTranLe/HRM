@@ -56,7 +56,50 @@ namespace HRM.Controllers
             {
                 return HttpNotFound();
             }
-            return View(eMPLOYEE);
+            EmployeeViewModel employee = new EmployeeViewModel();
+            employee.EmployeeID = eMPLOYEE.EmployeeID;
+            employee.EmployeeName = eMPLOYEE.EmployeeName;
+            employee.Image = eMPLOYEE.Image;
+            employee.Sex = eMPLOYEE.Sex;
+            employee.DoB = eMPLOYEE.DoB;
+            employee.Birthplace = eMPLOYEE.Birthplace;
+            employee.HomeTown = eMPLOYEE.HomeTown;
+            employee.Nation = eMPLOYEE.Nation;
+            employee.Id = eMPLOYEE.Id;
+            employee.Phone = eMPLOYEE.Phone;
+            employee.Email = eMPLOYEE.Email;
+            employee.City = eMPLOYEE.City;
+            employee.Ward = eMPLOYEE.Ward;
+            employee.Dictrict = eMPLOYEE.Dictrict;
+            employee.RoomID = eMPLOYEE.ROOM.RoomName;
+            employee.PositionID = eMPLOYEE.POSITION.PositionName;
+            employee.ContractID = eMPLOYEE.ContractID;
+            employee.HealthInsurance = eMPLOYEE.HealthInsurance;
+            employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
+            employee.SocialInsuranceID = eMPLOYEE.HealthInsuranceID.Substring(eMPLOYEE.HealthInsuranceID.Length - 10, 10);
+            employee.DeductionPersonal = eMPLOYEE.DeductionPersonal;
+            employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
+            List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
+            CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
+            List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
+            //Trinh do
+            employee.EducationName = eDUCATIONDETAIL[0].EDUCATION.EducationName;
+            employee.MajorName = eDUCATIONDETAIL[0].MAJOR.MajorName;
+            employee.Date = eDUCATIONDETAIL[0].Date;
+            employee.Place = eDUCATIONDETAIL[0].Place;
+            //Chung chi
+            employee.CertificateName = cERTIFICATEDETAIL[0].CertificateName;
+            employee.TypeCertificate = cERTIFICATEDETAIL[0].CERTIFICATE.TypeCertificate;
+            employee.CertificateDate = cERTIFICATEDETAIL[0].CertificateDate;
+            employee.CertificatePlace = cERTIFICATEDETAIL[0].CertificatePlace;
+            //Hop dong
+            employee.ContractID = cONTRACT.ContractID;
+            employee.ContractType = cONTRACT.ContractType;
+            employee.DateStartWork = cONTRACT.DateStartWork;
+            employee.ContractExpirationDate = cONTRACT.ContractExpirationDate;
+            employee.BasicSalary = (int)cONTRACT.BasicSalary;
+            employee.PersonalIncomeTax = cONTRACT.PersonalIncomeTax;
+            return View(employee);
         }
 
         // GET: EMPLOYEEs/Create
@@ -177,7 +220,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,Place,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,Place,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime,Password")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -293,7 +336,7 @@ namespace HRM.Controllers
                 eMPLOYEE.EmployeeName = FormatProperCase(employee.EmployeeName); //Chuan hoa chuoi
                 eMPLOYEE.Image = employee.Image;
                 eMPLOYEE.Sex = employee.Sex;
-                eMPLOYEE.DoB = employee.DoB;
+                eMPLOYEE.DoB = (DateTime)employee.DoB;
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
@@ -310,32 +353,26 @@ namespace HRM.Controllers
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
+                //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
-                for (int i = 0; i < employee.EducationID.Count(); i++)
-                {
-                    for (int j = i + 1; j < employee.EducationID.Count(); j++)
-                        if (employee.EducationID[i] == employee.EducationID[j])
-                            ModelState.AddModelError("EducationID", "Mã trình độ không được trùng");
-                    eDUCATIONDETAIL.EmployeeID = id;
-                    eDUCATIONDETAIL.EducationID = employee.EducationID[i];
-                    if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
-                        eDUCATIONDETAIL.MajorID = "M09";
-                    else
-                        eDUCATIONDETAIL.MajorID = employee.MajorID[i];
-                    eDUCATIONDETAIL.Date = employee.Date[i];
-                    eDUCATIONDETAIL.Place = employee.Place[i];
-                    db.EDUCATIONDETAILs.Add(eDUCATIONDETAIL);
-                }
+                eDUCATIONDETAIL.EmployeeID = id;
+                eDUCATIONDETAIL.EducationID = employee.EducationID;
+                if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
+                    eDUCATIONDETAIL.MajorID = "M09";
+                else
+                    eDUCATIONDETAIL.MajorID = employee.MajorID;
+                eDUCATIONDETAIL.Date = employee.Date;
+                eDUCATIONDETAIL.Place = employee.Place;
+                db.EDUCATIONDETAILs.Add(eDUCATIONDETAIL);
+                //Chung chi
                 CERTIFICATEDETAIL cERTIFICATEDETAIL = new CERTIFICATEDETAIL();
-                for (int i = 0; i < employee.CertificateName.Count(); i++)
-                {
-                    cERTIFICATEDETAIL.EmployeeID = id;
-                    cERTIFICATEDETAIL.CertificateName = employee.CertificateName[i];
-                    cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate[i];
-                    cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace[i];
-                    cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID[i];
-                    db.CERTIFICATEDETAILs.Add(cERTIFICATEDETAIL);
-                }
+                cERTIFICATEDETAIL.EmployeeID = id;
+                cERTIFICATEDETAIL.CertificateName = employee.CertificateName;
+                cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate;
+                cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace;
+                cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID;
+                db.CERTIFICATEDETAILs.Add(cERTIFICATEDETAIL);
+                //Hop dong
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
                 cONTRACT.ContractType = employee.ContractType;
@@ -352,8 +389,13 @@ namespace HRM.Controllers
                     else
                         cONTRACT.TrialTime = 0;
                 }
+                //Tai khoan
+                USER uSER = new USER();
+                uSER.EmployeeID = employee.EmployeeID;
+                uSER.Password = employee.Password;
                 db.CONTRACTs.Add(cONTRACT);
                 db.EMPLOYEEs.Add(eMPLOYEE);
+                db.USERS.Add(uSER);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -462,7 +504,6 @@ namespace HRM.Controllers
             employee.EmployeeName = eMPLOYEE.EmployeeName;
             employee.Image = eMPLOYEE.Image;
             employee.Sex = eMPLOYEE.Sex;
-            employee.Birthplace = eMPLOYEE.Birthplace;
             employee.DoB = eMPLOYEE.DoB;
             employee.Birthplace = eMPLOYEE.Birthplace;
             employee.HomeTown = eMPLOYEE.HomeTown;
@@ -480,9 +521,26 @@ namespace HRM.Controllers
             employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
             employee.DeductionPersonal = (bool)eMPLOYEE.DeductionPersonal;
             employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
-            employee.RoomName = eMPLOYEE.ROOM.RoomName;
-            employee.PositionName = eMPLOYEE.POSITION.PositionName;
-
+            List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
+            CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
+            List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
+            //Trinh do
+            employee.EducationID = eDUCATIONDETAIL[0].EducationID;
+            employee.MajorID = eDUCATIONDETAIL[0].MajorID;
+            employee.Date = eDUCATIONDETAIL[0].Date;
+            employee.Place = eDUCATIONDETAIL[0].Place;
+            //Chung chi
+            employee.CertificateName = cERTIFICATEDETAIL[0].CertificateName;
+            employee.TypeCertificateID = cERTIFICATEDETAIL[0].TypeCertificateID;
+            employee.CertificateDate = cERTIFICATEDETAIL[0].CertificateDate;
+            employee.CertificatePlace = cERTIFICATEDETAIL[0].CertificatePlace;
+            //Hop dong
+            employee.ContractID = cONTRACT.ContractID;
+            employee.ContractType = cONTRACT.ContractType;
+            employee.DateStartWork = cONTRACT.DateStartWork;
+            employee.ContractExpirationDate = cONTRACT.ContractExpirationDate;
+            employee.BasicSalary = (int)cONTRACT.BasicSalary;
+            employee.PersonalIncomeTax = cONTRACT.PersonalIncomeTax;
             return View(employee);
         }
 
@@ -585,7 +643,7 @@ namespace HRM.Controllers
                 eMPLOYEE.EmployeeName = FormatProperCase(employee.EmployeeName); //Chuan hoa chuoi
                 eMPLOYEE.Image = employee.Image;
                 eMPLOYEE.Sex = employee.Sex;
-                eMPLOYEE.DoB = employee.DoB;
+                eMPLOYEE.DoB = (DateTime)employee.DoB;
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
@@ -603,26 +661,24 @@ namespace HRM.Controllers
                 eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
                 eMPLOYEE.DeductionDependent = employee.DeductionDependent;
                 db.Entry(eMPLOYEE).State = EntityState.Modified;
+                //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
-                for (int i = 0; i < employee.EducationID.Count(); i++)
-                {
-                    eDUCATIONDETAIL.EmployeeID = employee.EmployeeID;
-                    eDUCATIONDETAIL.EducationID = employee.EducationID[i];
-                    eDUCATIONDETAIL.MajorID = employee.MajorID[i];
-                    eDUCATIONDETAIL.Date = employee.Date[i];
-                    eDUCATIONDETAIL.Place = employee.Place[i];
-                    db.Entry(eDUCATIONDETAIL).State = EntityState.Modified;
-                }
+                eDUCATIONDETAIL.EmployeeID = employee.EmployeeID;
+                eDUCATIONDETAIL.EducationID = employee.EducationID;
+                if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
+                    eDUCATIONDETAIL.MajorID = "M09";
+                else
+                    eDUCATIONDETAIL.MajorID = employee.MajorID;
+                eDUCATIONDETAIL.Date = employee.Date;
+                eDUCATIONDETAIL.Place = employee.Place;
+                //Chung chi
                 CERTIFICATEDETAIL cERTIFICATEDETAIL = new CERTIFICATEDETAIL();
-                for (int i = 0; i < employee.CertificateName.Count(); i++)
-                {
-                    cERTIFICATEDETAIL.EmployeeID = employee.EmployeeID;
-                    cERTIFICATEDETAIL.CertificateName = employee.CertificateName[i];
-                    cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate[i];
-                    cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace[i];
-                    cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID[i];
-                    db.Entry(cERTIFICATEDETAIL).State = EntityState.Modified;
-                }
+                cERTIFICATEDETAIL.EmployeeID = employee.EmployeeID;
+                cERTIFICATEDETAIL.CertificateName = employee.CertificateName;
+                cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate;
+                cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace;
+                cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID;
+                //Hop dong
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
                 cONTRACT.ContractType = employee.ContractType;
@@ -630,6 +686,17 @@ namespace HRM.Controllers
                 cONTRACT.ContractExpirationDate = employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
                 cONTRACT.PersonalIncomeTax = employee.PersonalIncomeTax;
+                if (employee.TrialTime == null)
+                    cONTRACT.TrialTime = 0;
+                else
+                {
+                    if (cONTRACT.ContractType == "Hợp đồng thử việc")
+                        cONTRACT.TrialTime = employee.TrialTime;
+                    else
+                        cONTRACT.TrialTime = 0;
+                }
+                db.Entry(eDUCATIONDETAIL).State = EntityState.Modified;
+                db.Entry(cERTIFICATEDETAIL).State = EntityState.Modified;
                 db.Entry(cONTRACT).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -662,10 +729,10 @@ namespace HRM.Controllers
             CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
             List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
             List<SHIFTDETAIL> sHIFTDETAILs = db.SHIFTDETAILs.SqlQuery("Select * from SHIFTDETAIL where employeeID = '" + id + "'").ToList();
-            if(sHIFTDETAILs.Count()!=0)
+            if (sHIFTDETAILs.Count() != 0)
             {
                 return RedirectToAction("Error");
-            }    
+            }
             foreach (var item in eDUCATIONDETAIL)
             {
                 db.EDUCATIONDETAILs.Remove(item);

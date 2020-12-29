@@ -349,7 +349,7 @@
     <div class="collapsible">
         Thông tin cơ bản
     </div>
-    <div class="collapsible-content" style="height: 800px;">
+    <div class="collapsible-content" id="c1" style="height: 800px;">
         <div class="label" style="left: 300px;">
             Mã nhân viên
         </div>
@@ -460,120 +460,113 @@
     <div class="collapsible">
         Trình độ chuyên môn
     </div>
-    <!--hop bao quanh trinh do, chua cac form trong phan trinh do-->
-    <div class="collapsible-content">
-        <!--phan tu ban dau trong hop-->
-        <div class="first-element" id="e1" style="left: 0px; top: 0px;">
-            <div class="label" style="left: 10px;">
-                Trình độ
-            </div>
-            @Html.DropDownListFor(m => m.EducationID[0], (IEnumerable<SelectListItem>)ViewBag.EducationID, new { style = "margin-left: 10px; margin-top: 28px; width: 180px;", @class = "drop-down-list", id = "eduid" })
-            @Html.ValidationMessageFor(model => model.EducationID[0], "", new { style = "left: 320px; top: 780px;", @class = "text-danger" })
-            <div class="label" style="left: 300px;">
-                Chuyên ngành
-            </div>
-            @Html.DropDownListFor(m => m.MajorID, (IEnumerable<SelectListItem>)ViewBag.MajorID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list", id = "majid" })
-            <div class="label" style="left: 10px; top: 100px;">
-                Ngày cấp
-            </div>
-            <input type="date" name="Date" class="date" style="left: 10px; top: 130px; width: 180px;" />
-            @Html.ValidationMessageFor(model => model.Date, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
-            <div class="label" style="left: 300px;top: 100px;">
-                Nơi đào tạo
-            </div>
-            @Html.TextBoxFor(model => model.Place, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
-            @Html.ValidationMessageFor(model => model.Place, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
+    <div class="collapsible-content" id="c2" style="height: 200px;">
+        <div class="label" style="left: 10px;">
+            Trình độ
         </div>
-            <div class="btn-add" id="btn-add-1" style="left: 10px; right: 10px; top: 1030px;" onclick=AddButton1("e1","btn-add-1")>
-                + Thêm
-            </div>
+        @Html.DropDownListFor(m => m.EducationID, (IEnumerable<SelectListItem>)ViewBag.EducationID, new { style = "margin-left: 10px; top: 28px; width: 180px;", @class = "drop-down-list", id = "eduid" })
+        @Html.ValidationMessageFor(model => model.EducationID, "", new { style = "left: 320px; top: 780px;", @class = "text-danger" })
+        <div class="label" style="left: 300px;">
+            Chuyên ngành
         </div>
-        <div class="collapsible">
-            Chứng chỉ chuyên ngành
+        @Html.DropDownListFor(m => m.MajorID, (IEnumerable<SelectListItem>)ViewBag.MajorID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list", id = "majid" })
+        <div class="label" style="left: 10px; top: 100px;">
+            Ngày cấp
         </div>
-        <div class="collapsible-content">
-            <!--phan tu ban dau trong hop-->
-            <div class="first-element" id="e2" style="left: 0px; top: 0px;">
-                <div class="label" style="left: 10px;">
-                    Tên chứng chỉ
-                </div>
-                @Html.TextBoxFor(model => model.CertificateName, new { style = "margin-left: 10px; margin-top: 28px; width: 200px", @class = "text-box", })
-                @Html.ValidationMessageFor(model => model.CertificateName, "", new { style = "left: 10px; top: 78px;", @class = "text-danger" })
-                <div class="label" style="left: 300px;">
-                    Loại chứng chỉ
-                </div>
-                @Html.DropDownListFor(m => m.TypeCertificateID, (IEnumerable<SelectListItem>)ViewBag.TypeCertificateID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
-                <div class="label" style="left: 10px;top: 100px;">
-                    Ngày cấp
-                </div>
-                <input type="date" name="CertificateDate" class="date" style="left: 10px; top: 130px; width: 200px;" />
-                @Html.ValidationMessageFor(model => model.CertificateDate, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
-                <div class="label" style="left: 300px;top: 100px;">
-                    Nơi cấp
-                </div>
-                @Html.TextBoxFor(model => model.CertificatePlace, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
-                @Html.ValidationMessageFor(model => model.CertificatePlace, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
-            </div>
-            <div class="btn-add" id="btn-add-2" style="left: 10px; right: 10px; top: 1300px;" onclick="AddButton2()">
-                + Thêm
-            </div>
+        <input type="date" name="Date" class="date" style="left: 10px; top: 130px; width: 180px;" />
+        @Html.ValidationMessageFor(model => model.Date, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
+        <div class="label" style="left: 300px;top: 100px;">
+            Nơi đào tạo
         </div>
-        <div class="collapsible">
-            Hợp đồng
+        @Html.TextBoxFor(model => model.Place, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.Place, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
+    </div>
+    <div class="collapsible">
+        Chứng chỉ chuyên ngành
+    </div>
+    <div class="collapsible-content" id="c3" style="height: 200px;">
+        <div class="label" style="left: 10px;">
+            Tên chứng chỉ
         </div>
-        <div class="collapsible-content" style="left: 0px; top: 0px; height: 300px;">
-            <div class="label" style="left: 30px;">
-                Số hợp đồng
-            </div>
-            @Html.TextBoxFor(model => model.ContractID, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
-            @Html.ValidationMessageFor(model => model.ContractID, "", new { style = "left: 30px; top: 80px;", @class = "text-danger" })
-            <div class="label" style="left: 300px;">
-                Loại hợp đồng
-            </div>
-            @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
-            <div class="label" style="left: 550px;">
-                Thời gian thử việc
-            </div>
-            @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
-            <div class="label" style="left: 30px; top: 100px;">
-                Lương cơ bản
-            </div>
-            @Html.TextBoxFor(model => model.BasicSalary, new { style = "left: 30px; top: 130px; width: 200px; background: #F8FAFA;", @class = "text-box", })
-            @Html.ValidationMessageFor(model => model.BasicSalary, "", new { style = "left: 30px; top: 180px;", @class = "text-danger" })
-            <div class="label" style="left: 300px; top: 100px;">
-                Loại thuế thu nhập cá nhân
-            </div>
-            @Html.DropDownListFor(model => model.PersonalIncomeTax, (IEnumerable<SelectListItem>)ViewBag.PersonalIncomeTax, new { style = "left: 300px; top: 130px; width: 200px;", @class = "drop-down-list" })
-            <div class="label" style="left: 30px; top: 200px;">
-                Ngày vào làm
-            </div>
-            <input type="date" name="DateStartWork" class="date" style="left: 30px; top: 230px;" />
-            @Html.ValidationMessageFor(model => model.DateStartWork, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
-            <div class="label" style="left: 300px; top: 200px;">
-                Ngày hết hạn
-            </div>
-            <input type="date" name="ContractExpirationDate" class="date" style="left: 300px; top: 230px;" />
-            @Html.ValidationMessageFor(model => model.ContractExpirationDate, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
+        @Html.TextBoxFor(model => model.CertificateName, new { style = "margin-left: 10px; margin-top: 28px; width: 200px", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.CertificateName, "", new { style = "left: 10px; top: 78px;", @class = "text-danger" })
+        <div class="label" style="left: 300px;">
+            Loại chứng chỉ
         </div>
-        <div class="collapsible">
-            Thông tin tài khoản
+        @Html.DropDownListFor(m => m.TypeCertificateID, (IEnumerable<SelectListItem>)ViewBag.TypeCertificateID, new { style = "margin-left: 300px; margin-top: 28px; width: 360px;", @class = "drop-down-list" })
+        <div class="label" style="left: 10px;top: 100px;">
+            Ngày cấp
         </div>
-        <div class="collapsible-content" style="height: 100px;">
-            <div class="label" style="left: 30px; top: 0px;">
-                Phân quyền
-            </div>
-            @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.Place, new { style = "left: 30px; top: 30px; width: 200px;", @class = "drop-down-list" })
+        <input type="date" name="CertificateDate" class="date" style="left: 10px; top: 130px; width: 200px;" />
+        @Html.ValidationMessageFor(model => model.CertificateDate, "", new { style = "left: 10px; top: 180px;", @class = "text-danger" })
+        <div class="label" style="left: 300px;top: 100px;">
+            Nơi cấp
         </div>
+        @Html.TextBoxFor(model => model.CertificatePlace, new { style = "left: 300px; top: 130px; width: 360px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.CertificatePlace, "", new { style = "left: 300px; top: 180px;", @class = "text-danger" })
+    </div>
+    <div class="collapsible">
+        Hợp đồng
+    </div>
+    <div class="collapsible-content" id="c4" style="left: 0px; top: 0px;  height: 300px;">
+        <div class="label" style="left: 30px;">
+            Số hợp đồng
+        </div>
+        @Html.TextBoxFor(model => model.ContractID, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.ContractID, "", new { style = "left: 30px; top: 80px;", @class = "text-danger" })
+        <div class="label" style="left: 300px;">
+            Loại hợp đồng
+        </div>
+        @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
+        <div class="label" style="left: 550px;">
+            Thời gian thử việc
+        </div>
+        @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
+        <div class="label" style="left: 30px; top: 100px;">
+            Lương cơ bản
+        </div>
+        @Html.TextBoxFor(model => model.BasicSalary, new { style = "left: 30px; top: 130px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+        @Html.ValidationMessageFor(model => model.BasicSalary, "", new { style = "left: 30px; top: 180px;", @class = "text-danger" })
+        <div class="label" style="left: 300px; top: 100px;">
+            Loại thuế thu nhập cá nhân
+        </div>
+        @Html.DropDownListFor(model => model.PersonalIncomeTax, (IEnumerable<SelectListItem>)ViewBag.PersonalIncomeTax, new { style = "left: 300px; top: 130px; width: 200px;", @class = "drop-down-list" })
+        <div class="label" style="left: 30px; top: 200px;">
+            Ngày vào làm
+        </div>
+        <input type="date" name="DateStartWork" class="date" style="left: 30px; top: 230px;" />
+        @Html.ValidationMessageFor(model => model.DateStartWork, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
+        <div class="label" style="left: 300px; top: 200px;">
+            Ngày hết hạn
+        </div>
+        <input type="date" name="ContractExpirationDate" class="date" style="left: 300px; top: 230px;" />
+        @Html.ValidationMessageFor(model => model.ContractExpirationDate, "", new { style = "left: 30px; top: 230px;", @class = "text-danger" })
+    </div>
+    <div class="collapsible-content" id="c5" style="left: 0px; top: 0px;  height: 100px;">
+        <div class="label" style="left: 30px;">
+            Mật khẩu
+        </div>
+        @Html.TextBoxFor(model => model.Password, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
+    </div>
         <div style="position: relative">
-            <input type="submit" value="Lưu" class="btn-save" />
+            <input type="submit" value="Lưu" class="btn-save" onclick="openModal()" />
             <button class="btn-cancel" onclick="GoHome()">
                 HỦY
             </button>
         </div>
-        
-
-
-
+        <div id="bg" onclick="closeModal()"></div>
+        <!-- Password Modal -->
+        <div id="passwordModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Thêm loại phụ cấp/trợ cấp/thưởng</div>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
         <script>
             function AddButton1() {
                 var element = document.getElementById("e1");
@@ -617,6 +610,11 @@
                 var image = document.getElementById('output');
                 image.src = URL.createObjectURL(event.target.files[0]);
             };
+            document.getElementById("c1").click();
+            document.getElementById("c2").click();
+            document.getElementById("c3").click();
+            document.getElementById("c4").click();
+            document.getElementById("c5").click();
         </script>
         }
 

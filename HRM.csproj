@@ -337,12 +337,6 @@
     <Content Include="Views\TAXRATEs\Create.cshtml" />
     <Content Include="Views\TAXRATEs\Delete.cshtml" />
     <Content Include="Views\TAXRATEs\Index.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Create.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Delete.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Details.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Index.cshtml" />
-    <Content Include="Views\EMPLOYEEs\Error.cshtml" />
     <Content Include="Views\TAXRATEs\Edit.cshtml" />
     <Content Include="Views\ROOMs\Index.cshtml" />
     <Content Include="Views\POSITIONs\Index.cshtml" />
@@ -376,6 +370,12 @@
     <Content Include="Views\PARAMETERs\StandardWorkDayEdit.cshtml" />
     <Content Include="Views\PARAMETERs\Insurance.cshtml" />
     <Content Include="Views\PARAMETERs\InsuranceEdit.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Create.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Delete.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Details.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Error.cshtml" />
+    <Content Include="Views\EMPLOYEEs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

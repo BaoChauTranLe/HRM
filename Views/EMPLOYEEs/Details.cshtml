@@ -1,4 +1,4 @@
-﻿@model HRM.Models.EMPLOYEE
+﻿@model HRM.Models.EmployeeViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -15,6 +15,41 @@
         letter-spacing: 0.01em;
         background: none;
         color: black;
+    }
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        width: 240px;
+        height: 48.05px;
+        background: #FFFFFF;
+        border: 1px solid #C1C1C1;
+    }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background: linear-gradient(180deg, #0099E9 0%, #80C8ED 100%);
+            border-radius: 4px 4px 0px 0px;
+        }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+    }
+    .p {
+        color: #3D76B5;
+    }
+    .hr {
+        height: 1px;
+        color: #3D76B5;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: #3D76B5;
+        border: 0px;
     }
 </style>
 <div>
@@ -52,159 +87,323 @@
             </div>
         </div>
     </div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Mã nhân viên")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeID)
-        </dd>
-        <dt>
-            @Html.DisplayName("Tên nhân viên")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeName)
-        </dd>
-        <dt>
-            @Html.DisplayName("Ảnh")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt>
-            @Html.DisplayName("Giới tính")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt>
-            @Html.DisplayName("Ngày sinh")
-        </dt>
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" onclick="tab(event, 'BasicInfo')" id="defaultOpen">Thông tin cơ bản</button>
+        <button class="tablinks" onclick="tab(event, 'Education')">Trình độ chuyên môn</button>
+        <button class="tablinks" onclick="tab(event, 'Certificate')">Chứng chỉ chuyên ngành</button>
+        <button class="tablinks" onclick="tab(event, 'Contract')">Hợp đồng</button>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DoB)
-        </dd>
-        <dt>
-            @Html.DisplayName("Nơi sinh")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Birthplace)
-        </dd>
+    <!-- Tab content -->
+    <div id="BasicInfo" class="tabcontent">
+        <table>
+            <tr>
+                <th>
+                    Mã nhân viên
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EmployeeID)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Tên nhân viên
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EmployeeName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Phòng
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.RoomName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Chức vụ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.PositionName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Ngày sinh
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DoB)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Giới tính
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Sex)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Số CMND/CCCD
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Id)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Nơi sinh
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Birthplace)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Dân tộc
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Nation)
+                </td>
+            </tr>
+        </table>
+        <p>Thông tin liên lạc</p>
+        <hr />
+        <table>
+            <tr>
+                <th>
+                    Số điện thoại
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Phone)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Địa chỉ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Street)
+                    @Html.DisplayFor(model => model.Dictrict)
+                    @Html.DisplayFor(model => model.Ward)
+                    @Html.DisplayFor(model => model.City)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Quê quán
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.HomeTown)
+                </td>
+            </tr>
+        </table>
+        <p>Thông tin khác</p>
+        <hr />
+        <table>
+            <tr>
+                <th>
+                    Miễn BHYT
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.HealthInsurance)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Số BHYT
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.HealthInsuranceID)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Số BHXH
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.SocialInsuranceID)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Đăng ký giảm trừ bản thân
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DeductionPersonal)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Đăng ký giảm trừ phụ thuộc
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DeductionDependent)
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <dt>
-            @Html.DisplayName("Quê quán")
-        </dt>
+    <div id="Education" class="tabcontent">
+        <table>
+            <tr>
+                <th>
+                    Trình độ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EducationName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Chuyên ngành
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.MajorName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Ngày cấp
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Date)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Nơi đào tạo
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Place)
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.HomeTown)
-        </dd>
+    <div id="Certificate" class="tabcontent">
+        <table>
+            <tr>
+                <th>
+                    Chứng chỉ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CertificateName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Loại chứng chỉ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TypeCertificate)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Ngày cấp
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CertificateDate)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Nơi cấp
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CertificatePlace)
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <dt>
-            @Html.DisplayName("Dân tộc")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nation)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("CMND/CCCD")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Số điện thoại")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Email")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayName("Phường / Xã")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dictrict)
-        </dd>
-        <dt>
-            @Html.DisplayName("Quận / Huyện")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ward)
-        </dd>
-        <dt>
-            @Html.DisplayName("Thành phố")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayName("Đăng ký bảo hiểm y tế tại công ty")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HealthInsurance)
-        </dd>
-        <dt>
-            @Html.DisplayName("Mã bảo hiểm y tế")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HealthInsuranceID)
-        </dd>
-        <dt>
-            @Html.DisplayName("Mã bảo hiểm xã hội")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SocialInsuranceID)
-        </dd>
-        <dt>
-            @Html.DisplayName("Đăng ký giảm trừ cá nhân")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DeductionPersonal)
-        </dd>
-        <dt>
-            @Html.DisplayName("Đăng ký giảm trừ phụ thuộc")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DeductionDependent)
-        </dd>
-        <dt>
-            @Html.DisplayName("Số hợp đồng")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CONTRACT.ContractID)
-        </dd>
-        <dt>
-            @Html.DisplayName("Loại hợp đồng")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CONTRACT.ContractType)
-        </dd>
-        <dt>
-            @Html.DisplayName("Phòng")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.POSITION.PositionName)
-        </dd>
-        <dt>
-            @Html.DisplayName("Chức vụ")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ROOM.RoomName)
-        </dd>
-    </dl>
+    <div id="Contract" class="tabcontent">
+        <table>
+            <tr>
+                <th>
+                    Số hợp đồng
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.ContractID)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Loại hợp đồng
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.ContractType)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Lương cơ bản
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.BasicSalary)
+                    VNĐ
+                </td>
+            </tr>
+            <tr>
+                <th>Loại thuế thu nhập cá nhân</th>
+                <td>
+                    @Html.DisplayFor(model => model.PersonalIncomeTax)
+                </td>
+            </tr>
+            <tr>
+                <th>Ngày vào làm</th>
+                <td>
+                    @Html.DisplayFor(model => model.DateStartWork)
+                </td>
+            </tr>
+            <tr>
+                <th>Ngày kết thúc</th>
+                <td>
+                    @Html.DisplayFor(model => model.ContractExpirationDate)
+                </td>
+            </tr>
+        </table>
+    </div>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<script>
+    function tab(evt, action) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(action).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>

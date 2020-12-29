@@ -35,20 +35,23 @@ namespace HRM.Models
         public string PositionID { get; set; }
         public string PositionName { get; set; }
         [Required(ErrorMessage = "Trình độ bắt buộc")]
-        public List<string> EducationID { get; set; }
+        public string EducationID { get; set; }
+        public string EducationName { get; set; }
         [Required(ErrorMessage = "Chuyên ngành bắt buộc")]
-        public List<string> MajorID { get; set; }
+        public string MajorID { get; set; }
+        public string MajorName { get; set; }
         [Required(ErrorMessage = "Ngày cấp bắt buộc")]
-        public List<DateTime?> Date { get; set; }
+        public DateTime? Date { get; set; }
         [Required(ErrorMessage = "Nơi đào tạo bắt buộc")]
-        public List<string> Place { get; set; }
+        public string Place { get; set; }
         [Required(ErrorMessage = "Tên chứng chỉ bắt buộc")]
-        public List<string> CertificateName { get; set; }
-        public List<string> TypeCertificateID { get; set; }
+        public string CertificateName { get; set; }
+        public string TypeCertificateID { get; set; }
+        public string TypeCertificate { get; set; }
         [Required(ErrorMessage = "Ngày cấp bắt buộc")]
-        public List<DateTime?> CertificateDate { get; set; }
+        public DateTime? CertificateDate { get; set; }
         [Required(ErrorMessage = "Nơi cấp bắt buộc")]
-        public List<string> CertificatePlace { get; set; }
+        public string CertificatePlace { get; set; }
         [Required(ErrorMessage = "Mã hợp đồng bắt buộc")]
         [StringLength(maximumLength: 10, ErrorMessage = "Độ dài không hợp lệ", MinimumLength = 10)]
         public string ContractID { get; set; }
@@ -70,5 +73,8 @@ namespace HRM.Models
         public int DeductionDependent { get; set; }
         [Required(ErrorMessage = "Tên đường bắt buộc")]
         public string Street { get; set; }
+        public string SocialInsuranceID { get; set; }
+        [Required(ErrorMessage = "Mật khẩu bắt buộc")]
+        public string Password { get; set; }
     }
 }
