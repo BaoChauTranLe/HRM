@@ -13,25 +13,115 @@ namespace HRM.Controllers
     public class SALARYREPORTsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
-        public int CalculateInsurancePay(EMPLOYEE e, int insurancePay)
+        public int CalculateTotalAllowance()
         {
-            //if (e.HealthInsurance == false)
-            //{
-            //    return (int)(insurancePay * db.PARAMETERs.Find("BHXH").Value + insurancePay
-            //                              * db.PARAMETERs.Find("BHYT").Value + insurancePay
-            //                              * db.PARAMETERs.Find("BHTN").Value);
-            //}
+            int sum = 0;
+            var allowanceList = db.ALLOWANCEs.ToList();
+            for (int i = 0; i < allowanceList.Count; i++)
+                sum += allowanceList[i].Value;
+            return sum;
+        }
+        public int CalculateStandardSalary(EMPLOYEE e)
+        {
+            return e.CONTRACT.BasicSalary + CalculateTotalAllowance();
+        }
+        public int CalculateWorkDaySalary(EMPLOYEE e, DateTime month)
+        {
+            return (int) (CalculateStandardSalary(e) * db.TIMEKEEPINGREPORTs.Find(e.EmployeeID, month).SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
+        }
+
+        #region Insurance Pay Calculation related
+        public int CalculateMustPayInsuranceAllowance()
+        {
+            int sum = 0;
+            var mustPayList = db.ALLOWANCEs.Where(x => x.Insurance == true).ToList();
+            for (int i = 0; i < mustPayList.Count; i++)
+                sum += mustPayList[i].Value;
+            return sum;
+        }
+        public int CalculateInsurancePaySalary(EMPLOYEE e)
+        {
+            return e.CONTRACT.BasicSalary + CalculateMustPayInsuranceAllowance();
+        }
+        public int CalculateSocialInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value);
+        }
+        public int CalculateHealthInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value);
+        }
+        public int CalculateWorkInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value);
+        }
+        public int CalculateTotalInsurancePay(EMPLOYEE e)
+        {
+            if (e.FreeInsurance == true)
+                return 0;
+            int insurancePaySalary = CalculateInsurancePaySalary(e);
+            return CalculateSocialInsurancePay(insurancePaySalary) + CalculateHealthInsurancePay(insurancePaySalary) + CalculateWorkInsurancePay(insurancePaySalary);
+        }
+
+        #endregion
+
+        #region Income Tax Calculation related
+        public int CalculateAllowanceFreeTaxValue()
+        {
+            int sum = 0;
+            var freeTaxList = db.ALLOWANCEs.Where(x => x.FreeTax == true).ToList();
+            for (int i = 0; i < freeTaxList.Count; i++)
+                sum += (int)freeTaxList[i].FreeTaxValue;
+            return sum;
+        }
+        public int CalculateStandardHourSalary(EMPLOYEE e)
+        {
+            return (int) (e.CONTRACT.BasicSalary / db.PARAMETERs.Find("SoNgayCongChuan").Value / db.PARAMETERs.Find("SoGioCongChuan").Value);
+        }
+        public int CalculateTotalWorkHour(EMPLOYEE e, DateTime month)
+        {
+            return (int)(db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNormal
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourDayOff
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourSpecialDayOff
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormal
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOff
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOff
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormalExtra
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOffExtra
+                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOffExtra);
+        }
+        public int CalculateTaxableOvertimeSalary(EMPLOYEE e, DateTime month)
+        {
+
+            return CalculateStandardHourSalary(e) * CalculateTotalWorkHour(e, month);
+        }
+        public int CalculateTaxableIncome(EMPLOYEE e, DateTime month)
+        {
+            return CalculateStandardSalary(e) 
+                 + CalculateTaxableOvertimeSalary(e, month) 
+                 - CalculateTotalInsurancePay(e) 
+                 - CalculateAllowanceFreeTaxValue();
+        }
+        public int CalculateAssessableIncome(EMPLOYEE e, DateTime month)
+        {
+            int taxable = CalculateTaxableIncome(e, month);
+            int deduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction;
+            if (e.SelfDeduction == true)
+                deduction += (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
+            if (taxable > deduction)
+                return taxable - deduction;
             return 0;
         }
-        public int CalculateIncomeTax(EMPLOYEE e, int taxPay)
+        public int CalculateIncomeTax(EMPLOYEE e, DateTime month)
         {
-            if (taxPay <= 0)
+            int assessable = CalculateAssessableIncome(e, month);
+            if (assessable == 0)
                 return 0;
             int incomeTax = 0;
             int taxLevel = 1;
             var taxRateList = db.TAXRATEs.ToList();
             for (int i = taxRateList.Last().Rank; i > 1; i--)
-                if (taxPay >= taxRateList[i].Min)
+                if (assessable >= taxRateList[i].Min)
                 {
                     taxLevel = i;
                     break;
@@ -40,57 +130,35 @@ namespace HRM.Controllers
             {
                 incomeTax += (taxRateList[i + 1].Min - taxRateList[i].Min) * taxRateList[i].Rate / 100;
             }
-            incomeTax += (taxPay - taxRateList[taxLevel].Min) * taxRateList[taxLevel].Rate / 100;
+            incomeTax += (assessable - taxRateList[taxLevel].Min) * taxRateList[taxLevel].Rate / 100;
             return incomeTax;
         }
-        public int CalculateTaxableIncome(EMPLOYEE e, int income, int insurancePay)
-        {
-            int taxPay = 0;
-            if (income >= (int)db.PARAMETERs.Find("MucThuNhapToiThieuPhaiDongThue").Value)
-            {
-                taxPay = income - insurancePay;
-                var allowanceList = db.ALLOWANCEs.ToList();
-                //var freeTaxList = allowanceList.Where(x => x.Tax == true).ToList();
-                //for (int i = 0; i < freeTaxList.Count; i++)
-                //    taxPay -= (int)freeTaxList[i].FreeTax;
-                //if (e.DeductionPersonal == true)
-                //    taxPay -= (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
-                //if (e.DeductionDependent > 0)
-                //    taxPay -= (int)(db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DeductionDependent);
-            }
-            return taxPay;
-        }
-        public int CalculateAdvanced(EMPLOYEE e)
+        #endregion
+        public int CalculateAdvanced(EMPLOYEE e, DateTime month)
         {
             int advanced = 0;
-            var advancedList = db.ADVANCEDs.Where(x => x.EmployeeID == e.EmployeeID).ToList();
+            var advancedList = db.ADVANCEDs.Where(x => x.EmployeeID == e.EmployeeID && x.DateAdvanced.Month == month.Month && x.DateAdvanced.Year == month.Year).ToList();
             for (int i = 0; i < advancedList.Count; i++)
                 advanced += (int)advancedList[i].Value;
             return advanced;
         }
-        public int CalculateSalary(string id)
+        public int CalculateOvertimeSalary(EMPLOYEE e, DateTime month)
         {
-            EMPLOYEE e = db.EMPLOYEEs.Find(id);
-            int income = (int)e.CONTRACT.BasicSalary;
+            int hourPay = CalculateStandardHourSalary(e);
+            return (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormalExtra * db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value)
+                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value);
 
-            int insurance_pay = income;
-            var allowanceList = db.ALLOWANCEs.ToList();
-            for (int i = 0; i < allowanceList.Count; i++)
-            {
-                var val = allowanceList[i];
-                if (val.Insurance)
-                    insurance_pay += (int)val.Value; //Insurance pay only counted for some specific Allowances
-                income += (int)val.Value; //Standard income = BasicSalary + all kind of Allowances
-            }
-            insurance_pay = CalculateInsurancePay(e, (int)insurance_pay);
-            //int absentVacationSalary = (int)(db.TIMEKEEPINGREPORTs.Find(id).SumVacation * income / db.PARAMETERs.Find("SoNgayCongChuan").Value);
-            int incomeTax = CalculateTaxableIncome(e, income, insurance_pay);
-
-            income = (int)(income * db.TIMEKEEPINGREPORTs.Find(id).SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
-            income = income - insurance_pay - incomeTax - CalculateAdvanced(e);
-            //income = income + absentVacationSalary;
-            
-            return income;
+        }
+        public int CalculateSalary(EMPLOYEE e, DateTime month)
+        {
+            return CalculateWorkDaySalary(e, month) + CalculateOvertimeSalary(e, month) - CalculateTotalInsurancePay(e) - CalculateIncomeTax(e, month) - CalculateAdvanced(e, month); ;
         }
         // GET: SALARYREPORTs
         public ActionResult Index()

@@ -74,11 +74,10 @@ namespace HRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult IncomeTaxEdit(int MinIncomeMustPayTax, int SelfDeduction, int DependentDeduction)
+        public ActionResult IncomeTaxEdit(int SelfDeduction, int DependentDeduction)
         {
             if (ModelState.IsValid)
             {
-                db.PARAMETERs.Find("MucThuNhapToiThieuPhaiDongThue").Value = MinIncomeMustPayTax;
                 db.PARAMETERs.Find("MucGiamTruBanThan").Value = SelfDeduction;
                 db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value = DependentDeduction;
                 db.SaveChanges();
@@ -107,20 +106,21 @@ namespace HRM.Controllers
             }
             return View();
         }
-        public ActionResult StandardWorkDay()
+        public ActionResult StandardWork()
         {
             return View();
         }
-        public ActionResult StandardWorkDayEdit()
+        public ActionResult StandardWorkEdit()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult StandardWorkDayEdit(int WorkDayNum)
+        public ActionResult StandardWorkEdit(int WorkDayNum, int WorkHourNum)
         {
             if (ModelState.IsValid)
             {
                 db.PARAMETERs.Find("SoNgayCongChuan").Value = WorkDayNum;
+                db.PARAMETERs.Find("SoGioCongChuan").Value = WorkHourNum;
                 db.SaveChanges();
                 return RedirectToAction("StandardWorkDay");
             }
