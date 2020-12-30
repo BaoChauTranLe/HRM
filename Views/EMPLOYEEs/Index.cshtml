@@ -68,62 +68,67 @@
 		</div>
 		<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
 			<thead>
-				<tr>
-					<th data-field="id" data-sortable="true">
-						@Html.DisplayName("Mã nhân viên")
-					</th>
-					<th data-field="image" data-sortable="true">
-						@Html.DisplayName("Ảnh")
-					</th>
-					<th data-field="name" data-sortable="true">
-						@Html.DisplayName("Tên nhân viên")
-					</th>
-					<th data-field="gender" data-sortable="true">
-						@Html.DisplayName("Giới tính")
-					</th>
-					<th data-field="phonennumber">
-						@Html.DisplayName("Điện thoại")
-					</th>
-					<th data-field="department" data-sortable="true">
-						@Html.DisplayName("Phòng")
-					</th>
-					<th data-field="position" data-sortable="true">
-						@Html.DisplayName("Chức vụ")
-					</th>
-
-				</tr>
+                <tr>
+                    <th data-field="id" data-sortable="true">
+                        @Html.DisplayName("Mã nhân viên")
+                    </th>
+                    <th data-field="image" data-sortable="true">
+                        @Html.DisplayName("Ảnh")
+                    </th>
+                    <th data-field="name" data-sortable="true">
+                        @Html.DisplayName("Tên nhân viên")
+                    </th>
+                    <th data-field="gender" data-sortable="true">
+                        @Html.DisplayName("Giới tính")
+                    </th>
+                    <th data-field="phonennumber">
+                        @Html.DisplayName("Điện thoại")
+                    </th>
+                    <th data-field="department" data-sortable="true">
+                        @Html.DisplayName("Phòng")
+                    </th>
+                    <th data-field="position" data-sortable="true">
+                        @Html.DisplayName("Chức vụ")
+                    </th>
+                    <th data-field="state" data-sortable="true">
+                        @Html.DisplayName("Đã rời công ty")
+                    </th>
+                </tr>
 			</thead>
 			<tbody>
 				@foreach (var item in Model)
 				{
-					<tr>
-						<td>
-							@Html.DisplayFor(modelItem => item.EmployeeID)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Image)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.EmployeeName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Sex)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Phone)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.RoomName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.PositionName)
-						</td>
-						<td>
-							@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
-						</td>
-					</tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    </td>
+                </tr>
 				}
 			</tbody>
 		</table>

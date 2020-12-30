@@ -34,6 +34,7 @@ namespace HRM.Controllers
                     Sex = item.Sex,
                     RoomName = item.ROOM.RoomName,
                     PositionName = item.POSITION.PositionName,
+                    State = (bool)item.State,
                 });
             }
             if (!String.IsNullOrEmpty(searchString)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
@@ -79,6 +80,7 @@ namespace HRM.Controllers
             employee.SocialInsuranceID = eMPLOYEE.HealthInsuranceID.Substring(eMPLOYEE.HealthInsuranceID.Length - 10, 10);
             employee.DeductionPersonal = eMPLOYEE.SelfDeduction;
             employee.DeductionDependent = (int)eMPLOYEE.DependentDeduction;
+            employee.State = (bool)eMPLOYEE.State;
             List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
             CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
             List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
@@ -365,6 +367,7 @@ namespace HRM.Controllers
                 eMPLOYEE.Email = employee.Email;
                 eMPLOYEE.City = employee.City;
                 eMPLOYEE.Ward = employee.Ward;
+                eMPLOYEE.Street = employee.Street;
                 eMPLOYEE.Dictrict = employee.Dictrict;
                 eMPLOYEE.RoomID = employee.RoomID;
                 eMPLOYEE.PositionID = employee.PositionID;
@@ -373,6 +376,7 @@ namespace HRM.Controllers
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
                 eMPLOYEE.SelfDeduction = Convert.ToBoolean(employee.DeductionPersonal);
                 eMPLOYEE.DependentDeduction = employee.DeductionDependent;
+                eMPLOYEE.State = false;
                 //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
                 eDUCATIONDETAIL.EmployeeID = id;
@@ -543,6 +547,7 @@ namespace HRM.Controllers
             employee.City = eMPLOYEE.City;
             employee.Ward = eMPLOYEE.Ward;
             employee.Dictrict = eMPLOYEE.Dictrict;
+            employee.Street = eMPLOYEE.Street;
             employee.RoomID = eMPLOYEE.RoomID;
             employee.PositionID = eMPLOYEE.PositionID;
             employee.ContractID = eMPLOYEE.ContractID;
@@ -676,7 +681,8 @@ namespace HRM.Controllers
             ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
             ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
             ViewBag.TypeCertificate = certificatelist;
-
+            if (employee.ContractExpirationDate < employee.DateStartWork)
+                ModelState.AddModelError("ContractExpirationDate", "Ngày kết thúc phải lớn hơn ngày bắt đầu");
             if (ModelState.IsValid)
             {
                 EMPLOYEE eMPLOYEE = new EMPLOYEE();
@@ -695,6 +701,7 @@ namespace HRM.Controllers
                 eMPLOYEE.City = employee.City;
                 eMPLOYEE.Ward = employee.Ward;
                 eMPLOYEE.Dictrict = employee.Dictrict;
+                eMPLOYEE.Street = employee.Street;
                 eMPLOYEE.RoomID = employee.RoomID;
                 eMPLOYEE.PositionID = employee.PositionID;
                 eMPLOYEE.ContractID = employee.ContractID;
@@ -773,24 +780,8 @@ namespace HRM.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
-            List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
-            CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
-            List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
-            List<SHIFTDETAIL> sHIFTDETAILs = db.SHIFTDETAILs.SqlQuery("Select * from SHIFTDETAIL where employeeID = '" + id + "'").ToList();
-            if (sHIFTDETAILs.Count() != 0)
-            {
-                return RedirectToAction("Error");
-            }
-            foreach (var item in eDUCATIONDETAIL)
-            {
-                db.EDUCATIONDETAILs.Remove(item);
-            }
-            foreach (var item in cERTIFICATEDETAIL)
-            {
-                db.CERTIFICATEDETAILs.Remove(item);
-            }
-            db.CONTRACTs.Remove(cONTRACT);
-            db.EMPLOYEEs.Remove(eMPLOYEE);
+            eMPLOYEE.State = true;
+            db.Entry(eMPLOYEE).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
