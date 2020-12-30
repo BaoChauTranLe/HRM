@@ -342,8 +342,8 @@
     <Content Include="Views\PARAMETERs\EmployeeEdit.cshtml" />
     <Content Include="Views\PARAMETERs\IncomeTaxEdit.cshtml" />
     <Content Include="Views\PARAMETERs\CoefficientsOTSalaryEdit.cshtml" />
-    <Content Include="Views\PARAMETERs\StandardWorkDay.cshtml" />
-    <Content Include="Views\PARAMETERs\StandardWorkDayEdit.cshtml" />
+    <Content Include="Views\PARAMETERs\StandardWork.cshtml" />
+    <Content Include="Views\PARAMETERs\StandardWorkEdit.cshtml" />
     <Content Include="Views\PARAMETERs\Insurance.cshtml" />
     <Content Include="Views\PARAMETERs\InsuranceEdit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Create.cshtml" />
