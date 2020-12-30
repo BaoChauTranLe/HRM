@@ -71,25 +71,25 @@ namespace HRM.Controllers
             employee.City = eMPLOYEE.City;
             employee.Ward = eMPLOYEE.Ward;
             employee.Dictrict = eMPLOYEE.Dictrict;
-            employee.RoomID = eMPLOYEE.ROOM.RoomName;
-            employee.PositionID = eMPLOYEE.POSITION.PositionName;
+            employee.RoomName = eMPLOYEE.ROOM.RoomName;
+            employee.PositionName = eMPLOYEE.POSITION.PositionName;
             employee.ContractID = eMPLOYEE.ContractID;
-            //employee.HealthInsurance = eMPLOYEE.HealthInsurance;
+            employee.HealthInsurance = eMPLOYEE.FreeInsurance;
             employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
             employee.SocialInsuranceID = eMPLOYEE.HealthInsuranceID.Substring(eMPLOYEE.HealthInsuranceID.Length - 10, 10);
-            //employee.DeductionPersonal = eMPLOYEE.DeductionPersonal;
-            //employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
+            employee.DeductionPersonal = eMPLOYEE.SelfDeduction;
+            employee.DeductionDependent = (int)eMPLOYEE.DependentDeduction;
             List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
             CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
             List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
             //Trinh do
-            //employee.EducationName = eDUCATIONDETAIL[0].EDUCATION.EducationName;
+            employee.EducationName = eDUCATIONDETAIL[0].EducationName;
             employee.MajorName = eDUCATIONDETAIL[0].MAJOR.MajorName;
             employee.Date = eDUCATIONDETAIL[0].Date;
             employee.Place = eDUCATIONDETAIL[0].Place;
             //Chung chi
             employee.CertificateName = cERTIFICATEDETAIL[0].CertificateName;
-            //employee.TypeCertificate = cERTIFICATEDETAIL[0].CERTIFICATE.TypeCertificate;
+            employee.TypeCertificate = cERTIFICATEDETAIL[0].TypeCertificate;
             employee.CertificateDate = cERTIFICATEDETAIL[0].CertificateDate;
             employee.CertificatePlace = cERTIFICATEDETAIL[0].CertificatePlace;
             //Hop dong
@@ -98,7 +98,6 @@ namespace HRM.Controllers
             employee.DateStartWork = cONTRACT.DateStartWork;
             employee.ContractExpirationDate = cONTRACT.ContractExpirationDate;
             employee.BasicSalary = (int)cONTRACT.BasicSalary;
-            //employee.PersonalIncomeTax = cONTRACT.PersonalIncomeTax;
             return View(employee);
         }
 
@@ -131,7 +130,8 @@ namespace HRM.Controllers
             List<SelectListItem> dictrict = new List<SelectListItem>();
             List<SelectListItem> nation = new List<SelectListItem>();
             List<SelectListItem> contractType = new List<SelectListItem>();
-            List<SelectListItem> personalIncomeTax = new List<SelectListItem>();
+            List<SelectListItem> education = new List<SelectListItem>();
+            List<SelectListItem> typecertificate = new List<SelectListItem>();
             var Directory = AppDomain.CurrentDomain.BaseDirectory;
             //path of folder
             var path = Directory + "./File_Text/";
@@ -141,7 +141,8 @@ namespace HRM.Controllers
             string[] lines3 = System.IO.File.ReadAllLines(path + "Dictrict.txt", encoding);
             string[] lines4 = System.IO.File.ReadAllLines(path + "Nation.txt", encoding);
             string[] lines5 = System.IO.File.ReadAllLines(path + "ContractType.txt", encoding);
-            string[] lines6 = System.IO.File.ReadAllLines(path + "PersonalIncomeTax.txt", encoding);
+            string[] lines6 = System.IO.File.ReadAllLines(path + "Education.txt", encoding);
+            string[] lines7 = System.IO.File.ReadAllLines(path + "TypeCertificate.txt", encoding);
             foreach (string line in lines1)
             {
                 city.Add(new SelectListItem()
@@ -184,7 +185,15 @@ namespace HRM.Controllers
             }
             foreach (string line in lines6)
             {
-                personalIncomeTax.Add(new SelectListItem()
+                education.Add(new SelectListItem()
+                {
+                    Text = line,
+                    Value = line
+                });
+            }
+            foreach (string line in lines7)
+            {
+                typecertificate.Add(new SelectListItem()
                 {
                     Text = line,
                     Value = line
@@ -195,7 +204,8 @@ namespace HRM.Controllers
             SelectList dictrictlist = new SelectList(dictrict, "Value", "Text");
             SelectList nationlist = new SelectList(nation, "Value", "Text");
             SelectList contracttypelist = new SelectList(contractType, "Value", "Text");
-            SelectList personalincometaxlist = new SelectList(personalIncomeTax, "Value", "Text");
+            SelectList educationlist = new SelectList(education, "Value", "Text");
+            SelectList certificatelist = new SelectList(typecertificate, "Value", "Text");
             // Set vào ViewBag
             ViewBag.Birthplace = citylist;
             ViewBag.HomeTown = citylist;
@@ -204,13 +214,11 @@ namespace HRM.Controllers
             ViewBag.City = citylist;
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
-            ViewBag.PersonalIncomeTax = personalincometaxlist;
+            ViewBag.EducationName = educationlist;
             ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
             ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            //ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
             ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            //ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            //ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.TypeCertificate = certificatelist;
             ViewBag.EmployeeID = id;
             return View();
         }
@@ -220,7 +228,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,Place,CertificateName,TypeCertificateID,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime,Password")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,ImageFile,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,TrialTime,Password")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -248,7 +256,8 @@ namespace HRM.Controllers
             List<SelectListItem> dictrict = new List<SelectListItem>();
             List<SelectListItem> nation = new List<SelectListItem>();
             List<SelectListItem> contractType = new List<SelectListItem>();
-            List<SelectListItem> personalIncomeTax = new List<SelectListItem>();
+            List<SelectListItem> education = new List<SelectListItem>();
+            List<SelectListItem> typecertificate = new List<SelectListItem>();
             var Directory = AppDomain.CurrentDomain.BaseDirectory;
             //path of folder
             var path = Directory + "./File_Text/";
@@ -258,7 +267,8 @@ namespace HRM.Controllers
             string[] lines3 = System.IO.File.ReadAllLines(path + "Dictrict.txt", encoding);
             string[] lines4 = System.IO.File.ReadAllLines(path + "Nation.txt", encoding);
             string[] lines5 = System.IO.File.ReadAllLines(path + "ContractType.txt", encoding);
-            string[] lines6 = System.IO.File.ReadAllLines(path + "PersonalIncomeTax.txt", encoding);
+            string[] lines6 = System.IO.File.ReadAllLines(path + "Education.txt", encoding);
+            string[] lines7 = System.IO.File.ReadAllLines(path + "TypeCertificate.txt", encoding);
             foreach (string line in lines1)
             {
                 city.Add(new SelectListItem()
@@ -301,7 +311,15 @@ namespace HRM.Controllers
             }
             foreach (string line in lines6)
             {
-                personalIncomeTax.Add(new SelectListItem()
+                education.Add(new SelectListItem()
+                {
+                    Text = line,
+                    Value = line
+                });
+            }
+            foreach (string line in lines7)
+            {
+                typecertificate.Add(new SelectListItem()
                 {
                     Text = line,
                     Value = line
@@ -312,7 +330,8 @@ namespace HRM.Controllers
             SelectList dictrictlist = new SelectList(dictrict, "Value", "Text");
             SelectList nationlist = new SelectList(nation, "Value", "Text");
             SelectList contracttypelist = new SelectList(contractType, "Value", "Text");
-            SelectList personalincometaxlist = new SelectList(personalIncomeTax, "Value", "Text");
+            SelectList educationlist = new SelectList(education, "Value", "Text");
+            SelectList certificatelist = new SelectList(typecertificate, "Value", "Text");
             // Set vào ViewBag
             ViewBag.Birthplace = citylist;
             ViewBag.HomeTown = citylist;
@@ -321,20 +340,21 @@ namespace HRM.Controllers
             ViewBag.City = citylist;
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
-            ViewBag.PersonalIncomeTax = personalincometaxlist;
+            ViewBag.EducationName = educationlist;
             ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
             ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            //ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
             ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            //ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            //ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.TypeCertificate = certificatelist;
             ViewBag.EmployeeID = id;
+            if (employee.ContractExpirationDate < employee.DateStartWork)
+                ModelState.AddModelError("ContractExpirationDate", "Ngày kết thúc phải lớn hơn ngày bắt đầu");
             if (ModelState.IsValid)
             {
                 EMPLOYEE eMPLOYEE = new EMPLOYEE();
                 eMPLOYEE.EmployeeID = id;
                 eMPLOYEE.EmployeeName = FormatProperCase(employee.EmployeeName); //Chuan hoa chuoi
-                eMPLOYEE.Image = employee.Image;
+                if (employee.ImageFile != null)
+                    employee.ImageFile.SaveAs(Server.MapPath("/images") + "/" + employee.EmployeeID + ".jpg");
                 eMPLOYEE.Sex = employee.Sex;
                 eMPLOYEE.DoB = (DateTime)employee.DoB;
                 eMPLOYEE.Birthplace = employee.Birthplace;
@@ -349,17 +369,18 @@ namespace HRM.Controllers
                 eMPLOYEE.RoomID = employee.RoomID;
                 eMPLOYEE.PositionID = employee.PositionID;
                 eMPLOYEE.ContractID = employee.ContractID;
+                eMPLOYEE.FreeInsurance = Convert.ToBoolean(employee.HealthInsurance);
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                //eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
-                //eMPLOYEE.DeductionDependent = employee.DeductionDependent;
+                eMPLOYEE.SelfDeduction = Convert.ToBoolean(employee.DeductionPersonal);
+                eMPLOYEE.DependentDeduction = employee.DeductionDependent;
                 //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
                 eDUCATIONDETAIL.EmployeeID = id;
-                // eDUCATIONDETAIL.EducationID = employee.EducationID;
-                // if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
-                //     eDUCATIONDETAIL.MajorID = "M09";
-                // else
-                //     eDUCATIONDETAIL.MajorID = employee.MajorID;
+                eDUCATIONDETAIL.EducationName = employee.EducationName;
+                if (eDUCATIONDETAIL.EducationName == "10" || eDUCATIONDETAIL.EducationName == "11" || eDUCATIONDETAIL.EducationName == "12")
+                    eDUCATIONDETAIL.MajorID = "M09";
+                else
+                    eDUCATIONDETAIL.MajorID = employee.MajorID;
                 eDUCATIONDETAIL.Date = employee.Date;
                 eDUCATIONDETAIL.Place = employee.Place;
                 db.EDUCATIONDETAILs.Add(eDUCATIONDETAIL);
@@ -369,16 +390,15 @@ namespace HRM.Controllers
                 cERTIFICATEDETAIL.CertificateName = employee.CertificateName;
                 cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate;
                 cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace;
-                //cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID;
+                cERTIFICATEDETAIL.TypeCertificate = employee.TypeCertificate;
                 db.CERTIFICATEDETAILs.Add(cERTIFICATEDETAIL);
                 //Hop dong
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
                 cONTRACT.ContractType = employee.ContractType;
-                //cONTRACT.DateStartWork = employee.DateStartWork;
-                //cONTRACT.ContractExpirationDate = employee.ContractExpirationDate;
+                cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
+                cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                //cONTRACT.PersonalIncomeTax = employee.PersonalIncomeTax;
                 if (employee.TrialTime == null)
                     cONTRACT.TrialTime = 0;
                 else
@@ -390,7 +410,7 @@ namespace HRM.Controllers
                 }
                 //Tai khoan
                 USER uSER = new USER();
-                uSER.EmployeeID = employee.EmployeeID;
+                uSER.EmployeeID = id;
                 uSER.Password = employee.Password;
                 db.CONTRACTs.Add(cONTRACT);
                 db.EMPLOYEEs.Add(eMPLOYEE);
@@ -398,7 +418,7 @@ namespace HRM.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Error");
+            return View(employee);
         }
 
         // GET: EMPLOYEEs/Edit/5
@@ -419,7 +439,8 @@ namespace HRM.Controllers
             List<SelectListItem> dictrict = new List<SelectListItem>();
             List<SelectListItem> nation = new List<SelectListItem>();
             List<SelectListItem> contractType = new List<SelectListItem>();
-            List<SelectListItem> personalIncomeTax = new List<SelectListItem>();
+            List<SelectListItem> education = new List<SelectListItem>();
+            List<SelectListItem> typecertificate = new List<SelectListItem>();
             var Directory = AppDomain.CurrentDomain.BaseDirectory;
             //path of folder
             var path = Directory + "./File_Text/";
@@ -429,7 +450,8 @@ namespace HRM.Controllers
             string[] lines3 = System.IO.File.ReadAllLines(path + "Dictrict.txt", encoding);
             string[] lines4 = System.IO.File.ReadAllLines(path + "Nation.txt", encoding);
             string[] lines5 = System.IO.File.ReadAllLines(path + "ContractType.txt", encoding);
-            string[] lines6 = System.IO.File.ReadAllLines(path + "PersonalIncomeTax.txt", encoding);
+            string[] lines6 = System.IO.File.ReadAllLines(path + "Education.txt", encoding);
+            string[] lines7 = System.IO.File.ReadAllLines(path + "TypeCertificate.txt", encoding);
             foreach (string line in lines1)
             {
                 city.Add(new SelectListItem()
@@ -472,7 +494,15 @@ namespace HRM.Controllers
             }
             foreach (string line in lines6)
             {
-                personalIncomeTax.Add(new SelectListItem()
+                education.Add(new SelectListItem()
+                {
+                    Text = line,
+                    Value = line
+                });
+            }
+            foreach (string line in lines7)
+            {
+                typecertificate.Add(new SelectListItem()
                 {
                     Text = line,
                     Value = line
@@ -483,7 +513,8 @@ namespace HRM.Controllers
             SelectList dictrictlist = new SelectList(dictrict, "Value", "Text");
             SelectList nationlist = new SelectList(nation, "Value", "Text");
             SelectList contracttypelist = new SelectList(contractType, "Value", "Text");
-            SelectList personalincometaxlist = new SelectList(personalIncomeTax, "Value", "Text");
+            SelectList educationlist = new SelectList(education, "Value", "Text");
+            SelectList certificatelist = new SelectList(typecertificate, "Value", "Text");
             // Set vào ViewBag
             ViewBag.Birthplace = citylist;
             ViewBag.HomeTown = citylist;
@@ -492,13 +523,12 @@ namespace HRM.Controllers
             ViewBag.City = citylist;
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
-            ViewBag.PersonalIncomeTax = personalincometaxlist;
+            ViewBag.EducationName = educationlist;
             ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
             ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-           // ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
             ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            ///ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            //ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.TypeCertificate = certificatelist;
+
             employee.EmployeeID = eMPLOYEE.EmployeeID;
             employee.EmployeeName = eMPLOYEE.EmployeeName;
             employee.Image = eMPLOYEE.Image;
@@ -516,21 +546,22 @@ namespace HRM.Controllers
             employee.RoomID = eMPLOYEE.RoomID;
             employee.PositionID = eMPLOYEE.PositionID;
             employee.ContractID = eMPLOYEE.ContractID;
-            //employee.HealthInsurance = (bool)eMPLOYEE.HealthInsurance;
+            employee.HealthInsurance = eMPLOYEE.FreeInsurance;
             employee.HealthInsuranceID = eMPLOYEE.HealthInsuranceID;
-            //employee.DeductionPersonal = (bool)eMPLOYEE.DeductionPersonal;
-            //employee.DeductionDependent = (int)eMPLOYEE.DeductionDependent;
+            employee.DeductionPersonal = eMPLOYEE.SelfDeduction;
+            employee.DeductionDependent = (int)eMPLOYEE.DependentDeduction;
             List<EDUCATIONDETAIL> eDUCATIONDETAIL = db.EDUCATIONDETAILs.SqlQuery("Select * from EDUCATIONDETAIL where employeeID = '" + id + "'").ToList();
             CONTRACT cONTRACT = await db.CONTRACTs.FindAsync(eMPLOYEE.ContractID);
             List<CERTIFICATEDETAIL> cERTIFICATEDETAIL = db.CERTIFICATEDETAILs.SqlQuery("Select * from CERTIFICATEDETAIL where employeeID = '" + id + "'").ToList();
+            USER uSER = await db.USERS.FindAsync(id);
             //Trinh do
-            //employee.EducationID = eDUCATIONDETAIL[0].EducationID;
+            employee.EducationName = eDUCATIONDETAIL[0].EducationName;
             employee.MajorID = eDUCATIONDETAIL[0].MajorID;
             employee.Date = eDUCATIONDETAIL[0].Date;
             employee.Place = eDUCATIONDETAIL[0].Place;
             //Chung chi
             employee.CertificateName = cERTIFICATEDETAIL[0].CertificateName;
-            //employee.TypeCertificateID = cERTIFICATEDETAIL[0].TypeCertificateID;
+            employee.TypeCertificate = cERTIFICATEDETAIL[0].TypeCertificate;
             employee.CertificateDate = cERTIFICATEDETAIL[0].CertificateDate;
             employee.CertificatePlace = cERTIFICATEDETAIL[0].CertificatePlace;
             //Hop dong
@@ -538,8 +569,9 @@ namespace HRM.Controllers
             employee.ContractType = cONTRACT.ContractType;
             employee.DateStartWork = cONTRACT.DateStartWork;
             employee.ContractExpirationDate = cONTRACT.ContractExpirationDate;
-            employee.BasicSalary = (int)cONTRACT.BasicSalary;
-            //employee.PersonalIncomeTax = cONTRACT.PersonalIncomeTax;
+            employee.BasicSalary = cONTRACT.BasicSalary;
+            //Tai khoan
+            employee.Password = uSER.Password;
             return View(employee);
         }
 
@@ -548,14 +580,15 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthcity,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationID,MajorID,Date,city,CertificateName,TypeCertificateID,CertificateDate,Certificatecity,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,PersonalIncomeTax,TrialTime")] EmployeeViewModel employee)
+        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,TrialTime,Password")] EmployeeViewModel employee)
         {
             List<SelectListItem> city = new List<SelectListItem>();
             List<SelectListItem> ward = new List<SelectListItem>();
             List<SelectListItem> dictrict = new List<SelectListItem>();
             List<SelectListItem> nation = new List<SelectListItem>();
             List<SelectListItem> contractType = new List<SelectListItem>();
-            List<SelectListItem> personalIncomeTax = new List<SelectListItem>();
+            List<SelectListItem> education = new List<SelectListItem>();
+            List<SelectListItem> typecertificate = new List<SelectListItem>();
             var Directory = AppDomain.CurrentDomain.BaseDirectory;
             //path of folder
             var path = Directory + "./File_Text/";
@@ -565,7 +598,8 @@ namespace HRM.Controllers
             string[] lines3 = System.IO.File.ReadAllLines(path + "Dictrict.txt", encoding);
             string[] lines4 = System.IO.File.ReadAllLines(path + "Nation.txt", encoding);
             string[] lines5 = System.IO.File.ReadAllLines(path + "ContractType.txt", encoding);
-            string[] lines6 = System.IO.File.ReadAllLines(path + "PersonalIncomeTax.txt", encoding);
+            string[] lines6 = System.IO.File.ReadAllLines(path + "Education.txt", encoding);
+            string[] lines7 = System.IO.File.ReadAllLines(path + "TypeCertificate.txt", encoding);
             foreach (string line in lines1)
             {
                 city.Add(new SelectListItem()
@@ -608,7 +642,15 @@ namespace HRM.Controllers
             }
             foreach (string line in lines6)
             {
-                personalIncomeTax.Add(new SelectListItem()
+                education.Add(new SelectListItem()
+                {
+                    Text = line,
+                    Value = line
+                });
+            }
+            foreach (string line in lines7)
+            {
+                typecertificate.Add(new SelectListItem()
                 {
                     Text = line,
                     Value = line
@@ -619,7 +661,8 @@ namespace HRM.Controllers
             SelectList dictrictlist = new SelectList(dictrict, "Value", "Text");
             SelectList nationlist = new SelectList(nation, "Value", "Text");
             SelectList contracttypelist = new SelectList(contractType, "Value", "Text");
-            SelectList personalincometaxlist = new SelectList(personalIncomeTax, "Value", "Text");
+            SelectList educationlist = new SelectList(education, "Value", "Text");
+            SelectList certificatelist = new SelectList(typecertificate, "Value", "Text");
             // Set vào ViewBag
             ViewBag.Birthplace = citylist;
             ViewBag.HomeTown = citylist;
@@ -628,19 +671,19 @@ namespace HRM.Controllers
             ViewBag.City = citylist;
             ViewBag.Ward = wardlist;
             ViewBag.Dictrict = dictrictlist;
-            ViewBag.PersonalIncomeTax = personalincometaxlist;
+            ViewBag.EducationName = educationlist;
             ViewBag.PositionID = new SelectList(db.POSITIONs, "PositionID", "PositionName");
             ViewBag.RoomID = new SelectList(db.ROOMs, "RoomID", "RoomName");
-            //ViewBag.EducationID = new SelectList(db.EDUCATIONs, "EducationID", "EducationName");
             ViewBag.MajorID = new SelectList(db.MAJORs, "MajorID", "MajorName");
-            //ViewBag.TypeCertificateID = new SelectList(db.CERTIFICATEs, "TypeCertificateID", "TypeCertificate");
-            //ViewBag.User = new SelectList(db.GROUPPERMISSIONs, "GroupPermission1", "GroupPermissionName");
+            ViewBag.TypeCertificate = certificatelist;
+
             if (ModelState.IsValid)
             {
                 EMPLOYEE eMPLOYEE = new EMPLOYEE();
                 eMPLOYEE.EmployeeID = employee.EmployeeID;
                 eMPLOYEE.EmployeeName = FormatProperCase(employee.EmployeeName); //Chuan hoa chuoi
-                eMPLOYEE.Image = employee.Image;
+                if (employee.ImageFile != null)
+                    employee.ImageFile.SaveAs(Server.MapPath("/images") + "/" + employee.EmployeeID + ".jpg");
                 eMPLOYEE.Sex = employee.Sex;
                 eMPLOYEE.DoB = (DateTime)employee.DoB;
                 eMPLOYEE.Birthplace = employee.Birthplace;
@@ -655,36 +698,37 @@ namespace HRM.Controllers
                 eMPLOYEE.RoomID = employee.RoomID;
                 eMPLOYEE.PositionID = employee.PositionID;
                 eMPLOYEE.ContractID = employee.ContractID;
-                //eMPLOYEE.HealthInsurance = employee.HealthInsurance;
+                eMPLOYEE.FreeInsurance = Convert.ToBoolean(employee.HealthInsurance);
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
-                //eMPLOYEE.DeductionPersonal = employee.DeductionPersonal;
-                //eMPLOYEE.DeductionDependent = employee.DeductionDependent;
+                eMPLOYEE.SelfDeduction = Convert.ToBoolean(employee.DeductionPersonal);
+                eMPLOYEE.DependentDeduction = employee.DeductionDependent;
                 db.Entry(eMPLOYEE).State = EntityState.Modified;
                 //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
                 eDUCATIONDETAIL.EmployeeID = employee.EmployeeID;
-                //eDUCATIONDETAIL.EducationID = employee.EducationID;
-                //if (eDUCATIONDETAIL.EducationID == "E01" || eDUCATIONDETAIL.EducationID == "E02" || eDUCATIONDETAIL.EducationID == "E03")
-                //    eDUCATIONDETAIL.MajorID = "M09";
-                //else
-                //    eDUCATIONDETAIL.MajorID = employee.MajorID;
+                eDUCATIONDETAIL.EducationName = employee.EducationName;
+                if (eDUCATIONDETAIL.EducationName == "10" || eDUCATIONDETAIL.EducationName == "11" || eDUCATIONDETAIL.EducationName == "12")
+                    eDUCATIONDETAIL.MajorID = "M09";
+                else
+                    eDUCATIONDETAIL.MajorID = employee.MajorID;
                 eDUCATIONDETAIL.Date = employee.Date;
                 eDUCATIONDETAIL.Place = employee.Place;
+                
                 //Chung chi
                 CERTIFICATEDETAIL cERTIFICATEDETAIL = new CERTIFICATEDETAIL();
                 cERTIFICATEDETAIL.EmployeeID = employee.EmployeeID;
                 cERTIFICATEDETAIL.CertificateName = employee.CertificateName;
                 cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate;
                 cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace;
-                //cERTIFICATEDETAIL.TypeCertificateID = employee.TypeCertificateID;
+                cERTIFICATEDETAIL.TypeCertificate = employee.TypeCertificate;
+                
                 //Hop dong
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
                 cONTRACT.ContractType = employee.ContractType;
-                //cONTRACT.DateStartWork = employee.DateStartWork;
-                //cONTRACT.ContractExpirationDate = employee.ContractExpirationDate;
+                cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
+                cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                //cONTRACT.PersonalIncomeTax = employee.PersonalIncomeTax;
                 if (employee.TrialTime == null)
                     cONTRACT.TrialTime = 0;
                 else
@@ -694,9 +738,14 @@ namespace HRM.Controllers
                     else
                         cONTRACT.TrialTime = 0;
                 }
+                //Tai khoan
+                USER uSER = new USER();
+                uSER.EmployeeID = employee.EmployeeID;
+                uSER.Password = employee.Password;
                 db.Entry(eDUCATIONDETAIL).State = EntityState.Modified;
                 db.Entry(cERTIFICATEDETAIL).State = EntityState.Modified;
                 db.Entry(cONTRACT).State = EntityState.Modified;
+                db.Entry(uSER).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

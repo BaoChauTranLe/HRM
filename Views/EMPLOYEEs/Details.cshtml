@@ -34,7 +34,6 @@
             background: linear-gradient(180deg, #0099E9 0%, #80C8ED 100%);
             border-radius: 4px 4px 0px 0px;
         }
-
     /* Style the tab content */
     .tabcontent {
         display: none;
@@ -114,6 +113,15 @@
                     @Html.DisplayFor(model => model.EmployeeName)
                 </td>
             </tr>
+            <tr>
+                <th>
+                    Ảnh
+                </th>
+                <td>
+                    <img src="@Html.DisplayFor(model => model.Image)" />
+                </td>
+            </tr>
+
             <tr>
                 <th>
                     Phòng
@@ -355,12 +363,6 @@
                 <td>
                     @Html.DisplayFor(model => model.BasicSalary)
                     VNĐ
-                </td>
-            </tr>
-            <tr>
-                <th>Loại thuế thu nhập cá nhân</th>
-                <td>
-                    @Html.DisplayFor(model => model.PersonalIncomeTax)
                 </td>
             </tr>
             <tr>
