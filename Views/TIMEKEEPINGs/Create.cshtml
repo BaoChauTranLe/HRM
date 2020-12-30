@@ -55,6 +55,18 @@
 		border: 1px solid #3D76B5;
 		border-radius: 4px;
 	}
+
+	.form-control {
+		width: calc(100% - 10px);
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+	}
 </style>
 <body>
 	<div class="col-md-6">
@@ -86,68 +98,83 @@
 					<input type="button" class="search-button" value="Tìm kiếm" style="width:100%;" />
 				</div>
 			</div>
-			<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
-				@using (Html.BeginForm("Create", "TIMEKEEPINGs", FormMethod.Post, new { name = "frm", id = "frm" }))
-				{
-					@Html.AntiForgeryToken()
-					<thead>
-						<tr>
-							<th data-field="state" data-checkbox="true"></th>
-							<th data-field="name" data-sortable="true">
-								@Html.DisplayName("Tên nhân viên")
-							</th>
-							<th data-field="department" data-sortable="true">
-								@Html.DisplayName("Phòng")
-							</th>
-							<th data-field="position" data-sortable="true">
-								@Html.DisplayName("Chức vụ")
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var item in Model.eMPLOYEEs)
-						{
-							<tr>
-								<td></td>
-								<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
-								<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
-								<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
-							</tr>
-						}
-					</tbody>
-				}
-				</table>
-		</div>
-	</div>
-	<div class="col-md-6" style="padding-top:3% ">
-		<div class="col-md-6">
 
-			<label>Từ ngày</label>
-			<input type="date" name="select_date" id="select_date" class="form-control" />
-			<label style="margin-top:30px">Chọn ca làm việc</label>
-			<select class="index-txtbox drop-down-list" style="width:100%;">
-				@foreach (var item in Model.sHIFTs)
-				{
-					<option id="shift">@Html.DisplayFor(modelItem => item.ShiftName)</option>
+			<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%">
+
+				@Html.AntiForgeryToken()
+				<thead>
+					<tr>
+						<th data-field="state" data-checkbox="true"></th>
+						<th data-field="name" data-sortable="true">
+							@Html.DisplayName("Tên nhân viên")
+						</th>
+						<th data-field="department" data-sortable="true">
+							@Html.DisplayName("Phòng")
+						</th>
+						<th data-field="position" data-sortable="true">
+							@Html.DisplayName("Chức vụ")
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.eMPLOYEEs)
+					{
+						<tr>
+							<td></td>
+							<td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
+							<td>@Html.DisplayFor(modelItem => item.ROOM.RoomName)</td>
+							<td>@Html.DisplayFor(modelItem => item.PositionID)</td>
+						</tr>
+					}
+				</tbody>
 				}
-			</select>
-		</div>
-		<div class="col-md-6">
-			<label>Đến ngày</label>
-			<input type="date" name="select_date" id="select_date" class="form-control" />
-		</div>
-		<div class="row" style="padding-top:200px">
-			<div class="col-md-6 col-md-offset-3">
-				<input type="submit" value="Lưu" class="btn-save" id="btn-save" />
-			</div>
-			<div class="col-md-6 col-md-offset-6">
-				<button class="btn-cancel" onclick="GoHome()">
-					HỦY
-				</button>
-			</div>
+			</table>
 		</div>
 	</div>
-	
+	@using (Html.BeginForm("Create", "TIMEKEEPINGs", FormMethod.Post, new { name = "frm", id = "frm" }))
+	{
+		@Html.AntiForgeryToken()
+		<div class="col-md-6" style="padding-top:3% ">
+			<div class="form-group">
+				Mã nhân viên
+				<div class="col-md-10">
+					@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Từ ngày</label>
+					@Html.EditorFor(model => model.shiftdetails.StartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+				</div>
+
+				<label style="margin-top:30px">Chọn ca làm việc</label>
+				@*<select class="index-txtbox drop-down-list" style="width:100%;"*@>
+				@Html.DropDownListFor(model => model.shiftdetails.ShiftID, (IEnumerable<SelectListItem>)ViewBag.Shift, new { htmlAttributes = new { @class = "index-txtbox drop-down-list", style = "width:100%;" } })
+				@*@foreach (var item in Model.sHIFTs)
+					{
+						<option id="shift">@Html.DisplayFor(modelItem => item.ShiftName)</option>
+					}*@
+				@*</select>*@
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Đến ngày</label>
+					@Html.EditorFor(model => model.shiftdetails.EndDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+				</div>
+			</div>
+			<div class="row" style="padding-top:200px">
+				<div class="col-md-6 col-md-offset-3">
+					<input type="submit" value="Lưu" class="btn-save" id="btn-save" />
+				</div>
+				<div class="col-md-6 col-md-offset-6">
+					<button class="btn-cancel" onclick="GoHome()">
+						HỦY
+					</button>
+				</div>
+			</div>
+		</div>
+
+	}
 </body>
 
 <script>
@@ -172,7 +199,7 @@
 		})
 	})
 	$(function () {
-		$btn-save.click(function () {
+		$btn - save.click(function () {
 			($table.bootstrapTable('getSelections'))
 		})
 	})
