@@ -74,5 +74,6 @@ namespace HRM.Models
         public string SocialInsuranceID { get; set; }
         [Required(ErrorMessage = "Mật khẩu bắt buộc")]
         public string Password { get; set; }
+        public bool State { get; set; }
     }
 }
