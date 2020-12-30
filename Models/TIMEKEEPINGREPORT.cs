@@ -14,7 +14,7 @@ namespace HRM.Models
     
     public partial class TIMEKEEPINGREPORT
     {
-        public System.DateTime Month { get; set; }
+        public string Month { get; set; }
         public string EmployeeID { get; set; }
         public Nullable<int> SumWorkDay { get; set; }
         public Nullable<int> SumAbsentHaveSalary { get; set; }

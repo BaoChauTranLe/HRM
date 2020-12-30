@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hrmserver_HRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADVANCED">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -144,6 +144,7 @@
           <Property Name="IncomeTax" Type="int" Nullable="false" />
           <Property Name="Advance" Type="int" Nullable="false" />
           <Property Name="RealSalary" Type="int" Nullable="false" />
+          <Property Name="StandardSalary" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -222,7 +223,7 @@
             <PropertyRef Name="Month" />
             <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="Month" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="SumWorkDay" Type="int" />
           <Property Name="SumAbsentHaveSalary" Type="int" />
@@ -364,7 +365,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIMEKEEPI__Emplo__6501FCD8">
+        <Association Name="FK__TIMEKEEPI__Emplo__29AC2CE0">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="TIMEKEEPINGREPORT" Type="Self.TIMEKEEPINGREPORT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -498,7 +499,7 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TAXREPORT" EntitySet="TAXREPORT" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__Emplo__6501FCD8" Association="Self.FK__TIMEKEEPI__Emplo__6501FCD8">
+          <AssociationSet Name="FK__TIMEKEEPI__Emplo__29AC2CE0" Association="Self.FK__TIMEKEEPI__Emplo__29AC2CE0">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORT" />
           </AssociationSet>
@@ -523,8 +524,7 @@
             <End Role="TIMEKEEPING" EntitySet="TIMEKEEPING" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hrmserver_HRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -691,6 +691,7 @@
           <Property Name="Advance" Type="Int32" Nullable="false" />
           <Property Name="RealSalary" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARYREP__Emplo__51EF2864" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
+          <Property Name="StandardSalary" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -775,7 +776,7 @@
             <PropertyRef Name="Month" />
             <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Month" Type="String" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="SumWorkDay" Type="Int32" />
           <Property Name="SumAbsentHaveSalary" Type="Int32" />
@@ -1221,6 +1222,7 @@
           <EntitySetMapping Name="SALARYREPORTs">
             <EntityTypeMapping TypeName="hrmserver_HRMModel.SALARYREPORT">
               <MappingFragment StoreEntitySet="SALARYREPORT">
+                <ScalarProperty Name="StandardSalary" ColumnName="StandardSalary" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Allowance" ColumnName="Allowance" />

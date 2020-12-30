@@ -24,6 +24,7 @@ namespace HRM.Models
         public int IncomeTax { get; set; }
         public int Advance { get; set; }
         public int RealSalary { get; set; }
+        public int StandardSalary { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
