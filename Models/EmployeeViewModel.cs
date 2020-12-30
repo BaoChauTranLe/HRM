@@ -12,6 +12,7 @@ namespace HRM.Models
         [Required(ErrorMessage = "Tên nhân viên bắt buộc")]
         public string EmployeeName { get; set; }
         public string Image { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
         public string Sex { get; set; }
         [Required(ErrorMessage = "Ngày sinh bắt buộc")]
         public DateTime DoB { get; set; }
@@ -35,7 +36,6 @@ namespace HRM.Models
         public string PositionID { get; set; }
         public string PositionName { get; set; }
         [Required(ErrorMessage = "Trình độ bắt buộc")]
-        public string EducationID { get; set; }
         public string EducationName { get; set; }
         [Required(ErrorMessage = "Chuyên ngành bắt buộc")]
         public string MajorID { get; set; }
@@ -46,7 +46,6 @@ namespace HRM.Models
         public string Place { get; set; }
         [Required(ErrorMessage = "Tên chứng chỉ bắt buộc")]
         public string CertificateName { get; set; }
-        public string TypeCertificateID { get; set; }
         public string TypeCertificate { get; set; }
         [Required(ErrorMessage = "Ngày cấp bắt buộc")]
         public DateTime CertificateDate { get; set; }
@@ -62,13 +61,12 @@ namespace HRM.Models
         public DateTime? ContractExpirationDate { get; set; }
         [Required(ErrorMessage = "Lương cơ bản bắt buộc")]
         public int BasicSalary { get; set; }
-        public string PersonalIncomeTax { get; set; }
         public int? TrialTime { get; set; }
-        public bool? HealthInsurance { get; set; }
+        public bool HealthInsurance { get; set; }
         [Required(ErrorMessage = "Mã bảo hiểm y tế bắt buộc")]
         [StringLength(maximumLength: 15, ErrorMessage = "Mã bảo hiểm y tế có 15 ký tự", MinimumLength = 15)]
         public string HealthInsuranceID { get; set; }
-        public bool? DeductionPersonal { get; set; }
+        public bool DeductionPersonal { get; set; }
         [Required(ErrorMessage = "Số người đăng ký giảm trừ phụ thuộc bắt buộc")]
         public int DeductionDependent { get; set; }
         [Required(ErrorMessage = "Tên đường bắt buộc")]

@@ -27,7 +27,8 @@ namespace HRM.Controllers
         }
         public int CalculateWorkDaySalary(EMPLOYEE e, DateTime month)
         {
-            return (int) (CalculateStandardSalary(e) * db.TIMEKEEPINGREPORTs.Find(e.EmployeeID, month).SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
+            var report = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).First();
+            return (int) (CalculateStandardSalary(e) * report.SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
         }
 
         #region Insurance Pay Calculation related

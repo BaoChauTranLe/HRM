@@ -252,9 +252,9 @@
     <Content Include="File_Text\City.txt" />
     <Content Include="File_Text\ContractType.txt" />
     <Content Include="File_Text\Dictrict.txt" />
+    <Content Include="File_Text\Education.txt" />
     <Content Include="File_Text\Nation.txt" />
-    <Content Include="File_Text\PersonalIncomeTax.txt" />
-    <Content Include="File_Text\Place.txt" />
+    <Content Include="File_Text\TypeCertificate.txt" />
     <Content Include="File_Text\Ward.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
