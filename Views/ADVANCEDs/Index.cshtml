@@ -251,39 +251,34 @@
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Thêm ca làm việc</div>
+            <div class="modal-title">Thêm tạm ứng</div>
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
         <div class="modal-body">
             @using (Html.BeginForm("CreateOrEdit", "ADVANCEDs", FormMethod.Post, new { name = "frm", id = "frm" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.DateAdvanced)
-                @Html.HiddenFor(model => model.EmployeeID)
-                <div class="form-horizontal" id="newForm">
+
+                <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="modal__text">
-                                Mã nhân viên
-                            </div>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.EmployeeID, "--Mã nhân viên--", new { htmlAttributes = new { @class = "form-control", @id = "AdDateInput"} })
-                                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-group">
+                        <div class="modal__text">
+                            Mã nhân viên
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="modal__text">
-                                Số tiền
-                            </div>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Value, "--Tiền tạm ứng--", new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-                            </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
@@ -292,7 +287,6 @@
 " />
                         </div>
                     </div>
-                    }
                 </div>
             }
         </div>

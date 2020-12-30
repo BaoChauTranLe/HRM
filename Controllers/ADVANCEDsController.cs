@@ -45,7 +45,7 @@ namespace HRM.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult CreateOrEdit([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
         {
             if (ModelState.IsValid)

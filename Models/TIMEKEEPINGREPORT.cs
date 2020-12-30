@@ -14,20 +14,20 @@ namespace HRM.Models
     
     public partial class TIMEKEEPINGREPORT
     {
-        public string Month { get; set; }
+        public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
-        public Nullable<int> SumWorkDay { get; set; }
-        public Nullable<int> SumAbsentHaveSalary { get; set; }
-        public Nullable<int> SumAbsentNoSalary { get; set; }
-        public Nullable<int> SumHourNormal { get; set; }
-        public Nullable<int> SumHourDayOff { get; set; }
-        public Nullable<int> SumHourSpecialDayOff { get; set; }
-        public Nullable<int> SumHourNightNormal { get; set; }
-        public Nullable<int> SumHourNightDayOff { get; set; }
-        public Nullable<int> SumHourNightSpecialDayOff { get; set; }
-        public Nullable<int> SumHourNightNormalExtra { get; set; }
-        public Nullable<int> SumHourNightDayOffExtra { get; set; }
-        public Nullable<int> SumHourNightSpecialDayOffExtra { get; set; }
+        public int SumWorkDay { get; set; }
+        public int SumAbsentHaveSalary { get; set; }
+        public int SumAbsentNoSalary { get; set; }
+        public int SumHourNormal { get; set; }
+        public int SumHourDayOff { get; set; }
+        public int SumHourSpecialDayOff { get; set; }
+        public int SumHourNightNormal { get; set; }
+        public int SumHourNightDayOff { get; set; }
+        public int SumHourNightSpecialDayOff { get; set; }
+        public int SumHourNightNormalExtra { get; set; }
+        public int SumHourNightDayOffExtra { get; set; }
+        public int SumHourNightSpecialDayOffExtra { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

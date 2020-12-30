@@ -223,20 +223,20 @@
             <PropertyRef Name="Month" />
             <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="Month" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="SumWorkDay" Type="int" />
-          <Property Name="SumAbsentHaveSalary" Type="int" />
-          <Property Name="SumAbsentNoSalary" Type="int" />
-          <Property Name="SumHourNormal" Type="int" />
-          <Property Name="SumHourDayOff" Type="int" />
-          <Property Name="SumHourSpecialDayOff" Type="int" />
-          <Property Name="SumHourNightNormal" Type="int" />
-          <Property Name="SumHourNightDayOff" Type="int" />
-          <Property Name="SumHourNightSpecialDayOff" Type="int" />
-          <Property Name="SumHourNightNormalExtra" Type="int" />
-          <Property Name="SumHourNightDayOffExtra" Type="int" />
-          <Property Name="SumHourNightSpecialDayOffExtra" Type="int" />
+          <Property Name="SumWorkDay" Type="int" Nullable="false" />
+          <Property Name="SumAbsentHaveSalary" Type="int" Nullable="false" />
+          <Property Name="SumAbsentNoSalary" Type="int" Nullable="false" />
+          <Property Name="SumHourNormal" Type="int" Nullable="false" />
+          <Property Name="SumHourDayOff" Type="int" Nullable="false" />
+          <Property Name="SumHourSpecialDayOff" Type="int" Nullable="false" />
+          <Property Name="SumHourNightNormal" Type="int" Nullable="false" />
+          <Property Name="SumHourNightDayOff" Type="int" Nullable="false" />
+          <Property Name="SumHourNightSpecialDayOff" Type="int" Nullable="false" />
+          <Property Name="SumHourNightNormalExtra" Type="int" Nullable="false" />
+          <Property Name="SumHourNightDayOffExtra" Type="int" Nullable="false" />
+          <Property Name="SumHourNightSpecialDayOffExtra" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -365,7 +365,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIMEKEEPI__Emplo__29AC2CE0">
+        <Association Name="FK__TIMEKEEPI__Emplo__30592A6F">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="TIMEKEEPINGREPORT" Type="Self.TIMEKEEPINGREPORT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -499,7 +499,7 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TAXREPORT" EntitySet="TAXREPORT" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIMEKEEPI__Emplo__29AC2CE0" Association="Self.FK__TIMEKEEPI__Emplo__29AC2CE0">
+          <AssociationSet Name="FK__TIMEKEEPI__Emplo__30592A6F" Association="Self.FK__TIMEKEEPI__Emplo__30592A6F">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TIMEKEEPINGREPORT" EntitySet="TIMEKEEPINGREPORT" />
           </AssociationSet>
@@ -776,20 +776,20 @@
             <PropertyRef Name="Month" />
             <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="Month" Type="String" Nullable="false" />
+          <Property Name="Month" Type="DateTime" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="SumWorkDay" Type="Int32" />
-          <Property Name="SumAbsentHaveSalary" Type="Int32" />
-          <Property Name="SumAbsentNoSalary" Type="Int32" />
-          <Property Name="SumHourNormal" Type="Int32" />
-          <Property Name="SumHourDayOff" Type="Int32" />
-          <Property Name="SumHourSpecialDayOff" Type="Int32" />
-          <Property Name="SumHourNightNormal" Type="Int32" />
-          <Property Name="SumHourNightDayOff" Type="Int32" />
-          <Property Name="SumHourNightSpecialDayOff" Type="Int32" />
-          <Property Name="SumHourNightNormalExtra" Type="Int32" />
-          <Property Name="SumHourNightDayOffExtra" Type="Int32" />
-          <Property Name="SumHourNightSpecialDayOffExtra" Type="Int32" />
+          <Property Name="SumWorkDay" Type="Int32" Nullable="false" />
+          <Property Name="SumAbsentHaveSalary" Type="Int32" Nullable="false" />
+          <Property Name="SumAbsentNoSalary" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNormal" Type="Int32" Nullable="false" />
+          <Property Name="SumHourDayOff" Type="Int32" Nullable="false" />
+          <Property Name="SumHourSpecialDayOff" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightNormal" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightDayOff" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightSpecialDayOff" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightNormalExtra" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightDayOffExtra" Type="Int32" Nullable="false" />
+          <Property Name="SumHourNightSpecialDayOffExtra" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__Emplo__6501FCD8" FromRole="TIMEKEEPINGREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="USER">
