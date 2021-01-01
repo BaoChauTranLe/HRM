@@ -79,7 +79,7 @@
 </div>
 @using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-	<input type="month" class="index-txtbox" name="Month">
+	<input type="month" class="index-txtbox" name="Month" id="Month">
 	<div class="form-horizontal">
 		<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
 
@@ -175,4 +175,24 @@
 			}
 		})
 	})
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
+
+	$('#Month').on('change', function () {
+		var date = new Date($(this).val());
+		$.ajax({
+			url: '/TIMEKEEPINGREPORTs/Index',
+			contentType: "application/json; charset=utf-8",
+			data: 'date',
+			success: function (data) {
+				
+			},
+			error: function (error) {
+				
+			}
+		})
+	});
 </script>
