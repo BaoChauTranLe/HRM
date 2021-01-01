@@ -27,8 +27,8 @@ namespace HRM.Controllers
         }
         public int CalculateWorkDaySalary(EMPLOYEE e, DateTime month)
         {
-            var report = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).First();
-            return (int) (CalculateStandardSalary(e) * report.SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).ToList().First();
+            return (int) (CalculateStandardSalary(e) * timekeepingInfo.SumWorkDay / db.PARAMETERs.Find("SoNgayCongChuan").Value);
         }
 
         #region Insurance Pay Calculation related
@@ -81,15 +81,16 @@ namespace HRM.Controllers
         }
         public int CalculateTotalWorkHour(EMPLOYEE e, DateTime month)
         {
-            return (int)(db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNormal
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourDayOff
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourSpecialDayOff
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormal
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOff
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOff
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormalExtra
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOffExtra
-                       + db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOffExtra);
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).ToList().First();
+            return (int)(timekeepingInfo.SumHourNormal
+                       + timekeepingInfo.SumHourDayOff
+                       + timekeepingInfo.SumHourSpecialDayOff
+                       + timekeepingInfo.SumHourNightNormal
+                       + timekeepingInfo.SumHourNightDayOff
+                       + timekeepingInfo.SumHourNightSpecialDayOff
+                       + timekeepingInfo.SumHourNightNormalExtra
+                       + timekeepingInfo.SumHourNightDayOffExtra
+                       + timekeepingInfo.SumHourNightSpecialDayOffExtra);
         }
         public int CalculateTaxableOvertimeSalary(EMPLOYEE e, DateTime month)
         {
@@ -145,16 +146,17 @@ namespace HRM.Controllers
         }
         public int CalculateOvertimeSalary(EMPLOYEE e, DateTime month)
         {
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).ToList().First();
             int hourPay = CalculateStandardHourSalary(e);
-            return (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightNormalExtra * db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value)
-                 + (int)(hourPay * db.TIMEKEEPINGREPORTs.Find(e, month).SumHourNightSpecialDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value);
+            return (int)(hourPay * timekeepingInfo.SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightNormalExtra * db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value)
+                 + (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value);
 
         }
         public int CalculateSalary(EMPLOYEE e, DateTime month)
