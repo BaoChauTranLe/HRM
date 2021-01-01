@@ -20,15 +20,15 @@ namespace HRM.Controllers
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
         // GET: TIMEKEEPINGREPORTs
-        public ActionResult Index(DateTime date)
+        public ActionResult Index(/*DateTime date*/)
         {
             var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
-            if (date != null)
-            {
-                var list = db.TIMEKEEPINGREPORTs.ToList();
-                list = list.Where(x => x.Month == date).ToList();
-                return View(list);
-            }
+            //if (date != null)
+            //{
+            //    var list = db.TIMEKEEPINGREPORTs.ToList();
+            //    list = list.Where(x => x.Month == date).ToList();
+            //    return View(list);
+            //}
 
             return View(tIMEKEEPINGREPORTs.ToList());
         }
