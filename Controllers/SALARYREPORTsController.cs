@@ -166,7 +166,20 @@ namespace HRM.Controllers
         // GET: SALARYREPORTs
         public ActionResult Index()
         {
+            //var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
             var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
+            foreach (SALARYREPORT rp in sALARYREPORTs)
+            {
+                rp.Allowance = CalculateTotalAllowance();
+                rp.Advance = CalculateAdvanced(rp.EMPLOYEE, rp.Month);
+                rp.IncomeTax = CalculateIncomeTax(rp.EMPLOYEE, rp.Month);
+                rp.StandardSalary = CalculateStandardSalary(rp.EMPLOYEE);
+                rp.WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == rp.EmployeeID && x.Month.Month == rp.Month.Month && x.Month.Year == rp.Month.Year).First().SumWorkDay;
+                rp.WorkDaySalary = CalculateWorkDaySalary(rp.EMPLOYEE, rp.Month);
+                rp.OvertimeSalary = CalculateOvertimeSalary(rp.EMPLOYEE, rp.Month);
+                rp.InsurancePay = CalculateTotalInsurancePay(rp.EMPLOYEE);
+                rp.RealSalary = CalculateSalary(rp.EMPLOYEE, rp.Month);
+            }    
             return View(sALARYREPORTs.ToList());
         }
 
