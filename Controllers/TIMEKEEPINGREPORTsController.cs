@@ -65,10 +65,10 @@ namespace HRM.Controllers
                     {
                         try
                         {
-                            if (a.EmployeeID != null && a.Month != null)
+                            if (a.EmployeeID != null)
                             {
                                 TIMEKEEPINGREPORT TU = new TIMEKEEPINGREPORT();
-                                TU.Month = a.Month;
+                                TU.Month = timekeepingsRP.Month;
                                 TU.EmployeeID = a.EmployeeID;
                                 TU.SumWorkDay = a.SumWorkDay;
                                 TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
