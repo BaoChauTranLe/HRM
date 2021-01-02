@@ -167,18 +167,36 @@ namespace HRM.Controllers
         public ActionResult Index()
         {
             //var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
+            DateTime date = new DateTime(2021, 1, 1, 12, 0, 0);
             var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
-            foreach (SALARYREPORT rp in sALARYREPORTs)
+            var employeelist = db.EMPLOYEEs.ToList();
+            foreach (EMPLOYEE e in employeelist)
             {
-                rp.Allowance = CalculateTotalAllowance();
-                rp.Advance = CalculateAdvanced(rp.EMPLOYEE, rp.Month);
-                rp.IncomeTax = CalculateIncomeTax(rp.EMPLOYEE, rp.Month);
-                rp.StandardSalary = CalculateStandardSalary(rp.EMPLOYEE);
-                rp.WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == rp.EmployeeID && x.Month.Month == rp.Month.Month && x.Month.Year == rp.Month.Year).First().SumWorkDay;
-                rp.WorkDaySalary = CalculateWorkDaySalary(rp.EMPLOYEE, rp.Month);
-                rp.OvertimeSalary = CalculateOvertimeSalary(rp.EMPLOYEE, rp.Month);
-                rp.InsurancePay = CalculateTotalInsurancePay(rp.EMPLOYEE);
-                rp.RealSalary = CalculateSalary(rp.EMPLOYEE, rp.Month);
+                var sALARYREPORT = new SALARYREPORT
+                {
+                    EmployeeID = e.EmployeeID,
+                    Month = date,
+                    Allowance = CalculateTotalAllowance(),
+                    Advance = CalculateAdvanced(e, date),
+                    IncomeTax = CalculateIncomeTax(e, date),
+                    StandardSalary = CalculateStandardSalary(e),
+                    WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay,
+                    OvertimeSalary = CalculateOvertimeSalary(e, date),
+                    InsurancePay = CalculateTotalInsurancePay(e),
+                    RealSalary = CalculateSalary(e, date)
+                };
+                db.SALARYREPORTs.Add(sALARYREPORT);
+                db.SaveChanges();
+                //sALARYREPORT.EMPLOYEE.EmployeeID = e.EmployeeID;
+                //sALARYREPORT.Allowance = CalculateTotalAllowance();
+                //sALARYREPORT.Advance = CalculateAdvanced(e, date);
+                //sALARYREPORT.IncomeTax = CalculateIncomeTax(e, date);
+                //sALARYREPORT.StandardSalary = CalculateStandardSalary(e);
+                //sALARYREPORT.WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay;
+                //sALARYREPORT.WorkDaySalary = CalculateWorkDaySalary(e, date);
+                //sALARYREPORT.OvertimeSalary = CalculateOvertimeSalary(e, date);
+                //sALARYREPORT.InsurancePay = CalculateTotalInsurancePay(e);
+                //sALARYREPORT.RealSalary = CalculateSalary(e, date);
             }    
             return View(sALARYREPORTs.ToList());
         }
