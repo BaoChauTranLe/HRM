@@ -122,13 +122,13 @@ namespace HRM.Controllers
             int incomeTax = 0;
             int taxLevel = 1;
             var taxRateList = db.TAXRATEs.ToList();
-            for (int i = taxRateList.Last().Rank; i > 1; i--)
+            for (int i = taxRateList.Count - 1; i > 0; i--)
                 if (assessable >= taxRateList[i].Min)
                 {
-                    taxLevel = i;
+                    taxLevel = taxRateList[i].Rank;
                     break;
                 }
-            for (int i = 1; i < taxLevel; i++)
+            for (int i = 0; i < taxLevel - 1; i++)
             {
                 incomeTax += (taxRateList[i + 1].Min - taxRateList[i].Min) * taxRateList[i].Rate / 100;
             }
