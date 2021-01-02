@@ -56,7 +56,7 @@
 </style>
 
 <div style="margin-top:20px;">
-	<input type="month" class="index-txtbox">
+	@*<input type="month" class="index-txtbox">*@
 
 	<select class="index-txtbox drop-down-list">
 		<option value="Tất cả phòng">Tất cả phòng</option>
@@ -79,19 +79,18 @@
 </div>
 @using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-<div class="form-horizontal">
+	<input type="month" class="index-txtbox" name="Month" id="Month">
+	<div class="form-horizontal">
+		<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
 
+		<div class="col-md-1" style="padding-left: 0px;">
+			<input type="submit" value="Cập nhập" id="btnSubmit" class="" />
+		</div>
+		<div class="col-md-1" style="padding-top:2px; padding-left:5px;">
+			<input type="file" id="FileUpload" name="FileUpload" class="" />
+		</div>
 
-	<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
-
-	<div class="col-md-1" style="padding-left: 0px;">
-		<input type="submit" value="Cập nhập" id="btnSubmit" class="" />
 	</div>
-	<div class="col-md-1" style="padding-top:2px; padding-left:5px;">
-		<input type="file" id="FileUpload" name="FileUpload" class="" />
-	</div>
-
-</div>
 }
 <div class="fresh-table">
 	<table class="fresh-table" id="fresh-table" width="100%">
@@ -176,4 +175,24 @@
 			}
 		})
 	})
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
+
+	$('#Month').on('change', function () {
+		var date = new Date($(this).val());
+		$.ajax({
+			url: '/TIMEKEEPINGREPORTs/Index',
+			contentType: "application/json; charset=utf-8",
+			data: 'date',
+			success: function (data) {
+				
+			},
+			error: function (error) {
+				
+			}
+		})
+	});
 </script>

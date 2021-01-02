@@ -20,9 +20,16 @@ namespace HRM.Controllers
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
         // GET: TIMEKEEPINGREPORTs
-        public ActionResult Index()
+        public ActionResult Index(/*DateTime date*/)
         {
             var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
+            //if (date != null)
+            //{
+            //    var list = db.TIMEKEEPINGREPORTs.ToList();
+            //    list = list.Where(x => x.Month == date).ToList();
+            //    return View(list);
+            //}
+
             return View(tIMEKEEPINGREPORTs.ToList());
         }
         // GET: TIMEKEEPINGREPORTs
@@ -65,10 +72,10 @@ namespace HRM.Controllers
                     {
                         try
                         {
-                            if (a.EmployeeID != null && a.Month != null)
+                            if (a.EmployeeID != null)
                             {
                                 TIMEKEEPINGREPORT TU = new TIMEKEEPINGREPORT();
-                                TU.Month = a.Month;
+                                TU.Month = timekeepingsRP.Month;
                                 TU.EmployeeID = a.EmployeeID;
                                 TU.SumWorkDay = a.SumWorkDay;
                                 TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
