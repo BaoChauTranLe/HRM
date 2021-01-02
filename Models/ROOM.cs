@@ -20,11 +20,11 @@ namespace HRM.Models
         {
             this.EMPLOYEEs = new HashSet<EMPLOYEE>();
         }
-
+    
         public string RoomID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tên phòng.")]
         public string RoomName { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
     }

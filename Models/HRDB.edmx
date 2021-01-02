@@ -24,6 +24,16 @@
           <Property Name="FreeTax" Type="bit" Nullable="false" />
           <Property Name="FreeTaxValue" Type="int" />
           <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="AllEmployee" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEDETAIL">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Month" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CERTIFICATEDETAIL">
           <Key>
@@ -259,6 +269,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ALLOWANCE__Allow__436BFEE3">
+          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALLOWANCE">
+              <PropertyRef Name="AllowanceID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="AllowanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALLOWANCE__Emplo__4277DAAA">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CERTIFICA__Emplo__4959E263">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="0..1" />
@@ -442,6 +476,7 @@
         <EntityContainer Name="hrmserver_HRMModelStoreContainer">
           <EntitySet Name="ADVANCED" EntityType="Self.ADVANCED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALLOWANCE" EntityType="Self.ALLOWANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALLOWANCEDETAIL" EntityType="Self.ALLOWANCEDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATEDETAIL" EntityType="Self.CERTIFICATEDETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATEINFORMATION" EntityType="Self.DATEINFORMATION" Schema="dbo" store:Type="Tables" />
@@ -464,6 +499,14 @@
           <AssociationSet Name="FK__ADVANCED__Employ__56B3DD81" Association="Self.FK__ADVANCED__Employ__56B3DD81">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ADVANCED" EntitySet="ADVANCED" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALLOWANCE__Allow__436BFEE3" Association="Self.FK__ALLOWANCE__Allow__436BFEE3">
+            <End Role="ALLOWANCE" EntitySet="ALLOWANCE" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALLOWANCE__Emplo__4277DAAA" Association="Self.FK__ALLOWANCE__Emplo__4277DAAA">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
           </AssociationSet>
           <AssociationSet Name="FK__CERTIFICA__Emplo__4959E263" Association="Self.FK__CERTIFICA__Emplo__4959E263">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
@@ -551,6 +594,19 @@
           <Property Name="FreeTax" Type="Boolean" Nullable="false" />
           <Property Name="FreeTaxValue" Type="Int32" />
           <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="AllEmployee" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Allow__436BFEE3" FromRole="ALLOWANCE" ToRole="ALLOWANCEDETAIL" />
+        </EntityType>
+        <EntityType Name="ALLOWANCEDETAIL">
+          <Key>
+            <PropertyRef Name="AllowanceID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ALLOWANCE" Relationship="Self.FK__ALLOWANCE__Allow__436BFEE3" FromRole="ALLOWANCEDETAIL" ToRole="ALLOWANCE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__ALLOWANCE__Emplo__4277DAAA" FromRole="ALLOWANCEDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="CERTIFICATEDETAIL">
           <Key>
@@ -623,6 +679,7 @@
           <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Boolean" />
           <NavigationProperty Name="ADVANCEDs" Relationship="Self.FK__ADVANCED__Employ__56B3DD81" FromRole="EMPLOYEE" ToRole="ADVANCED" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Emplo__4277DAAA" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
           <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="Self.FK__CERTIFICA__Emplo__4959E263" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
           <NavigationProperty Name="CONTRACT" Relationship="Self.FK__EMPLOYEE__Contra__3CF40B7E" FromRole="EMPLOYEE" ToRole="CONTRACT" />
           <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.FK__EDUCATION__Emplo__42ACE4D4" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
@@ -817,6 +874,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ALLOWANCE__Allow__436BFEE3">
+          <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALLOWANCE">
+              <PropertyRef Name="AllowanceID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="AllowanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALLOWANCE__Emplo__4277DAAA">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="ALLOWANCEDETAIL">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CERTIFICA__Emplo__4959E263">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="CERTIFICATEDETAIL" Type="Self.CERTIFICATEDETAIL" Multiplicity="0..1" />
@@ -1000,6 +1081,7 @@
         <EntityContainer Name="hrmserver_HRMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADVANCEDs" EntityType="Self.ADVANCED" />
           <EntitySet Name="ALLOWANCEs" EntityType="Self.ALLOWANCE" />
+          <EntitySet Name="ALLOWANCEDETAILs" EntityType="Self.ALLOWANCEDETAIL" />
           <EntitySet Name="CERTIFICATEDETAILs" EntityType="Self.CERTIFICATEDETAIL" />
           <EntitySet Name="CONTRACTs" EntityType="Self.CONTRACT" />
           <EntitySet Name="DATEINFORMATIONs" EntityType="Self.DATEINFORMATION" />
@@ -1022,6 +1104,14 @@
           <AssociationSet Name="FK__ADVANCED__Employ__56B3DD81" Association="Self.FK__ADVANCED__Employ__56B3DD81">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ADVANCED" EntitySet="ADVANCEDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALLOWANCE__Allow__436BFEE3" Association="Self.FK__ALLOWANCE__Allow__436BFEE3">
+            <End Role="ALLOWANCE" EntitySet="ALLOWANCEs" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALLOWANCE__Emplo__4277DAAA" Association="Self.FK__ALLOWANCE__Emplo__4277DAAA">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
           </AssociationSet>
           <AssociationSet Name="FK__CERTIFICA__Emplo__4959E263" Association="Self.FK__CERTIFICA__Emplo__4959E263">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
@@ -1108,6 +1198,16 @@
                 <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
                 <ScalarProperty Name="FreeTaxValue" ColumnName="FreeTaxValue" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="AllEmployee" ColumnName="AllEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALLOWANCEDETAILs">
+            <EntityTypeMapping TypeName="hrmserver_HRMModel.ALLOWANCEDETAIL">
+              <MappingFragment StoreEntitySet="ALLOWANCEDETAIL">
+                <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

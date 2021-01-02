@@ -27,6 +27,7 @@ namespace HRM.Models
     
         public virtual DbSet<ADVANCED> ADVANCEDs { get; set; }
         public virtual DbSet<ALLOWANCE> ALLOWANCEs { get; set; }
+        public virtual DbSet<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
         public virtual DbSet<CERTIFICATEDETAIL> CERTIFICATEDETAILs { get; set; }
         public virtual DbSet<CONTRACT> CONTRACTs { get; set; }
         public virtual DbSet<DATEINFORMATION> DATEINFORMATIONs { get; set; }

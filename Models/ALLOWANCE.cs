@@ -15,6 +15,12 @@ namespace HRM.Models
 
     public partial class ALLOWANCE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ALLOWANCE()
+        {
+            this.ALLOWANCEDETAILs = new HashSet<ALLOWANCEDETAIL>();
+        }
+
         public string AllowanceID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tên trợ cấp/phụ cấp/thưởng.")]
         public string AllowanceName { get; set; }
@@ -25,5 +31,9 @@ namespace HRM.Models
         public Nullable<int> FreeTaxValue { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Giá trị phải lớn hơn hoặc bằng 0")]
         public int Value { get; set; }
+        public bool AllEmployee { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
     }
 }

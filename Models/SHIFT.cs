@@ -20,7 +20,7 @@ namespace HRM.Models
         {
             this.SHIFTDETAILs = new HashSet<SHIFTDETAIL>();
         }
-
+    
         public string ShiftID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tên ca.")]
         public string ShiftName { get; set; }

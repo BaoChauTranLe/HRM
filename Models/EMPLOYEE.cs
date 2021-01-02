@@ -18,6 +18,7 @@ namespace HRM.Models
         public EMPLOYEE()
         {
             this.ADVANCEDs = new HashSet<ADVANCED>();
+            this.ALLOWANCEDETAILs = new HashSet<ALLOWANCEDETAIL>();
             this.INSURANCEREPORTs = new HashSet<INSURANCEREPORT>();
             this.SALARYREPORTs = new HashSet<SALARYREPORT>();
             this.TAXREPORTs = new HashSet<TAXREPORT>();
@@ -52,6 +53,8 @@ namespace HRM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ADVANCED> ADVANCEDs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ALLOWANCEDETAIL> ALLOWANCEDETAILs { get; set; }
         public virtual CERTIFICATEDETAIL CERTIFICATEDETAIL { get; set; }
         public virtual CONTRACT CONTRACT { get; set; }
         public virtual EDUCATIONDETAIL EDUCATIONDETAIL { get; set; }

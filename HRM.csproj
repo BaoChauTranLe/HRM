@@ -164,6 +164,9 @@
     <Compile Include="Models\ALLOWANCE.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ALLOWANCEDETAIL.cs">
+      <DependentUpon>HRDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CERTIFICATEDETAIL.cs">
       <DependentUpon>HRDB.tt</DependentUpon>
     </Compile>
