@@ -132,7 +132,7 @@ namespace HRM.Controllers
             {
                 incomeTax += (taxRateList[i + 1].Min - taxRateList[i].Min) * taxRateList[i].Rate / 100;
             }
-            incomeTax += (assessable - taxRateList[taxLevel].Min) * taxRateList[taxLevel].Rate / 100;
+            incomeTax += (assessable - taxRateList[taxLevel - 1 ].Min) * taxRateList[taxLevel - 1].Rate / 100;
             return incomeTax;
         }
         #endregion
