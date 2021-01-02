@@ -140,6 +140,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ADVANCEDsController.cs" />
+    <Compile Include="Controllers\ALLOWANCEDETAILsController.cs" />
     <Compile Include="Controllers\ALLOWANCEsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -367,6 +368,11 @@
     <Content Include="Views\EMPLOYEEs\Edit.cshtml" />
     <Content Include="Views\EMPLOYEEs\Error.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Create.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Delete.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Details.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Edit.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
