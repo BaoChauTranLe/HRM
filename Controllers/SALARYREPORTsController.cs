@@ -202,13 +202,13 @@ namespace HRM.Controllers
         }
 
         // GET: SALARYREPORTs/Details/5
-        public ActionResult Details(DateTime id)
+        public ActionResult Details(string id, DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALARYREPORT sALARYREPORT = db.SALARYREPORTs.Find(id);
+            SALARYREPORT sALARYREPORT = db.SALARYREPORTs.Find(month, id);
             if (sALARYREPORT == null)
             {
                 return HttpNotFound();

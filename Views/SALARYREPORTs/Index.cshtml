@@ -117,8 +117,9 @@
 						@Html.DisplayFor(modelItem => item.RealSalary)
 					</td>
 					<td>
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+						@Html.ActionLink("Details", "Details", new { id=item.EmployeeID, month=item.Month })
 					</td>
+                    <td></td>
 				</tr>
 			}
 			<tr>

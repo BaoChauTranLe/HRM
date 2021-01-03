@@ -369,8 +369,6 @@
     <Content Include="Views\EMPLOYEEs\Error.cshtml" />
     <Content Include="Views\EMPLOYEEs\Index.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Create.cshtml" />
-    <Content Include="Views\ALLOWANCEDETAILs\Delete.cshtml" />
-    <Content Include="Views\ALLOWANCEDETAILs\Details.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Index.cshtml" />
   </ItemGroup>

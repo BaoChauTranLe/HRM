@@ -79,38 +79,40 @@
 </div>
 <div class="fresh-table">
 	<table class="fresh-table" id="fresh-table" width="100%">
-		<tr>
-			<th>
-				@Html.DisplayName("STT")
-			</th>
-			<th>
-				@Html.DisplayName("Tên nhân viên")
-			</th>
-			<th>
-				@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
-			</th>
-			<th></th>
-		</tr>
-
-		@foreach (var item in Model)
-		{
+		<thead>
 			<tr>
-				<td>
-					
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
-				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-				</td>
+				<th>
+					@Html.DisplayName("STT")
+				</th>
+				<th>
+					@Html.DisplayName("Tên nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+				</th>
+				<th></th>
 			</tr>
-		}
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+					</td>
+				</tr>
+			}
+		</tbody>
 
 	</table>
 </div>
