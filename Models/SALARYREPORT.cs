@@ -6,7 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace HRM.Models
 {
     using System;
@@ -14,6 +14,8 @@ namespace HRM.Models
     
     public partial class SALARYREPORT
     {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public int Allowance { get; set; }
