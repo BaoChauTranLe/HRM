@@ -185,8 +185,11 @@ namespace HRM.Controllers
                     InsurancePay = CalculateTotalInsurancePay(e),
                     RealSalary = CalculateSalary(e, date)
                 };
-                db.SALARYREPORTs.Add(sALARYREPORT);
-                db.SaveChanges();
+                if (db.SALARYREPORTs.Count(x => x.EmployeeID == sALARYREPORT.EmployeeID && x.Month == sALARYREPORT.Month) == 0)
+                {
+                    db.SALARYREPORTs.Add(sALARYREPORT);
+                    db.SaveChanges();
+                }
                 //sALARYREPORT.EMPLOYEE.EmployeeID = e.EmployeeID;
                 //sALARYREPORT.Allowance = CalculateTotalAllowance();
                 //sALARYREPORT.Advance = CalculateAdvanced(e, date);
