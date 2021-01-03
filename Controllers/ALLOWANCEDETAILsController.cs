@@ -35,11 +35,15 @@ namespace HRM.Controllers
             }
             return View(aLLOWANCEDETAIL);
         }
-
+        public List<ALLOWANCE> GetAllowance()
+        {
+            List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
+            return list;
+        }
         // GET: ALLOWANCEDETAILs/Create
         public ActionResult Create()
         {
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName");
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.ToList(), "AllowanceID", "AllowanceName");
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
@@ -49,7 +53,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID,Month")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
+        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
         {
             if (ModelState.IsValid)
             {

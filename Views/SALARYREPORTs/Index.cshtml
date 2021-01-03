@@ -119,12 +119,13 @@
 					<td>
 						@Html.ActionLink("Details", "Details", new { id=item.EmployeeID, month=item.Month })
 					</td>
-                    <td></td>
+                    
 				</tr>
 			}
 			<tr>
 				<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
 				<td> @Model.Sum(i => i.RealSalary)</td>
+                <td></td>
 			</tr>
 		</tbody>
     </table>
