@@ -53,7 +53,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
+        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID,Month")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
         {
             if (ModelState.IsValid)
             {

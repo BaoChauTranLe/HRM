@@ -4,18 +4,101 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+	<style>
+		.create-lbl {
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			/* identical to box height, or 22px */
+			letter-spacing: 0.01em;
+			color: #000000;
+		}
 
-<h2>Edit</h2>
+		.create-txtbox {
+			/* Text Block */
+			/* Auto Layout */
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 500px;
+			height: 50px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/* Inside Auto Layout */
+			flex: none;
+			order: 1;
+			align-self: stretch;
+			flex-grow: 0;
+			/*Inside Text*/
+			padding: 12px;
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			letter-spacing: 0.01em;
+			color: #060606;
+		}
+
+		.create-margin {
+			margin-left: 24px;
+			margin-top: 20px;
+		}
+
+		.create-btn {
+			box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+			border-radius: 4px;
+			width: 126px;
+			height: 40px;
+			/* Inside Text */
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 16px;
+			text-align: center;
+			letter-spacing: 1.25px;
+			text-transform: uppercase;
+			color: #FFFFFF;
+		}
+
+		.error-msg {
+			font-family: Montserrat;
+			color: red;
+		}
+
+		.index-txtbox {
+			width: 500px;
+			height: 50px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/*Text*/
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			padding-left: 10px;
+		}
+	</style>
+</head>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ALLOWANCEDETAIL</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AllowanceID)
 
         @Html.HiddenFor(model => model.EmployeeID)
 
