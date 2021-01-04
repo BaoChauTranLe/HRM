@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -74,7 +74,7 @@ namespace HRM.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(DateTime id, string employee)
         {
-            ADVANCED aDVANCED = db.ADVANCEDs.Find(id, employee);
+            ADVANCED aDVANCED = db.ADVANCEDs.Find(employee, id);
             db.ADVANCEDs.Remove(aDVANCED);
             db.SaveChanges();
             return RedirectToAction("Index");

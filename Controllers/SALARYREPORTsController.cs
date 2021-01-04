@@ -15,7 +15,9 @@ namespace HRM.Controllers
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
         public bool CheckLowerThan3Month(DateTime startDate, DateTime endDate)
         {
-            //if < 3 month return true
+            DateTime threeMonthAfterStart = startDate.AddMonths(3);
+            if (DateTime.Compare(endDate, threeMonthAfterStart) < 0)
+                return true;
             return false;
         }
 

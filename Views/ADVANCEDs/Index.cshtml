@@ -414,7 +414,7 @@
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + advanced.DateAdvanced + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
             "</td>" +
-            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + advanced.DateAdvanced + "'" + ")\" >"
+            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + advanced.DateAdvanced + "', " + "'" + advanced.EmployeeID + "'" + ")\" >"
             + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
             "</td>" +
             "</tr>";
@@ -445,8 +445,9 @@
     //functions to show delete confirm
     var deleteId;
     var deleteEmployee;
-    function DeleteModule(id) {
-        deleteId = id;
+    function DeleteModule(date, eID) {
+        deleteId = date;
+        deleteEmployee = eID;
         var noticeString = "Dữ liệu này sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
         $("#modal__text").html(noticeString);
         delete_modal.style.display = "block";
