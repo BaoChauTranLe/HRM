@@ -213,7 +213,7 @@
 					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
 				</th>
 				<th>
-					@Html.DisplayName("Số tiền")
+					@Html.DisplayName("Loại")
 				</th>
 				<th>
 					@Html.DisplayName("Được miễn bảo hiểm")
@@ -222,7 +222,13 @@
 					@Html.DisplayName("Được miễn thuế")
 				</th>
 				<th>
-					@Html.DisplayName("Khoản tiền được miễn")
+					@Html.DisplayName("Khoản tiền thuế được miễn")
+				</th>
+				<th>
+					@Html.DisplayName("Áp dụng cho tất cả nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Số tiền")
 				</th>
 				<th></th>
 				<th></th>
@@ -410,22 +416,34 @@
     function GetDataString(allowance, n) {
         var Data = "<tr class='row_" + allowance.AllowanceID + "'>" +
             "<td>" + (n + 1) + "</td>" +
-            "<td>" + allowance.AllowanceName + "</td>" +
-            "<td>" + allowance.Value + "</td>";
+			"<td>" + allowance.AllowanceName + "</td>";
+		if (allowance.Type == true) {
+			Data = Data + "<td> Phụ cấp </td>";
+		}
+		else {
+			Data = Data + "<td> Khoản chế độ hoặc phúc lợi khác </td>";
+		}
         if (allowance.Insurance == true) {
             Data = Data + "<td> Có </td>";
         }
         else {
             Data = Data + "<td> Không </td>";
         }
-        if (allowance.Tax == true) {
+        if (allowance.FreeTax == true) {
             Data = Data + "<td> Có </td>";
         }
         else {
             Data = Data + "<td> Không </td>";
         }
-        Data = Data + "<td>" + allowance.FreeTax + "</td>";
+		Data = Data + "<td>" + allowance.FreeTaxValue + "</td>";
 
+		if (allowance.AllEmployee == true) {
+			Data = Data + "<td> Có </td>";
+		}
+		else {
+			Data = Data + "<td> Không </td>";
+		}
+		Data = Data + "<td>" + allowance.Value + "</td>";
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
             "</td>" +
