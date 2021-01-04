@@ -375,6 +375,7 @@
     <Content Include="Views\PARAMETERs\Advance.cshtml" />
     <Content Include="Views\PARAMETERs\AdvanceEdit.cshtml" />
     <Content Include="Views\ALLOWANCEs\Edit.cshtml" />
+    <Content Include="Views\ALLOWANCEDETAILs\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

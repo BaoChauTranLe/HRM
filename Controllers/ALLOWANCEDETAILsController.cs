@@ -68,13 +68,13 @@ namespace HRM.Controllers
         }
 
         // GET: ALLOWANCEDETAILs/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string employee,  DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             if (aLLOWANCEDETAIL == null)
             {
                 return HttpNotFound();
@@ -103,13 +103,13 @@ namespace HRM.Controllers
         }
 
         // GET: ALLOWANCEDETAILs/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string employee, DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             if (aLLOWANCEDETAIL == null)
             {
                 return HttpNotFound();
@@ -120,9 +120,9 @@ namespace HRM.Controllers
         // POST: ALLOWANCEDETAILs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string employee, DateTime month)
         {
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             db.ALLOWANCEDETAILs.Remove(aLLOWANCEDETAIL);
             db.SaveChanges();
             return RedirectToAction("Index");
