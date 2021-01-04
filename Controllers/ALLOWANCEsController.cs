@@ -48,11 +48,24 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllowanceID")] ALLOWANCE aLLOWANCE)
+        public ActionResult Create([Bind(Include = "AllowanceID,AllowanceName,Type,Insurance,FreeTax,FreeTaxValue,AllEmployee,Value")] ALLOWANCE aLLOWANCE)
         {
             if (ModelState.IsValid)
             {
-                db.ALLOWANCEs.Add(aLLOWANCE);
+                if (aLLOWANCE.AllowanceID == null)
+                {
+                    //auto create allowanceID
+                    int n = 0;
+                    var allowanceList = db.ALLOWANCEs.ToList();
+                    if (allowanceList.Count > 0)
+                    {
+                        ALLOWANCE s = allowanceList.Last();
+                        n = Int32.Parse(s.AllowanceID.Substring(s.AllowanceID.Length - 3)) + 1;
+                    }
+                    string id = String.Format("{0:000}", n);
+                    aLLOWANCE.AllowanceID = "A" + id;
+                }
+				db.ALLOWANCEs.Add(aLLOWANCE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
