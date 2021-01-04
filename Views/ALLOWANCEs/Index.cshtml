@@ -210,10 +210,10 @@
 					STT
 				</th>
 				<th>
-					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+					@Html.DisplayName("Tên phụ cấp/trợ cấp/thưởng")
 				</th>
 				<th>
-					@Html.DisplayName("Loại")
+					@Html.DisplayName("Loại phụ cấp/trợ cấp/thưởng")
 				</th>
 				<th>
 					@Html.DisplayName("Được miễn bảo hiểm")
@@ -451,29 +451,17 @@
             "</td>" +
             "</tr>";
         return Data;
+
     }
-
-    ////function to show information of a allowance on modal
-    //function EditModule(id) {
-    //    $("#modal-title").html("Sửa loại trợ cấp/phụ cấp/thưởng");
-    //    document.getElementById("frm").reset();
-    //    for (var i = 0; i < allowances.length; i++) {
-    //        if (allowances[i].AllowancesID == id) {
-    //            document.getElementById("AllowanceID").value = allowances[i].AllowanceID;
-    //            document.getElementById("AllowanceName").value = allowances[i].AllowanceName;
-    //            document.getElementById("Insurance").checked = allowances[i].Insurance;
-    //            document.getElementById("Tax").checked = allowances[i].Tax;
-    //            document.getElementById("FreeTax").value = allowances[i].FreeTax;
-    //            document.getElementById("Value").value = allowances[i].Value;
-    //        }
-    //    }
-
-    //    create_modal.style.display = "block";
-
-    //    $("#bg").width("100%").height("100%");
-
-    //    $("#bg").fadeTo("slow", 0.8);
-    //}
+	@*"<a href=\"" + @Url.Action("Create","ALLOWANCEs",)+ "\">"
+	<input type="button" id="btn" class="add__button" value="Thêm" />
+</a>*@
+	var editID;
+    //function to show information of a allowance on modal
+	function EditModule(id) {
+		editID = id;
+		window.location = '/ALLOWANCEs/Edit/' + id;
+    }
 
     //functions to show delete confirm
     var deleteId;

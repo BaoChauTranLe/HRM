@@ -107,7 +107,7 @@
     </div>
 
     <div class="top-title">
-        Hệ số lương làm thêm (%) ban đêm (6:00 - 22:00) - Chưa làm thêm ban ngày
+        Hệ số lương làm thêm (%) ban đêm (6:00 - 22:00)
     </div>
     <div class="form-group margin" style="margin-top: 40px; height: 110px;">
         @Html.Label("Ngày bình thường", htmlAttributes: new { @class = "lbl" })
@@ -125,24 +125,6 @@
         <input name="NightSpecialDayOff" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghiCoLuong" })" />
     </div>
 
-    <div class="top-title">
-        Hệ số lương làm thêm (%) ban đêm (6:00 - 22:00) - Đã làm thêm ban ngày
-    </div>
-    <div class="form-group margin" style="margin-top: 40px; height: 110px;">
-        @Html.Label("Ngày bình thường", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="AdditionalNightWorkDay" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLDemNgayThuongDaLamNgay" })" />
-    </div>
-    <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Ngày nghỉ hằng tuần", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="AdditionalNightAnnualDayOff" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghiDaLamNgay" })" />
-    </div>
-    <div class="form-group margin" style="height: 110px;">
-        @Html.Label("Ngày nghỉ có hưởng lương", htmlAttributes: new { @class = "lbl" })
-        <br />
-        <input name="AdditionalNightSpecialDayOff" type="text" class="enabled-txtbox" value="@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghiCoLuongDaLamNgay" })" />
-    </div>
     <div class="form-group" style="margin-left:395px;">
         <input type="submit" value="Lưu" class="edit-btn" style="background: #3D76B5;" />
         <a href="@Url.Action("CoefficientsOTSalary","PARAMETERs")">
