@@ -142,11 +142,20 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
 				</td>
+				@if (item.ALLOWANCE.Type == true)
+				{
+					<td>
+						Phụ cấp
+					</td>
+				}
+				else
+				{
+					<td>
+						Khoản chế độ hoặc phúc lợi khác
+					</td>
+				}
 				<td>
-					@Html.DisplayFor(modelItem => item.ALLOWANCE.Type)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ALLOWANCE.Value)
+					@Html.DisplayFor(modelItem => item.Value)
 				</td>
 				<td>
 					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

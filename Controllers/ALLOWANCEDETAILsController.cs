@@ -43,7 +43,7 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Create
         public ActionResult Create()
         {
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.ToList(), "AllowanceID", "AllowanceName");
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName");
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
@@ -62,7 +62,7 @@ namespace HRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
@@ -79,7 +79,7 @@ namespace HRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
@@ -89,7 +89,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AllowanceID,EmployeeID,Month")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
+        public ActionResult Edit([Bind(Include = "AllowanceID,EmployeeID,Month,Value")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace HRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
