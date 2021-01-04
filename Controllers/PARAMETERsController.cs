@@ -47,7 +47,7 @@ namespace HRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CoefficientsOTSalaryEdit(int WorkDay, int AnnualDayOff, int SpecialDayOff, int NightWorkDay, int NightAnnualDayOff, int NightSpecialDayOff, int AdditionalNightWorkDay, int AdditionalNightAnnualDayOff, int AdditionalNightSpecialDayOff)
+        public ActionResult CoefficientsOTSalaryEdit(int WorkDay, int AnnualDayOff, int SpecialDayOff, int NightWorkDay, int NightAnnualDayOff, int NightSpecialDayOff)
         {
             if (ModelState.IsValid)
             {
@@ -57,9 +57,6 @@ namespace HRM.Controllers
                 db.PARAMETERs.Find("HSLDemNgayThuong").Value = NightWorkDay;
                 db.PARAMETERs.Find("HSLDemNgayNghi").Value = NightAnnualDayOff;
                 db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value = NightSpecialDayOff;
-                db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value = AdditionalNightWorkDay;
-                db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value = AdditionalNightAnnualDayOff;
-                db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value = AdditionalNightSpecialDayOff;
                 db.SaveChanges();
                 return RedirectToAction("CoefficientsOTSalary");
             }
@@ -74,12 +71,14 @@ namespace HRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult IncomeTaxEdit(int SelfDeduction, int DependentDeduction)
+        public ActionResult IncomeTaxEdit(int SelfDeduction, int DependentDeduction, int MinAssessableIncome, float TaxRate)
         {
             if (ModelState.IsValid)
             {
                 db.PARAMETERs.Find("MucGiamTruBanThan").Value = SelfDeduction;
                 db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value = DependentDeduction;
+                db.PARAMETERs.Find("ThuNhapChiuThueToiThieuHDDuoi3Thang").Value = MinAssessableIncome;
+                db.PARAMETERs.Find("HSThueHDDuoi3Thang").Value = TaxRate;
                 db.SaveChanges();
                 return RedirectToAction("IncomeTax");
             }
@@ -94,7 +93,7 @@ namespace HRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult InsuranceEdit(double SocialInsurance, double HealthInsurance, double WorkInsurance)
+        public ActionResult InsuranceEdit(float SocialInsurance, float HealthInsurance, float WorkInsurance)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +121,26 @@ namespace HRM.Controllers
                 db.PARAMETERs.Find("SoNgayCongChuan").Value = WorkDayNum;
                 db.PARAMETERs.Find("SoGioCongChuan").Value = WorkHourNum;
                 db.SaveChanges();
-                return RedirectToAction("StandardWorkDay");
+                return RedirectToAction("StandardWork");
+            }
+            return View();
+        }
+        public ActionResult Advance()
+        {
+            return View();
+        }
+        public ActionResult AdvanceEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AdvanceEdit(float MaxAdvanceRate)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PARAMETERs.Find("TyLeTamUngToiDa").Value = MaxAdvanceRate;
+                db.SaveChanges();
+                return RedirectToAction("Advance");
             }
             return View();
         }
