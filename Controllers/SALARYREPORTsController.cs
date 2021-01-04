@@ -254,26 +254,29 @@ namespace HRM.Controllers
             {
                 if (db.SALARYREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
                 {
+                    int hourPay = CalculateStandardHourSalary(e);
+                    var report = db.TIMEKEEPINGREPORTs.Find(date, e.EmployeeID);
+                    //var report = db.TIMEKEEPINGREPORTs.Find(date, e);
                     var sALARYREPORT = new SALARYREPORT
                     {
                         EmployeeID = e.EmployeeID,
                         EMPLOYEE = e,
                         Month = date,
                         AbsentHaveSalary = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumAbsentHaveSalary,
-                        //AbsentHaveSalaryValue = ,
-                        //NormalOverTimeSalary = ,
-                        //DayOffOverTimeSalary = ,
-                        //SpecialDayOffOverTimeSalary = ,
-                        //NightNormalOverTimeSalary = ,
-                        //NightDayOffOverTimeSalary = ,
-                        //NightSpecialDayOffOverTimeSalary = ,
-                        //OverTimeSalary = ,
+                        AbsentHaveSalaryValue = CalculateAbsentSalary(e, date),
+                        NormalOverTimeSalary = CalculateNormalOvertimeSalary(report, hourPay),
+                        DayOffOverTimeSalary = CalculateDayOffOvertimeSalary(report, hourPay),
+                        SpecialDayOffOverTimeSalary = CalculateSpecialDayOffOvertimeSalary(report, hourPay),
+                        NightNormalOverTimeSalary = CalculateNightNormalOvertimeSalary(report, hourPay),
+                        NightDayOffOverTimeSalary = CalculateNightDayOffOvertimeSalary(report, hourPay),
+                        NightSpecialDayOffOverTimeSalary = CalculateNightSpecialDayOffOvertimeSalary(report, hourPay),
+                        OverTimeSalary = CalculateOvertimeSalary(e, date),
                         Allowance = CalculateTotalAllowance(e, date),
                         Advance = CalculateAdvanced(e, date),
                         IncomeTax = CalculateIncomeTax(e, date),
                         StandardSalary = CalculateStandardSalary(e, date),
                         WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay,
-                        //WorkDaySalary = ,
+                        WorkDaySalary = CalculateWorkDaySalary(e, date),
                         TotalInsurancePay = CalculateTotalInsurancePay(e, date),
                         RealSalary = CalculateSalary(e, date)
                     };
