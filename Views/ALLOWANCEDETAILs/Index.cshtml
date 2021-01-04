@@ -51,10 +51,38 @@
 		border: 1px solid #3D76B5;
 		border-radius: 4px;
 	}
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+		/* Text */
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: #3D76B5;
+	}
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
 </style>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <div style="margin-top:20px;">
 	@*<input type="month" class="index-txtbox">*@
 	<input type="month" class="index-txtbox" name="Month" id="Month">
@@ -75,8 +103,11 @@
 
 	<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
 	<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
-
+	<a href="@Url.Action("Create","ALLOWANCEDETAILs")" >
+		<input type="button" id="btn" class="add__button" value="Thêm" style="margin-top:10px;"/>
+	</a>
 </div>
+
 <div class="fresh-table">
 	<table class="fresh-table" id="fresh-table" width="100%">
 		<thead>
@@ -88,7 +119,13 @@
 					@Html.DisplayName("Tên nhân viên")
 				</th>
 				<th>
-					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+					@Html.DisplayName("Tên phụ cấp/trợ cấp/thưởng")
+				</th>
+				<th>
+					@Html.DisplayName("Loại")
+				</th>
+				<th>
+					@Html.DisplayName("Số tiền")
 				</th>
 				<th></th>
 			</tr>
@@ -96,21 +133,26 @@
 		<tbody>
 			@foreach (var item in Model)
 			{
-				<tr>
-					<td>
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
-					</td>
-					<td>
-						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-					</td>
-				</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ALLOWANCE.Type)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ALLOWANCE.Value)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+				</td>
+			</tr>
 			}
 		</tbody>
 

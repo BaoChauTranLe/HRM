@@ -115,7 +115,13 @@
 				@Html.ValidationMessageFor(model => model.AllowanceID, "", new { @class = "text-danger" })
 			</div>
 		</div>
-
+		<div class="form-group create-margin value">
+		@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
+			@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+		</div>
+		</div>
 		<div class="form-group create-margin" style="margin-top:30px;">
 			<input type="month" class="index-txtbox" name="Month" id="Month">
 		</div>
