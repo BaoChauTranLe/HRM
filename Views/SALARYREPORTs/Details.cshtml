@@ -126,7 +126,7 @@
                         @Html.DisplayName("Lương theo ngày công chuẩn")
                     </th>
                     <td>
-                        @*@Html.DisplayFor(model => model.SalaryStandard)*@
+                        @Html.DisplayFor(model => model.StandardSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -170,7 +170,7 @@
                         @Html.DisplayName("Khoản tiền trích đóng BH")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.InsurancePay)
+                        @Html.DisplayFor(model => model.TotalInsurancePay)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -223,6 +223,7 @@
                         @Html.DisplayName("Lương làm thêm ban ngày")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.NormalOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -233,6 +234,7 @@
                         @Html.DisplayName("Lương làm thêm ban đêm")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.NightNormalOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -243,6 +245,7 @@
                         @Html.DisplayName("Lương làm thêm ban ngày (nghỉ hằng tuần)")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.DayOffOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -253,6 +256,7 @@
                         @Html.DisplayName("Lương làm thêm ban đêm (nghỉ hằng tuần)")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.NightDayOffOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -263,6 +267,7 @@
                         @Html.DisplayName("Lương làm thêm ban ngày (nghỉ có lương)")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.SpecialDayOffOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -273,6 +278,7 @@
                         @Html.DisplayName("Lương làm thêm ban đêm (nghỉ có lương)")
                     </th>
                     <td>
+                        @Html.DisplayFor(model => model.NightSpecialDayOffOverTimeSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -283,7 +289,29 @@
                         @Html.DisplayName("Tổng lương làm thêm")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.OvertimeSalary)
+                        @Html.DisplayFor(model => model.OverTimeSalary)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Số ngày nghỉ có hưởng lương")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.AbsentHaveSalary)
+                    </td>
+                    <td>
+                        @Html.DisplayName("VNĐ")
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-weight:bold">
+                        @Html.DisplayName("Số tiền được hưởng")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.AbsentHaveSalaryValue)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
