@@ -43,7 +43,7 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Create
         public ActionResult Create()
         {
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.ToList(), "AllowanceID", "AllowanceName");
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName");
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
@@ -53,7 +53,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID,Month")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
+        public ActionResult Create([Bind(Include = "AllowanceID,EmployeeID,Month,Value")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
         {
             if (ModelState.IsValid)
             {
@@ -62,24 +62,24 @@ namespace HRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
 
         // GET: ALLOWANCEDETAILs/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string employee,  DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             if (aLLOWANCEDETAIL == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
@@ -89,7 +89,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AllowanceID,EmployeeID,Month")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
+        public ActionResult Edit([Bind(Include = "AllowanceID,EmployeeID,Month,Value")] ALLOWANCEDETAIL aLLOWANCEDETAIL)
         {
             if (ModelState.IsValid)
             {
@@ -97,19 +97,19 @@ namespace HRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aLLOWANCEDETAIL);
         }
 
         // GET: ALLOWANCEDETAILs/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string employee, DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             if (aLLOWANCEDETAIL == null)
             {
                 return HttpNotFound();
@@ -120,9 +120,9 @@ namespace HRM.Controllers
         // POST: ALLOWANCEDETAILs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string employee, DateTime month)
         {
-            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id);
+            ALLOWANCEDETAIL aLLOWANCEDETAIL = db.ALLOWANCEDETAILs.Find(id, employee, month);
             db.ALLOWANCEDETAILs.Remove(aLLOWANCEDETAIL);
             db.SaveChanges();
             return RedirectToAction("Index");

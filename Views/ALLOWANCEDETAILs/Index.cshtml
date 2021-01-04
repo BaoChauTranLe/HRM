@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<HRM.Models.ALLOWANCEDETAIL>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -51,10 +51,155 @@
 		border: 1px solid #3D76B5;
 		border-radius: 4px;
 	}
+
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+		/* Text */
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: #3D76B5;
+	}
+
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 12; /* Sit on top */
+		float: left;
+		left: 50%;
+		top: 50%;
+	}
+
+	/* Modal Content */
+	.modal-content {
+		position: fixed;
+		background-color: #fefefe;
+		width: 100%;
+		height: 100%;
+		-webkit-animation-name: slideIn;
+		-webkit-animation-duration: 0.4s;
+		animation-name: slideIn;
+		animation-duration: 0.4s
+	}
+
+	/* The Close Button */
+	.close {
+		color: #4282BB;
+		float: right;
+		font-weight: bold;
+	}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+	.modal-header {
+		top: 0px;
+		height: 32px;
+		padding: 2px 16px;
+		background-color: #E0EFFF;
+		color: #4282BB;
+		font-size: 20px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		font-weight: bold;
+	}
+
+	.modal-body {
+		padding-top: 10px;
+		padding-left: 37px;
+		padding-right: 37px;
+	}
+
+	#bg {
+		background-color: black;
+		width: 0;
+		height: 0;
+		display: none;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
+
+	.modal__text {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		margin-top: 13px;
+		margin-bottom: 7px;
+	}
+
+	.btn.btn-default {
+		position: fixed;
+		display: block;
+		text-align: center;
+		padding: 0px;
+		bottom: 37px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 126px;
+		height: 40px;
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+		border-radius: 4px;
+		color: white;
+	}
+
+	input#StartTime, input#EndTime {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		display: inline;
+	}
+
+	.form-horizontal .form-group {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+
+
+	.text-danger.field-validation-error {
+		color: red;
+		font-size: 13px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+	}
+
+	.modal-title {
+		display: inline-block;
+		width: 80%;
+	}
 </style>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <div style="margin-top:20px;">
 	@*<input type="month" class="index-txtbox">*@
 	<input type="month" class="index-txtbox" name="Month" id="Month">
@@ -75,8 +220,11 @@
 
 	<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
 	<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
-
+	<a href="@Url.Action("Create","ALLOWANCEDETAILs")">
+		<input type="button" id="btn" class="add__button" value="Thêm" style="margin-top:10px;" />
+	</a>
 </div>
+
 <div class="fresh-table">
 	<table class="fresh-table" id="fresh-table" width="100%">
 		<thead>
@@ -88,7 +236,13 @@
 					@Html.DisplayName("Tên nhân viên")
 				</th>
 				<th>
-					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+					@Html.DisplayName("Tên phụ cấp/trợ cấp/thưởng")
+				</th>
+				<th>
+					@Html.DisplayName("Loại")
+				</th>
+				<th>
+					@Html.DisplayName("Số tiền")
 				</th>
 				<th></th>
 			</tr>
@@ -105,10 +259,28 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
 					</td>
+					@if (item.ALLOWANCE.Type == true)
+					{
+						<td>
+							Phụ cấp
+						</td>
+					}
+					else
+					{
+						<td>
+							Khoản chế độ hoặc phúc lợi khác
+						</td>
+					}
 					<td>
-						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+						@Html.DisplayFor(modelItem => item.Value)
+					</td>
+					<td>
+						<a href="@Url.Action("Edit","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
+							<i class='fa fa-edit pa-5 text-warning'></i>
+						</a>
+						<a href="@Url.Action("Delete","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
+							<i class='fa fa-trash pa-5 text-danger'></i>
+						</a>
 					</td>
 				</tr>
 			}
@@ -116,45 +288,43 @@
 
 	</table>
 </div>
+<script>
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			pagination: true,
+			striped: true,
+			toolbar: '.toolbar',
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
 
-	<script>
-		var $table = $('#fresh-table')
-		$(function () {
-			$table.bootstrapTable({
-				classes: 'table table-hover table-responsive',
-				pagination: true,
-				striped: true,
-				toolbar: '.toolbar',
-				pageSize: 8,
-				pageList: [8, 10, 25, 50, 100],
-
-				formatShowingRows: function (pageFrom, pageTo, totalRows) {
-					return ''
-				},
-				formatRecordsPerPage: function (pageNumber) {
-					return pageNumber + ' rows visible'
-				}
-			})
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
 		})
+	})
+	// Get the modal
+	//var create_modal = document.getElementById("createModal");
+	var delete_modal = document.getElementById("deleteModal");
 
-		const monthControl = document.querySelector('input[type="month"]');
-		const date = new Date()
-		const month = ("0" + (date.getMonth() + 1)).slice(-2)
-		const year = date.getFullYear()
-		monthControl.value = `${year}-${month}`;
+	//// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
 
-		//$('#Month').on('change', function () {
-		//	var date = new Date($(this).val());
-		//	$.ajax({
-		//		url: '/TIMEKEEPINGREPORTs/Index',
-		//		contentType: "application/json; charset=utf-8",
-		//		data: 'date',
-		//		success: function (data) {
+	////close create modal
+	function closeModal() {
+		window.location.reload();
+		delete_modal.style.display = "none";
+		$("#bg").fadeOut();
+	}
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
 
-		//		},
-		//		error: function (error) {
 
-		//		}
-		//	})
-		//});
-	</script>
+</script>

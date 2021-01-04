@@ -1,8 +1,8 @@
 ﻿@model HRM.Models.ALLOWANCEDETAIL
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Edit";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
 	<style>
@@ -94,30 +94,54 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@Html.AntiForgeryToken()
 
-        @Html.HiddenFor(model => model.EmployeeID)
+	<div class="form-horizontal">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Month, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="form-group create-margin">
+			@Html.LabelFor(model => model.EmployeeID, "Chọn nhân viên:", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "create-txtbox" })
+				@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+			</div>
+		</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+		<div class="form-group create-margin">
+			@Html.LabelFor(model => model.AllowanceID, "Chọn trợ cấp/phụ cấp/thưởng:", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.DropDownList("AllowanceID", null, htmlAttributes: new { @class = "create-txtbox" })
+				@Html.ValidationMessageFor(model => model.AllowanceID, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group create-margin value">
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group create-margin" style="margin-top:30px;">
+			<input type="month" class="index-txtbox" name="Month" id="Month">
+		</div>
+
+		<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
+			<input type="submit" value="Sửa" class="btn create-btn" style="background: #3D76B5;" />
+			<a href="@Url.Action("Index","ALLOWANCEDETAILs")">
+				<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
+			</a>
+		</div>
+	</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Quay lại danh sách chi tiết trợ cấp / phụ cấp / thưởng", "Index")
 </div>
+
+<script>
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
+</script>

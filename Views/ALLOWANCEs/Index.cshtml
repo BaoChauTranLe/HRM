@@ -210,10 +210,10 @@
 					STT
 				</th>
 				<th>
-					@Html.DisplayName("Tên loại phụ cấp/trợ cấp/thưởng")
+					@Html.DisplayName("Tên phụ cấp/trợ cấp/thưởng")
 				</th>
 				<th>
-					@Html.DisplayName("Loại")
+					@Html.DisplayName("Loại phụ cấp/trợ cấp/thưởng")
 				</th>
 				<th>
 					@Html.DisplayName("Được miễn bảo hiểm")
@@ -374,18 +374,6 @@
     //// Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    //// When the user clicks the button, open the modal
-    //function openCreateModal() {
-    //    $("#modal-title").html("Thêm loại phụ cấp/trợ cấp/thưởng");
-    //    create_modal.style.display = "block";
-
-    //    //document.getElementById("frm").reset();
-
-    //    $("#bg").width("100%").height("100%");
-
-    //    $("#bg").fadeTo("slow", 0.8);
-    //}
-
     ////close create modal
     function closeModal() {
         window.location.reload();
@@ -451,29 +439,14 @@
             "</td>" +
             "</tr>";
         return Data;
+
     }
-
-    ////function to show information of a allowance on modal
-    //function EditModule(id) {
-    //    $("#modal-title").html("Sửa loại trợ cấp/phụ cấp/thưởng");
-    //    document.getElementById("frm").reset();
-    //    for (var i = 0; i < allowances.length; i++) {
-    //        if (allowances[i].AllowancesID == id) {
-    //            document.getElementById("AllowanceID").value = allowances[i].AllowanceID;
-    //            document.getElementById("AllowanceName").value = allowances[i].AllowanceName;
-    //            document.getElementById("Insurance").checked = allowances[i].Insurance;
-    //            document.getElementById("Tax").checked = allowances[i].Tax;
-    //            document.getElementById("FreeTax").value = allowances[i].FreeTax;
-    //            document.getElementById("Value").value = allowances[i].Value;
-    //        }
-    //    }
-
-    //    create_modal.style.display = "block";
-
-    //    $("#bg").width("100%").height("100%");
-
-    //    $("#bg").fadeTo("slow", 0.8);
-    //}
+	var editID;
+    //function to show information of a allowance on modal
+	function EditModule(id) {
+		editID = id;
+		window.location = '/ALLOWANCEs/Edit/' + id;
+    }
 
     //functions to show delete confirm
     var deleteId;

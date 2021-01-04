@@ -1,8 +1,8 @@
 ﻿@model HRM.Models.ALLOWANCE
 
 @{
-	ViewBag.Title = "Create";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
 	<style>
@@ -72,6 +72,7 @@
 			font-family: Montserrat;
 			color: red;
 		}
+
 		input[type=number][disabled="disabled"] {
 			background-color: #E3E3E3 !important;
 			color: #AAAAAA !important;
@@ -79,15 +80,14 @@
 	</style>
 </head>
 
-
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
-
+    @Html.AntiForgeryToken()
+    
 <div class="form-horizontal">
-
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 	@Html.HiddenFor(model => model.AllowanceID)
+
 	<div class="form-group create-margin">
 		@Html.Label("Tên trợ cấp/phụ cấp/thưởng", htmlAttributes: new { @class = "create-lbl" })
 		<div class="col-md-10">
@@ -99,7 +99,7 @@
 	<div class="form-group create-margin">
 		@Html.Label("Loại", htmlAttributes: new { @class = "create-lbl" })
 		<div class="col-md-10">
-			@Html.DropDownListFor(model => model.Type, new [] { new SelectListItem { Text = "Phụ cấp", Value = "true" }, new SelectListItem { Text = "Khoản chế độ hoặc phúc lợi khác", Value = "false" } }, htmlAttributes: new { @class = "create-txtbox" })
+			@Html.DropDownListFor(model => model.Type, new[] { new SelectListItem { Text = "Phụ cấp", Value = "true" }, new SelectListItem { Text = "Khoản chế độ hoặc phúc lợi khác", Value = "false" } }, htmlAttributes: new { @class = "create-txtbox" })
 			@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
 		</div>
 	</div>
@@ -123,13 +123,23 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="form-group create-margin">
-		@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox free-tax-value" } })
-			@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
-		</div>
+		@if (Model.FreeTax == true)
+		{
+			@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
+				@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+			</div>
+		}
+		else
+		{
+			@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox free-tax-value" } })
+				@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+			</div>
+		}
 	</div>
 	<div class="form-group create-margin" autocomplete="off">
 		<div class="col-md-10">
@@ -141,14 +151,27 @@
 		</div>
 	</div>
 	<div class="form-group create-margin">
-		@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
-			@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-		</div>
+		@if (Model.AllEmployee == true)
+		{
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "create-txtbox all-employee-value" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		}
+		else
+		{
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		}
+
 	</div>
+
 	<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
-		<input type="submit" value="Thêm" class="btn create-btn" style="background: #3D76B5;" />
+		<input type="submit" value="Sửa" class="btn create-btn" style="background: #3D76B5;" />
 		<a href="@Url.Action("Index","ALLOWANCEs")">
 			<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
 		</a>
@@ -157,8 +180,9 @@
 }
 
 <div>
-	@Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
+    @Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
 </div>
+
 <script>
 	$('.check-box.all-employee').click(function () {
 		if ($('.check-box.all-employee').is(':checked')) {
@@ -166,6 +190,7 @@
 		}
 		else {
 			$('.create-txtbox.all-employee-value').attr("disabled", "disabled");
+			$('.create-txtbox.all-employee-value').val('');
 		}
 	});
 	$('.check-box.free-tax').click(function () {
@@ -174,6 +199,8 @@
 		}
 		else {
 			$('.create-txtbox.free-tax-value').attr("disabled", "disabled");
+			$('.create-txtbox.free-tax-value').val('');
 		}
 	});
+
 </script>

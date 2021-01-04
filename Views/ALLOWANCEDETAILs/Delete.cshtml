@@ -1,0 +1,46 @@
+﻿@model HRM.Models.ALLOWANCEDETAIL
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bạn chắc chắn muốn xóa thông tin này?</h3>
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALLOWANCE.AllowanceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALLOWANCE.AllowanceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm(Html.BeginForm(null, null, new { id = Model.AllowanceID, employee = Model.EmployeeID, month = Model.Month }))) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

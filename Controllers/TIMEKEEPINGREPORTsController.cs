@@ -23,13 +23,6 @@ namespace HRM.Controllers
         public ActionResult Index(/*DateTime date*/)
         {
             var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
-            //if (date != null)
-            //{
-            //    var list = db.TIMEKEEPINGREPORTs.ToList();
-            //    list = list.Where(x => x.Month == date).ToList();
-            //    return View(list);
-            //}
-
             return View(tIMEKEEPINGREPORTs.ToList());
         }
         // GET: TIMEKEEPINGREPORTs
@@ -80,7 +73,7 @@ namespace HRM.Controllers
                                 TU.SumWorkDay = a.SumWorkDay;
                                 TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
                                 TU.SumAbsentNoSalary = a.SumAbsentNoSalary;
-                                TU.SumHourNightNormal = a.SumHourNormal;
+                                TU.SumHourNormal = a.SumHourNormal;
                                 TU.SumHourDayOff = a.SumHourDayOff;
                                 TU.SumHourSpecialDayOff = a.SumHourSpecialDayOff;
                                 TU.SumHourNightSpecialDayOff = a.SumHourNightSpecialDayOff;
@@ -134,7 +127,6 @@ namespace HRM.Controllers
             var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
             return View(tIMEKEEPINGREPORTs.ToList());
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

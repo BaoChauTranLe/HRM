@@ -538,15 +538,6 @@
         <input type="date" name="ContractExpirationDate" class="date" style="left: 550px; top: 130px;" />
         @Html.ValidationMessageFor(model => model.ContractExpirationDate, "", new { style = "left: 550px; top: 180px;", @class = "text-danger" })
     </div>
-    <div class="collapsible">
-        Tài khoản
-    </div>
-    <div class="collapsible-content" id="c5" style="left: 0px; top: 0px;  height: 100px;">
-        <div class="label" style="left: 30px;">
-            Mật khẩu
-        </div>
-        @Html.TextBoxFor(model => model.Password, new { style = "left: 30px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", })
-    </div>
     <div style="position: relative">
         <input type="submit" value="Lưu" class="btn-save" onclick="openModal()" />
         <button class="btn-cancel" onclick="GoHome()">

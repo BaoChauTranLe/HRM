@@ -26,7 +26,7 @@ namespace HRM.Controllers
             {
                 List<ALLOWANCE> list = db.ALLOWANCEs.ToList();
                 var AllowanceList = from a in list
-                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.FreeTax, a.FreeTaxValue, a.Value};
+                                select new { a.AllowanceID, a.AllowanceName, a.Insurance, a.FreeTax, a.FreeTaxValue, a.Value, a.AllEmployee, a.Type };
                 var result = new { list = AllowanceList, str = "success" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -103,6 +103,40 @@ namespace HRM.Controllers
 
         //    return View(aLLOWANCE);
         //}
+        // GET: ALLOWANCEDETAILs/Edit/5
+        public ActionResult Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ALLOWANCE aLLOWANCE = db.ALLOWANCEs.Find(id);
+            if (aLLOWANCE == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            //ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
+            return View(aLLOWANCE);
+        }
+
+        // POST: ALLOWANCEDETAILs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "AllowanceID,AllowanceName,Type,Insurance,FreeTax,FreeTaxValue,AllEmployee,Value")] ALLOWANCE aLLOWANCE)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(aLLOWANCE).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            //ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs, "AllowanceID", "AllowanceName", aLLOWANCEDETAIL.AllowanceID);
+            //ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
+            return View(aLLOWANCE);
+        }
 
         // POST: ALLOWANCEs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
