@@ -359,10 +359,10 @@
         </div>
         @Html.TextBoxFor(model => model.EmployeeName, new { style = "left: 500px; top: 30px; width: 420px; background: #F8FAFA;", @class = "text-box", })
         @Html.ValidationMessageFor(model => model.EmployeeName, "", new { style = "left: 500px; top: 80px;", @class = "text-danger" })
-        <div>
-            <img id="output" class="img" />
-            @Html.TextBoxFor(model => model.ImageFile, new { style = "left: 70px; top: 330px; width: 420px; position: absolute", type = "file", @class = "form-control" })
-        </div>
+    <div>
+        <img id="output" class="img" />
+        @Html.TextBoxFor(model => model.ImageFile, new { style = "left: 70px; top: 330px; width: 420px; position: absolute", type = "file", @class = "form-control" })
+    </div>
 
         <div class="label" style="left: 300px; top: 100px;">
             Giới tính

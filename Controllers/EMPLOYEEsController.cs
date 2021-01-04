@@ -782,14 +782,9 @@ namespace HRM.Controllers
                 //    else
                 //        cONTRACT.TrialTime = 0;
                 //}
-                //Tai khoan
-                USER uSER = new USER();
-                uSER.EmployeeID = employee.EmployeeID;
-                uSER.Password = employee.Password;
                 db.Entry(eDUCATIONDETAIL).State = EntityState.Modified;
                 db.Entry(cERTIFICATEDETAIL).State = EntityState.Modified;
                 db.Entry(cONTRACT).State = EntityState.Modified;
-                db.Entry(uSER).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
