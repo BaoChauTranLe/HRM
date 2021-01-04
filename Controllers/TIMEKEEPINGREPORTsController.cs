@@ -84,11 +84,11 @@ namespace HRM.Controllers
                                 TU.SumHourDayOff = a.SumHourDayOff;
                                 TU.SumHourSpecialDayOff = a.SumHourSpecialDayOff;
                                 TU.SumHourNightSpecialDayOff = a.SumHourNightSpecialDayOff;
-                                TU.SumHourNightSpecialDayOffExtra = a.SumHourNightSpecialDayOff;
+                                //TU.SumHourNightSpecialDayOffExtra = a.SumHourNightSpecialDayOff;
                                 TU.SumHourNightNormal = a.SumHourNightNormal;
-                                TU.SumHourNightNormalExtra = a.SumHourNightNormalExtra;
+                                //TU.SumHourNightNormalExtra = a.SumHourNightNormalExtra;
                                 TU.SumHourNightDayOff = a.SumHourNightDayOff;
-                                TU.SumHourNightDayOffExtra = a.SumHourNightDayOffExtra;
+                                //TU.SumHourNightDayOffExtra = a.SumHourNightDayOffExtra;
                                 db.TIMEKEEPINGREPORTs.Add(TU);
                                 db.SaveChanges();
                             }

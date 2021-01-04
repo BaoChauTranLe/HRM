@@ -17,8 +17,8 @@ namespace HRM.Controllers
         {
             int sum = 0;
             var allowanceList = db.ALLOWANCEs.ToList();
-            for (int i = 0; i < allowanceList.Count; i++)
-                sum += allowanceList[i].Value;
+            //for (int i = 0; i < allowanceList.Count; i++)
+            //    sum += allowanceList[i].Value;
             return sum;
         }
         public int CalculateStandardSalary(EMPLOYEE e)
@@ -36,8 +36,8 @@ namespace HRM.Controllers
         {
             int sum = 0;
             var mustPayList = db.ALLOWANCEs.Where(x => x.Insurance == true).ToList();
-            for (int i = 0; i < mustPayList.Count; i++)
-                sum += mustPayList[i].Value;
+            //for (int i = 0; i < mustPayList.Count; i++)
+            //    sum += mustPayList[i].Value;
             return sum;
         }
         public int CalculateInsurancePaySalary(EMPLOYEE e)
@@ -87,10 +87,10 @@ namespace HRM.Controllers
                        + timekeepingInfo.SumHourSpecialDayOff
                        + timekeepingInfo.SumHourNightNormal
                        + timekeepingInfo.SumHourNightDayOff
-                       + timekeepingInfo.SumHourNightSpecialDayOff
-                       + timekeepingInfo.SumHourNightNormalExtra
-                       + timekeepingInfo.SumHourNightDayOffExtra
-                       + timekeepingInfo.SumHourNightSpecialDayOffExtra);
+                       + timekeepingInfo.SumHourNightSpecialDayOff);
+                       //+ timekeepingInfo.SumHourNightNormalExtra
+                       //+ timekeepingInfo.SumHourNightDayOffExtra
+                       //+ timekeepingInfo.SumHourNightSpecialDayOffExtra);
         }
         public int CalculateTaxableOvertimeSalary(EMPLOYEE e, DateTime month)
         {
@@ -153,10 +153,10 @@ namespace HRM.Controllers
                  + (int)(hourPay * timekeepingInfo.SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value)
                  + (int)(hourPay * timekeepingInfo.SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value)
                  + (int)(hourPay * timekeepingInfo.SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value)
-                 + (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value)
-                 + (int)(hourPay * timekeepingInfo.SumHourNightNormalExtra * db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value)
-                 + (int)(hourPay * timekeepingInfo.SumHourNightDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value)
-                 + (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value);
+                 + (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value);
+                 //+ (int)(hourPay * timekeepingInfo.SumHourNightNormalExtra * db.PARAMETERs.Find("HSLDemNgayThuongDaLamNgay").Value)
+                 //+ (int)(hourPay * timekeepingInfo.SumHourNightDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiDaLamNgay").Value)
+                 //+ (int)(hourPay * timekeepingInfo.SumHourNightSpecialDayOffExtra * db.PARAMETERs.Find("HSLDemNgayNghiCoLuongDaLamNgay").Value);
 
         }
         public int CalculateSalary(EMPLOYEE e, DateTime month)
@@ -188,8 +188,8 @@ namespace HRM.Controllers
                         IncomeTax = CalculateIncomeTax(e, date),
                         StandardSalary = CalculateStandardSalary(e),
                         WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay,
-                        OvertimeSalary = CalculateOvertimeSalary(e, date),
-                        InsurancePay = CalculateTotalInsurancePay(e),
+                        //OvertimeSalary = CalculateOvertimeSalary(e, date),
+                        //InsurancePay = CalculateTotalInsurancePay(e),
                         RealSalary = CalculateSalary(e, date)
                     };
                     db.SALARYREPORTs.Add(sALARYREPORT);

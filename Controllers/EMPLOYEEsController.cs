@@ -403,15 +403,15 @@ namespace HRM.Controllers
                 cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
                 cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                if (employee.TrialTime == null)
-                    cONTRACT.TrialTime = 0;
-                else
-                {
-                    if (cONTRACT.ContractType == "Hợp đồng thử việc")
-                        cONTRACT.TrialTime = employee.TrialTime;
-                    else
-                        cONTRACT.TrialTime = 0;
-                }
+                //if (employee.TrialTime == null)
+                //    cONTRACT.TrialTime = 0;
+                //else
+                //{
+                //    if (cONTRACT.ContractType == "Hợp đồng thử việc")
+                //        cONTRACT.TrialTime = employee.TrialTime;
+                //    else
+                //        cONTRACT.TrialTime = 0;
+                //}
                 //Tai khoan
                 USER uSER = new USER();
                 uSER.EmployeeID = id;
@@ -736,15 +736,15 @@ namespace HRM.Controllers
                 cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
                 cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                if (employee.TrialTime == null)
-                    cONTRACT.TrialTime = 0;
-                else
-                {
-                    if (cONTRACT.ContractType == "Hợp đồng thử việc")
-                        cONTRACT.TrialTime = employee.TrialTime;
-                    else
-                        cONTRACT.TrialTime = 0;
-                }
+                //if (employee.TrialTime == null)
+                //    cONTRACT.TrialTime = 0;
+                //else
+                //{
+                //    if (cONTRACT.ContractType == "Hợp đồng thử việc")
+                //        cONTRACT.TrialTime = employee.TrialTime;
+                //    else
+                //        cONTRACT.TrialTime = 0;
+                //}
                 //Tai khoan
                 USER uSER = new USER();
                 uSER.EmployeeID = employee.EmployeeID;
