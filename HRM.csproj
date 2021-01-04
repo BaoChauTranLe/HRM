@@ -371,6 +371,7 @@
     <Content Include="Views\ALLOWANCEDETAILs\Create.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Index.cshtml" />
+    <Content Include="Views\ALLOWANCEs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

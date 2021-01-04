@@ -1,0 +1,180 @@
+﻿@model HRM.Models.ALLOWANCE
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+	<style>
+		.create-lbl {
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			/* identical to box height, or 22px */
+			letter-spacing: 0.01em;
+			color: #000000;
+		}
+
+		.create-txtbox {
+			/* Text Block */
+			/* Auto Layout */
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 500px;
+			height: 50px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/* Inside Auto Layout */
+			flex: none;
+			order: 1;
+			align-self: stretch;
+			flex-grow: 0;
+			/*Inside Text*/
+			padding: 12px;
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			letter-spacing: 0.01em;
+			color: #060606;
+		}
+
+		.create-margin {
+			margin-left: 24px;
+			margin-top: 20px;
+		}
+
+		.create-btn {
+			box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+			border-radius: 4px;
+			width: 126px;
+			height: 40px;
+			/* Inside Text */
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 16px;
+			text-align: center;
+			letter-spacing: 1.25px;
+			text-transform: uppercase;
+			color: #FFFFFF;
+		}
+
+		.error-msg {
+			font-family: Montserrat;
+			color: red;
+		}
+		input[type=number][disabled="disabled"] {
+			background-color: #E3E3E3 !important;
+			color: #AAAAAA !important;
+		}
+	</style>
+</head>
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+	@*<h4>ALLOWANCE</h4>
+		<hr />*@
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@Html.HiddenFor(model => model.AllowanceID)
+	<div class="form-group create-margin">
+		@Html.Label("Tên loại trợ cấp/phụ cấp/thưởng", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "create-txtbox" } })
+			@Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group create-margin">
+		@Html.Label("Loại", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.DropDownListFor(model => model.Type, new [] { new SelectListItem { Text = "Phụ cấp", Value = "true" }, new SelectListItem { Text = "Khoản chế độ hoặc phúc lợi khác", Value = "false" } }, htmlAttributes: new { @class = "create-txtbox" })
+			@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group create-margin" autocomplete="off">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.Insurance)
+				@Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
+				@Html.Label("Phải đóng bảo hiểm", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group create-margin">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "check-box free-tax" } })
+				@Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
+				@Html.Label("Được miễn thuế", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group create-margin">
+		@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox free-tax-value" } })
+			@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group create-margin" autocomplete="off">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.AllEmployee, new { htmlAttributes = new { @class = "check-box all-employee" } })
+				@Html.ValidationMessageFor(model => model.AllEmployee, "", new { @class = "text-danger" })
+				@Html.Label("Áp dụng cho tất cả nhân viên", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
+	<div class="form-group create-margin">
+		@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
+			@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
+		<input type="submit" value="Thêm" class="btn create-btn" style="background: #3D76B5;" />
+		<a href="@Url.Action("Index","ALLOWANCEs")">
+			<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
+		</a>
+	</div>
+</div>
+}
+
+<div>
+	@Html.ActionLink("<- Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
+</div>
+<script>
+	$('.check-box.all-employee').click(function () {
+		if ($('.check-box.all-employee').is(':checked')) {
+			$('.create-txtbox.all-employee-value').removeAttr("disabled");
+		}
+		else {
+			$('.create-txtbox.all-employee-value').attr("disabled", "disabled");
+		}
+	});
+	$('.check-box.free-tax').click(function () {
+		if ($('.check-box.free-tax').is(':checked')) {
+			$('.create-txtbox.free-tax-value').removeAttr("disabled");
+		}
+		else {
+			$('.create-txtbox.free-tax-value').attr("disabled", "disabled");
+		}
+	});
+</script>
