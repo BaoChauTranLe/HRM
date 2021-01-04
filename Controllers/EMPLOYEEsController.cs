@@ -704,6 +704,22 @@ namespace HRM.Controllers
             ViewBag.TypeCertificate = certificatelist;
             if (employee.ContractExpirationDate < employee.DateStartWork)
                 ModelState.AddModelError("ContractExpirationDate", "Ngày kết thúc phải lớn hơn ngày bắt đầu");
+            var Parameter = db.PARAMETERs.ToList();
+            var tuoi = employee.DoB.Year - DateTime.Now.Year;
+            if (employee.Sex == "Nam")
+            {
+                if (tuoi < Parameter[19].Value) //tuoi toi thieu nam
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+                if (tuoi > Parameter[17].Value) //tuoi toi da nam
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+            }
+            else
+            {
+                if (tuoi < Parameter[17].Value) //tuoi toi thieu nu
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+                if (tuoi > Parameter[18].Value) //tuoi toi da nu
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+            }
             if (ModelState.IsValid)
             {
                 EMPLOYEE eMPLOYEE = new EMPLOYEE();
