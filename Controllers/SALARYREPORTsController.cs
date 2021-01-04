@@ -167,7 +167,7 @@ namespace HRM.Controllers
         public ActionResult Index()
         {
             //var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
-            DateTime date = new DateTime(2021, 1, 1, 12, 0, 0);
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month,1);
             var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
             var employeelist = db.EMPLOYEEs.ToList();
             foreach (EMPLOYEE e in employeelist)
@@ -199,6 +199,8 @@ namespace HRM.Controllers
             }    
             return View(sALARYREPORTs.ToList());
         }
+
+
 
         // GET: SALARYREPORTs/Details/5
         public ActionResult Details(string id, DateTime month)

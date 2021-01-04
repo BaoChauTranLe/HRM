@@ -35,7 +35,7 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm(Html.BeginForm(null, null, new { id = Model.AllowanceID, employee = Model.EmployeeID, month = Model.Month }))) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
