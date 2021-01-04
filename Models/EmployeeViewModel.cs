@@ -11,7 +11,7 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         [Required(ErrorMessage = "Tên nhân viên bắt buộc")]
         public string EmployeeName { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public HttpPostedFileBase ImageFile { get; set; }
         public string Sex { get; set; }
         [Required(ErrorMessage = "Ngày sinh bắt buộc")]
