@@ -149,7 +149,7 @@
 	</div>
 
 	<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
-		<input type="submit" value="Thêm" class="btn create-btn" style="background: #3D76B5;" />
+		<input type="submit" value="Sửa" class="btn create-btn" style="background: #3D76B5;" />
 		<a href="@Url.Action("Index","ALLOWANCEs")">
 			<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
 		</a>
@@ -160,3 +160,25 @@
 <div>
     @Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
 </div>
+
+<script>
+	$('.check-box.all-employee').click(function () {
+		if ($('.check-box.all-employee').is(':checked')) {
+			$('.create-txtbox.all-employee-value').removeAttr("disabled");
+		}
+		else {
+			$('.create-txtbox.all-employee-value').attr("disabled", "disabled");
+			$('.create-txtbox.all-employee-value').val('');
+		}
+	});
+	$('.check-box.free-tax').click(function () {
+		if ($('.check-box.free-tax').is(':checked')) {
+			$('.create-txtbox.free-tax-value').removeAttr("disabled");
+		}
+		else {
+			$('.create-txtbox.free-tax-value').attr("disabled", "disabled");
+			$('.create-txtbox.all-employee-value').val('');
+		}
+	});
+
+</script>
