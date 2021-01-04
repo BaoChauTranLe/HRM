@@ -48,38 +48,48 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrEdit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax,Value")] ALLOWANCE aLLOWANCE)
+        public ActionResult Create([Bind(Include = "AllowanceID")] ALLOWANCE aLLOWANCE)
         {
             if (ModelState.IsValid)
             {
-                if (aLLOWANCE.AllowanceID == null)
-                {
-                    //auto create allowanceID
-                    int n = 0;
-                    var allowanceList = db.ALLOWANCEs.ToList();
-                    if (allowanceList.Count > 0)
-                    {
-                        ALLOWANCE s = allowanceList.Last();
-                        n = Int32.Parse(s.AllowanceID.Substring(s.AllowanceID.Length - 3)) + 1;
-                    }
-
-                    string id = String.Format("{0:000}", n);
-                    aLLOWANCE.AllowanceID = "A" + id;
-
-                    db.ALLOWANCEs.Add(aLLOWANCE);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    db.Entry(aLLOWANCE).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.ALLOWANCEs.Add(aLLOWANCE);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-
             return View(aLLOWANCE);
         }
+        //public ActionResult CreateOrEdit([Bind(Include = "AllowanceID,AllowanceName,Insurance,Tax,FreeTax,Value")] ALLOWANCE aLLOWANCE)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (aLLOWANCE.AllowanceID == null)
+        //        {
+        //            //auto create allowanceID
+        //            int n = 0;
+        //            var allowanceList = db.ALLOWANCEs.ToList();
+        //            if (allowanceList.Count > 0)
+        //            {
+        //                ALLOWANCE s = allowanceList.Last();
+        //                n = Int32.Parse(s.AllowanceID.Substring(s.AllowanceID.Length - 3)) + 1;
+        //            }
+
+        //            string id = String.Format("{0:000}", n);
+        //            aLLOWANCE.AllowanceID = "A" + id;
+
+        //            db.ALLOWANCEs.Add(aLLOWANCE);
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            db.Entry(aLLOWANCE).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+
+        //    return View(aLLOWANCE);
+        //}
 
         // POST: ALLOWANCEs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
