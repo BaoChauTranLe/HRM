@@ -123,13 +123,23 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="form-group create-margin">
-		@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
-			@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
-		</div>
+		@if (Model.FreeTax == true)
+		{
+			@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
+				@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+			</div>
+		}
+		else
+		{
+			@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox free-tax-value" } })
+				@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+			</div>
+		}
 	</div>
 	<div class="form-group create-margin" autocomplete="off">
 		<div class="col-md-10">
@@ -141,11 +151,23 @@
 		</div>
 	</div>
 	<div class="form-group create-margin">
-		@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
-			@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-		</div>
+		@if (Model.AllEmployee == true)
+		{
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "create-txtbox all-employee-value" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		}
+		else
+		{
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		}
+
 	</div>
 
 	<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
@@ -177,7 +199,7 @@
 		}
 		else {
 			$('.create-txtbox.free-tax-value').attr("disabled", "disabled");
-			$('.create-txtbox.all-employee-value').val('');
+			$('.create-txtbox.free-tax-value').val('');
 		}
 	});
 
