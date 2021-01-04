@@ -57,7 +57,7 @@ namespace HRM.Controllers
 
         public int CalculateWorkDaySalary(EMPLOYEE e, DateTime month)
         {
-            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(e, month);
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID);
             return (int) (CalculateStandardSalary(e, month) / db.PARAMETERs.Find("SoNgayCongChuan").Value * timekeepingInfo.SumWorkDay);
         }
 
@@ -130,7 +130,7 @@ namespace HRM.Controllers
         }
         public int CalculateOvertimeSalary(EMPLOYEE e, DateTime month)
         {
-            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(e, month);
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID );
             int hourPay = CalculateStandardHourSalary(e);
             return CalculateNormalOvertimeSalary(timekeepingInfo, hourPay) +
                    CalculateDayOffOvertimeSalary(timekeepingInfo, hourPay) +
@@ -154,7 +154,7 @@ namespace HRM.Controllers
             {
                 absentAllowanceReceived += a.Value;
             }
-            int absentHaveSalary = db.TIMEKEEPINGREPORTs.Find(e, month).SumAbsentHaveSalary;
+            int absentHaveSalary = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID).SumAbsentHaveSalary;
             return (int)((e.CONTRACT.BasicSalary + absentAllowanceReceived)/db.PARAMETERs.Find("SoNgayCongChuan").Value * absentHaveSalary);
         }
 
@@ -171,7 +171,7 @@ namespace HRM.Controllers
         }
         public int CalculateTotalWorkHour(EMPLOYEE e, DateTime month)
         {
-            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(e, month);
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID);
             return (int)(timekeepingInfo.SumHourNormal
                        + timekeepingInfo.SumHourDayOff
                        + timekeepingInfo.SumHourSpecialDayOff
@@ -248,7 +248,7 @@ namespace HRM.Controllers
         public ActionResult Index()
         {
             //var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
-            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
             var employeelist = db.EMPLOYEEs.ToList();
             foreach (EMPLOYEE e in employeelist)
             {

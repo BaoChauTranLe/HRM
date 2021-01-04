@@ -60,7 +60,7 @@ namespace HRM.Controllers
 
                     var excelFile = new ExcelQueryFactory(pathToExcelFile);
                     var artistAlbums = from a in excelFile.Worksheet<TIMEKEEPINGREPORT>(sheetName) select a;
-
+                    DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 12, 0, 0, 0, 0);
                     foreach (var a in artistAlbums)
                     {
                         try
@@ -68,7 +68,7 @@ namespace HRM.Controllers
                             if (a.EmployeeID != null)
                             {
                                 TIMEKEEPINGREPORT TU = new TIMEKEEPINGREPORT();
-                                TU.Month = timekeepingsRP.Month;
+                                TU.Month = date;
                                 TU.EmployeeID = a.EmployeeID;
                                 TU.SumWorkDay = a.SumWorkDay;
                                 TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
@@ -99,7 +99,6 @@ namespace HRM.Controllers
                                 {
                                     Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                                 }
-
                             }
                         }
                     }
