@@ -25,7 +25,6 @@ namespace HRM.Models
         public System.DateTime DateStartWork { get; set; }
         public System.DateTime ContractExpirationDate { get; set; }
         public int BasicSalary { get; set; }
-        public Nullable<int> TrialTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }

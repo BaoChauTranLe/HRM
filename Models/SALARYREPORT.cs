@@ -6,7 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
+
 namespace HRM.Models
 {
     using System;
@@ -14,19 +14,25 @@ namespace HRM.Models
     
     public partial class SALARYREPORT
     {
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public int Allowance { get; set; }
+        public int StandardSalary { get; set; }
         public int WorkDay { get; set; }
         public int WorkDaySalary { get; set; }
-        public int InsurancePay { get; set; }
-        public int OvertimeSalary { get; set; }
+        public int TotalInsurancePay { get; set; }
         public int IncomeTax { get; set; }
         public int Advance { get; set; }
+        public int NormalOverTimeSalary { get; set; }
+        public int DayOffOverTimeSalary { get; set; }
+        public int SpecialDayOffOverTimeSalary { get; set; }
+        public int NightNormalOverTimeSalary { get; set; }
+        public int NightDayOffOverTimeSalary { get; set; }
+        public int NightSpecialDayOffOverTimeSalary { get; set; }
+        public int OverTimeSalary { get; set; }
+        public int AbsentHaveSalary { get; set; }
+        public int AbsentHaveSalaryValue { get; set; }
         public int RealSalary { get; set; }
-        public int StandardSalary { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

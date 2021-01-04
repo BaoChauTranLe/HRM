@@ -20,6 +20,7 @@ namespace HRM.Models
         public int SocialInsurancePay { get; set; }
         public int HealthInsurancePay { get; set; }
         public int TotalInsurancePay { get; set; }
+        public int WorkInsurancePay { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

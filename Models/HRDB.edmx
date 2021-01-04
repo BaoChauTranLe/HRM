@@ -23,17 +23,20 @@
           <Property Name="Insurance" Type="bit" Nullable="false" />
           <Property Name="FreeTax" Type="bit" Nullable="false" />
           <Property Name="FreeTaxValue" Type="int" />
-          <Property Name="Value" Type="int" Nullable="false" />
           <Property Name="AllEmployee" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="bit" Nullable="false" />
+          <Property Name="Value" Type="int" />
         </EntityType>
         <EntityType Name="ALLOWANCEDETAIL">
           <Key>
             <PropertyRef Name="AllowanceID" />
             <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Month" />
           </Key>
           <Property Name="AllowanceID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CERTIFICATEDETAIL">
           <Key>
@@ -54,7 +57,6 @@
           <Property Name="DateStartWork" Type="datetime" Nullable="false" />
           <Property Name="ContractExpirationDate" Type="datetime" Nullable="false" />
           <Property Name="BasicSalary" Type="int" Nullable="false" />
-          <Property Name="TrialTime" Type="int" />
         </EntityType>
         <EntityType Name="DATEINFORMATION">
           <Key>
@@ -79,7 +81,6 @@
           </Key>
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="Sex" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="DoB" Type="datetime" Nullable="false" />
           <Property Name="Birthplace" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -100,6 +101,7 @@
           <Property Name="DependentDeduction" Type="int" Nullable="false" />
           <Property Name="Street" Type="nvarchar(max)" />
           <Property Name="State" Type="bit" />
+          <Property Name="Image" Type="image" />
         </EntityType>
         <EntityType Name="INSURANCEREPORT">
           <Key>
@@ -112,6 +114,7 @@
           <Property Name="SocialInsurancePay" Type="int" Nullable="false" />
           <Property Name="HealthInsurancePay" Type="int" Nullable="false" />
           <Property Name="TotalInsurancePay" Type="int" Nullable="false" />
+          <Property Name="WorkInsurancePay" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MAJOR">
           <Key>
@@ -149,14 +152,22 @@
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="Allowance" Type="int" Nullable="false" />
+          <Property Name="StandardSalary" Type="int" Nullable="false" />
           <Property Name="WorkDay" Type="int" Nullable="false" />
           <Property Name="WorkDaySalary" Type="int" Nullable="false" />
-          <Property Name="InsurancePay" Type="int" Nullable="false" />
-          <Property Name="OvertimeSalary" Type="int" Nullable="false" />
+          <Property Name="TotalInsurancePay" Type="int" Nullable="false" />
           <Property Name="IncomeTax" Type="int" Nullable="false" />
           <Property Name="Advance" Type="int" Nullable="false" />
+          <Property Name="NormalOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="DayOffOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="SpecialDayOffOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="NightNormalOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="NightDayOffOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="NightSpecialDayOffOverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="OverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="AbsentHaveSalary" Type="int" Nullable="false" />
+          <Property Name="AbsentHaveSalaryValue" Type="int" Nullable="false" />
           <Property Name="RealSalary" Type="int" Nullable="false" />
-          <Property Name="StandardSalary" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -217,6 +228,8 @@
           <Property Name="OverTimeFreeTax" Type="int" Nullable="false" />
           <Property Name="TaxableIncome" Type="int" Nullable="false" />
           <Property Name="IncomeTax" Type="int" Nullable="false" />
+          <Property Name="AssessableIncome" Type="int" Nullable="false" />
+          <Property Name="OverTimeSalary" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -246,9 +259,6 @@
           <Property Name="SumHourNightNormal" Type="int" Nullable="false" />
           <Property Name="SumHourNightDayOff" Type="int" Nullable="false" />
           <Property Name="SumHourNightSpecialDayOff" Type="int" Nullable="false" />
-          <Property Name="SumHourNightNormalExtra" Type="int" Nullable="false" />
-          <Property Name="SumHourNightDayOffExtra" Type="int" Nullable="false" />
-          <Property Name="SumHourNightSpecialDayOffExtra" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -269,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALLOWANCE__Allow__436BFEE3">
+        <Association Name="FK__ALLOWANCE__Allow__46486B8E">
           <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
           <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALLOWANCE__Emplo__4277DAAA">
+        <Association Name="FK__ALLOWANCE__Emplo__473C8FC7">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -377,7 +387,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARYREP__Emplo__51EF2864">
+        <Association Name="FK__SALARYREP__Emplo__4A18FC72">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="SALARYREPORT" Type="Self.SALARYREPORT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -500,11 +510,11 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ADVANCED" EntitySet="ADVANCED" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALLOWANCE__Allow__436BFEE3" Association="Self.FK__ALLOWANCE__Allow__436BFEE3">
+          <AssociationSet Name="FK__ALLOWANCE__Allow__46486B8E" Association="Self.FK__ALLOWANCE__Allow__46486B8E">
             <End Role="ALLOWANCE" EntitySet="ALLOWANCE" />
             <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALLOWANCE__Emplo__4277DAAA" Association="Self.FK__ALLOWANCE__Emplo__4277DAAA">
+          <AssociationSet Name="FK__ALLOWANCE__Emplo__473C8FC7" Association="Self.FK__ALLOWANCE__Emplo__473C8FC7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAIL" />
           </AssociationSet>
@@ -536,7 +546,7 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORT" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARYREP__Emplo__51EF2864" Association="Self.FK__SALARYREP__Emplo__51EF2864">
+          <AssociationSet Name="FK__SALARYREP__Emplo__4A18FC72" Association="Self.FK__SALARYREP__Emplo__4A18FC72">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORT" />
           </AssociationSet>
@@ -593,20 +603,23 @@
           <Property Name="Insurance" Type="Boolean" Nullable="false" />
           <Property Name="FreeTax" Type="Boolean" Nullable="false" />
           <Property Name="FreeTaxValue" Type="Int32" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
           <Property Name="AllEmployee" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Allow__436BFEE3" FromRole="ALLOWANCE" ToRole="ALLOWANCEDETAIL" />
+          <Property Name="Type" Type="Boolean" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Allow__46486B8E" FromRole="ALLOWANCE" ToRole="ALLOWANCEDETAIL" />
         </EntityType>
         <EntityType Name="ALLOWANCEDETAIL">
           <Key>
             <PropertyRef Name="AllowanceID" />
             <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Month" />
           </Key>
           <Property Name="AllowanceID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ALLOWANCE" Relationship="Self.FK__ALLOWANCE__Allow__436BFEE3" FromRole="ALLOWANCEDETAIL" ToRole="ALLOWANCE" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__ALLOWANCE__Emplo__4277DAAA" FromRole="ALLOWANCEDETAIL" ToRole="EMPLOYEE" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ALLOWANCE" Relationship="Self.FK__ALLOWANCE__Allow__46486B8E" FromRole="ALLOWANCEDETAIL" ToRole="ALLOWANCE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__ALLOWANCE__Emplo__473C8FC7" FromRole="ALLOWANCEDETAIL" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="CERTIFICATEDETAIL">
           <Key>
@@ -628,7 +641,6 @@
           <Property Name="DateStartWork" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ContractExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BasicSalary" Type="Int32" Nullable="false" />
-          <Property Name="TrialTime" Type="Int32" />
           <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__Contra__3CF40B7E" FromRole="CONTRACT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="DATEINFORMATION">
@@ -657,7 +669,6 @@
           </Key>
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DoB" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
@@ -678,15 +689,16 @@
           <Property Name="DependentDeduction" Type="Int32" Nullable="false" />
           <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Boolean" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="ADVANCEDs" Relationship="Self.FK__ADVANCED__Employ__56B3DD81" FromRole="EMPLOYEE" ToRole="ADVANCED" />
-          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Emplo__4277DAAA" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
+          <NavigationProperty Name="ALLOWANCEDETAILs" Relationship="Self.FK__ALLOWANCE__Emplo__473C8FC7" FromRole="EMPLOYEE" ToRole="ALLOWANCEDETAIL" />
           <NavigationProperty Name="CERTIFICATEDETAIL" Relationship="Self.FK__CERTIFICA__Emplo__4959E263" FromRole="EMPLOYEE" ToRole="CERTIFICATEDETAIL" />
           <NavigationProperty Name="CONTRACT" Relationship="Self.FK__EMPLOYEE__Contra__3CF40B7E" FromRole="EMPLOYEE" ToRole="CONTRACT" />
           <NavigationProperty Name="EDUCATIONDETAIL" Relationship="Self.FK__EDUCATION__Emplo__42ACE4D4" FromRole="EMPLOYEE" ToRole="EDUCATIONDETAIL" />
           <NavigationProperty Name="POSITION" Relationship="Self.FK__EMPLOYEE__Positi__3BFFE745" FromRole="EMPLOYEE" ToRole="POSITION" />
           <NavigationProperty Name="ROOM" Relationship="Self.FK__EMPLOYEE__RoomID__3B0BC30C" FromRole="EMPLOYEE" ToRole="ROOM" />
           <NavigationProperty Name="INSURANCEREPORTs" Relationship="Self.FK__INSURANCE__Emplo__4F12BBB9" FromRole="EMPLOYEE" ToRole="INSURANCEREPORT" />
-          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.FK__SALARYREP__Emplo__51EF2864" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
+          <NavigationProperty Name="SALARYREPORTs" Relationship="Self.FK__SALARYREP__Emplo__4A18FC72" FromRole="EMPLOYEE" ToRole="SALARYREPORT" />
           <NavigationProperty Name="TAXREPORTs" Relationship="Self.FK__TAXREPORT__Emplo__4C364F0E" FromRole="EMPLOYEE" ToRole="TAXREPORT" />
           <NavigationProperty Name="TIMEKEEPINGREPORTs" Relationship="Self.FK__TIMEKEEPI__Emplo__30592A6F" FromRole="EMPLOYEE" ToRole="TIMEKEEPINGREPORT" />
           <NavigationProperty Name="USER" Relationship="Self.FK__USERS__EmployeeI__3FD07829" FromRole="EMPLOYEE" ToRole="USERS" />
@@ -704,6 +716,7 @@
           <Property Name="SocialInsurancePay" Type="Int32" Nullable="false" />
           <Property Name="HealthInsurancePay" Type="Int32" Nullable="false" />
           <Property Name="TotalInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="WorkInsurancePay" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__INSURANCE__Emplo__4F12BBB9" FromRole="INSURANCEREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="MAJOR">
@@ -745,15 +758,23 @@
           <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Allowance" Type="Int32" Nullable="false" />
+          <Property Name="StandardSalary" Type="Int32" Nullable="false" />
           <Property Name="WorkDay" Type="Int32" Nullable="false" />
           <Property Name="WorkDaySalary" Type="Int32" Nullable="false" />
-          <Property Name="InsurancePay" Type="Int32" Nullable="false" />
-          <Property Name="OvertimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="TotalInsurancePay" Type="Int32" Nullable="false" />
           <Property Name="IncomeTax" Type="Int32" Nullable="false" />
           <Property Name="Advance" Type="Int32" Nullable="false" />
+          <Property Name="NormalOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="DayOffOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="SpecialDayOffOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="NightNormalOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="NightDayOffOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="NightSpecialDayOffOverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="OverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="AbsentHaveSalary" Type="Int32" Nullable="false" />
+          <Property Name="AbsentHaveSalaryValue" Type="Int32" Nullable="false" />
           <Property Name="RealSalary" Type="Int32" Nullable="false" />
-          <Property Name="StandardSalary" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARYREP__Emplo__51EF2864" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__SALARYREP__Emplo__4A18FC72" FromRole="SALARYREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -817,6 +838,8 @@
           <Property Name="OverTimeFreeTax" Type="Int32" Nullable="false" />
           <Property Name="TaxableIncome" Type="Int32" Nullable="false" />
           <Property Name="IncomeTax" Type="Int32" Nullable="false" />
+          <Property Name="AssessableIncome" Type="Int32" Nullable="false" />
+          <Property Name="OverTimeSalary" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TAXREPORT__Emplo__4C364F0E" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
@@ -849,9 +872,6 @@
           <Property Name="SumHourNightNormal" Type="Int32" Nullable="false" />
           <Property Name="SumHourNightDayOff" Type="Int32" Nullable="false" />
           <Property Name="SumHourNightSpecialDayOff" Type="Int32" Nullable="false" />
-          <Property Name="SumHourNightNormalExtra" Type="Int32" Nullable="false" />
-          <Property Name="SumHourNightDayOffExtra" Type="Int32" Nullable="false" />
-          <Property Name="SumHourNightSpecialDayOffExtra" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TIMEKEEPI__Emplo__30592A6F" FromRole="TIMEKEEPINGREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="USER">
@@ -874,7 +894,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALLOWANCE__Allow__436BFEE3">
+        <Association Name="FK__ALLOWANCE__Allow__46486B8E">
           <End Role="ALLOWANCE" Type="Self.ALLOWANCE" Multiplicity="1" />
           <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -886,7 +906,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALLOWANCE__Emplo__4277DAAA">
+        <Association Name="FK__ALLOWANCE__Emplo__473C8FC7">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="ALLOWANCEDETAIL" Type="Self.ALLOWANCEDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -994,7 +1014,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SALARYREP__Emplo__51EF2864">
+        <Association Name="FK__SALARYREP__Emplo__4A18FC72">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="SALARYREPORT" Type="Self.SALARYREPORT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1105,11 +1125,11 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ADVANCED" EntitySet="ADVANCEDs" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALLOWANCE__Allow__436BFEE3" Association="Self.FK__ALLOWANCE__Allow__436BFEE3">
+          <AssociationSet Name="FK__ALLOWANCE__Allow__46486B8E" Association="Self.FK__ALLOWANCE__Allow__46486B8E">
             <End Role="ALLOWANCE" EntitySet="ALLOWANCEs" />
             <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALLOWANCE__Emplo__4277DAAA" Association="Self.FK__ALLOWANCE__Emplo__4277DAAA">
+          <AssociationSet Name="FK__ALLOWANCE__Emplo__473C8FC7" Association="Self.FK__ALLOWANCE__Emplo__473C8FC7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="ALLOWANCEDETAIL" EntitySet="ALLOWANCEDETAILs" />
           </AssociationSet>
@@ -1145,7 +1165,7 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="INSURANCEREPORT" EntitySet="INSURANCEREPORTs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SALARYREP__Emplo__51EF2864" Association="Self.FK__SALARYREP__Emplo__51EF2864">
+          <AssociationSet Name="FK__SALARYREP__Emplo__4A18FC72" Association="Self.FK__SALARYREP__Emplo__4A18FC72">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="SALARYREPORT" EntitySet="SALARYREPORTs" />
           </AssociationSet>
@@ -1197,8 +1217,9 @@
                 <ScalarProperty Name="Insurance" ColumnName="Insurance" />
                 <ScalarProperty Name="FreeTax" ColumnName="FreeTax" />
                 <ScalarProperty Name="FreeTaxValue" ColumnName="FreeTaxValue" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="AllEmployee" ColumnName="AllEmployee" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1208,6 +1229,7 @@
                 <ScalarProperty Name="AllowanceID" ColumnName="AllowanceID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1230,7 +1252,6 @@
                 <ScalarProperty Name="DateStartWork" ColumnName="DateStartWork" />
                 <ScalarProperty Name="ContractExpirationDate" ColumnName="ContractExpirationDate" />
                 <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
-                <ScalarProperty Name="TrialTime" ColumnName="TrialTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1258,7 +1279,6 @@
               <MappingFragment StoreEntitySet="EMPLOYEE">
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="DoB" ColumnName="DoB" />
                 <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
@@ -1279,6 +1299,7 @@
                 <ScalarProperty Name="DependentDeduction" ColumnName="DependentDeduction" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1291,6 +1312,7 @@
                 <ScalarProperty Name="SocialInsurancePay" ColumnName="SocialInsurancePay" />
                 <ScalarProperty Name="HealthInsurancePay" ColumnName="HealthInsurancePay" />
                 <ScalarProperty Name="TotalInsurancePay" ColumnName="TotalInsurancePay" />
+                <ScalarProperty Name="WorkInsurancePay" ColumnName="WorkInsurancePay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1332,14 +1354,22 @@
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Allowance" ColumnName="Allowance" />
+                <ScalarProperty Name="StandardSalary" ColumnName="StandardSalary" />
                 <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
                 <ScalarProperty Name="WorkDaySalary" ColumnName="WorkDaySalary" />
-                <ScalarProperty Name="InsurancePay" ColumnName="InsurancePay" />
-                <ScalarProperty Name="OvertimeSalary" ColumnName="OvertimeSalary" />
+                <ScalarProperty Name="TotalInsurancePay" ColumnName="TotalInsurancePay" />
                 <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
                 <ScalarProperty Name="Advance" ColumnName="Advance" />
+                <ScalarProperty Name="NormalOverTimeSalary" ColumnName="NormalOverTimeSalary" />
+                <ScalarProperty Name="DayOffOverTimeSalary" ColumnName="DayOffOverTimeSalary" />
+                <ScalarProperty Name="SpecialDayOffOverTimeSalary" ColumnName="SpecialDayOffOverTimeSalary" />
+                <ScalarProperty Name="NightNormalOverTimeSalary" ColumnName="NightNormalOverTimeSalary" />
+                <ScalarProperty Name="NightDayOffOverTimeSalary" ColumnName="NightDayOffOverTimeSalary" />
+                <ScalarProperty Name="NightSpecialDayOffOverTimeSalary" ColumnName="NightSpecialDayOffOverTimeSalary" />
+                <ScalarProperty Name="OverTimeSalary" ColumnName="OverTimeSalary" />
+                <ScalarProperty Name="AbsentHaveSalary" ColumnName="AbsentHaveSalary" />
+                <ScalarProperty Name="AbsentHaveSalaryValue" ColumnName="AbsentHaveSalaryValue" />
                 <ScalarProperty Name="RealSalary" ColumnName="RealSalary" />
-                <ScalarProperty Name="StandardSalary" ColumnName="StandardSalary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1403,6 +1433,8 @@
                 <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
                 <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
                 <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+                <ScalarProperty Name="AssessableIncome" ColumnName="AssessableIncome" />
+                <ScalarProperty Name="OverTimeSalary" ColumnName="OverTimeSalary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1432,9 +1464,6 @@
                 <ScalarProperty Name="SumHourNightNormal" ColumnName="SumHourNightNormal" />
                 <ScalarProperty Name="SumHourNightDayOff" ColumnName="SumHourNightDayOff" />
                 <ScalarProperty Name="SumHourNightSpecialDayOff" ColumnName="SumHourNightSpecialDayOff" />
-                <ScalarProperty Name="SumHourNightNormalExtra" ColumnName="SumHourNightNormalExtra" />
-                <ScalarProperty Name="SumHourNightDayOffExtra" ColumnName="SumHourNightDayOffExtra" />
-                <ScalarProperty Name="SumHourNightSpecialDayOffExtra" ColumnName="SumHourNightSpecialDayOffExtra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

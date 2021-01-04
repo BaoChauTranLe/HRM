@@ -17,6 +17,7 @@ namespace HRM.Models
         public string AllowanceID { get; set; }
         public string EmployeeID { get; set; }
         public System.DateTime Month { get; set; }
+        public int Value { get; set; }
     
         public virtual ALLOWANCE ALLOWANCE { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }

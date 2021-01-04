@@ -25,9 +25,6 @@ namespace HRM.Models
         public int SumHourNightNormal { get; set; }
         public int SumHourNightDayOff { get; set; }
         public int SumHourNightSpecialDayOff { get; set; }
-        public int SumHourNightNormalExtra { get; set; }
-        public int SumHourNightDayOffExtra { get; set; }
-        public int SumHourNightSpecialDayOffExtra { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

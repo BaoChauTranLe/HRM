@@ -23,6 +23,8 @@ namespace HRM.Models
         public int OverTimeFreeTax { get; set; }
         public int TaxableIncome { get; set; }
         public int IncomeTax { get; set; }
+        public int AssessableIncome { get; set; }
+        public int OverTimeSalary { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

@@ -29,7 +29,6 @@ namespace HRM.Models
     
         public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }
-        public string Image { get; set; }
         public string Sex { get; set; }
         public System.DateTime DoB { get; set; }
         public string Birthplace { get; set; }
@@ -50,6 +49,7 @@ namespace HRM.Models
         public int DependentDeduction { get; set; }
         public string Street { get; set; }
         public Nullable<bool> State { get; set; }
+        public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ADVANCED> ADVANCEDs { get; set; }
