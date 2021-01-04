@@ -319,10 +319,10 @@
 	</div>
 </div>-->
 
-<!-- The Delete Modal -->
-<!--<div id="deleteModal" class="modal" style="height:200px !important">-->
-	<!-- Modal content -->
-	<!--<div class="modal-content">
+ @*The Delete Modal*@ 
+<div id="deleteModal" class="modal" style="height:200px !important">
+	 @*Modal content*@ 
+	<div class="modal-content">
 		<div class="modal-header">
 			<div class="modal-title">Xóa trợ cấp/phụ cấp/thưởng</div>
 			<span class="close" onclick="closeModal()">&times;</span>
@@ -342,7 +342,7 @@
 			</ul>
 		</div>
 	</div>
-</div>-->
+</div>
 
 <script>
 	var $table = $('#fresh-table')
@@ -369,10 +369,10 @@
     $("#LoadingStatus").html("Loading....");
     // Get the modal
     //var create_modal = document.getElementById("createModal");
-    //var delete_modal = document.getElementById("deleteModal");
+    var delete_modal = document.getElementById("deleteModal");
 
     //// Get the <span> element that closes the modal
-    //var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementsByClassName("close")[0];
 
     //// When the user clicks the button, open the modal
     //function openCreateModal() {
@@ -387,12 +387,11 @@
     //}
 
     ////close create modal
-    //function closeModal() {
-    //    window.location.reload();
-    //    create_modal.style.display = "none";
-    //    delete_modal.style.display = "none";
-    //    $("#bg").fadeOut();
-    //}
+    function closeModal() {
+        window.location.reload();
+        delete_modal.style.display = "none";
+        $("#bg").fadeOut();
+    }
 
     //function to get list of allowance and display on table
     var allowances;
