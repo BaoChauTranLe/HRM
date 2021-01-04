@@ -13,6 +13,7 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Globalization;
 using System.Data.Entity.Validation;
+using System.IO;
 
 namespace HRM.Controllers
 {
@@ -350,13 +351,33 @@ namespace HRM.Controllers
             ViewBag.EmployeeID = id;
             if (employee.ContractExpirationDate < employee.DateStartWork)
                 ModelState.AddModelError("ContractExpirationDate", "Ngày kết thúc phải lớn hơn ngày bắt đầu");
+            var Parameter = db.PARAMETERs.ToList();
+            var tuoi = employee.DoB.Year - DateTime.Now.Year;
+            if (employee.Sex == "Nam")
+            {
+                if (tuoi < Parameter[19].Value) //tuoi toi thieu nam
+                    ModelState.AddModelError("DoB","Tuổi không hợp lệ");
+                if (tuoi > Parameter[17].Value) //tuoi toi da nam
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+            }
+            else
+            {
+                if (tuoi < Parameter[17].Value) //tuoi toi thieu nu
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+                if (tuoi > Parameter[18].Value) //tuoi toi da nu
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
+            }
             if (ModelState.IsValid)
             {
                 EMPLOYEE eMPLOYEE = new EMPLOYEE();
                 eMPLOYEE.EmployeeID = id;
                 eMPLOYEE.EmployeeName = FormatProperCase(employee.EmployeeName); //Chuan hoa chuoi
                 if (employee.ImageFile != null)
-                    employee.ImageFile.SaveAs(Server.MapPath("/images") + "/" + employee.EmployeeID + ".jpg");
+                {
+                    BinaryReader b = new BinaryReader(employee.ImageFile.InputStream);
+                    byte[] binData = b.ReadBytes(employee.ImageFile.ContentLength);
+                    eMPLOYEE.Image = binData;
+                }
                 eMPLOYEE.Sex = employee.Sex;
                 eMPLOYEE.DoB = (DateTime)employee.DoB;
                 eMPLOYEE.Birthplace = employee.Birthplace;
@@ -803,6 +824,15 @@ namespace HRM.Controllers
             str = System.Text.RegularExpressions.Regex.Replace(str, @"\s{2,}", " ");
             //Upcase like Title
             return textInfo.ToTitleCase(str);
+        }
+
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
         }
     }
 }
