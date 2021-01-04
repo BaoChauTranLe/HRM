@@ -4,7 +4,6 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <head>
 	<style>
 		.create-lbl {
@@ -74,21 +73,9 @@
 			color: red;
 		}
 
-		.index-txtbox {
-			width: 500px;
-			height: 50px;
-			/* Surface/Light */
-			background: #F8FAFA;
-			border: 1px solid #DBDBDB;
-			box-sizing: border-box;
-			border-radius: 4px;
-			/*Text*/
-			font-family: IBM Plex Sans;
-			font-style: normal;
-			font-weight: normal;
-			font-size: 15px;
-			line-height: 150%;
-			padding-left: 10px;
+		input[type=number][disabled="disabled"] {
+			background-color: #E3E3E3 !important;
+			color: #AAAAAA !important;
 		}
 	</style>
 </head>
@@ -97,82 +84,79 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AllowanceID)
+<div class="form-horizontal">
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@Html.HiddenFor(model => model.AllowanceID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AllowanceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+	<div class="form-group create-margin">
+		@Html.Label("Tên trợ cấp/phụ cấp/thưởng", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "create-txtbox" } })
+			@Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
+		</div>
+	</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Insurance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Insurance)
-                    @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+	<div class="form-group create-margin">
+		@Html.Label("Loại", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.DropDownListFor(model => model.Type, new[] { new SelectListItem { Text = "Phụ cấp", Value = "true" }, new SelectListItem { Text = "Khoản chế độ hoặc phúc lợi khác", Value = "false" } }, htmlAttributes: new { @class = "create-txtbox" })
+			@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+		</div>
+	</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FreeTax, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.FreeTax)
-                    @Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+	<div class="form-group create-margin" autocomplete="off">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.Insurance)
+				@Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
+				@Html.Label("Phải đóng bảo hiểm", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FreeTaxValue, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
-            </div>
-        </div>
+	<div class="form-group create-margin">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.FreeTax, new { htmlAttributes = new { @class = "check-box free-tax" } })
+				@Html.ValidationMessageFor(model => model.FreeTax, "", new { @class = "text-danger" })
+				@Html.Label("Được miễn thuế", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AllEmployee, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.AllEmployee)
-                    @Html.ValidationMessageFor(model => model.AllEmployee, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+	<div class="form-group create-margin">
+		@Html.Label("Khoản tiền thuế được miễn", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.FreeTaxValue, new { htmlAttributes = new { @class = "create-txtbox free-tax-value" } })
+			@Html.ValidationMessageFor(model => model.FreeTaxValue, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group create-margin" autocomplete="off">
+		<div class="col-md-10">
+			<div class="checkbox">
+				@Html.EditorFor(model => model.AllEmployee, new { htmlAttributes = new { @class = "check-box all-employee" } })
+				@Html.ValidationMessageFor(model => model.AllEmployee, "", new { @class = "text-danger" })
+				@Html.Label("Áp dụng cho tất cả nhân viên", htmlAttributes: new { @class = "create-lbl" })
+			</div>
+		</div>
+	</div>
+	<div class="form-group create-margin">
+		@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Value, new { htmlAttributes = new { disabled = "disabled", @class = "create-txtbox all-employee-value" } })
+			@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+		</div>
+	</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Type)
-                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+	<div class="form-group" style="margin-left:395px; margin-top:40px; margin-bottom:40px;">
+		<input type="submit" value="Thêm" class="btn create-btn" style="background: #3D76B5;" />
+		<a href="@Url.Action("Index","ALLOWANCEs")">
+			<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
+		</a>
+	</div>
+</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
 </div>

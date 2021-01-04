@@ -85,12 +85,11 @@
 	@Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-	@*<h4>ALLOWANCE</h4>
-		<hr />*@
+
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 	@Html.HiddenFor(model => model.AllowanceID)
 	<div class="form-group create-margin">
-		@Html.Label("Tên loại trợ cấp/phụ cấp/thưởng", htmlAttributes: new { @class = "create-lbl" })
+		@Html.Label("Tên trợ cấp/phụ cấp/thưởng", htmlAttributes: new { @class = "create-lbl" })
 		<div class="col-md-10">
 			@Html.EditorFor(model => model.AllowanceName, new { htmlAttributes = new { @class = "create-txtbox" } })
 			@Html.ValidationMessageFor(model => model.AllowanceName, "", new { @class = "text-danger" })
@@ -158,7 +157,7 @@
 }
 
 <div>
-	@Html.ActionLink("<- Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
+	@Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
 </div>
 <script>
 	$('.check-box.all-employee').click(function () {
