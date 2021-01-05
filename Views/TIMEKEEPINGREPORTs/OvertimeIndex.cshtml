@@ -123,11 +123,14 @@
 			</tr>
 		</thead>
 		<tbody>
+			@{ int index = 1; }
 			@foreach (var item in Model)
 			{
 				<tr>
 					<td>
+						@index
 					</td>
+					@{ index++; }
 					<td>
 						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
 					</td>

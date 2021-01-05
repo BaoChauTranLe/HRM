@@ -99,33 +99,36 @@
         </thead>
         
 		<tbody>
+			@{ int index = 1; }
 			@foreach (var item in Model)
 			{
-				<tr>
-					<td>
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.RealSalary)
-					</td>
-					<td>
-						@Html.ActionLink("Details", "Details", new { id=item.EmployeeID, month=item.Month })
-					</td>
-                    
-				</tr>
+			<tr>
+				<td>
+					@index
+				</td>
+				@{ index++; }
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RealSalary)
+				</td>
+				<td>
+					@Html.ActionLink("Details", "Details", new { id = item.EmployeeID, month = item.Month })
+				</td>
+
+			</tr>
 			}
 			<tr>
 				<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
 				<td> @Model.Sum(i => i.RealSalary)</td>
-                <td></td>
+				<td></td>
 			</tr>
 		</tbody>
     </table>
@@ -151,4 +154,9 @@
             }
         })
     })
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
 </script>

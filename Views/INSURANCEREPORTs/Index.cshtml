@@ -123,29 +123,33 @@
             </tr>
 		</thead>
 		<tbody>
+			@{ int index = 1; }
 			@foreach (var item in Model)
 			{
-				<tr>
-					<td></td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-					</td>
-					<td>
-					</td>
-					<td>
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-					</td>
-				</tr>
+			<tr>
+				<td>
+					@index
+				</td>
+				@{ index++; }
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+				</td>
+				<td>
+				</td>
+				<td>
+					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+				</td>
+			</tr>
 			}
 			<tr>
 				<td colspan="8" style="border-color: #DFE0EB !important;">Tổng</td>
-				<td> @Model.Sum(i => i.InsuranceAndUnionFee)</td>
+				<td> @Model.Sum(i => i.TotalInsurancePay)</td>
 			</tr>
 		</tbody>
 	</table>
