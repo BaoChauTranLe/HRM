@@ -5,52 +5,147 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<head>
+	<style>
+		.create-lbl {
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			/* identical to box height, or 22px */
+			letter-spacing: 0.01em;
+			color: #000000;
+		}
 
+		.create-txtbox {
+			/* Text Block */
+			/* Auto Layout */
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 500px;
+			height: 50px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/* Inside Auto Layout */
+			flex: none;
+			order: 1;
+			align-self: stretch;
+			flex-grow: 0;
+			/*Inside Text*/
+			padding: 12px;
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			letter-spacing: 0.01em;
+			color: #060606;
+		}
+
+		.create-month {
+			/* Text Block */
+			/* Auto Layout */
+			display: flex;
+			width: 500px;
+			height: 50px;
+			/* Surface/Light */
+			background: #F8FAFA;
+			border: 1px solid #DBDBDB;
+			box-sizing: border-box;
+			border-radius: 4px;
+			/* Inside Auto Layout */
+			flex: none;
+			order: 1;
+			align-self: stretch;
+			flex-grow: 0;
+			/*Inside Text*/
+			padding: 12px;
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 150%;
+			letter-spacing: 0.01em;
+			color: #060606;
+		}
+
+		.create-margin {
+			margin-left: 24px;
+			margin-top: 20px;
+		}
+
+		.create-btn {
+			box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+			border-radius: 4px;
+			width: 126px;
+			height: 40px;
+			/* Inside Text */
+			font-family: IBM Plex Sans;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 16px;
+			text-align: center;
+			letter-spacing: 1.25px;
+			text-transform: uppercase;
+			color: #FFFFFF;
+		}
+
+		.error-msg {
+			font-family: Montserrat;
+			color: red;
+		}
+
+		input[type=number][disabled="disabled"] {
+			background-color: #E3E3E3 !important;
+			color: #AAAAAA !important;
+		}
+	</style>
+</head>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ADVANCED</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="form-group create-margin">
+			@Html.LabelFor(model => model.EmployeeID, "Chọn nhân viên:", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "create-txtbox" })
+				@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+			</div>
+		</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateAdvanced, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group create-margin">
+            @Html.Label("Ngày tạm ứng", htmlAttributes: new { @class = "create-lbl" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateAdvanced, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DateAdvanced, new { htmlAttributes = new { @type= "date", @class = "create-month" } })
                 @Html.ValidationMessageFor(model => model.DateAdvanced, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="form-group create-margin value">
+			@Html.Label("Số tiền", htmlAttributes: new { @class = "create-lbl" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "create-txtbox" } })
+				@Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+			</div>
+		</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+		<div class="form-group" style="margin-left:395px; margin-top:40px;">
+			<input type="submit" value="Thêm" class="btn create-btn" style="background: #3D76B5;" />
+			<a href="@Url.Action("Index","ADVANCEDs")">
+				<input type="button" value="Hủy" class="btn create-btn" style="background: #C33333;" />
+			</a>
+		</div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

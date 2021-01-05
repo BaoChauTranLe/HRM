@@ -17,8 +17,8 @@ namespace HRM.Controllers
         // GET: ADVANCEDs
         public ActionResult Index()
         {
-            //var aDVANCEDs = db.ADVANCEDs.Include(a => a.EMPLOYEE);
-            return View();
+            var aDVANCEDs = db.ADVANCEDs.Include(a => a.EMPLOYEE);
+            return View(aDVANCEDs.ToList());
         }
 
         public JsonResult GetAdvancedList()
@@ -98,13 +98,13 @@ namespace HRM.Controllers
         //    ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aDVANCED.EmployeeID);
         //    return View(aDVANCED);
         //}
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, DateTime date)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ADVANCED aDVANCED = db.ADVANCEDs.Find(id);
+            ADVANCED aDVANCED = db.ADVANCEDs.Find(id, date);
             if (aDVANCED == null)
             {
                 return HttpNotFound();
@@ -126,7 +126,20 @@ namespace HRM.Controllers
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aDVANCED.EmployeeID);
             return View(aDVANCED);
         }
-
+        // GET: ALLOWANCEDETAILs/Delete/5
+        public ActionResult Delete(string id, DateTime date)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ADVANCED aDVANCED = db.ADVANCEDs.Find(id, date);
+            if (aDVANCED == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aDVANCED);
+        }
         // POST: ADVANCEDs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
         //[ValidateAntiForgeryToken]

@@ -342,7 +342,6 @@
     <Content Include="Views\TAXREPORTs\Index.cshtml" />
     <Content Include="Views\INSURANCEREPORTs\Index.cshtml" />
     <Content Include="Views\ADVANCEDs\Create.cshtml" />
-    <Content Include="Views\ADVANCEDs\Delete.cshtml" />
     <Content Include="Views\ADVANCEDs\Index.cshtml" />
     <Content Include="Views\PARAMETERs\Employee.cshtml" />
     <Content Include="Views\PARAMETERs\CoefficientsOTSalary.cshtml" />
@@ -376,6 +375,7 @@
     <Content Include="Views\ALLOWANCEs\Edit.cshtml" />
     <Content Include="Views\ALLOWANCEDETAILs\Delete.cshtml" />
     <Content Include="Views\ADVANCEDs\Edit.cshtml" />
+    <Content Include="Views\ADVANCEDs\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
