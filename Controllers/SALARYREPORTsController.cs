@@ -108,27 +108,27 @@ namespace HRM.Controllers
         #region Overtime Salary Calculation related
         public int CalculateNormalOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value);
+            return (int)(hourPay * rp.SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value / 100);
         }
         public int CalculateDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value);
+            return (int)(hourPay * rp.SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value / 100);
         }
         public int CalculateSpecialDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value);
+            return (int)(hourPay * rp.SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value / 100);
         }
         public int CalculateNightNormalOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value);
+            return (int)(hourPay * rp.SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value / 100);
         }
         public int CalculateNightDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value);
+            return (int)(hourPay * rp.SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value / 100);
         }
         public int CalculateNightSpecialDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
         {
-            return (int)(hourPay * rp.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value);
+            return (int)(hourPay * rp.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value / 100);
         }
         public int CalculateOvertimeSalary(EMPLOYEE e, DateTime month)
         {
@@ -189,8 +189,6 @@ namespace HRM.Controllers
         {
             return CalculateStandardSalary(e, month)
                  + CalculateTaxableOvertimeSalary(e, month)
-                 + CalculateAbsentSalary(e, month)
-                 - CalculateTotalInsurancePay(e, month) 
                  - CalculateAllowanceFreeTaxValue();
         }      
         public int CalculateAssessableIncome(EMPLOYEE e, DateTime month)
@@ -202,7 +200,7 @@ namespace HRM.Controllers
                     return 0;
                 return taxable;
             }   
-            int deduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction;
+            int deduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction + CalculateTotalInsurancePay(e, month);
             if (e.SelfDeduction == true)
                 deduction += (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
             if (taxable > deduction)
