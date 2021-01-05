@@ -80,7 +80,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayName("STT")
+                    @Html.DisplayName("Mã nhân viên")
                 </th>
                 <th>
                     @Html.DisplayName("Tên nhân viên")
@@ -101,31 +101,34 @@
 		<tbody>
 			@foreach (var item in Model)
 			{
-				<tr>
-					<td>
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.RealSalary)
-					</td>
-					<td>
-						@Html.ActionLink("Details", "Details", new { id=item.EmployeeID, month=item.Month })
-					</td>
-                    
-				</tr>
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.EmployeeID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RealSalary)
+				</td>
+				<td>
+                    <a href="@Url.Action("Details","SALARYREPORTs",new { id = item.EmployeeID, month = item.Month  })">
+						<i class='fa fa-file pa-5 text-warning'></i>
+					</a>
+				</td>
+
+			</tr>
 			}
 			<tr>
 				<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
 				<td> @Model.Sum(i => i.RealSalary)</td>
-                <td></td>
+				<td></td>
 			</tr>
 		</tbody>
     </table>
@@ -140,7 +143,7 @@
             toolbar: '.toolbar',
             pagination: true,
             striped: true,
-            pageSize: 8,
+            pageSize: 12,
             pageList: [8, 10, 25, 50, 100],
 
             formatShowingRows: function (pageFrom, pageTo, totalRows) {
@@ -151,4 +154,9 @@
             }
         })
     })
+	const monthControl = document.querySelector('input[type="month"]');
+	const date = new Date()
+	const month = ("0" + (date.getMonth() + 1)).slice(-2)
+	const year = date.getFullYear()
+	monthControl.value = `${year}-${month}`;
 </script>

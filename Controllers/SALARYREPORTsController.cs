@@ -13,6 +13,11 @@ namespace HRM.Controllers
     public class SALARYREPORTsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
+        public double getValueByName(string paraName)
+        {
+            var parameter = db.PARAMETERs.Find(paraName);
+            return parameter.Value;
+        }
         public bool CheckLowerThan3Month(DateTime startDate, DateTime endDate)
         {
             DateTime threeMonthAfterStart = startDate.AddMonths(3);
@@ -247,16 +252,14 @@ namespace HRM.Controllers
         // GET: SALARYREPORTs
         public ActionResult Index()
         {
-            //var sALARYREPORTs = db.SALARYREPORTs.Include(s => s.EMPLOYEE);
             DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
-            var employeelist = db.EMPLOYEEs.ToList();
+            var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
             foreach (EMPLOYEE e in employeelist)
             {
                 if (db.SALARYREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
                 {
                     int hourPay = CalculateStandardHourSalary(e);
                     var report = db.TIMEKEEPINGREPORTs.Find(date, e.EmployeeID);
-                    //var report = db.TIMEKEEPINGREPORTs.Find(date, e);
                     var sALARYREPORT = new SALARYREPORT
                     {
                         EmployeeID = e.EmployeeID,

@@ -98,13 +98,13 @@
         <table class="fresh-table" id="fresh-table1" style="grid-column: 1/4">
             <thead>
                 <tr>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Tên cột")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Giá trị")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Đơn vị")
                     </th>
                 </tr>
@@ -189,7 +189,8 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Khoản tiền trích đóng BH")
+                        Khoản tiền trích đóng BH <br />
+                        (BHXH: @Html.Action("getValueByName", new { paraName = "BHXH" })%, BHYT: @Html.Action("getValueByName", new { paraName = "BHYT" })%, BHTN: @Html.Action("getValueByName", new { paraName = "BHTN" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.TotalInsurancePay)
@@ -228,13 +229,13 @@
         <table class="fresh-table" id="fresh-table2" style="grid-column: 1/4">
             <thead>
                 <tr>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Tên cột")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Giá trị")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Đơn vị")
                     </th>
                 </tr>
@@ -247,7 +248,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày thường")
+                        Ngày thường (@Html.Action("getValueByName", new { paraName = "HSLNgayThuong" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.NormalOverTimeSalary)
@@ -258,7 +259,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày nghỉ hằng tuần")
+                        Ngày nghỉ hằng tuần (@Html.Action("getValueByName", new { paraName = "HSLNgayNghi" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.DayOffOverTimeSalary)
@@ -269,7 +270,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày nghỉ có hưởng lương")
+                        Ngày nghỉ có hưởng lương (@Html.Action("getValueByName", new { paraName = "HSLNgayNghiCoLuong" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.SpecialDayOffOverTimeSalary)
@@ -285,7 +286,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày thường")
+                        Ngày thường (@Html.Action("getValueByName", new { paraName = "HSLDemNgayThuong" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.NightNormalOverTimeSalary)
@@ -296,7 +297,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày nghỉ hằng tuần")
+                        Ngày nghỉ hằng tuần (@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghi" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.NightDayOffOverTimeSalary)
@@ -307,7 +308,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayName("Ngày nghỉ có hưởng lương")
+                        Ngày nghỉ có hưởng lương (@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghiCoLuong" })%)
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.NightSpecialDayOffOverTimeSalary)
@@ -356,8 +357,7 @@
             toolbar: '.toolbar',
             pagination: true,
             striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+            pageSize: 10,
 
             formatShowingRows: function (pageFrom, pageTo, totalRows) {
                 return ''
@@ -374,7 +374,6 @@
             pagination: true,
             striped: true,
             pageSize: 10,
-            pageList: [8, 10, 25, 50, 100],
 
             formatShowingRows: function (pageFrom, pageTo, totalRows) {
                 return ''
