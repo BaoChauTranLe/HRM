@@ -109,7 +109,7 @@
 			<div class="checkbox">
 				@Html.EditorFor(model => model.Insurance)
 				@Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
-				@Html.Label("Được miễn bảo hiểm", htmlAttributes: new { @class = "create-lbl" })
+				@Html.Label("Phải tính bảo hiểm", htmlAttributes: new { @class = "create-lbl" })
 			</div>
 		</div>
 	</div>
@@ -156,9 +156,6 @@
 </div>
 }
 
-<div>
-	@Html.ActionLink("Quay lại danh sách trợ cấp/phụ cấp/thưởng", "Index")
-</div>
 <script>
 	$('.check-box.all-employee').click(function () {
 		if ($('.check-box.all-employee').is(':checked')) {
