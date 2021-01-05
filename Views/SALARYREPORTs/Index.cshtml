@@ -115,7 +115,7 @@
 					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.RealSalary)
+                    @Html.Action("CurrencyFormat", new { num = item.RealSalary })
 				</td>
 				<td>
                     <a href="@Url.Action("Details","SALARYREPORTs",new { id = item.EmployeeID, month = item.Month  })">
@@ -127,7 +127,7 @@
 			}
 			<tr>
 				<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
-				<td> @Model.Sum(i => i.RealSalary)</td>
+                <td> @Html.Action("CurrencyFormat", new { num = Model.Sum(i => i.RealSalary) })</td>
 				<td></td>
 			</tr>
 		</tbody>

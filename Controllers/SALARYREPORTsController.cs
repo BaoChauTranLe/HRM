@@ -13,6 +13,10 @@ namespace HRM.Controllers
     public class SALARYREPORTsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
+        public string CurrencyFormat(int num)
+        {
+            return String.Format("{0:n0}", num);
+        }
         public double getValueByName(string paraName)
         {
             var parameter = db.PARAMETERs.Find(paraName);
@@ -232,7 +236,7 @@ namespace HRM.Controllers
             {
                 incomeTax += (taxRateList[i + 1].Min - taxRateList[i].Min) * taxRateList[i].Rate / 100;
             }
-            incomeTax += (assessable - taxRateList[taxLevel - 1 ].Min) * taxRateList[taxLevel - 1].Rate / 100;
+            incomeTax += (assessable - taxRateList[taxLevel - 1].Min) * taxRateList[taxLevel - 1].Rate / 100;
             return incomeTax;
         }
         #endregion

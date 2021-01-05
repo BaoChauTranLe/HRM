@@ -115,7 +115,7 @@
                         @Html.DisplayName("Lương cơ bản")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.EMPLOYEE.CONTRACT.BasicSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.EMPLOYEE.CONTRACT.BasicSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -126,7 +126,7 @@
                         @Html.DisplayName("Tổng tiền phụ cấp, trợ cấp, thưởng")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Allowance)
+                        @Html.Action("CurrencyFormat", new { num = Model.Allowance })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -137,7 +137,7 @@
                         @Html.DisplayName("Lương theo ngày công chuẩn")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.StandardSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.StandardSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -159,7 +159,7 @@
                         @Html.DisplayName("Lương theo số ngày đi làm")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.WorkDaySalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.WorkDaySalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -173,7 +173,7 @@
                         @Html.DisplayFor(model => model.AbsentHaveSalary)
                     </td>
                     <td>
-                        @Html.DisplayName("VNĐ")
+                        @Html.DisplayName("Ngày")
                     </td>
                 </tr>
                 <tr>
@@ -181,7 +181,7 @@
                         @Html.DisplayName("Số tiền được hưởng")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.AbsentHaveSalaryValue)
+                        @Html.Action("CurrencyFormat", new { num = Model.AbsentHaveSalaryValue })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -193,7 +193,7 @@
                         (BHXH: @Html.Action("getValueByName", new { paraName = "BHXH" })%, BHYT: @Html.Action("getValueByName", new { paraName = "BHYT" })%, BHTN: @Html.Action("getValueByName", new { paraName = "BHTN" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.TotalInsurancePay)
+                        @Html.Action("CurrencyFormat", new { num = Model.TotalInsurancePay })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -204,7 +204,7 @@
                         @Html.DisplayName("Thuế TNCN")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.IncomeTax)
+                        @Html.Action("CurrencyFormat", new { num = Model.IncomeTax })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -215,7 +215,7 @@
                         @Html.DisplayName("Tạm ứng")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Advance)
+                        @Html.Action("CurrencyFormat", new { num = Model.Advance })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -251,7 +251,7 @@
                         Ngày thường (@Html.Action("getValueByName", new { paraName = "HSLNgayThuong" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.NormalOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.NormalOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -262,7 +262,7 @@
                         Ngày nghỉ hằng tuần (@Html.Action("getValueByName", new { paraName = "HSLNgayNghi" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.DayOffOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.DayOffOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -273,7 +273,7 @@
                         Ngày nghỉ có hưởng lương (@Html.Action("getValueByName", new { paraName = "HSLNgayNghiCoLuong" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.SpecialDayOffOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.SpecialDayOffOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -289,7 +289,7 @@
                         Ngày thường (@Html.Action("getValueByName", new { paraName = "HSLDemNgayThuong" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.NightNormalOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.NightNormalOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -300,7 +300,7 @@
                         Ngày nghỉ hằng tuần (@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghi" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.NightDayOffOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.NightDayOffOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -311,7 +311,7 @@
                         Ngày nghỉ có hưởng lương (@Html.Action("getValueByName", new { paraName = "HSLDemNgayNghiCoLuong" })%)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.NightSpecialDayOffOverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.NightSpecialDayOffOverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -322,7 +322,7 @@
                         @Html.DisplayName("Tổng")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.OverTimeSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.OverTimeSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -333,7 +333,7 @@
                         @Html.DisplayName("Thực lĩnh")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.RealSalary)
+                        @Html.Action("CurrencyFormat", new { num = Model.RealSalary })
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")

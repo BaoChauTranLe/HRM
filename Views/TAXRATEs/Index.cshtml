@@ -77,13 +77,13 @@
         <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
             <thead>
                 <tr>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Bậc thuế")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Phần thu nhập tính thuế / tháng")
                     </th>
-                    <th data-sortable="true">
+                    <th>
                         @Html.DisplayName("Thuế suất (%)")
                     </th>
                 </tr>
@@ -96,9 +96,7 @@
 							@Html.DisplayFor(modelItem => item.Rank)
 						</td>
 						<td>
-							Từ
-							@Html.DisplayFor(modelItem => item.Min)
-							triệu đồng
+							Từ @Html.DisplayFor(modelItem => item.Min) VNĐ
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Rate)
