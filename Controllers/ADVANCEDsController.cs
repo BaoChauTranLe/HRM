@@ -45,6 +45,7 @@ namespace HRM.Controllers
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
+
         // POST: ADVANCEDs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -52,6 +53,10 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
         {
+            int sum = SumAdvanced(aDVANCED.EmployeeID);
+
+            if (sum + aDVANCED.Value > GetLimitAdvanced(aDVANCED.EmployeeID))
+                ModelState.AddModelError("Value", "Vượt quá giới hạn được tạm ứng.");
             if (ModelState.IsValid)
 			{
 				DateTime minDate = new DateTime(1, 1, 1, 0, 0, 0);
@@ -73,31 +78,7 @@ namespace HRM.Controllers
 			ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aDVANCED.EmployeeID);
 			return View(aDVANCED);
 		}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CreateOrEdit([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        DateTime minDate = new DateTime(1, 1, 1, 0, 0, 0);
-        //        if(aDVANCED.DateAdvanced == minDate)
-        //        {
-        //            DateTime now = DateTime.Now;
-        //            aDVANCED.DateAdvanced = new DateTime(now.Year, now.Month, now.Day);
-        //            db.ADVANCEDs.Add(aDVANCED);
-        //            db.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            db.Entry(aDVANCED).State = EntityState.Modified;
-        //            db.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aDVANCED.EmployeeID);
-        //    return View(aDVANCED);
-        //}
+
         public ActionResult Edit(string id, DateTime date)
         {
             if (id == null)
@@ -113,10 +94,15 @@ namespace HRM.Controllers
             //ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aLLOWANCEDETAIL.EmployeeID);
             return View(aDVANCED);
         }
-        [HttpPost, ActionName("Edit")]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
         {
+            ADVANCED oldAdv = db.ADVANCEDs.Find(aDVANCED.EmployeeID, aDVANCED.DateAdvanced);
+            int sum = SumAdvanced(aDVANCED.EmployeeID) - oldAdv.Value;
+            if (sum + aDVANCED.Value  > GetLimitAdvanced(aDVANCED.EmployeeID))
+                ModelState.AddModelError("Value", "Vượt quá giới hạn được tạm ứng.");
+
             if (ModelState.IsValid)
             {
                 db.Entry(aDVANCED).State = EntityState.Modified;
@@ -142,7 +128,7 @@ namespace HRM.Controllers
         }
         // POST: ADVANCEDs/Delete/5
         [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id, DateTime date)
         {
             
@@ -151,6 +137,27 @@ namespace HRM.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public int SumAdvanced(string eID)
+        {
+            var advanced = db.ADVANCEDs.Where(a => a.DateAdvanced.Year == DateTime.Now.Year).Where(a => a.DateAdvanced.Month == DateTime.Now.Month).Where(a => a.EmployeeID == eID).ToList();
+            int sum = 0;
+            for (int i = 0; i < advanced.Count(); i++)
+            {
+                sum = sum + advanced[i].Value;
+            }
+            return sum;
+        }    
+
+        public double GetLimitAdvanced(string eID)
+        {
+            double limit;
+            EMPLOYEE emp = db.EMPLOYEEs.Find(eID);
+            int salary = db.CONTRACTs.Find(emp.ContractID).BasicSalary;
+            double rate = db.PARAMETERs.Find("TyLeTamUngToiDa").Value;
+            limit = salary * rate / 100;
+            return limit;
+        }    
 
         protected override void Dispose(bool disposing)
         {
