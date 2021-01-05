@@ -13,6 +13,7 @@ namespace HRM.Controllers
     public class SALARYREPORTsController : Controller
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
+        #region Utility methods
         public string CurrencyFormat(int num)
         {
             return String.Format("{0:n0}", num);
@@ -29,6 +30,32 @@ namespace HRM.Controllers
                 return true;
             return false;
         }
+        public int getSumHourNormal(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourNormal;
+        }
+        public int getSumHourDayOff(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourDayOff;
+        }
+        public int getSumHourSpecialDayOff(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourSpecialDayOff;
+        }
+        public int getSumHourNightNormal(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourNightNormal;
+        }
+        public int getSumHourNightDayOff(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourNightDayOff;
+        }
+        public int getSumHourNightSpecialDayOff(string id, DateTime month)
+        {
+            return db.TIMEKEEPINGREPORTs.Find(month, id).SumHourNightSpecialDayOff;
+        }
+        #endregion
+
 
         #region Allowance Calculation
         public int CalculateCommonAllowance()
@@ -240,6 +267,7 @@ namespace HRM.Controllers
             return incomeTax;
         }
         #endregion
+
         public int CalculateAdvanced(EMPLOYEE e, DateTime month)
         {
             int advanced = 0;
