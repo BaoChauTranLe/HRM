@@ -85,15 +85,15 @@ namespace HRM.Controllers
         }
         public int CalculateSocialInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value);
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value) / 100;
         }
         public int CalculateHealthInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value);
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value / 100);
         }
         public int CalculateWorkInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value);
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value) / 100;
         }
         public int CalculateTotalInsurancePay(EMPLOYEE e, DateTime month)
         {
@@ -146,12 +146,12 @@ namespace HRM.Controllers
         public int CalculateAbsentSalary(EMPLOYEE e, DateTime month)
         {
             int absentAllowanceReceived = 0;
-            var commonList = db.ALLOWANCEs.Where(x => x.Type == false && x.AllEmployee == true).ToList();
+            var commonList = db.ALLOWANCEs.Where(x => x.Type == true && x.AllEmployee == true).ToList();
             foreach (ALLOWANCE a in commonList)
             {
                 absentAllowanceReceived += (int) a.Value;
             }
-            var specificList = db.ALLOWANCEDETAILs.Where(x => x.EmployeeID == e.EmployeeID && x.Month == month && x.ALLOWANCE.Type == false).ToList();
+            var specificList = db.ALLOWANCEDETAILs.Where(x => x.EmployeeID == e.EmployeeID && x.Month == month && x.ALLOWANCE.Type == true).ToList();
             foreach (ALLOWANCEDETAIL a in specificList)
             {
                 absentAllowanceReceived += a.Value;
@@ -216,7 +216,7 @@ namespace HRM.Controllers
             if (assessable == 0)
                 return 0;
             if (CheckLowerThan3Month(e.CONTRACT.DateStartWork, e.CONTRACT.ContractExpirationDate))
-                return (int)(assessable * db.PARAMETERs.Find("HSThueHDDuoi3Thang").Value);
+                return (int)(assessable * db.PARAMETERs.Find("HSThueHDDuoi3Thang").Value / 100);
             int taxLevel = 1;
             var taxRateList = db.TAXRATEs.ToList();
             for (int i = taxRateList.Count - 1; i > 0; i--)
