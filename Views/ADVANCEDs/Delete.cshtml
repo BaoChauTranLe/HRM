@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
 <h3>Bạn chắc chắn muốn xóa?</h3>
 <div>
     <h4>ADVANCED</h4>
@@ -30,7 +28,7 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm(null, null, new { id = Model.EmployeeID, date = Model.DateAdvanced })) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

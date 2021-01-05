@@ -141,22 +141,15 @@ namespace HRM.Controllers
             return View(aDVANCED);
         }
         // POST: ADVANCEDs/Delete/5
-        [HttpPost, ActionName("DeleteConfirmed")]
+        [HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id, string employee)
+        public ActionResult DeleteConfirmed(string id, DateTime date)
         {
-            try
-            {
-                DateTime d = DateTime.Parse(id);
-                ADVANCED aDVANCED = db.ADVANCEDs.Find(employee, d);
+            
+                ADVANCED aDVANCED = db.ADVANCEDs.Find(id, date);
                 db.ADVANCEDs.Remove(aDVANCED);
                 db.SaveChanges();
-            }
-            catch
-            {
-                return Json(new { success = false });
-            }
-            return Json(new { success = true });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
