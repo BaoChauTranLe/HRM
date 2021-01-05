@@ -414,7 +414,7 @@
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + advanced.DateAdvanced + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
             "</td>" +
-            " <td class=\"text-center\" onclick=\"DeleteModule(" + "'" + advanced.DateAdvanced + "', " + "'" + advanced.EmployeeID + "'" + ")\" >"
+            " <td class=\"text-center\" onclick=\"DeleteModule('" + moment(advanced.DateAdvanced).format("MM/DD/yyyy") + "' , " + "'" + advanced.EmployeeID + "'" + ")\" >"
             + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
             "</td>" +
             "</tr>";
@@ -465,8 +465,12 @@
             data: JSON.stringify({ "id": deleteId, "employee": deleteEmployee }),
             success: function (data) {
                 // do what ever you want with the server response
-                alert("Xóa thành công");
-                closeModal();
+                if (data.success) {
+                    alert("Xóa thành công");
+                    closeModal();
+                }
+                else 
+                    alert("Không tìm thấy dữ liệu để xóa");
             },
             error: function (error) {
                 // error handling

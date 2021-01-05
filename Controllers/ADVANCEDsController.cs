@@ -53,7 +53,8 @@ namespace HRM.Controllers
                 DateTime minDate = new DateTime(1, 1, 1, 0, 0, 0);
                 if(aDVANCED.DateAdvanced == minDate)
                 {
-                    aDVANCED.DateAdvanced = DateTime.Now;
+                    DateTime now = DateTime.Now;
+                    aDVANCED.DateAdvanced = new DateTime(now.Year, now.Month, now.Day);
                     db.ADVANCEDs.Add(aDVANCED);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -72,12 +73,20 @@ namespace HRM.Controllers
         // POST: ADVANCEDs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
         //[ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(DateTime id, string employee)
+        public ActionResult DeleteConfirmed(string id, string employee)
         {
-            ADVANCED aDVANCED = db.ADVANCEDs.Find(employee, id);
-            db.ADVANCEDs.Remove(aDVANCED);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                DateTime d = DateTime.Parse(id);
+                ADVANCED aDVANCED = db.ADVANCEDs.Find(employee, d);
+                db.ADVANCEDs.Remove(aDVANCED);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)
