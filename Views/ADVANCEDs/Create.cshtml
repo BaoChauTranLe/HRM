@@ -115,7 +115,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 		<div class="form-group create-margin">
-			@Html.LabelFor(model => model.EmployeeID, "Chọn nhân viên:", htmlAttributes: new { @class = "create-lbl" })
+			@Html.LabelFor(model => model.EmployeeID, "Tên nhân viên", htmlAttributes: new { @class = "create-lbl" })
 			<div class="col-md-10">
 				@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "create-txtbox" })
 				@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
