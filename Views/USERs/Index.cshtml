@@ -74,35 +74,40 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmployeeID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            @Html.ActionLink("Restart", "Restart", new { id = item.EmployeeID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
-                        </td>
-                    </tr>
-                }
-            </tbody>
+			<tbody>
+				@{ int index = 1; }
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+						@index
+					</td>
+					@{ index++; }
+						<td>
+							@Html.DisplayFor(modelItem => item.EmployeeID)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+						</td>
+						<td>
+						</td>
+						<td>
+							<a href="@Url.Action("Restart","USERs",new { id = item.EmployeeID })">
+								<i class='fa fa-repeat pa-5 text-warning'></i>
+							</a>
+							<a href="@Url.Action("Delete","USERs",new { id = item.EmployeeID })">
+								<i class='fa fa-trash pa-5 text-danger'></i>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
         </table>
     </div>
 </body>

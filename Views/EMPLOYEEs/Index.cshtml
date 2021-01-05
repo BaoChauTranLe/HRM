@@ -132,9 +132,15 @@
 						@Html.DisplayFor(modelItem => item.State)
 					</td>
 					<td>
-						@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
-						@Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
-						@Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+						<a href="@Url.Action("Edit","EMPLOYEEs",new { id = item.EmployeeID })">
+							<i class='fa fa-edit pa-5 text-warning'></i>
+						</a>
+						<a href="@Url.Action("Details","EMPLOYEEs",new { id = item.EmployeeID })">
+							<i class='fa fa-file pa-5 text-warning'></i>
+						</a>
+						<a href="@Url.Action("Delete","EMPLOYEEs",new { id = item.EmployeeID })">
+							<i class='fa fa-trash pa-5 text-danger'></i>
+						</a>
 					</td>
 				</tr>
 				}
