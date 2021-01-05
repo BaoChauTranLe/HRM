@@ -70,6 +70,20 @@ namespace HRM.Controllers
             return View(aDVANCED);
         }
 
+        [HttpPost, ActionName("Edit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(aDVANCED).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName", aDVANCED.EmployeeID);
+            return View(aDVANCED);
+        }
+
         // POST: ADVANCEDs/Delete/5
         [HttpPost, ActionName("DeleteConfirmed")]
         //[ValidateAntiForgeryToken]
