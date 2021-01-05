@@ -105,8 +105,12 @@
 							%
 						</td>
 						<td>
-							@Html.ActionLink("Edit", "Edit", new { id = item.Rank }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.Rank })
+							<a href="@Url.Action("Edit","TAXRATEs",new { id = item.Rank })">
+								<i class='fa fa-edit pa-5 text-warning'></i>
+							</a>
+							<a href="@Url.Action("Delete","TAXRATEs",new { id = item.Rank })">
+								<i class='fa fa-trash pa-5 text-danger'></i>
+							</a>
 						</td>
 					</tr>
 				}

@@ -80,7 +80,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayName("STT")
+                    @Html.DisplayName("Mã nhân viên")
                 </th>
                 <th>
                     @Html.DisplayName("Tên nhân viên")
@@ -99,14 +99,12 @@
         </thead>
         
 		<tbody>
-			@{ int index = 1; }
 			@foreach (var item in Model)
 			{
 			<tr>
 				<td>
-					@index
+					@Html.DisplayFor(modelItem => item.EmployeeID)
 				</td>
-				@{ index++; }
 				<td>
 					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
 				</td>
@@ -120,7 +118,9 @@
 					@Html.DisplayFor(modelItem => item.RealSalary)
 				</td>
 				<td>
-					@Html.ActionLink("Details", "Details", new { id = item.EmployeeID, month = item.Month })
+                    <a href="@Url.Action("Details","SALARYREPORTs",new { id = item.EmployeeID, month = item.Month  })">
+						<i class='fa fa-file pa-5 text-warning'></i>
+					</a>
 				</td>
 
 			</tr>
