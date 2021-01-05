@@ -52,6 +52,17 @@ namespace HRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeID,DateAdvanced,Value")] ADVANCED aDVANCED)
         {
+            var advanced = db.ADVANCEDs.Where(a => a.DateAdvanced.Year == aDVANCED.DateAdvanced.Year).Where(a => a.DateAdvanced.Month == aDVANCED.DateAdvanced.Month).Where(a => a.EmployeeID == aDVANCED.EmployeeID).ToList();
+            int sum = 0;
+            for (int i = 0; i < advanced.Count(); i++)
+            {
+                sum = sum + advanced[i].Value;
+            }
+
+            EMPLOYEE emp = db.EMPLOYEEs.Find(aDVANCED.EmployeeID);
+            double limit = db.CONTRACTs.Find(emp.ContractID).BasicSalary * db.PARAMETERs.Find("TyLeTamUngToiDa").Value / 100;
+            if (sum + aDVANCED.Value > limit)
+                ModelState.AddModelError("Value", "Vượt quá giới hạn được tạm ứng.");
             if (ModelState.IsValid)
 			{
 				DateTime minDate = new DateTime(1, 1, 1, 0, 0, 0);
