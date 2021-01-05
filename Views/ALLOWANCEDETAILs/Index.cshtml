@@ -248,41 +248,44 @@
 			</tr>
 		</thead>
 		<tbody>
+			@{ int index = 1; }
 			@foreach (var item in Model)
 			{
-				<tr>
+			<tr>
+				<td>
+					@index
+				</td>
+				@{ index++; }
+				<td>
+					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
+				</td>
+				@if (item.ALLOWANCE.Type == true)
+				{
 					<td>
+						Phụ cấp
 					</td>
+				}
+				else
+				{
 					<td>
-						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+						Khoản chế độ hoặc phúc lợi khác
 					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.ALLOWANCE.AllowanceName)
-					</td>
-					@if (item.ALLOWANCE.Type == true)
-					{
-						<td>
-							Phụ cấp
-						</td>
-					}
-					else
-					{
-						<td>
-							Khoản chế độ hoặc phúc lợi khác
-						</td>
-					}
-					<td>
-						@Html.DisplayFor(modelItem => item.Value)
-					</td>
-					<td>
-						<a href="@Url.Action("Edit","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
-							<i class='fa fa-edit pa-5 text-warning'></i>
-						</a>
-						<a href="@Url.Action("Delete","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
-							<i class='fa fa-trash pa-5 text-danger'></i>
-						</a>
-					</td>
-				</tr>
+				}
+				<td>
+					@Html.DisplayFor(modelItem => item.Value)
+				</td>
+				<td>
+					<a href="@Url.Action("Edit","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
+						<i class='fa fa-edit pa-5 text-warning'></i>
+					</a>
+					<a href="@Url.Action("Delete","ALLOWANCEDETAILs",new { id = item.AllowanceID, employee = item.EmployeeID, month = item.Month })">
+						<i class='fa fa-trash pa-5 text-danger'></i>
+					</a>
+				</td>
+			</tr>
 			}
 		</tbody>
 

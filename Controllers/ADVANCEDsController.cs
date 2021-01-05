@@ -146,9 +146,9 @@ namespace HRM.Controllers
         public ActionResult DeleteConfirmed(string id, DateTime date)
         {
             
-                ADVANCED aDVANCED = db.ADVANCEDs.Find(id, date);
-                db.ADVANCEDs.Remove(aDVANCED);
-                db.SaveChanges();
+            ADVANCED aDVANCED = db.ADVANCEDs.Find(id, date);
+            db.ADVANCEDs.Remove(aDVANCED);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
