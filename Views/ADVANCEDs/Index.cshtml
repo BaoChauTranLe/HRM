@@ -1,512 +1,301 @@
-﻿@model HRM.Models.ADVANCED
+﻿@model IEnumerable<HRM.Models.ADVANCED>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
-    <link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/fresh-bootstrap-table.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+	<link href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
-    <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 </head>
 
 <style>
-    table, th, td, tr {
-        border-color: #DFE0EB !important;
-        border-radius: 5px !important;
-    }
+	table, th, td, tr {
+		border-color: #DFE0EB !important;
+		border-radius: 5px !important;
+	}
 
-    .add__button {
-        display: block;
-        height: 36px;
-        width: 94px;
-        right: 36px;
-        top: 80px;
-        position: absolute;
-        background: #E3F2FD;
-        border: 1px solid #3D76B5;
-        border-radius: 4px;
-        /* Text */
-        font-family: IBM Plex Sans;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 20px;
-        text-align: center;
-        letter-spacing: 0.2px;
-        color: #3D76B5;
-    }
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+		/* Text */
+		font-family: IBM Plex Sans;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 0.2px;
+		color: #3D76B5;
+	}
 
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 12; /* Sit on top */
-        float: left;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        text-align: left;
-        width: 490px;
-        height: 554px;
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        -webkit-animation-name: fadeIn; /* Fade in the background */
-        -webkit-animation-duration: 0.4s;
-        animation-name: fadeIn;
-        animation-duration: 0.4s;
-        vertical-align: middle;
-        margin-left: 122px;
-        margin-top: 30px;
-    }
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 12; /* Sit on top */
+		float: left;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		text-align: left;
+		width: 490px;
+		height: 554px;
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		-webkit-animation-name: fadeIn; /* Fade in the background */
+		-webkit-animation-duration: 0.4s;
+		animation-name: fadeIn;
+		animation-duration: 0.4s;
+		vertical-align: middle;
+		margin-left: 122px;
+		margin-top: 30px;
+	}
 
-    /* Modal Content */
-    .modal-content {
-        position: fixed;
-        background-color: #fefefe;
-        width: 100%;
-        height: 100%;
-        -webkit-animation-name: slideIn;
-        -webkit-animation-duration: 0.4s;
-        animation-name: slideIn;
-        animation-duration: 0.4s
-    }
+	/* Modal Content */
+	.modal-content {
+		position: fixed;
+		background-color: #fefefe;
+		width: 100%;
+		height: 100%;
+		-webkit-animation-name: slideIn;
+		-webkit-animation-duration: 0.4s;
+		animation-name: slideIn;
+		animation-duration: 0.4s
+	}
 
-    /* The Close Button */
-    .close {
-        color: #4282BB;
-        float: right;
-        font-weight: bold;
-    }
+	/* The Close Button */
+	.close {
+		color: #4282BB;
+		float: right;
+		font-weight: bold;
+	}
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
 
-    .modal-header {
-        top: 0px;
-        height: 32px;
-        padding: 2px 16px;
-        background-color: #E0EFFF;
-        color: #4282BB;
-        font-size: 20px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        font-weight: bold;
-    }
+	.modal-header {
+		top: 0px;
+		height: 32px;
+		padding: 2px 16px;
+		background-color: #E0EFFF;
+		color: #4282BB;
+		font-size: 20px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		font-weight: bold;
+	}
 
-    .modal-body {
-        padding-top: 10px;
-        padding-left: 37px;
-        padding-right: 37px;
-    }
+	.modal-body {
+		padding-top: 10px;
+		padding-left: 37px;
+		padding-right: 37px;
+	}
 
-    #bg {
-        background-color: black;
-        width: 0;
-        height: 0;
-        display: none;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-    }
+	#bg {
+		background-color: black;
+		width: 0;
+		height: 0;
+		display: none;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
 
-    .add__button {
-        display: block;
-        height: 36px;
-        width: 94px;
-        right: 36px;
-        top: 80px;
-        position: absolute;
-        background: #E3F2FD;
-        border: 1px solid #3D76B5;
-        border-radius: 4px;
-    }
+	.add__button {
+		display: block;
+		height: 36px;
+		width: 94px;
+		right: 36px;
+		top: 80px;
+		position: absolute;
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
 
-    .modal__text {
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        margin-top: 13px;
-        margin-bottom: 7px;
-    }
+	.modal__text {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		margin-top: 13px;
+		margin-bottom: 7px;
+	}
 
-    .form-control, select {
-        height: 47px;
-        width: calc(100% - 4px);
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-        left: 0 !important;
-        right: 0 !important;
-    }
+	.form-control, select {
+		height: 47px;
+		width: calc(100% - 4px);
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		left: 0 !important;
+		right: 0 !important;
+	}
 
-    .check-box {
-        margin-top: 2px;
-        margin-bottom: 2px;
-        padding: 0;
-        list-style: none;
-        width: 20px;
-        height: 20px;
-        box-sizing: border-box;
-        border-radius: 2px;
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-top: 8px;
-        margin-bottom: 8px;
-    }
+	.check-box {
+		margin-top: 2px;
+		margin-bottom: 2px;
+		padding: 0;
+		list-style: none;
+		width: 20px;
+		height: 20px;
+		box-sizing: border-box;
+		border-radius: 2px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
 
-    .btn.btn-default {
-        position: fixed;
-        display: block;
-        text-align: center;
-        padding: 0px;
-        bottom: 37px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        width: 126px;
-        height: 40px;
-        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-        border-radius: 4px;
-        color: white;
-    }
+	.btn.btn-default {
+		position: fixed;
+		display: block;
+		text-align: center;
+		padding: 0px;
+		bottom: 37px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 126px;
+		height: 40px;
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+		border-radius: 4px;
+		color: white;
+	}
 
-    input#StartTime, input#EndTime {
-        font-size: 15px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-        padding-left: 10px;
-        background: #F8FAFA;
-        border: 1px solid #DBDBDB;
-        box-sizing: border-box;
-        border-radius: 4px;
-        display: inline;
-    }
+	input#StartTime, input#EndTime {
+		font-size: 15px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+		padding-left: 10px;
+		background: #F8FAFA;
+		border: 1px solid #DBDBDB;
+		box-sizing: border-box;
+		border-radius: 4px;
+		display: inline;
+	}
 
-    .form-horizontal .form-group {
-        margin-right: 0px;
-        margin-left: 0px;
-    }
+	.form-horizontal .form-group {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
 
 
-    .text-danger.field-validation-error {
-        color: red;
-        font-size: 13px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-style: normal;
-    }
+	.text-danger.field-validation-error {
+		color: red;
+		font-size: 13px;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-style: normal;
+	}
 
-    .modal-title {
-        display: inline-block;
-        width: 80%;
-    }
+	.modal-title {
+		display: inline-block;
+		width: 80%;
+	}
 </style>
-<input type="button" id="btn" class="add__button" value="Thêm" onclick="openCreateModal()" />
+<a href="@Url.Action("Create","ADVANCEDs")">
+	<input type="button" id="btn" class="add__button" value="Thêm" />
+</a>>
 <div class="fresh-table">
-    <table class="fresh-table" id="fresh-table" width="100%" style="margin-top:40px;">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("STT")
-                </th>
-                <th>
-                    @Html.DisplayName("Mã nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Tên nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Ngày tạm ứng")
-                </th>
-                <th>
-                    @Html.DisplayName("Số tiền")
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="SetAdvancedList">
-            <tr id="LoadingStatus" style="color:red"></tr>
-        </tbody>
-    </table>
+	<table class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayName("STT")
+				</th>
+				<th>
+					@Html.DisplayName("Mã nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Tên nhân viên")
+				</th>
+				<th>
+					@Html.DisplayName("Ngày tạm ứng")
+				</th>
+				<th>
+					@Html.DisplayName("Số tiền")
+				</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeID)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+					</td>
+					<td>
+						@Convert.ToDateTime(item.DateAdvanced).ToString("dd/MM/yyyy")
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Value)
+					</td>
+					<td>
+						<a href="@Url.Action("Edit","ADVANCEDs",new { id = item.EmployeeID, date = item.DateAdvanced })">
+							<i class='fa fa-edit pa-5 text-warning'></i>
+						</a>
+					</td>
+					<td>
+						<a href="@Url.Action("Delete","ADVANCEDs",new { id = item.EmployeeID, date = item.DateAdvanced })">
+							<i class='fa fa-trash pa-5 text-danger'></i>
+						</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 </div>
-
-<!-- The Create Modal -->
-<div id="createModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Thêm tạm ứng</div>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            @using (Html.BeginForm("CreateOrEdit", "ADVANCEDs", FormMethod.Post, new { name = "frm", id = "frm" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.EmployeeID, "EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
-" />
-                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
-" />
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-<!-- The Edit Modal -->
-<div id="editModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Sửa tạm ứng</div>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            @using (Html.BeginForm("Edit", "ADVANCEDs", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.EmployeeID, new { @id = "eID"})
-
-                    @Html.HiddenFor(model => model.DateAdvanced, new { @id = "dAdv" })
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control", @id = "Val" } })
-                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Lưu" class="btn btn-default" style="        background: #3D76B5; left: 110px;
-" />
-                            <input type="button" value="Hủy" class="btn btn-default" onclick="closeModal()" style="        background: #C33333; right: 110px;
-" />
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-<!-- The Delete Modal -->
-<div id="deleteModal" class="modal" style="height:200px !important">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Xóa tạm ứng</div>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="modal__text" id="modal__text">
-            </div>
-            <ul class="button">
-                <li>
-                    <a>
-                        <input type="button" id="confirmbtn" value="Có" style="background: #3D76B5" onclick="deleteByID()" />
-                    </a>
-                </li>
-                <li>
-                    <input type="button" id="declinebtn" value="Không" style="background: #C33333" onclick="closeModal()">
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div id="bg" onclick="closeModal()"></div>
 
 <script>
-    var $table = $('#fresh-table')
-    $(function () {
-        $table.bootstrapTable({
-            classes: 'table table-hover table-responsive',
-            toolbar: '.toolbar',
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+	var $table = $('#fresh-table')
+	$(function () {
+		$table.bootstrapTable({
+			classes: 'table table-hover table-responsive',
+			toolbar: '.toolbar',
+			pagination: true,
+			striped: true,
+			pageSize: 8,
+			pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return ''
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + ' rows visible'
-            }
-        })
-    })
+			formatShowingRows: function (pageFrom, pageTo, totalRows) {
+				return ''
+			},
+			formatRecordsPerPage: function (pageNumber) {
+				return pageNumber + ' rows visible'
+			}
+		})
+	})
 
 
 </script>
 
-<!--script for interactive with user-->
-<script>
-    $("#LoadingStatus").html("Loading....");
-    // Get the modal
-    var create_modal = document.getElementById("createModal");
-    var delete_modal = document.getElementById("deleteModal");
-    var edit_modal = document.getElementById("editModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    function openCreateModal() {
-        $("#modal-title").html("Thêm tạm ứng");
-        create_modal.style.display = "block";
-        //document.getElementById("frm").reset();
-
-        $("#bg").width("100%").height("100%");
-
-        $("#bg").fadeTo("slow", 0.8);
-    }
-
-    //close create modal
-    function closeModal() {
-        window.location.reload();
-        create_modal.style.display = "none";
-        delete_modal.style.display = "none";
-        $("#bg").fadeOut();
-    }
-
-    //function to get list of allowance and display on table
-    var advanceds;
-    $.get("/ADVANCEDs/GetAdvancedList", null, DataBind);
-    function DataBind(result) {
-        if (result.str == "success") {
-            var SetData = $("#SetAdvancedList");
-            advanceds = result.lista;
-            employees = result.liste;
-            if (advanceds.length == 0)
-                $("#LoadingStatus").html("Chưa có dữ liệu nào.");
-            for (var i = 0; i < advanceds.length; i++) {
-                SetData.append(GetDataString(advanceds[i], i));
-                $("#LoadingStatus").html(" ");
-            }
-        }
-        else {
-            $("#LoadingStatus").html("Có lỗi xảy ra trong quá trình tải dữ liệu.");
-        }
-    }
-
-    function GetDataString(advanced, n) {
-        var name;
-        for (var i = 0; i < employees.length; i++) {
-            if (employees[i].EmployeeID == advanced.EmployeeID) {
-                name = employees[i].EmployeeName;
-            }
-        }
-        var Data = "<tr class='row_" + advanced.DateAdvanced + "'>" +
-            "<td>" + (n + 1) + "</td>" +
-            "<td>" + advanced.EmployeeID + "</td>" +
-            "<td>" + name + "</td>" +
-            "<td>" + moment(advanced.DateAdvanced).format("DD/MM/yyyy") + "</td>";
-        Data = Data + "<td>" + advanced.Value + "</td>";
-        Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + advanced.DateAdvanced + "'" + ")\">"
-            + "<i class='fa fa-edit pa-5 text-warning'></i>" +
-            "</td>" +
-            " <td class=\"text-center\" onclick=\"DeleteModule('" + moment(advanced.DateAdvanced).format("MM/DD/yyyy") + "' , " + "'" + advanced.EmployeeID + "'" + ")\" >"
-            + "<i class='fa fa-trash pa-5 text-danger' ></i>" +
-            "</td>" +
-            "</tr>";
-        return Data;
-    }
-
-    //function to show information of a allowance on modal
-    function EditModule(id) {
-        //document.getElementById("frm").reset();
-        for (var i = 0; i < advanceds.length; i++) {
-            if (advanceds[i].DateAdvanced == id) {
-                Model = advanceds[i];
-                document.getElementById("eID").value = advanceds[i].EmployeeID;
-                document.getElementById("dAdv").value = moment(advanceds[i].DateAdvanced).format("MM/DD/yyyy");
-                document.getElementById("Val").value = advanceds[i].Value;
-            }
-        }
-
-        edit_modal.style.display = "block";
-
-        $("#bg").width("100%").height("100%");
-
-        $("#bg").fadeTo("slow", 0.8);
-    }
-
-    //functions to show delete confirm
-    var deleteId;
-    var deleteEmployee;
-    function DeleteModule(date, eID) {
-        deleteId = date;
-        deleteEmployee = eID;
-        var noticeString = "Dữ liệu này sẽ bị xóa vĩnh viễn. Bạn có chắc chắn muốn xóa?";
-        $("#modal__text").html(noticeString);
-        delete_modal.style.display = "block";
-        $("#bg").width("100%").height("100%");
-
-        $("#bg").fadeTo("slow", 0.8);
-    }
-
-    function deleteByID() {
-        $.ajax({
-            type: 'POST',
-            url: '/ADVANCEDs/DeleteConfirmed',
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ "id": deleteId, "employee": deleteEmployee }),
-            success: function (data) {
-                // do what ever you want with the server response
-                if (data.success) {
-                    alert("Xóa thành công");
-                    closeModal();
-                }
-                else
-                    alert("Không tìm thấy dữ liệu để xóa");
-            },
-            error: function (error) {
-                // error handling
-                alert("Xóa không thành công");
-                console.log();
-            }
-        });
-    }
-</script>
