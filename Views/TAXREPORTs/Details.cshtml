@@ -197,10 +197,10 @@
             <tbody>
                 <tr>
                     <th style="font-weight:bold">
-                        @Html.DisplayName("Tổng thu nhập")
+                        @Html.DisplayName("Lương theo ngày công chuẩn")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.TotalIncome)
+                        @Html.DisplayFor(model => model.StandardSalary)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
@@ -222,7 +222,7 @@
                         @Html.DisplayName("Lương làm thêm chịu thuế")
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.OverTimeFreeTax)
+                        @Html.DisplayFor(model => model.TaxableOverTime)
                     </td>
                     <td>
                         @Html.DisplayName("VNĐ")
