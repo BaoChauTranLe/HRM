@@ -253,7 +253,16 @@ namespace HRM.Controllers
 
 			return View(db.TAXREPORTs.ToList());
         }
-
+        [HttpPost]
+        public ActionResult Index(SALARYREPORT rp)
+        {
+            var tAXREPORTs = db.TAXREPORTs.Where(x => x.Month == rp.Month).ToList();
+            if (tAXREPORTs == null)
+            {
+                return View();
+            }
+            return View(tAXREPORTs);
+        }
         // GET: TAXREPORTs/Details/5
         public ActionResult Details(string id, DateTime month)
         {

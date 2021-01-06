@@ -56,109 +56,120 @@
 </style>
 
 <div>
-    <input type="month" class="index-txtbox">
+	<div class="col-md-4">
+		@using (Html.BeginForm("Index", "TAXREPORTs", FormMethod.Post))
+		{
+			<div class="control-label" style="text-align:left;">Chọn tháng</div>
+			@Html.TextBox("Month", null, htmlAttributes: new { @type = "month", @class = "index-txtbox" })
+			@*<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:10px; ">*@
+			<input type="submit" value="Xem" id="btnSubmit" class="search-button" />
+		}
+	</div>
+	<div class="col-md-8" style="margin-top:20px">
+		<select class="index-txtbox drop-down-list">
+			<option value="Tất cả phòng">Tất cả phòng</option>
+			<option value="Phòng nhân sự">Phòng nhân sự</option>
+			<option value="Phòng kế toán">Phòng kế toán</option>
+			<option value="Phòng giám đốc">Phòng giám đốc</option>
+		</select>
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả phòng">Tất cả phòng</option>
-        <option value="Phòng nhân sự">Phòng nhân sự</option>
-        <option value="Phòng kế toán">Phòng kế toán</option>
-        <option value="Phòng giám đốc">Phòng giám đốc</option>
-    </select>
+		<select class="index-txtbox drop-down-list">
+			<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+			<option value="Giám đốc">Giám đốc</option>
+			<option value="Trưởng phòng">Trưởng phòng</option>
+			<option value="Phó phòng">Phó phòng</option>
+			<option value="Nhân viên">Nhân viên</option>
+		</select>
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả chức vụ">Tất cả chức vụ</option>
-        <option value="Giám đốc">Giám đốc</option>
-        <option value="Trưởng phòng">Trưởng phòng</option>
-        <option value="Phó phòng">Phó phòng</option>
-        <option value="Nhân viên">Nhân viên</option>
-    </select>
-
-    <input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
-    <input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+		<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+		<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+	</div>
 </div>
 
-<div class="fresh-table">
-	<table class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
-		<thead>
-			<tr>
-				<th>
-					@Html.DisplayName("STT")
-				</th>
-				<th>
-					@Html.DisplayName("Mã nhân viên")
-				</th>
-				<th>
-					@Html.DisplayName("Tên nhân viên")
-				</th>
-				<th>
-					@Html.DisplayName("Phòng")
-				</th>
-				<th>
-					@Html.DisplayName("Chức vụ")
-				</th>
-				<th>
-					@Html.DisplayName("Thuế TNCN")
-				</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			@{ int index = 1; }
-			@foreach (var item in Model)
-			{
-			<tr>
-				<td>
-					@index
-				</td>
-				@{ index++; }
-				<td>
-					@Html.DisplayFor(modelItem => item.EmployeeID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IncomeTax)
-				</td>
-				<td>
-					@Html.ActionLink("Details", "Details", new { id = item.EmployeeID, month = item.Month })
-				</td>
-			</tr>
-			}
-			<tr>
-				<td colspan="5" style="border-color: #DFE0EB !important;">
-					Tổng
-				</td>
-				<td>@Model.Sum(i => i.IncomeTax) </td>
-                <td></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+	<div class="fresh-table">
+		<table class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayName("STT")
+					</th>
+					<th>
+						@Html.DisplayName("Mã nhân viên")
+					</th>
+					<th>
+						@Html.DisplayName("Tên nhân viên")
+					</th>
+					<th>
+						@Html.DisplayName("Phòng")
+					</th>
+					<th>
+						@Html.DisplayName("Chức vụ")
+					</th>
+					<th>
+						@Html.DisplayName("Thuế TNCN")
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@{ int index = 1; }
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@index
+						</td>
+						@{ index++; }
+						<td>
+							@Html.DisplayFor(modelItem => item.EmployeeID)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.IncomeTax)
+						</td>
+						<td>
+							<a href="@Url.Action("Details","TAXREPORTs",new { id = item.EmployeeID, month = item.Month  })">
+								<i class='fa fa-file pa-5 text-warning'></i>
+							</a>
+						</td>
+					</tr>
+				}
+				<tr>
+					<td colspan="5" style="border-color: #DFE0EB !important;">
+						Tổng
+					</td>
+					<td>@Html.Action("CurrencyFormat", new { num = Model.Sum(i => i.IncomeTax) }) </td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-<script>
-    var $table = $('#fresh-table')
-    $(function () {
-        $table.bootstrapTable({
-            classes: 'table table-hover table-responsive',
-            toolbar: '.toolbar',
-            pagination: true,
-            striped: true,
-            pageSize: 8,
-            pageList: [8, 10, 25, 50, 100],
+	<script>
+		var $table = $('#fresh-table')
+		$(function () {
+			$table.bootstrapTable({
+				classes: 'table table-hover table-responsive',
+				toolbar: '.toolbar',
+				pagination: true,
+				striped: true,
+				pageSize: 8,
+				pageList: [8, 10, 25, 50, 100],
 
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return ''
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + ' rows visible'
-            }
-        })
-    })
-</script>
+				formatShowingRows: function (pageFrom, pageTo, totalRows) {
+					return ''
+				},
+				formatRecordsPerPage: function (pageNumber) {
+					return pageNumber + ' rows visible'
+				}
+			})
+		})
+	</script>
