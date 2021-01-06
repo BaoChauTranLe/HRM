@@ -53,110 +53,118 @@
     }
 </style>
 
-<div style="margin-top:20px;">
-	<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:20px;">
+<div style="margin-top:10px;">
+	<div class="col-md-4">
+		@using (Html.BeginForm("Index", "SALARYREPORTs", FormMethod.Post))
+		{
+			<div class="control-label" style="text-align:left;">Chọn tháng</div>
+			<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:10px; ">
+			<input type="submit" value="Cập nhật" id="btnSubmit" class="search-button" />
+		}
+	</div>
+	<div class="col-md-8">
+		<div style="margin-top:30px">
+			<select class="index-txtbox drop-down-list">
+				<option value="Tất cả phòng">Tất cả phòng</option>
+				<option value="Phòng nhân sự">Phòng nhân sự</option>
+				<option value="Phòng kế toán">Phòng kế toán</option>
+				<option value="Phòng giám đốc">Phòng giám đốc</option>
+			</select>
+			<select class="index-txtbox drop-down-list">
+				<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+				<option value="Giám đốc">Giám đốc</option>
+				<option value="Trưởng phòng">Trưởng phòng</option>
+				<option value="Phó phòng">Phó phòng</option>
+				<option value="Nhân viên">Nhân viên</option>
+			</select>
+			<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+			<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
+		</div>
+		</div>
+	</div>
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả phòng">Tất cả phòng</option>
-        <option value="Phòng nhân sự">Phòng nhân sự</option>
-        <option value="Phòng kế toán">Phòng kế toán</option>
-        <option value="Phòng giám đốc">Phòng giám đốc</option>
-    </select>
+	<div class="fresh-table">
+		<table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:10px;">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayName("Mã nhân viên")
+					</th>
+					<th>
+						@Html.DisplayName("Tên nhân viên")
+					</th>
+					<th>
+						@Html.DisplayName("Phòng")
+					</th>
+					<th>
+						@Html.DisplayName("Chức vụ")
+					</th>
+					<th>
+						@Html.DisplayName("Thực lĩnh")
+					</th>
+					<th></th>
+				</tr>
+			</thead>
 
-    <select class="index-txtbox drop-down-list">
-        <option value="Tất cả chức vụ">Tất cả chức vụ</option>
-        <option value="Giám đốc">Giám đốc</option>
-        <option value="Trưởng phòng">Trưởng phòng</option>
-        <option value="Phó phòng">Phó phòng</option>
-        <option value="Nhân viên">Nhân viên</option>
-    </select>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.EmployeeID)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+						</td>
+						<td>
+							@Html.Action("CurrencyFormat", new { num = item.RealSalary })
+						</td>
+						<td>
+							<a href="@Url.Action("Details","SALARYREPORTs",new { id = item.EmployeeID, month = item.Month  })">
+								<i class='fa fa-file pa-5 text-warning'></i>
+							</a>
+						</td>
 
-    <input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;"/>
-    <input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px"/>
-</div>
+					</tr>
+				}
+				<tr>
+					<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
+					<td> @Html.Action("CurrencyFormat", new { num = Model.Sum(i => i.RealSalary) })</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 
-<div class="fresh-table">
-    <table data-sortable="true" class="fresh-table" id="fresh-table" width="100%" style="margin-top:20px;">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("Mã nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Tên nhân viên")
-                </th>
-                <th>
-                    @Html.DisplayName("Phòng")
-                </th>
-                <th>
-                    @Html.DisplayName("Chức vụ")
-                </th>
-                <th>
-                    @Html.DisplayName("Thực lĩnh")
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        
-		<tbody>
-			@foreach (var item in Model)
-			{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.EmployeeID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-				</td>
-				<td>
-                    @Html.Action("CurrencyFormat", new { num = item.RealSalary })
-				</td>
-				<td>
-                    <a href="@Url.Action("Details","SALARYREPORTs",new { id = item.EmployeeID, month = item.Month  })">
-						<i class='fa fa-file pa-5 text-warning'></i>
-					</a>
-				</td>
+	</div>
 
-			</tr>
-			}
-			<tr>
-				<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
-                <td> @Html.Action("CurrencyFormat", new { num = Model.Sum(i => i.RealSalary) })</td>
-				<td></td>
-			</tr>
-		</tbody>
-    </table>
+	<script>
+		var $table = $('#fresh-table')
+		$(function () {
+			$table.bootstrapTable({
+				classes: 'table table-hover table-responsive',
+				pagination: true,
+				striped: true,
+				pageSize: 12,
+				pageList: [8, 10, 25, 50, 100],
 
-</div>
+				formatShowingRows: function (pageFrom, pageTo, totalRows) {
+					return ''
+				},
+				formatRecordsPerPage: function (pageNumber) {
+					return pageNumber + ' rows visible'
+				}
+			})
+		})
+		const monthControl = document.querySelector('input[type="month"]');
+		const date = new Date()
+		const month = ("0" + (date.getMonth() + 1)).slice(-2)
+		const year = date.getFullYear()
+		monthControl.value = `${year}-${month}`;
 
-<script>
-    var $table = $('#fresh-table')
-    $(function () {
-        $table.bootstrapTable({
-            classes: 'table table-hover table-responsive',
-            toolbar: '.toolbar',
-            pagination: true,
-            striped: true,
-            pageSize: 12,
-            pageList: [8, 10, 25, 50, 100],
-
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return ''
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return pageNumber + ' rows visible'
-            }
-        })
-    })
-	const monthControl = document.querySelector('input[type="month"]');
-	const date = new Date()
-	const month = ("0" + (date.getMonth() + 1)).slice(-2)
-	const year = date.getFullYear()
-	monthControl.value = `${year}-${month}`;
-</script>
+	</script>

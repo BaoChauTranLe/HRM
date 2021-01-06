@@ -320,10 +320,16 @@ namespace HRM.Controllers
                 }
                 else continue;
             }
+
             return View(db.SALARYREPORTs.ToList());
         }
 
-
+        [HttpPost]
+        public ActionResult Index(SALARYREPORT rp)
+		{
+            var sALARYREPORT = db.SALARYREPORTs.Where(x=>x.Month==rp.Month).ToList();
+            return View(sALARYREPORT);
+		}
 
         // GET: SALARYREPORTs/Details/5
         public ActionResult Details(string id, DateTime month)
