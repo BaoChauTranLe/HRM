@@ -349,7 +349,6 @@
     <Content Include="Views\USERs\Create.cshtml" />
     <Content Include="Views\USERs\Delete.cshtml" />
     <Content Include="Views\USERs\Details.cshtml" />
-    <Content Include="Views\USERs\Edit.cshtml" />
     <Content Include="Views\USERs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGREPORTs\Index.cshtml" />
     <Content Include="Views\TIMEKEEPINGREPORTs\OvertimeIndex.cshtml" />

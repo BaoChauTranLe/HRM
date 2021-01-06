@@ -61,7 +61,6 @@ namespace HRM.Models
         public DateTime? ContractExpirationDate { get; set; }
         [Required(ErrorMessage = "Lương cơ bản bắt buộc")]
         public int BasicSalary { get; set; }
-        public int? TrialTime { get; set; }
         public bool HealthInsurance { get; set; }
         [Required(ErrorMessage = "Mã bảo hiểm y tế bắt buộc")]
         [StringLength(maximumLength: 15, ErrorMessage = "Mã bảo hiểm y tế có 15 ký tự", MinimumLength = 15)]

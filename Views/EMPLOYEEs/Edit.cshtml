@@ -518,10 +518,6 @@
             Loại hợp đồng
         </div>
         @Html.DropDownListFor(m => m.ContractType, (IEnumerable<SelectListItem>)ViewBag.ContractType, new { style = "left: 300px; top: 30px; width: 200px;", @class = "drop-down-list", id = "contracttype" })
-        <div class="label" style="left: 550px;">
-            Thời gian thử việc
-        </div>
-        @Html.TextBoxFor(model => model.TrialTime, new { style = "left: 550px; top: 30px; width: 200px; background: #F8FAFA;", @class = "text-box", id = "TrialTime" })
         <div class="label" style="left: 30px; top: 100px;">
             Lương cơ bản (đồng)
         </div>

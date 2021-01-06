@@ -33,6 +33,7 @@ namespace HRM.Controllers
                     EmployeeName = item.EmployeeName,
                     Image = item.Image,
                     Sex = item.Sex,
+                    Phone = item.Phone,
                     RoomName = item.ROOM.RoomName,
                     PositionName = item.POSITION.PositionName,
                     State = (bool)item.State,
@@ -231,7 +232,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,ImageFile,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,TrialTime,Password")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,ImageFile,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -397,7 +398,7 @@ namespace HRM.Controllers
                 eMPLOYEE.HealthInsuranceID = employee.HealthInsuranceID;
                 eMPLOYEE.SelfDeduction = Convert.ToBoolean(employee.DeductionPersonal);
                 eMPLOYEE.DependentDeduction = employee.DeductionDependent;
-                eMPLOYEE.State = false;
+                eMPLOYEE.State = true;
                 //Trinh do
                 EDUCATIONDETAIL eDUCATIONDETAIL = new EDUCATIONDETAIL();
                 eDUCATIONDETAIL.EmployeeID = id;
@@ -424,15 +425,6 @@ namespace HRM.Controllers
                 cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
                 cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                //if (employee.TrialTime == null)
-                //    cONTRACT.TrialTime = 0;
-                //else
-                //{
-                //    if (cONTRACT.ContractType == "Hợp đồng thử việc")
-                //        cONTRACT.TrialTime = employee.TrialTime;
-                //    else
-                //        cONTRACT.TrialTime = 0;
-                //}
                 //Tai khoan
                 USER uSER = new USER();
                 uSER.EmployeeID = id;
@@ -606,7 +598,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,TrialTime,Password")] EmployeeViewModel employee)
+        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
         {
             List<SelectListItem> city = new List<SelectListItem>();
             List<SelectListItem> ward = new List<SelectListItem>();
@@ -773,15 +765,6 @@ namespace HRM.Controllers
                 cONTRACT.DateStartWork = (DateTime)employee.DateStartWork;
                 cONTRACT.ContractExpirationDate = (DateTime)employee.ContractExpirationDate;
                 cONTRACT.BasicSalary = employee.BasicSalary;
-                //if (employee.TrialTime == null)
-                //    cONTRACT.TrialTime = 0;
-                //else
-                //{
-                //    if (cONTRACT.ContractType == "Hợp đồng thử việc")
-                //        cONTRACT.TrialTime = employee.TrialTime;
-                //    else
-                //        cONTRACT.TrialTime = 0;
-                //}
                 db.Entry(eDUCATIONDETAIL).State = EntityState.Modified;
                 db.Entry(cERTIFICATEDETAIL).State = EntityState.Modified;
                 db.Entry(cONTRACT).State = EntityState.Modified;
@@ -812,7 +795,7 @@ namespace HRM.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             EMPLOYEE eMPLOYEE = await db.EMPLOYEEs.FindAsync(id);
-            eMPLOYEE.State = true;
+            eMPLOYEE.State = false;
             db.Entry(eMPLOYEE).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
