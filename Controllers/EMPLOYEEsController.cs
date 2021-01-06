@@ -705,7 +705,7 @@ namespace HRM.Controllers
             if (employee.ContractExpirationDate < employee.DateStartWork)
                 ModelState.AddModelError("ContractExpirationDate", "Ngày kết thúc phải lớn hơn ngày bắt đầu");
             var Parameter = db.PARAMETERs.ToList();
-            var tuoi = employee.DoB.Year - DateTime.Now.Year;
+            var tuoi = DateTime.Now.Year - employee.DoB.Year;
             if (employee.Sex == "Nam")
             {
                 if (tuoi < Parameter[19].Value) //tuoi toi thieu nam
