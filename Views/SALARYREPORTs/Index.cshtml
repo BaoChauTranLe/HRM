@@ -58,7 +58,8 @@
 		@using (Html.BeginForm("Index", "SALARYREPORTs", FormMethod.Post))
 		{
 			<div class="control-label" style="text-align:left;">Chọn tháng</div>
-			<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:10px; ">
+			@Html.TextBox("Month",null, htmlAttributes: new { @type="month",@class = "index-txtbox" })
+			@*<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:10px; ">*@
 			<input type="submit" value="Cập nhật" id="btnSubmit" class="search-button" />
 		}
 	</div>
@@ -161,10 +162,9 @@
 				}
 			})
 		})
-		const monthControl = document.querySelector('input[type="month"]');
-		const date = new Date()
-		const month = ("0" + (date.getMonth() + 1)).slice(-2)
-		const year = date.getFullYear()
-		monthControl.value = `${year}-${month}`;
-
+		//const monthControl = document.querySelector('input[type="month"]');
+		//const date = new Date()
+		//const month = ("0" + (date.getMonth() + 1)).slice(-2)
+		//const year = date.getFullYear()
+		//monthControl.value = `${year}-${month}`;
 	</script>

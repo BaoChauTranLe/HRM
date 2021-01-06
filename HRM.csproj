@@ -375,6 +375,7 @@
     <Content Include="Views\ALLOWANCEDETAILs\Delete.cshtml" />
     <Content Include="Views\ADVANCEDs\Edit.cshtml" />
     <Content Include="Views\ADVANCEDs\Delete.cshtml" />
+    <Content Include="Views\SALARYREPORTs\Load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
