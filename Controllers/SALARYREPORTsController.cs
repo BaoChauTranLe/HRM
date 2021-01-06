@@ -121,15 +121,15 @@ namespace HRM.Controllers
         }
         public int CalculateSocialInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value) / 100;
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXHLD").Value) / 100;
         }
         public int CalculateHealthInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value / 100);
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYTLD").Value / 100);
         }
         public int CalculateWorkInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value) / 100;
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTNLD").Value) / 100;
         }
         public int CalculateTotalInsurancePay(EMPLOYEE e, DateTime month)
         {

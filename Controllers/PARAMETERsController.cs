@@ -93,13 +93,17 @@ namespace HRM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult InsuranceEdit(float SocialInsurance, float HealthInsurance, float WorkInsurance)
+        public ActionResult InsuranceEdit(float PersonalSocialInsurance, float PersonalHealthInsurance, float PersonalWorkInsurance, float BusinessSocialInsurance, float BusinessHealthInsurance, float BusinessWorkInsurance, float UnionFee)
         {
             if (ModelState.IsValid)
             {
-                db.PARAMETERs.Find("BHXH").Value = SocialInsurance;
-                db.PARAMETERs.Find("BHYT").Value = HealthInsurance;
-                db.PARAMETERs.Find("BHTN").Value = WorkInsurance;
+                db.PARAMETERs.Find("BHXHLD").Value = PersonalSocialInsurance;
+                db.PARAMETERs.Find("BHYTLD").Value = PersonalHealthInsurance;
+                db.PARAMETERs.Find("BHTNLD").Value = PersonalWorkInsurance;
+                db.PARAMETERs.Find("BHXHDN").Value = BusinessSocialInsurance;
+                db.PARAMETERs.Find("BHYTDN").Value = BusinessHealthInsurance;
+                db.PARAMETERs.Find("BHTNDN").Value = BusinessWorkInsurance;
+                db.PARAMETERs.Find("KPCD").Value = UnionFee;
                 db.SaveChanges();
                 return RedirectToAction("Insurance");
             }
