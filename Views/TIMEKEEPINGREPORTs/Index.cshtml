@@ -53,6 +53,11 @@
 		border: 1px solid #3D76B5;
 		border-radius: 4px;
 	}
+	.btn-primary{
+		background: #E3F2FD;
+		border: 1px solid #3D76B5;
+		border-radius: 4px;
+	}
 </style>
 	@using (Html.BeginForm("Index", "TIMEKEEPINGREPORTs", FormMethod.Post))
 	{
@@ -83,13 +88,16 @@
 		<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
 
 	</div>
-
-	<div style="margin-top:20px;">
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-top:20px;">
+		Import dữ liệu từ file excel
+	</a>
+	<div class="collapse" id="collapseExample" style="margin-top:10px;">
 		@using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 		{
+			<div class="control-label" style="text-align:left;">Chọn tháng của dữ liệu:</div>
 			<input type="month" class="index-txtbox" name="Month" id="Month">
 			<div class="form-horizontal">
-				<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
+				<div class="control-label" style="text-align:left;">Chọn file:</div>
 
 				<div class="col-md-1" style="padding-left: 0px;">
 					<input type="submit" value="Cập nhật" id="btnSubmit" class="" />
