@@ -21,7 +21,7 @@ namespace HRM.Models
         public string Nation { get; set; }
         [Required(ErrorMessage = "CMND bắt buộc")]
         [StringLength(maximumLength: 13, ErrorMessage = "Độ dài không hợp lệ", MinimumLength = 9)]
-        public string Id { get; set; }
+        public string IdNumber { get; set; }
         [Required(ErrorMessage = "Số điện thoại bắt buộc")]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Phone { get; set; }

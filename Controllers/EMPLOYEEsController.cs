@@ -68,7 +68,7 @@ namespace HRM.Controllers
             employee.Birthplace = eMPLOYEE.Birthplace;
             employee.HomeTown = eMPLOYEE.HomeTown;
             employee.Nation = eMPLOYEE.Nation;
-            employee.Id = eMPLOYEE.IdNumber;
+            employee.IdNumber = eMPLOYEE.IdNumber;
             employee.Phone = eMPLOYEE.Phone;
             employee.Email = eMPLOYEE.Email;
             employee.City = eMPLOYEE.City;
@@ -232,7 +232,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,ImageFile,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
+        public async Task<ActionResult> Create([Bind(Include = "EmployeeName,ImageFile,Sex,DoB,Birthplace,HomeTown,Nation,IdNumber,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
         {
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
@@ -357,7 +357,7 @@ namespace HRM.Controllers
             if (employee.Sex == "Nam")
             {
                 if (tuoi < Parameter[19].Value) //tuoi toi thieu nam
-                    ModelState.AddModelError("DoB","Tuổi không hợp lệ");
+                    ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
                 if (tuoi > Parameter[17].Value) //tuoi toi da nam
                     ModelState.AddModelError("DoB", "Tuổi không hợp lệ");
             }
@@ -384,7 +384,7 @@ namespace HRM.Controllers
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
-                eMPLOYEE.IdNumber = employee.Id;
+                eMPLOYEE.IdNumber = employee.IdNumber;
                 eMPLOYEE.Phone = employee.Phone;
                 eMPLOYEE.Email = employee.Email;
                 eMPLOYEE.City = employee.City;
@@ -554,7 +554,7 @@ namespace HRM.Controllers
             employee.Birthplace = eMPLOYEE.Birthplace;
             employee.HomeTown = eMPLOYEE.HomeTown;
             employee.Nation = eMPLOYEE.Nation;
-            employee.Id = eMPLOYEE.IdNumber;
+            employee.IdNumber = eMPLOYEE.IdNumber;
             employee.Phone = eMPLOYEE.Phone;
             employee.Email = eMPLOYEE.Email;
             employee.City = eMPLOYEE.City;
@@ -598,7 +598,7 @@ namespace HRM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,Id,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
+        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,EmployeeName,Image,Sex,DoB,Birthplace,HomeTown,Nation,IdNumber,Phone,Email,City,Ward,Dictrict,Street,RoomID,PositionID,ContractID,HealthInsurance,HealthInsuranceID,DeductionPersonal,DeductionDependent,EducationName,MajorID,Date,Place,CertificateName,TypeCertificate,CertificateDate,CertificatePlace,ContractID,ContractType,DateStartWork,ContractExpirationDate,BasicSalary,Password")] EmployeeViewModel employee)
         {
             List<SelectListItem> city = new List<SelectListItem>();
             List<SelectListItem> ward = new List<SelectListItem>();
@@ -724,7 +724,7 @@ namespace HRM.Controllers
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
-                eMPLOYEE.IdNumber = employee.Id;
+                eMPLOYEE.IdNumber = employee.IdNumber;
                 eMPLOYEE.Phone = employee.Phone;
                 eMPLOYEE.Email = employee.Email;
                 eMPLOYEE.City = employee.City;
@@ -749,7 +749,7 @@ namespace HRM.Controllers
                     eDUCATIONDETAIL.MajorID = employee.MajorID;
                 eDUCATIONDETAIL.Date = employee.Date;
                 eDUCATIONDETAIL.Place = employee.Place;
-                
+
                 //Chung chi
                 CERTIFICATEDETAIL cERTIFICATEDETAIL = new CERTIFICATEDETAIL();
                 cERTIFICATEDETAIL.EmployeeID = employee.EmployeeID;
@@ -757,7 +757,7 @@ namespace HRM.Controllers
                 cERTIFICATEDETAIL.CertificateDate = employee.CertificateDate;
                 cERTIFICATEDETAIL.CertificatePlace = employee.CertificatePlace;
                 cERTIFICATEDETAIL.TypeCertificate = employee.TypeCertificate;
-                
+
                 //Hop dong
                 CONTRACT cONTRACT = new CONTRACT();
                 cONTRACT.ContractID = employee.ContractID;
