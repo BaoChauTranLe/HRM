@@ -111,15 +111,15 @@ namespace HRM.Controllers
         }
         public int CalculateSocialInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value) / 100;
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXHLD").Value) / 100;
         }
         public int CalculateHealthInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value / 100);
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYTLD").Value / 100);
         }
         public int CalculateWorkInsurancePay(int insurancePaySalary)
         {
-            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value) / 100;
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTNLD").Value) / 100;
         }
         public int CalculateTotalInsurancePay(EMPLOYEE e, DateTime month)
         {
@@ -223,43 +223,45 @@ namespace HRM.Controllers
         // GET: TAXREPORTs
         public ActionResult Index()
         {
-   //         DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
-   //         //var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
-			//var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
-			//foreach (EMPLOYEE e in employeelist)
-			//{
-			//	if (db.TAXREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
-			//	{
-			//		var tAXREPORT = new TAXREPORT
-			//		{
-			//			EmployeeID = e.EmployeeID,
-			//			EMPLOYEE = e,
-			//			Month = date,
-   //                     SelfDeduction = (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value,
-			//			DependentDeduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction + CalculateTotalInsurancePay(e, date),
-   //                     OverTimeHour = CalculateTotalWorkHour(e,date),
-   //                     OverTimeSalary = CalculateOvertimeSalary(e, date),
-   //                     OverTimeFreeTax = CalculateTaxableOvertimeSalary(e,date),
-   //                     AssessableIncome = CalculateAssessableIncome(e,date),
-			//			IncomeTax = CalculateIncomeTax(e, date)
-			//		};
-			//		db.TAXREPORTs.Add(tAXREPORT);
-			//		db.SaveChanges();
-			//	}
-			//	else continue;
-			//}
+			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+			//var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
+			var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
+			foreach (EMPLOYEE e in employeelist)
+			{
+				if (db.TAXREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
+				{
+					var tAXREPORT = new TAXREPORT
+					{
+						EmployeeID = e.EmployeeID,
+						EMPLOYEE = e,
+						Month = date,
+                        StandardSalary = CalculateStandardSalary(e, date),
+                        SelfDeduction = (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value,
+						DependentDeduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction + CalculateTotalInsurancePay(e, date),
+						OverTimeHour = CalculateTotalWorkHour(e, date),
+                        TaxableOverTime = CalculateTaxableOvertimeSalary(e,date),
+                        TaxableIncome = CalculateTaxableIncome(e,date),
+						AssessableIncome = CalculateAssessableIncome(e, date),
+						TotalInsurancePay = CalculateTotalInsurancePay(e, date),
+						IncomeTax = CalculateIncomeTax(e, date)
+                    };
+					db.TAXREPORTs.Add(tAXREPORT);
+					db.SaveChanges();
+				}
+				else continue;
+			}
 
-			return View(/*db.TAXREPORTs.ToList()*/);
+			return View(db.TAXREPORTs.ToList());
         }
 
         // GET: TAXREPORTs/Details/5
-        public ActionResult Details(DateTime id)
+        public ActionResult Details(string id, DateTime month)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAXREPORT tAXREPORT = db.TAXREPORTs.Find(id);
+            TAXREPORT tAXREPORT = db.TAXREPORTs.Find(month, id);
             if (tAXREPORT == null)
             {
                 return HttpNotFound();

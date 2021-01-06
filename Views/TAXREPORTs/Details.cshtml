@@ -57,7 +57,7 @@
 </div>
 
 <fieldset style="border: 1px solid #C1C1C1; box-sizing: border-box;">
-    <table style="margin-left:24px; margin-top:20px;">
+    <table style="margin-left:24px; margin-top:20px;  border:none" >
         <tr>
             <th class="detail-top-info-title">
                 @Html.DisplayName("Mã nhân viên:")
@@ -110,7 +110,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                @*<tr>
                     <td class="detail-top-info-title" style="background:#EBEBEB; text-align:center;" colspan="3">
                         Các khoản phụ cấp, trợ cấp miễn thuế
                     </td>
@@ -147,7 +147,7 @@
                     <td>
                         @Html.DisplayName("VNĐ")
                     </td>
-                </tr>
+                </tr>*@
                 <tr>
                     <td class="detail-top-info-title" style="background:#EBEBEB; text-align:center;" colspan="3">
                         Các khoản giảm trừ
@@ -157,9 +157,9 @@
                     <th style="font-weight:bold">
                         @Html.DisplayName("Giảm trừ bản thân")
                     </th>
-                    <td>
-                        
-                    </td>
+					<td>
+						@Html.DisplayFor(model => model.SelfDeduction)
+					</td>
                     <td>
                         @Html.DisplayName("VNĐ")
                     </td>
@@ -168,9 +168,9 @@
                     <th style="font-weight:bold">
                         @Html.DisplayName("Giảm trừ người phụ thuộc")
                     </th>
-                    <td>
-                        
-                    </td>
+					<td>
+						@Html.DisplayFor(model => model.DependentDeduction)
+					</td>
                     <td>
                         @Html.DisplayName("VNĐ")
                     </td>
@@ -194,74 +194,85 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Lương theo ngày công chuẩn")
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.StandardSalary)
-                    </td>
-                    <td>
-                        @Html.DisplayName("VNĐ")
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Tổng số giờ làm thêm")
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.OverTimeHour)
-                    </td>
-                    <td>
-                        @Html.DisplayName("Giờ")
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Lương làm thêm chịu thuế")
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.TaxableOverTime)
-                    </td>
-                    <td>
-                        @Html.DisplayName("VNĐ")
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Thu nhập tính thuế")
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.TaxableIncome)
-                    </td>
-                    <td>
-                        @Html.DisplayName("VNĐ")
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Thuế suất")
-                    </th>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        @Html.DisplayName("%")
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-weight:bold">
-                        @Html.DisplayName("Thuế TNCN")
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.IncomeTax)
-                    </td>
-                    <td>
-                        @Html.DisplayName("VNĐ")
-                    </td>
-                </tr>
-            </tbody>
+			<tbody>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Lương theo ngày công chuẩn")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.StandardSalary)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Tổng số giờ làm thêm")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.OverTimeHour)
+					</td>
+					<td>
+						@Html.DisplayName("Giờ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Lương làm thêm chịu thuế")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.TaxableOverTime)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Thu nhập chịu thuế")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.TaxableIncome)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Thu nhập tính thuế")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.AssessableIncome)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName(" Khoản tiền trích đóng BH")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.TotalInsurancePay)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+				<tr>
+					<th style="font-weight:bold">
+						@Html.DisplayName("Thuế TNCN")
+					</th>
+					<td>
+						@Html.DisplayFor(model => model.IncomeTax)
+					</td>
+					<td>
+						@Html.DisplayName("VNĐ")
+					</td>
+				</tr>
+			</tbody>
         </table>
     </div>
 </fieldset>
