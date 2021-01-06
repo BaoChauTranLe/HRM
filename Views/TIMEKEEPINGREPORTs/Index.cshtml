@@ -183,18 +183,18 @@
 	const year = date.getFullYear()
 	monthControl.value = `${year}-${month}`;
 
-	$('#Month').on('change', function () {
-		var date = new Date($(this).val());
-		$.ajax({
-			url: '/TIMEKEEPINGREPORTs/Index',
-			contentType: "application/json; charset=utf-8",
-			data: 'date',
-			success: function (data) {
+	//$('#Month').on('change', function () {
+	//	var date = new Date($(this).val());
+	//	$.ajax({
+	//		url: '/TIMEKEEPINGREPORTs/Index',
+	//		contentType: "application/json; charset=utf-8",
+	//		data: 'date',
+	//		success: function (data) {
 				
-			},
-			error: function (error) {
+	//		},
+	//		error: function (error) {
 				
-			}
-		})
-	});
+	//		}
+	//	})
+	//});
 </script>

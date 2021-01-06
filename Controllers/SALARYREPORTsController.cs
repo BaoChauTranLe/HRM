@@ -284,7 +284,62 @@ namespace HRM.Controllers
         // GET: SALARYREPORTs
         public ActionResult Index()
         {
-            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+			var sALARYREPORT = db.SALARYREPORTs.Where(x => x.Month == date ).ToList();
+            
+            //var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
+            //foreach (EMPLOYEE e in employeelist)
+            //{
+            //    if (db.SALARYREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
+            //    {
+            //        int hourPay = CalculateStandardHourSalary(e);
+            //        var report = db.TIMEKEEPINGREPORTs.Find(date, e.EmployeeID);
+            //        var sALARYREPORT = new SALARYREPORT
+            //        {
+            //            EmployeeID = e.EmployeeID,
+            //            EMPLOYEE = e,
+            //            Month = date,
+            //            AbsentHaveSalary = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumAbsentHaveSalary,
+            //            AbsentHaveSalaryValue = CalculateAbsentSalary(e, date),
+            //            NormalOverTimeSalary = CalculateNormalOvertimeSalary(report, hourPay),
+            //            DayOffOverTimeSalary = CalculateDayOffOvertimeSalary(report, hourPay),
+            //            SpecialDayOffOverTimeSalary = CalculateSpecialDayOffOvertimeSalary(report, hourPay),
+            //            NightNormalOverTimeSalary = CalculateNightNormalOvertimeSalary(report, hourPay),
+            //            NightDayOffOverTimeSalary = CalculateNightDayOffOvertimeSalary(report, hourPay),
+            //            NightSpecialDayOffOverTimeSalary = CalculateNightSpecialDayOffOvertimeSalary(report, hourPay),
+            //            OverTimeSalary = CalculateOvertimeSalary(e, date),
+            //            Allowance = CalculateTotalAllowance(e, date),
+            //            Advance = CalculateAdvanced(e, date),
+            //            IncomeTax = CalculateIncomeTax(e, date),
+            //            StandardSalary = CalculateStandardSalary(e, date),
+            //            WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay,
+            //            WorkDaySalary = CalculateWorkDaySalary(e, date),
+            //            TotalInsurancePay = CalculateTotalInsurancePay(e, date),
+            //            RealSalary = CalculateSalary(e, date)
+            //        };
+            //        db.SALARYREPORTs.Add(sALARYREPORT);
+            //        db.SaveChanges();
+            //    }
+            //    else continue;
+            //}
+
+            return View(sALARYREPORT);
+        }
+
+        [HttpPost]
+        public ActionResult Index(SALARYREPORT rp)
+		{
+            var sALARYREPORT = db.SALARYREPORTs.Where(x=>x.Month==rp.Month).ToList();
+            if (sALARYREPORT == null)
+            {
+                return View();
+            }
+            return View(sALARYREPORT);
+		}
+        public ActionResult Load()
+		{
+            DateTime date = new DateTime(2020, 12, 1, 0, 0, 0);
+            //var sALARYREPORT = db.SALARYREPORTs.Where(x => x.Month == date).ToList();
             var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
             foreach (EMPLOYEE e in employeelist)
             {
@@ -320,15 +375,8 @@ namespace HRM.Controllers
                 }
                 else continue;
             }
-
-            return View(db.SALARYREPORTs.ToList());
-        }
-
-        [HttpPost]
-        public ActionResult Index(SALARYREPORT rp)
-		{
-            var sALARYREPORT = db.SALARYREPORTs.Where(x=>x.Month==rp.Month).ToList();
-            return View(sALARYREPORT);
+			var sALARYREPORTs = db.SALARYREPORTs.Where(x => x.Month == date).ToList();
+			return View(sALARYREPORTs);
 		}
 
         // GET: SALARYREPORTs/Details/5
