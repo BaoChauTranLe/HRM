@@ -14,6 +14,54 @@ namespace HRM.Controllers
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
+        public string CurrencyFormat(int num)
+        {
+            return String.Format("{0:n0}", num);
+        }
+
+        public double getValueByName(string paraName)
+        {
+            var parameter = db.PARAMETERs.Find(paraName);
+            return parameter.Value;
+        }
+        #region Overtime Salary Calculation related
+        public int CalculateNormalOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourNormal * db.PARAMETERs.Find("HSLNgayThuong").Value / 100);
+        }
+        public int CalculateDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourDayOff * db.PARAMETERs.Find("HSLNgayNghi").Value / 100);
+        }
+        public int CalculateSpecialDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourSpecialDayOff * db.PARAMETERs.Find("HSLNgayNghiCoLuong").Value / 100);
+        }
+        public int CalculateNightNormalOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourNightNormal * db.PARAMETERs.Find("HSLDemNgayThuong").Value / 100);
+        }
+        public int CalculateNightDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourNightDayOff * db.PARAMETERs.Find("HSLDemNgayNghi").Value / 100);
+        }
+        public int CalculateNightSpecialDayOffOvertimeSalary(TIMEKEEPINGREPORT rp, int hourPay)
+        {
+            return (int)(hourPay * rp.SumHourNightSpecialDayOff * db.PARAMETERs.Find("HSLDemNgayNghiCoLuong").Value / 100);
+        }
+        public int CalculateOvertimeSalary(EMPLOYEE e, DateTime month)
+        {
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID);
+            int hourPay = CalculateStandardHourSalary(e);
+            return CalculateNormalOvertimeSalary(timekeepingInfo, hourPay) +
+                   CalculateDayOffOvertimeSalary(timekeepingInfo, hourPay) +
+                   CalculateSpecialDayOffOvertimeSalary(timekeepingInfo, hourPay) +
+                   CalculateNightNormalOvertimeSalary(timekeepingInfo, hourPay) +
+                   CalculateNightDayOffOvertimeSalary(timekeepingInfo, hourPay) +
+                   CalculateNightSpecialDayOffOvertimeSalary(timekeepingInfo, hourPay);
+        }
+        #endregion
+
         #region Allowance Calculation
         public int CalculateCommonAllowance()
         {
@@ -175,9 +223,33 @@ namespace HRM.Controllers
         // GET: TAXREPORTs
         public ActionResult Index()
         {
-            var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
+   //         DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+   //         //var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
+			//var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
+			//foreach (EMPLOYEE e in employeelist)
+			//{
+			//	if (db.TAXREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
+			//	{
+			//		var tAXREPORT = new TAXREPORT
+			//		{
+			//			EmployeeID = e.EmployeeID,
+			//			EMPLOYEE = e,
+			//			Month = date,
+   //                     SelfDeduction = (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value,
+			//			DependentDeduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction + CalculateTotalInsurancePay(e, date),
+   //                     OverTimeHour = CalculateTotalWorkHour(e,date),
+   //                     OverTimeSalary = CalculateOvertimeSalary(e, date),
+   //                     OverTimeFreeTax = CalculateTaxableOvertimeSalary(e,date),
+   //                     AssessableIncome = CalculateAssessableIncome(e,date),
+			//			IncomeTax = CalculateIncomeTax(e, date)
+			//		};
+			//		db.TAXREPORTs.Add(tAXREPORT);
+			//		db.SaveChanges();
+			//	}
+			//	else continue;
+			//}
 
-            return View(tAXREPORTs.ToList());
+			return View(/*db.TAXREPORTs.ToList()*/);
         }
 
         // GET: TAXREPORTs/Details/5

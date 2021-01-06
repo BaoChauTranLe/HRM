@@ -103,7 +103,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@{ int index = 1; }
+			@*@{ int index = 1; }
 			@foreach (var item in Model)
 			{
 			<tr>
@@ -127,7 +127,7 @@
 					@Html.DisplayFor(modelItem => item.IncomeTax)
 				</td>
 				<td>
-					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+					@Html.ActionLink("Details", "Details", new { id = item.EmployeeID, month = item.Month })
 				</td>
 			</tr>
 			}
@@ -136,7 +136,7 @@
 					Tổng
 				</td>
 				<td>@Model.Sum(i => i.IncomeTax) </td>
-			</tr>
+			</tr>*@
 		</tbody>
 	</table>
 </div>
