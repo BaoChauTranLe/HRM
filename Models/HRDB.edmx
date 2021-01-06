@@ -86,7 +86,7 @@
           <Property Name="Birthplace" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="HomeTown" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Nation" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Id" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="IdNumber" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="10" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="City" Type="nvarchar" MaxLength="70" Nullable="false" />
@@ -111,10 +111,15 @@
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="InsurancePaySalary" Type="int" Nullable="false" />
-          <Property Name="SocialInsurancePay" Type="int" Nullable="false" />
-          <Property Name="HealthInsurancePay" Type="int" Nullable="false" />
-          <Property Name="TotalInsurancePay" Type="int" Nullable="false" />
-          <Property Name="WorkInsurancePay" Type="int" Nullable="false" />
+          <Property Name="PersonalSocialInsurancePay" Type="int" Nullable="false" />
+          <Property Name="PersonalHealthInsurancePay" Type="int" Nullable="false" />
+          <Property Name="PersonalWorkInsurancePay" Type="int" Nullable="false" />
+          <Property Name="BusinessSocialInsurancePay" Type="int" Nullable="false" />
+          <Property Name="BusinessHealthInsurancePay" Type="int" Nullable="false" />
+          <Property Name="BusinessWorkInsurancePay" Type="int" Nullable="false" />
+          <Property Name="UnionFee" Type="int" Nullable="false" />
+          <Property Name="PersonalInsurancePay" Type="int" Nullable="false" />
+          <Property Name="BusinessInsurancePay" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MAJOR">
           <Key>
@@ -190,6 +195,7 @@
           <Key>
             <PropertyRef Name="ShiftID" />
             <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StartDate" />
           </Key>
           <Property Name="ShiftID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
@@ -221,15 +227,15 @@
           </Key>
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="TotalIncome" Type="int" Nullable="false" />
+          <Property Name="StandardSalary" Type="int" Nullable="false" />
           <Property Name="SelfDeduction" Type="int" Nullable="false" />
           <Property Name="DependentDeduction" Type="int" Nullable="false" />
           <Property Name="OverTimeHour" Type="int" Nullable="false" />
-          <Property Name="OverTimeFreeTax" Type="int" Nullable="false" />
+          <Property Name="TaxableOverTime" Type="int" Nullable="false" />
           <Property Name="TaxableIncome" Type="int" Nullable="false" />
           <Property Name="IncomeTax" Type="int" Nullable="false" />
           <Property Name="AssessableIncome" Type="int" Nullable="false" />
-          <Property Name="OverTimeSalary" Type="int" Nullable="false" />
+          <Property Name="TotalInsurancePay" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
           <Key>
@@ -674,7 +680,7 @@
           <Property Name="Birthplace" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HomeTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Id" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
@@ -713,10 +719,15 @@
           <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="InsurancePaySalary" Type="Int32" Nullable="false" />
-          <Property Name="SocialInsurancePay" Type="Int32" Nullable="false" />
-          <Property Name="HealthInsurancePay" Type="Int32" Nullable="false" />
-          <Property Name="TotalInsurancePay" Type="Int32" Nullable="false" />
-          <Property Name="WorkInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="PersonalSocialInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="PersonalHealthInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="PersonalWorkInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="BusinessSocialInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="BusinessHealthInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="BusinessWorkInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="UnionFee" Type="Int32" Nullable="false" />
+          <Property Name="PersonalInsurancePay" Type="Int32" Nullable="false" />
+          <Property Name="BusinessInsurancePay" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__INSURANCE__Emplo__4F12BBB9" FromRole="INSURANCEREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="MAJOR">
@@ -798,6 +809,7 @@
           <Key>
             <PropertyRef Name="ShiftID" />
             <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StartDate" />
           </Key>
           <Property Name="ShiftID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
@@ -831,15 +843,15 @@
           </Key>
           <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="TotalIncome" Type="Int32" Nullable="false" />
+          <Property Name="StandardSalary" Type="Int32" Nullable="false" />
           <Property Name="SelfDeduction" Type="Int32" Nullable="false" />
           <Property Name="DependentDeduction" Type="Int32" Nullable="false" />
           <Property Name="OverTimeHour" Type="Int32" Nullable="false" />
-          <Property Name="OverTimeFreeTax" Type="Int32" Nullable="false" />
+          <Property Name="TaxableOverTime" Type="Int32" Nullable="false" />
           <Property Name="TaxableIncome" Type="Int32" Nullable="false" />
           <Property Name="IncomeTax" Type="Int32" Nullable="false" />
           <Property Name="AssessableIncome" Type="Int32" Nullable="false" />
-          <Property Name="OverTimeSalary" Type="Int32" Nullable="false" />
+          <Property Name="TotalInsurancePay" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__TAXREPORT__Emplo__4C364F0E" FromRole="TAXREPORT" ToRole="EMPLOYEE" />
         </EntityType>
         <EntityType Name="TIMEKEEPING">
@@ -1284,7 +1296,7 @@
                 <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
                 <ScalarProperty Name="HomeTown" ColumnName="HomeTown" />
                 <ScalarProperty Name="Nation" ColumnName="Nation" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -1309,10 +1321,15 @@
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="InsurancePaySalary" ColumnName="InsurancePaySalary" />
-                <ScalarProperty Name="SocialInsurancePay" ColumnName="SocialInsurancePay" />
-                <ScalarProperty Name="HealthInsurancePay" ColumnName="HealthInsurancePay" />
-                <ScalarProperty Name="TotalInsurancePay" ColumnName="TotalInsurancePay" />
-                <ScalarProperty Name="WorkInsurancePay" ColumnName="WorkInsurancePay" />
+                <ScalarProperty Name="PersonalSocialInsurancePay" ColumnName="PersonalSocialInsurancePay" />
+                <ScalarProperty Name="PersonalHealthInsurancePay" ColumnName="PersonalHealthInsurancePay" />
+                <ScalarProperty Name="PersonalWorkInsurancePay" ColumnName="PersonalWorkInsurancePay" />
+                <ScalarProperty Name="BusinessSocialInsurancePay" ColumnName="BusinessSocialInsurancePay" />
+                <ScalarProperty Name="BusinessHealthInsurancePay" ColumnName="BusinessHealthInsurancePay" />
+                <ScalarProperty Name="BusinessWorkInsurancePay" ColumnName="BusinessWorkInsurancePay" />
+                <ScalarProperty Name="UnionFee" ColumnName="UnionFee" />
+                <ScalarProperty Name="PersonalInsurancePay" ColumnName="PersonalInsurancePay" />
+                <ScalarProperty Name="BusinessInsurancePay" ColumnName="BusinessInsurancePay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1426,15 +1443,15 @@
               <MappingFragment StoreEntitySet="TAXREPORT">
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+                <ScalarProperty Name="StandardSalary" ColumnName="StandardSalary" />
                 <ScalarProperty Name="SelfDeduction" ColumnName="SelfDeduction" />
                 <ScalarProperty Name="DependentDeduction" ColumnName="DependentDeduction" />
                 <ScalarProperty Name="OverTimeHour" ColumnName="OverTimeHour" />
-                <ScalarProperty Name="OverTimeFreeTax" ColumnName="OverTimeFreeTax" />
+                <ScalarProperty Name="TaxableOverTime" ColumnName="TaxableOverTime" />
                 <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
                 <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
                 <ScalarProperty Name="AssessableIncome" ColumnName="AssessableIncome" />
-                <ScalarProperty Name="OverTimeSalary" ColumnName="OverTimeSalary" />
+                <ScalarProperty Name="TotalInsurancePay" ColumnName="TotalInsurancePay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

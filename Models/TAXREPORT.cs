@@ -16,15 +16,15 @@ namespace HRM.Models
     {
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
-        public int TotalIncome { get; set; }
+        public int StandardSalary { get; set; }
         public int SelfDeduction { get; set; }
         public int DependentDeduction { get; set; }
         public int OverTimeHour { get; set; }
-        public int OverTimeFreeTax { get; set; }
+        public int TaxableOverTime { get; set; }
         public int TaxableIncome { get; set; }
         public int IncomeTax { get; set; }
         public int AssessableIncome { get; set; }
-        public int OverTimeSalary { get; set; }
+        public int TotalInsurancePay { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

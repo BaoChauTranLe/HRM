@@ -34,7 +34,7 @@ namespace HRM.Models
         public string Birthplace { get; set; }
         public string HomeTown { get; set; }
         public string Nation { get; set; }
-        public string Id { get; set; }
+        public string IdNumber { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string City { get; set; }

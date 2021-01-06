@@ -17,10 +17,15 @@ namespace HRM.Models
         public System.DateTime Month { get; set; }
         public string EmployeeID { get; set; }
         public int InsurancePaySalary { get; set; }
-        public int SocialInsurancePay { get; set; }
-        public int HealthInsurancePay { get; set; }
-        public int TotalInsurancePay { get; set; }
-        public int WorkInsurancePay { get; set; }
+        public int PersonalSocialInsurancePay { get; set; }
+        public int PersonalHealthInsurancePay { get; set; }
+        public int PersonalWorkInsurancePay { get; set; }
+        public int BusinessSocialInsurancePay { get; set; }
+        public int BusinessHealthInsurancePay { get; set; }
+        public int BusinessWorkInsurancePay { get; set; }
+        public int UnionFee { get; set; }
+        public int PersonalInsurancePay { get; set; }
+        public int BusinessInsurancePay { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }
     }

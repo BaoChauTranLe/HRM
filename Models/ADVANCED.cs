@@ -18,7 +18,7 @@ namespace HRM.Models
         public string EmployeeID { get; set; }
         public System.DateTime DateAdvanced { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập giá trị tạm ứng.")]
-        [Range(0, int.MaxValue, ErrorMessage = "Giá trị tạm ứng phải lớn hơn không")]
+        [Range(0, int.MaxValue, ErrorMessage = "Giá trị tạm ứng phải lớn hơn không")] 
         public int Value { get; set; }
     
         public virtual EMPLOYEE EMPLOYEE { get; set; }

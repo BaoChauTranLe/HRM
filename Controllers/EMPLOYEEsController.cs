@@ -68,7 +68,7 @@ namespace HRM.Controllers
             employee.Birthplace = eMPLOYEE.Birthplace;
             employee.HomeTown = eMPLOYEE.HomeTown;
             employee.Nation = eMPLOYEE.Nation;
-            employee.Id = eMPLOYEE.Id;
+            employee.Id = eMPLOYEE.IdNumber;
             employee.Phone = eMPLOYEE.Phone;
             employee.Email = eMPLOYEE.Email;
             employee.City = eMPLOYEE.City;
@@ -384,7 +384,7 @@ namespace HRM.Controllers
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
-                eMPLOYEE.Id = employee.Id;
+                eMPLOYEE.IdNumber = employee.Id;
                 eMPLOYEE.Phone = employee.Phone;
                 eMPLOYEE.Email = employee.Email;
                 eMPLOYEE.City = employee.City;
@@ -554,7 +554,7 @@ namespace HRM.Controllers
             employee.Birthplace = eMPLOYEE.Birthplace;
             employee.HomeTown = eMPLOYEE.HomeTown;
             employee.Nation = eMPLOYEE.Nation;
-            employee.Id = eMPLOYEE.Id;
+            employee.Id = eMPLOYEE.IdNumber;
             employee.Phone = eMPLOYEE.Phone;
             employee.Email = eMPLOYEE.Email;
             employee.City = eMPLOYEE.City;
@@ -724,7 +724,7 @@ namespace HRM.Controllers
                 eMPLOYEE.Birthplace = employee.Birthplace;
                 eMPLOYEE.HomeTown = employee.HomeTown;
                 eMPLOYEE.Nation = employee.Nation;
-                eMPLOYEE.Id = employee.Id;
+                eMPLOYEE.IdNumber = employee.Id;
                 eMPLOYEE.Phone = employee.Phone;
                 eMPLOYEE.Email = employee.Email;
                 eMPLOYEE.City = employee.City;

@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="db76f51e217a48ddac0d5ed974c0f815" Name="Diagram1">
-        <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCED" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCE" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCEDETAIL" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
+      <Diagram DiagramId="0be490478f864697bb51162e999be187" Name="Diagram1">
+        <EntityTypeShape EntityType="hrmserver_HRMModel.ADVANCED" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCE" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.ALLOWANCEDETAIL" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.CERTIFICATEDETAIL" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.CONTRACT" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.DATEINFORMATION" Width="1.5" PointX="9" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.EDUCATIONDETAIL" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.EMPLOYEE" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.INSURANCEREPORT" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.MAJOR" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.CONTRACT" Width="1.5" PointX="0.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.DATEINFORMATION" Width="1.5" PointX="6" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.EDUCATIONDETAIL" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.EMPLOYEE" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.INSURANCEREPORT" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.MAJOR" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.PARAMETER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.POSITION" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.ROOM" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.SALARYREPORT" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFT" Width="1.5" PointX="6" PointY="47.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFTDETAIL" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.POSITION" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.ROOM" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.SALARYREPORT" Width="1.5" PointX="5.25" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFT" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.SHIFTDETAIL" Width="1.5" PointX="8.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hrmserver_HRMModel.TAXRATE" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXREPORT" Width="1.5" PointX="5.25" PointY="32.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPING" Width="1.5" PointX="11.25" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPINGREPORT" Width="1.5" PointX="5.25" PointY="39.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hrmserver_HRMModel.USER" Width="1.5" PointX="5.25" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.TAXREPORT" Width="1.5" PointX="5.25" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPING" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.TIMEKEEPINGREPORT" Width="1.5" PointX="5.25" PointY="40.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hrmserver_HRMModel.USER" Width="1.5" PointX="5.25" PointY="44.625" IsExpanded="true" />
         <AssociationConnector Association="hrmserver_HRMModel.FK__ADVANCED__Employ__56B3DD81" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.FK__ALLOWANCE__Allow__46486B8E" ManuallyRouted="false" />
         <AssociationConnector Association="hrmserver_HRMModel.FK__ALLOWANCE__Emplo__473C8FC7" ManuallyRouted="false" />
