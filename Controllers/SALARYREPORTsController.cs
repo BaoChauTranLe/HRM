@@ -338,7 +338,7 @@ namespace HRM.Controllers
 		}
         public ActionResult Load()
 		{
-            DateTime date = new DateTime(2020, 12, 1, 0, 0, 0);
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
             //var sALARYREPORT = db.SALARYREPORTs.Where(x => x.Month == date).ToList();
             var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
             foreach (EMPLOYEE e in employeelist)
