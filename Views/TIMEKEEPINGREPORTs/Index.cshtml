@@ -54,147 +54,156 @@
 		border-radius: 4px;
 	}
 </style>
+	@using (Html.BeginForm("Index", "TIMEKEEPINGREPORTs", FormMethod.Post))
+	{
+		<div class="control-label" style="text-align:left;">Chọn tháng</div>
+		@Html.TextBox("Month", null, htmlAttributes: new { @type = "month", @class = "index-txtbox" })
 
-<div style="margin-top:20px;">
-	@*<input type="month" class="index-txtbox">*@
+		<input type="submit" value="Xem" id="btnSubmit" class="search-button" />
+	}
+	<div style="margin-top:20px;">
+		@*<input type="month" class="index-txtbox">*@
 
-	<select class="index-txtbox drop-down-list">
-		<option value="Tất cả phòng">Tất cả phòng</option>
-		<option value="Phòng nhân sự">Phòng nhân sự</option>
-		<option value="Phòng kế toán">Phòng kế toán</option>
-		<option value="Phòng giám đốc">Phòng giám đốc</option>
-	</select>
+		<select class="index-txtbox drop-down-list">
+			<option value="Tất cả phòng">Tất cả phòng</option>
+			<option value="Phòng nhân sự">Phòng nhân sự</option>
+			<option value="Phòng kế toán">Phòng kế toán</option>
+			<option value="Phòng giám đốc">Phòng giám đốc</option>
+		</select>
 
-	<select class="index-txtbox drop-down-list">
-		<option value="Tất cả chức vụ">Tất cả chức vụ</option>
-		<option value="Giám đốc">Giám đốc</option>
-		<option value="Trưởng phòng">Trưởng phòng</option>
-		<option value="Phó phòng">Phó phòng</option>
-		<option value="Nhân viên">Nhân viên</option>
-	</select>
+		<select class="index-txtbox drop-down-list">
+			<option value="Tất cả chức vụ">Tất cả chức vụ</option>
+			<option value="Giám đốc">Giám đốc</option>
+			<option value="Trưởng phòng">Trưởng phòng</option>
+			<option value="Phó phòng">Phó phòng</option>
+			<option value="Nhân viên">Nhân viên</option>
+		</select>
 
-	<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
-	<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
-
-</div>
-@using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-	<input type="month" class="index-txtbox" name="Month" id="Month" style="margin-top:20px;">
-	<div class="form-horizontal">
-		<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
-
-		<div class="col-md-1" style="padding-left: 0px;">
-			<input type="submit" value="Cập nhật" id="btnSubmit" class="" />
-		</div>
-		<div class="col-md-1" style="padding-top:2px; padding-left:5px;">
-			<input type="file" id="FileUpload" name="FileUpload" class="" />
-		</div>
+		<input type="text" class="index-txtbox" placeholder="Tìm nhân viên" style="width:250px;" />
+		<input type="button" class="search-button" value="Tìm kiếm" style="padding-left:15px; padding-right:15px" />
 
 	</div>
-}
-<div class="fresh-table">
-	<table class="fresh-table" id="fresh-table" width="100%">
-		<thead>
-			<tr>
-				<th>
-					@Html.DisplayName("STT")
-				</th>
-				<th>
-					@Html.DisplayName("Tên nhân viên")
-				</th>
-				<th>
-					@Html.DisplayName("Phòng")
-				</th>
-				<th>
-					@Html.DisplayName("Chức vụ")
-				</th>
-				<th>
-					@Html.DisplayName("Số ngày đi làm")
-				</th>
-				<th>
-					@Html.DisplayName("Số ngày nghỉ có lương")
-				</th>
-				<th>
-					@Html.DisplayName("Số ngày nghỉ không lương")
-				</th>
-			</tr>
-		</thead>
 
-		@{ int index = 1; }
-		@foreach (var item in Model)
+	<div style="margin-top:20px;">
+		@using (Html.BeginForm("UploadExcel", "TIMEKEEPINGREPORTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 		{
-			<tr>
-				<td>
-					@index
-				</td>
-				@{ index++; }
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.SumWorkDay)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.SumAbsentHaveSalary)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.SumAbsentNoSalary)
-				</td>
-			</tr>
+			<input type="month" class="index-txtbox" name="Month" id="Month">
+			<div class="form-horizontal">
+				<div class="control-label" style="text-align:left;">Import dữ liệu từ file excel:</div>
+
+				<div class="col-md-1" style="padding-left: 0px;">
+					<input type="submit" value="Cập nhật" id="btnSubmit" class="" />
+				</div>
+				<div class="col-md-1" style="padding-top:2px; padding-left:5px;">
+					<input type="file" id="FileUpload" name="FileUpload" class="" />
+				</div>
+
+			</div>
 		}
-		<tr>
-			<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
-			<td> @Model.Sum(i => i.SumWorkDay)</td>
-			<td> @Model.Sum(i => i.SumAbsentHaveSalary)</td>
-			<td> @Model.Sum(i => i.SumAbsentNoSalary)</td>
-		</tr>
+	</div>
+		<div class="fresh-table">
+			<table class="fresh-table" id="fresh-table" width="100%">
+				<thead>
+					<tr>
+						<th>
+							@Html.DisplayName("STT")
+						</th>
+						<th>
+							@Html.DisplayName("Tên nhân viên")
+						</th>
+						<th>
+							@Html.DisplayName("Phòng")
+						</th>
+						<th>
+							@Html.DisplayName("Chức vụ")
+						</th>
+						<th>
+							@Html.DisplayName("Số ngày đi làm")
+						</th>
+						<th>
+							@Html.DisplayName("Số ngày nghỉ có lương")
+						</th>
+						<th>
+							@Html.DisplayName("Số ngày nghỉ không lương")
+						</th>
+					</tr>
+				</thead>
 
-	</table>
-</div>
+				@{ int index = 1; }
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@index
+						</td>
+						@{ index++; }
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.EmployeeName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.ROOM.RoomName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPLOYEE.POSITION.PositionName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SumWorkDay)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SumAbsentHaveSalary)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SumAbsentNoSalary)
+						</td>
+					</tr>
+				}
+				<tr>
+					<td colspan="4" style="border-color: #DFE0EB !important;">Tổng</td>
+					<td> @Model.Sum(i => i.SumWorkDay)</td>
+					<td> @Model.Sum(i => i.SumAbsentHaveSalary)</td>
+					<td> @Model.Sum(i => i.SumAbsentNoSalary)</td>
+				</tr>
 
-<script>
-	var $table = $('#fresh-table')
-	$(function () {
-		$table.bootstrapTable({
-			classes: 'table table-hover table-responsive',
-			pagination: true,
-			striped: true,
-			toolbar: '.toolbar',
-			pageSize: 8,
-			pageList: [8, 10, 25, 50, 100],
+			</table>
+		</div>
 
-			formatShowingRows: function (pageFrom, pageTo, totalRows) {
-				return ''
-			},
-			formatRecordsPerPage: function (pageNumber) {
-				return pageNumber + ' rows visible'
-			}
-		})
-	})
-	const monthControl = document.querySelector('input[type="month"]');
-	const date = new Date()
-	const month = ("0" + (date.getMonth() + 1)).slice(-2)
-	const year = date.getFullYear()
-	monthControl.value = `${year}-${month}`;
+		<script>
+			var $table = $('#fresh-table')
+			$(function () {
+				$table.bootstrapTable({
+					classes: 'table table-hover table-responsive',
+					pagination: true,
+					striped: true,
+					toolbar: '.toolbar',
+					pageSize: 8,
+					pageList: [8, 10, 25, 50, 100],
 
-	//$('#Month').on('change', function () {
-	//	var date = new Date($(this).val());
-	//	$.ajax({
-	//		url: '/TIMEKEEPINGREPORTs/Index',
-	//		contentType: "application/json; charset=utf-8",
-	//		data: 'date',
-	//		success: function (data) {
-				
-	//		},
-	//		error: function (error) {
-				
-	//		}
-	//	})
-	//});
-</script>
+					formatShowingRows: function (pageFrom, pageTo, totalRows) {
+						return ''
+					},
+					formatRecordsPerPage: function (pageNumber) {
+						return pageNumber + ' rows visible'
+					}
+				})
+			})
+			const monthControl = document.querySelector('input[type="month"]');
+			const date = new Date()
+			const month = ("0" + (date.getMonth() + 1)).slice(-2)
+			const year = date.getFullYear()
+			monthControl.value = `${year}-${month}`;
+
+				//$('#Month').on('change', function () {
+				//	var date = new Date($(this).val());
+				//	$.ajax({
+				//		url: '/TIMEKEEPINGREPORTs/Index',
+				//		contentType: "application/json; charset=utf-8",
+				//		data: 'date',
+				//		success: function (data) {
+
+				//		},
+				//		error: function (error) {
+
+				//		}
+				//	})
+				//});
+		</script>

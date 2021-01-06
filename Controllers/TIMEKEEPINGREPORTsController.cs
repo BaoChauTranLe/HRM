@@ -22,8 +22,20 @@ namespace HRM.Controllers
         // GET: TIMEKEEPINGREPORTs
         public ActionResult Index(/*DateTime date*/)
         {
-            var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
-            return View(tIMEKEEPINGREPORTs.ToList());
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+            var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Where(x => x.Month == date).ToList();
+            //var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);
+            return View(tIMEKEEPINGREPORTs);
+        }
+        [HttpPost]
+        public ActionResult Index(TIMEKEEPINGREPORT rp)
+        {
+            var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Where(x => x.Month == rp.Month).ToList();
+            if (tIMEKEEPINGREPORTs == null)
+            {
+                return View();
+            }
+            return View(tIMEKEEPINGREPORTs);
         }
         // GET: TIMEKEEPINGREPORTs
         [HttpPost]
@@ -63,44 +75,50 @@ namespace HRM.Controllers
                     //DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 12, 0, 0, 0, 0);
                     foreach (var a in artistAlbums)
                     {
-                        try
-                        {
-                            if (a.EmployeeID != null)
+                        if(db.TIMEKEEPINGREPORTs.Count(x => x.EmployeeID == a.EmployeeID && x.Month == timekeepingsRP.Month) == 0)
+						{
+                            try
                             {
-                                TIMEKEEPINGREPORT TU = new TIMEKEEPINGREPORT();
-                                TU.Month = timekeepingsRP.Month;
-                                TU.EmployeeID = a.EmployeeID;
-                                TU.SumWorkDay = a.SumWorkDay;
-                                TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
-                                TU.SumAbsentNoSalary = a.SumAbsentNoSalary;
-                                TU.SumHourNormal = a.SumHourNormal;
-                                TU.SumHourDayOff = a.SumHourDayOff;
-                                TU.SumHourSpecialDayOff = a.SumHourSpecialDayOff;
-                                TU.SumHourNightSpecialDayOff = a.SumHourNightSpecialDayOff;
-                                //TU.SumHourNightSpecialDayOffExtra = a.SumHourNightSpecialDayOff;
-                                TU.SumHourNightNormal = a.SumHourNightNormal;
-                                //TU.SumHourNightNormalExtra = a.SumHourNightNormalExtra;
-                                TU.SumHourNightDayOff = a.SumHourNightDayOff;
-                                //TU.SumHourNightDayOffExtra = a.SumHourNightDayOffExtra;
-                                db.TIMEKEEPINGREPORTs.Add(TU);
-                                db.SaveChanges();
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-
-                        catch (DbEntityValidationException ex)
-                        {
-                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                            {
-                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                if (a.EmployeeID != null)
                                 {
-                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    TIMEKEEPINGREPORT TU = new TIMEKEEPINGREPORT();
+                                    TU.Month = timekeepingsRP.Month;
+                                    TU.EmployeeID = a.EmployeeID;
+                                    TU.SumWorkDay = a.SumWorkDay;
+                                    TU.SumAbsentHaveSalary = a.SumAbsentHaveSalary;
+                                    TU.SumAbsentNoSalary = a.SumAbsentNoSalary;
+                                    TU.SumHourNormal = a.SumHourNormal;
+                                    TU.SumHourDayOff = a.SumHourDayOff;
+                                    TU.SumHourSpecialDayOff = a.SumHourSpecialDayOff;
+                                    TU.SumHourNightSpecialDayOff = a.SumHourNightSpecialDayOff;
+                                    //TU.SumHourNightSpecialDayOffExtra = a.SumHourNightSpecialDayOff;
+                                    TU.SumHourNightNormal = a.SumHourNightNormal;
+                                    //TU.SumHourNightNormalExtra = a.SumHourNightNormalExtra;
+                                    TU.SumHourNightDayOff = a.SumHourNightDayOff;
+                                    //TU.SumHourNightDayOffExtra = a.SumHourNightDayOffExtra;
+                                    db.TIMEKEEPINGREPORTs.Add(TU);
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            catch (DbEntityValidationException ex)
+                            {
+                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                                {
+                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                    {
+                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    }
                                 }
                             }
                         }
+						else
+						{
+                            continue;
+						}
                     }
                     //deleting excel file from folder  
                     if ((System.IO.File.Exists(pathToExcelFile)))
@@ -111,7 +129,6 @@ namespace HRM.Controllers
                 }
                 else
                 {
-                   
                     return Content("<script language='javascript' type='text/javascript'>alert('Format file không đúng');</script>");
                 }
             }

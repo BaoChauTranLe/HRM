@@ -14,10 +14,169 @@ namespace HRM.Controllers
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
 
+        #region Allowance Calculation
+        public int CalculateCommonAllowance()
+        {
+            var commonList = db.ALLOWANCEs.Where(x => x.AllEmployee == true).ToList();
+            int sum = 0;
+            foreach (ALLOWANCE a in commonList)
+            {
+                sum += (int)a.Value;
+            }
+            return sum;
+        }
+        public int CalculateSpecificAllowance(EMPLOYEE e, DateTime month)
+        {
+            var allowanceList = db.ALLOWANCEDETAILs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year).ToList();
+            int sum = 0;
+            foreach (ALLOWANCEDETAIL a in allowanceList)
+            {
+                sum += a.Value;
+            }
+            return sum;
+        }
+        public int CalculateTotalAllowance(EMPLOYEE e, DateTime month)
+        {
+            return CalculateCommonAllowance() + CalculateSpecificAllowance(e, month);
+        }
+        #endregion
+
+        #region Insurance Pay Calculation related
+        public int CalculateMustPayInsuranceAllowance(EMPLOYEE e, DateTime month)
+        {
+            int sum = 0;
+            var commonMustPayList = db.ALLOWANCEs.Where(x => x.Insurance == true && x.AllEmployee == true).ToList();
+            foreach (ALLOWANCE a in commonMustPayList)
+            {
+                sum += (int)a.Value;
+            }
+            var specificMustPayList = db.ALLOWANCEDETAILs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == month.Month && x.Month.Year == month.Year && x.ALLOWANCE.Insurance == true).ToList();
+            foreach (ALLOWANCEDETAIL a in specificMustPayList)
+            {
+                sum += a.Value;
+            }
+            return sum;
+        }
+        public int CalculateInsurancePaySalary(EMPLOYEE e, DateTime month)
+        {
+            return e.CONTRACT.BasicSalary + CalculateMustPayInsuranceAllowance(e, month);
+        }
+        public int CalculateSocialInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHXH").Value) / 100;
+        }
+        public int CalculateHealthInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHYT").Value / 100);
+        }
+        public int CalculateWorkInsurancePay(int insurancePaySalary)
+        {
+            return (int)(insurancePaySalary * db.PARAMETERs.Find("BHTN").Value) / 100;
+        }
+        public int CalculateTotalInsurancePay(EMPLOYEE e, DateTime month)
+        {
+            if (e.FreeInsurance == true)
+                return 0;
+            int insurancePaySalary = CalculateInsurancePaySalary(e, month);
+            return CalculateSocialInsurancePay(insurancePaySalary) + CalculateHealthInsurancePay(insurancePaySalary) + CalculateWorkInsurancePay(insurancePaySalary);
+        }
+
+        #endregion
+
+        public bool CheckLowerThan3Month(DateTime startDate, DateTime endDate)
+        {
+            DateTime threeMonthAfterStart = startDate.AddMonths(3);
+            if (DateTime.Compare(endDate, threeMonthAfterStart) < 0)
+                return true;
+            return false;
+        }
+
+        public int CalculateStandardHourSalary(EMPLOYEE e)
+        {
+            return (int)(e.CONTRACT.BasicSalary / db.PARAMETERs.Find("SoNgayCongChuan").Value / db.PARAMETERs.Find("SoGioCongChuan").Value);
+        }
+
+        public int CalculateStandardSalary(EMPLOYEE e, DateTime month)
+        {
+            return e.CONTRACT.BasicSalary + CalculateTotalAllowance(e, month);
+        }
+
+        #region Income Tax Calculation related
+        public int CalculateAllowanceFreeTaxValue()
+        {
+            int sum = 0;
+            var freeTaxList = db.ALLOWANCEs.Where(x => x.FreeTax == true).ToList();
+            foreach (ALLOWANCE a in freeTaxList)
+            {
+                sum += (int)a.FreeTaxValue;
+            }
+            return sum;
+        }
+        public int CalculateTotalWorkHour(EMPLOYEE e, DateTime month)
+        {
+            var timekeepingInfo = db.TIMEKEEPINGREPORTs.Find(month, e.EmployeeID);
+            return (int)(timekeepingInfo.SumHourNormal
+                       + timekeepingInfo.SumHourDayOff
+                       + timekeepingInfo.SumHourSpecialDayOff
+                       + timekeepingInfo.SumHourNightNormal
+                       + timekeepingInfo.SumHourNightDayOff
+                       + timekeepingInfo.SumHourNightSpecialDayOff);
+        }
+        public int CalculateTaxableOvertimeSalary(EMPLOYEE e, DateTime month)
+        {
+            return CalculateStandardHourSalary(e) * CalculateTotalWorkHour(e, month);
+        }
+        public int CalculateTaxableIncome(EMPLOYEE e, DateTime month)
+        {
+            return CalculateStandardSalary(e, month)
+                 + CalculateTaxableOvertimeSalary(e, month)
+                 - CalculateAllowanceFreeTaxValue();
+        }
+        public int CalculateAssessableIncome(EMPLOYEE e, DateTime month)
+        {
+            int taxable = CalculateTaxableIncome(e, month);
+            if (CheckLowerThan3Month(e.CONTRACT.DateStartWork, e.CONTRACT.ContractExpirationDate))
+            {
+                if (taxable < db.PARAMETERs.Find("ThuNhapChiuThueToiThieuHDDuoi3Thang").Value)
+                    return 0;
+                return taxable;
+            }
+            int deduction = (int)db.PARAMETERs.Find("MucGiamTruNguoiPhuThuoc").Value * e.DependentDeduction + CalculateTotalInsurancePay(e, month);
+            if (e.SelfDeduction == true)
+                deduction += (int)db.PARAMETERs.Find("MucGiamTruBanThan").Value;
+            if (taxable > deduction)
+                return taxable - deduction;
+            return 0;
+        }
+        public int CalculateIncomeTax(EMPLOYEE e, DateTime month)
+        {
+            int incomeTax = 0;
+            int assessable = CalculateAssessableIncome(e, month);
+            if (assessable == 0)
+                return 0;
+            if (CheckLowerThan3Month(e.CONTRACT.DateStartWork, e.CONTRACT.ContractExpirationDate))
+                return (int)(assessable * db.PARAMETERs.Find("HSThueHDDuoi3Thang").Value / 100);
+            int taxLevel = 1;
+            var taxRateList = db.TAXRATEs.ToList();
+            for (int i = taxRateList.Count - 1; i > 0; i--)
+                if (assessable >= taxRateList[i].Min)
+                {
+                    taxLevel = taxRateList[i].Rank;
+                    break;
+                }
+            for (int i = 0; i < taxLevel - 1; i++)
+            {
+                incomeTax += (taxRateList[i + 1].Min - taxRateList[i].Min) * taxRateList[i].Rate / 100;
+            }
+            incomeTax += (assessable - taxRateList[taxLevel - 1].Min) * taxRateList[taxLevel - 1].Rate / 100;
+            return incomeTax;
+        }
+        #endregion
         // GET: TAXREPORTs
         public ActionResult Index()
         {
             var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
+
             return View(tAXREPORTs.ToList());
         }
 

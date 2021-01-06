@@ -123,7 +123,8 @@
 		</div>
 		</div>
 		<div class="form-group create-margin" style="margin-top:30px;">
-			<input type="month" class="index-txtbox" name="Month" id="Month">
+			@Html.TextBox("Month", null, htmlAttributes: new { @type = "month", @class = "index-txtbox" })
+			@*<input type="month" class="index-txtbox" name="Month" id="Month">*@
 		</div>
 
 		<div class="form-group" style="margin-left:395px; margin-top:40px;">
