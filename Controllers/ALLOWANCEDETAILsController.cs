@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Bảng chi tiết phụ cấp, trợ cấp, thưởng";
             var aLLOWANCEDETAILs = db.ALLOWANCEDETAILs.Include(a => a.ALLOWANCE).Include(a => a.EMPLOYEE);
             return View(aLLOWANCEDETAILs.ToList());
         }
@@ -43,6 +45,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Create
         public ActionResult Create()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Thêm chi tiết phụ cấp, trợ cấp, thưởng";
             ViewBag.AllowanceID = new SelectList(db.ALLOWANCEs.Where(i => i.AllEmployee == false).ToList(), "AllowanceID", "AllowanceName");
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
@@ -70,6 +74,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Edit/5
         public ActionResult Edit(string id, string employee,  DateTime month)
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Sửa chi tiết phụ cấp, trợ cấp, thưởng";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

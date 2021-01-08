@@ -223,7 +223,9 @@ namespace HRM.Controllers
         // GET: TAXREPORTs
         public ActionResult Index()
         {
-			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+            Session["MainTitle"] = "Báo cáo tiền lương";
+            Session["SubTitle"] = "Thuế TNCN";
+            DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
 			//var tAXREPORTs = db.TAXREPORTs.Include(t => t.EMPLOYEE);
 			var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
 			foreach (EMPLOYEE e in employeelist)

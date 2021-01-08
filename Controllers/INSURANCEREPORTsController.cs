@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: INSURANCEREPORTs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Báo cáo tiền lương";
+            Session["SubTitle"] = "Bảo hiểm";
             var iNSURANCEREPORTs = db.INSURANCEREPORTs.Include(i => i.EMPLOYEE);
             return View(iNSURANCEREPORTs.ToList());
         }

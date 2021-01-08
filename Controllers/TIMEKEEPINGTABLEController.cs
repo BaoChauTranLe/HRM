@@ -16,6 +16,8 @@ namespace HRM.Controllers
         // GET: TIMEKEEPING
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý chấm công";
+            Session["SubTitle"] = "Bảng chấm công";
             ViewBag.ListOfShiftType = SelectListItemHelper.GetShiftTypeList();
             
             return View();

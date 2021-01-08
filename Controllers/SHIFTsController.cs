@@ -18,6 +18,8 @@ namespace HRM.Controllers
         // GET: SHIFTs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý chấm công";
+            Session["SubTitle"] = "Danh sách ca làm việc";
             //db.SHIFTs.ToList();
             ViewBag.ListOfShiftType = SelectListItemHelper.GetShiftTypeList();
             return View();

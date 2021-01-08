@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: ADVANCEDs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Bảng lương tạm ứng";
             var aDVANCEDs = db.ADVANCEDs.Include(a => a.EMPLOYEE);
             return View(aDVANCEDs.ToList());
         }
@@ -42,6 +44,8 @@ namespace HRM.Controllers
         }
         public ActionResult Create()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Thêm thông tin tạm ứng";
             ViewBag.EmployeeID = new SelectList(db.EMPLOYEEs, "EmployeeID", "EmployeeName");
             return View();
         }
@@ -81,6 +85,8 @@ namespace HRM.Controllers
 
         public ActionResult Edit(string id, DateTime date)
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Sửa thông tin tạm ứng";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -115,6 +121,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Delete/5
         public ActionResult Delete(string id, DateTime date)
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Xóa thông tin tạm ứng";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

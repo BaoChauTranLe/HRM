@@ -22,6 +22,8 @@ namespace HRM.Controllers
         // GET: TIMEKEEPINGREPORTs
         public ActionResult Index(/*DateTime date*/)
         {
+            Session["MainTitle"] = "Báo cáo chấm công";
+            Session["SubTitle"] = "Chấm công tháng";
             DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
             var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Where(x => x.Month == date).ToList();
             //var tIMEKEEPINGREPORTs = db.TIMEKEEPINGREPORTs.Include(t => t.EMPLOYEE);

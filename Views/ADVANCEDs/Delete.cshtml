@@ -5,25 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Bạn chắc chắn muốn xóa?</h3>
+<h3>Bạn có chắc chắn muốn xóa?</h3>
 <div>
-    <h4>ADVANCED</h4>
+    <h4>Thông tin tạm ứng</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Value)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Value)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EMPLOYEE.EmployeeName)
+            @Html.DisplayName("Tên nhân viên")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.EMPLOYEE.EmployeeName)
+            
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Số tiền")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
         </dd>
 
     </dl>
@@ -32,8 +33,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về", "Index")
         </div>
     }
 </div>

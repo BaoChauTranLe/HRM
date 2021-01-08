@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Bảng phụ cấp, trợ cấp, thưởng";
             return View();
         }
 
@@ -40,6 +42,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEs/Create
         public ActionResult Create()
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Thêm phụ cấp, trợ cấp, thưởng";
             return View();
         }
 
@@ -106,6 +110,8 @@ namespace HRM.Controllers
         // GET: ALLOWANCEDETAILs/Edit/5
         public ActionResult Edit(string id)
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Sửa phụ cấp, trợ cấp, thưởng";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

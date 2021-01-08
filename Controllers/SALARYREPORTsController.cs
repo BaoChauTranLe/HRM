@@ -286,42 +286,6 @@ namespace HRM.Controllers
         {
 			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
 			var sALARYREPORT = db.SALARYREPORTs.Where(x => x.Month == date ).ToList();
-            
-            //var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
-            //foreach (EMPLOYEE e in employeelist)
-            //{
-            //    if (db.SALARYREPORTs.Count(x => x.EmployeeID == e.EmployeeID && x.Month == date) == 0)
-            //    {
-            //        int hourPay = CalculateStandardHourSalary(e);
-            //        var report = db.TIMEKEEPINGREPORTs.Find(date, e.EmployeeID);
-            //        var sALARYREPORT = new SALARYREPORT
-            //        {
-            //            EmployeeID = e.EmployeeID,
-            //            EMPLOYEE = e,
-            //            Month = date,
-            //            AbsentHaveSalary = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumAbsentHaveSalary,
-            //            AbsentHaveSalaryValue = CalculateAbsentSalary(e, date),
-            //            NormalOverTimeSalary = CalculateNormalOvertimeSalary(report, hourPay),
-            //            DayOffOverTimeSalary = CalculateDayOffOvertimeSalary(report, hourPay),
-            //            SpecialDayOffOverTimeSalary = CalculateSpecialDayOffOvertimeSalary(report, hourPay),
-            //            NightNormalOverTimeSalary = CalculateNightNormalOvertimeSalary(report, hourPay),
-            //            NightDayOffOverTimeSalary = CalculateNightDayOffOvertimeSalary(report, hourPay),
-            //            NightSpecialDayOffOverTimeSalary = CalculateNightSpecialDayOffOvertimeSalary(report, hourPay),
-            //            OverTimeSalary = CalculateOvertimeSalary(e, date),
-            //            Allowance = CalculateTotalAllowance(e, date),
-            //            Advance = CalculateAdvanced(e, date),
-            //            IncomeTax = CalculateIncomeTax(e, date),
-            //            StandardSalary = CalculateStandardSalary(e, date),
-            //            WorkDay = db.TIMEKEEPINGREPORTs.Where(x => x.EmployeeID == e.EmployeeID && x.Month.Month == date.Month && x.Month.Year == date.Year).First().SumWorkDay,
-            //            WorkDaySalary = CalculateWorkDaySalary(e, date),
-            //            TotalInsurancePay = CalculateTotalInsurancePay(e, date),
-            //            RealSalary = CalculateSalary(e, date)
-            //        };
-            //        db.SALARYREPORTs.Add(sALARYREPORT);
-            //        db.SaveChanges();
-            //    }
-            //    else continue;
-            //}
 
             return View(sALARYREPORT);
         }
@@ -329,6 +293,8 @@ namespace HRM.Controllers
         [HttpPost]
         public ActionResult Index(SALARYREPORT rp)
 		{
+            Session["MainTitle"] = "Báo cáo tiền lương";
+            Session["SubTitle"] = "Tiền lương";
             var sALARYREPORT = db.SALARYREPORTs.Where(x=>x.Month==rp.Month).ToList();
             if (sALARYREPORT == null)
             {
@@ -338,6 +304,8 @@ namespace HRM.Controllers
 		}
         public ActionResult Load()
 		{
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Bảng lương tháng";
             DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
             //var sALARYREPORT = db.SALARYREPORTs.Where(x => x.Month == date).ToList();
             var employeelist = db.EMPLOYEEs.Where(x => x.State == true).ToList();
@@ -382,6 +350,8 @@ namespace HRM.Controllers
         // GET: SALARYREPORTs/Details/5
         public ActionResult Details(string id, DateTime month)
         {
+            Session["MainTitle"] = "Quản lý tiền lương";
+            Session["SubTitle"] = "Bảng lương chi tiết";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
