@@ -17,12 +17,16 @@ namespace HRM.Controllers
         // GET: TAXRATEs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Thuế suất";
             return View(db.TAXRATEs.ToList());
         }
 
         // GET: TAXRATEs/Create
         public ActionResult Create()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Thêm bậc thuế suất";
             return View();
         }
 
@@ -60,6 +64,8 @@ namespace HRM.Controllers
         // GET: BONUSs/Edit/5
         public ActionResult Edit(int? id)
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Sửa bậc thuế suất";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +120,8 @@ namespace HRM.Controllers
         // GET: TAXRATEs/Delete/5
         public ActionResult Delete(int? id)
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Xóa bậc thuế suất";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -544,15 +544,15 @@
     <!-- The topbar -->
     <div class="topbar">
         <div class="container">
-             @*<div class="title">
-        <div class="title__main">
-            Title
-        </div>
-        <span class="gg-chevron-double-right"></span>
-        <div class="title__sub">
-            Title
-        </div>
-		</div>*@ 
+        <div class="title">
+			<div class="title__main">
+				@Session["MainTitle"]
+			</div>
+			<span class="gg-chevron-double-right"></span>
+			<div class="title__sub">
+				@Session["SubTitle"]
+			</div>
+		</div> 
 
             <div class="user__name">
                 @if (Session["EmployeeID"] != null)
@@ -562,7 +562,7 @@
             </div>
 
             <div class="user__ava">
-                Anh
+                Ảnh
             </div>
 
             <div class="user__infor">

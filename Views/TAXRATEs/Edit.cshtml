@@ -81,7 +81,7 @@
     @Html.HiddenFor(model => model.Rank)
 
     <div class="form-group taxrate-create-margin" style="margin-top: 96px; height: 110px;">
-        @Html.Label("Phần thu nhập tính thuế / tháng (triệu đồng)", htmlAttributes: new { @class = "taxrate-create-lbl" })
+        @Html.Label("Phần thu nhập tính thuế / tháng (VNĐ)", htmlAttributes: new { @class = "taxrate-create-lbl" })
         <br />
         @Html.TextBoxFor(model => model.Min, "", new { @id = "min", @class = "taxrate-create-txtbox", @placeholder = "Từ ..." })
         @Html.ValidationMessageFor(model => model.Min, "", new { @class = "taxrate-error-msg" })

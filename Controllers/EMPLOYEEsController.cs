@@ -50,6 +50,8 @@ namespace HRM.Controllers
         // GET: EMPLOYEEs/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            Session["MainTitle"] = "Quản lý nhân sự";
+            Session["SubTitle"] = "Thông tin nhân viên";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
