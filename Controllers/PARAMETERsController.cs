@@ -11,16 +11,16 @@ namespace HRM.Controllers
     {
         private hrmserver_HRMEntities db = new hrmserver_HRMEntities();
         // GET: PARAMETERs
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult Employee()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Hồ sơ nhân viên";
             return View();
         }
         public ActionResult EmployeeEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa quy định hồ sơ nhân viên";
             return View();
         }
         [HttpPost]
@@ -40,10 +40,14 @@ namespace HRM.Controllers
         }
         public ActionResult CoefficientsOTSalary()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Hệ số lương làm thêm";
             return View();
         }
         public ActionResult CoefficientsOTSalaryEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa hệ số lương làm thêm";
             return View();
         }
         [HttpPost]
@@ -64,10 +68,14 @@ namespace HRM.Controllers
         }
         public ActionResult IncomeTax()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Thuế thu nhập cá nhân";
             return View();
         }
         public ActionResult IncomeTaxEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa quy định thuế thu nhập cá nhân";
             return View();
         }
         [HttpPost]
@@ -86,10 +94,14 @@ namespace HRM.Controllers
         }
         public ActionResult Insurance()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Tỷ lệ trích bảo hiểm";
             return View();
         }
         public ActionResult InsuranceEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa tỷ lệ trích bảo hiểm";
             return View();
         }
         [HttpPost]
@@ -111,10 +123,14 @@ namespace HRM.Controllers
         }
         public ActionResult StandardWork()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Số ngày/giờ công chuẩn";
             return View();
         }
         public ActionResult StandardWorkEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa số ngày/giờ công chuẩn";
             return View();
         }
         [HttpPost]
@@ -131,10 +147,14 @@ namespace HRM.Controllers
         }
         public ActionResult Advance()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Tạm ứng lương";
             return View();
         }
         public ActionResult AdvanceEdit()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chỉnh sửa quy định tạm ứng lương";
             return View();
         }
         [HttpPost]

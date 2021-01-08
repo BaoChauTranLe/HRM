@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: ROOMs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Phòng ban";
             return View();
         }
 

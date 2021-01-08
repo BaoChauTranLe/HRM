@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: POSITIONs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Thiết lập quy định";
+            Session["SubTitle"] = "Chức vụ";
             return View();
         }
 
