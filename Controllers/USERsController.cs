@@ -17,6 +17,8 @@ namespace HRM.Controllers
         // GET: USERs
         public ActionResult Index()
         {
+            Session["MainTitle"] = "Quản lý nhân sự";
+            Session["SubTitle"] = "Danh sách tài khoản";
             var uSERS = db.USERS.Include(u => u.EMPLOYEE);
             return View(uSERS.ToList());
         }

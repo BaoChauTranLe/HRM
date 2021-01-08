@@ -23,6 +23,8 @@ namespace HRM.Controllers
         // GET: EMPLOYEEs
         public ActionResult Index(string searchString)
         {
+            Session["MainTitle"] = "Quản lý nhân sự";
+            Session["SubTitle"] = "Danh sách nhân viên";
             var eMPLOYEEs = db.EMPLOYEEs.Include(e => e.CONTRACT).Include(e => e.POSITION).Include(e => e.ROOM).Include(e => e.USER).ToList();
             var list = new List<EmployeeViewModel>();
             foreach (var item in eMPLOYEEs)
@@ -110,6 +112,8 @@ namespace HRM.Controllers
         // GET: EMPLOYEEs/Create
         public ActionResult Create()
         {
+            Session["MainTitle"] = "Quản lý nhân sự";
+            Session["SubTitle"] = "Thêm nhân viên";
             //Tao ID nhan vien tu dong
             var emloyeeList = db.EMPLOYEEs.SqlQuery("Select * from EMPLOYEE").ToList();
             int n = 0;
