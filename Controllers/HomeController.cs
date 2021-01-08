@@ -40,7 +40,7 @@ namespace HRM.Controllers
                     Session["Position"] = e.POSITION.PositionName;
                     Session["Room"] = e.ROOM.RoomName;
                     Session["Image"] = e.Image;
-                    return RedirectToAction("Index","EMPLOYEEs");
+                    return RedirectToAction("Details","EMPLOYEEs", new { id = valid_data.EmployeeID });
                 }
                 else
                 {

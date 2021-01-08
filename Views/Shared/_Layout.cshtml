@@ -445,7 +445,7 @@
             <div class="sidenav__title">
                 Cá nhân
             </div>
-            <a href="#infor"><i class='fa fa-user-tie'></i> Thông tin</a>
+            <a href="@Url.Action("Details", "EMPLOYEEs", new { id = Session["EmployeeID"] })"><i class='fa fa-user-tie'></i> Thông tin</a>
             <a href="#salary"><i class="fa fa-dollar-sign"></i> Bảng lương</a>
             <a href="#timekeeping"><i class="fa fa-calendar-o"></i> Bảng chấm công</a>
         </div>
