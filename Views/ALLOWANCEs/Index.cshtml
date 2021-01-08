@@ -345,9 +345,9 @@
 		}
 
         if (allowance.FreeTaxValue == null)
-            Data = Data + "<td> 0 </td>";
+            Data = Data + "<td style=" + "'" + "text-align: right" + "'" + "> 0 VNĐ</td>";
         else
-			Data = Data + "<td>" + allowance.FreeTaxValue + "</td>";
+            Data = Data + "<td style=" + "'" + "text-align: right" + "'" + ">" + allowance.FreeTaxValue.toLocaleString() + " VNĐ </td>";
 
 		if (allowance.AllEmployee == true) {
 			Data = Data + "<td> Có </td>";
@@ -356,9 +356,9 @@
 			Data = Data + "<td> Không </td>";
 		}
 		if (allowance.Value == null)
-			Data = Data + "<td> 0 </td>";
+            Data = Data + "<td style=" + "'" + "text-align: right" + "'" + "> 0 VNĐ</td>";
 		else
-			Data = Data + "<td>" + allowance.Value + "</td>";
+            Data = Data + "<td style=" + "'" + "text-align: right" + "'" + ">" + allowance.Value.toLocaleString() + " VNĐ</td>";
         Data = Data + "<td class=\"text-center\" onclick=\"EditModule(" + "'" + allowance.AllowanceID + "'" + ")\">"
             + "<i class='fa fa-edit pa-5 text-warning'></i>" +
             "</td>" +
